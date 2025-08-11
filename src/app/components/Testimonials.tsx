@@ -98,7 +98,7 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-24 bg-gradient-bg relative overflow-hidden" ref={ref}>
+    <section className="section-padding-y bg-gradient-bg relative overflow-hidden" ref={ref}>
       {/* Декоративные элементы */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
@@ -110,7 +110,7 @@ export default function Testimonials() {
         />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative container-adaptive">
         {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -125,10 +125,10 @@ export default function Testimonials() {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-6"
           >
             <Users className="w-5 h-5 text-primary" />
-            <span className="text-sm font-semibold text-gray-700">Отзывы клиентов</span>
+            <span className="text-caption weight-semibold text-muted">Отзывы клиентов</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-display-2 text-primary-dark mb-6 leading-tight-kw weight-bold">
             Что говорят наши{' '}
             <span className="relative inline-block">
               <span className="gradient-kvartett-text">клиенты</span>
@@ -140,7 +140,7 @@ export default function Testimonials() {
               />
             </span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
             Более 500 довольных клиентов доверили нам свою рекламу и получили превосходные результаты
           </p>
         </motion.div>
@@ -152,7 +152,7 @@ export default function Testimonials() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-5xl mx-auto mb-16"
         >
-          <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 overflow-hidden">
+          <div className="relative bg-card backdrop-blur-xl rounded-3xl p-8 md:p-12 shadow-primary-xl border border-light overflow-hidden">
             {/* Декоративные элементы */}
             <div className="absolute top-6 left-6 opacity-10">
               <Quote className="w-16 h-16 text-primary" />
@@ -190,29 +190,29 @@ export default function Testimonials() {
                   </div>
 
                   {/* Текст отзыва */}
-                  <blockquote className="text-xl md:text-2xl text-gray-800 text-center leading-relaxed mb-8 font-medium">
+                  <blockquote className="text-body-xl text-primary-dark text-center leading-relaxed-kw mb-8 weight-medium">
                     "{testimonials[activeIndex].text}"
                   </blockquote>
 
                   {/* Результаты проекта */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-primary-10 rounded-2xl p-4 text-center">
-                      <div className="text-2xl font-bold text-primary mb-1">
+                      <div className="text-title-lg weight-bold text-primary mb-1">
                         {testimonials[activeIndex].result}
                       </div>
-                      <div className="text-sm text-muted">Результат</div>
+                      <div className="text-caption text-muted">Результат</div>
                     </div>
                     <div className="bg-primary-10 rounded-2xl p-4 text-center">
-                      <div className="text-2xl font-bold text-primary mb-1">
+                      <div className="text-title-lg weight-bold text-primary mb-1">
                         {testimonials[activeIndex].budget}
                       </div>
-                      <div className="text-sm text-muted">Бюджет</div>
+                      <div className="text-caption text-muted">Бюджет</div>
                     </div>
                     <div className="bg-primary-dark-10 rounded-2xl p-4 text-center">
-                      <div className="text-2xl font-bold text-primary-dark mb-1">
+                      <div className="text-title-lg weight-bold text-primary-dark mb-1">
                         {testimonials[activeIndex].project}
                       </div>
-                      <div className="text-sm text-muted">Проект</div>
+                      <div className="text-caption text-muted">Проект</div>
                     </div>
                   </div>
 
@@ -241,17 +241,17 @@ export default function Testimonials() {
                       </div>
                     </motion.div>
                     <div className="text-center">
-                      <h3 className="text-xl font-bold text-gray-900 mb-1">
+                      <h3 className="text-title weight-bold text-primary-dark mb-1">
                         {testimonials[activeIndex].name}
                       </h3>
-                      <p className="text-gray-600 mb-3">
+                      <p className="text-body text-muted mb-3">
                         {testimonials[activeIndex].position}
                       </p>
                       {testimonials[activeIndex].videoReview && (
                         <motion.button
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
-                          className="inline-flex items-center space-x-2 bg-primary-10 text-primary px-4 py-2 rounded-full text-sm font-medium hover:bg-primary-20 transition-colors"
+                          className="inline-flex items-center space-x-2 bg-primary-10 text-primary px-4 py-2 rounded-full text-body-sm weight-medium hover:bg-primary-20 transition-colors"
                         >
                           <Play className="w-4 h-4 fill-current" />
                           <span>Видео отзыв</span>
@@ -268,7 +268,7 @@ export default function Testimonials() {
                   whileHover={{ scale: 1.1, x: -2 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={prevTestimonial}
-                  className="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/20 flex items-center justify-center text-muted hover:text-primary hover:bg-white transition-all"
+                  className="w-12 h-12 bg-card backdrop-blur-sm rounded-full shadow-card border border-light flex items-center justify-center text-muted hover:text-primary hover:bg-white transition-all"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </motion.button>
@@ -287,7 +287,7 @@ export default function Testimonials() {
                       className={`relative transition-all duration-300 ${
                         index === activeIndex 
                           ? 'w-8 h-3 bg-gradient-primary rounded-full' 
-                          : 'w-3 h-3 bg-light hover:bg-hover rounded-full'
+                          : 'w-3 h-3 bg-primary-20 hover:bg-primary-30 rounded-full'
                       }`}
                     >
                       {index === activeIndex && (
@@ -304,7 +304,7 @@ export default function Testimonials() {
                   whileHover={{ scale: 1.1, x: 2 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={nextTestimonial}
-                  className="w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-white/20 flex items-center justify-center text-gray-600 hover:text-primary hover:bg-white transition-all"
+                  className="w-12 h-12 bg-card backdrop-blur-sm rounded-full shadow-card border border-light flex items-center justify-center text-muted hover:text-primary hover:bg-white transition-all"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </motion.button>
@@ -318,7 +318,7 @@ export default function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-4xl mx-auto mb-16"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-4xl mx-auto mb-16"
         >
           {testimonials.map((testimonial, index) => (
             <motion.button
@@ -329,10 +329,10 @@ export default function Testimonials() {
                 setActiveIndex(index)
                 setIsAutoPlay(false)
               }}
-              className={`relative p-6 rounded-2xl transition-all duration-300 text-left group ${
+              className={`relative p-4 rounded-2xl transition-all duration-300 text-left group h-32 flex flex-col justify-between ${
                 index === activeIndex
-                  ? 'bg-gradient-to-r from-primary to-primary-dark text-white shadow-xl scale-105'
-                  : 'bg-white/80 backdrop-blur-sm hover:bg-white text-gray-600 shadow-lg border border-white/20'
+                  ? 'bg-gradient-primary text-white shadow-xl scale-105'
+                  : 'bg-card backdrop-blur-sm hover:bg-white text-muted shadow-lg border border-light'
               }`}
             >
               {/* Активный индикатор */}
@@ -345,42 +345,46 @@ export default function Testimonials() {
                 />
               )}
 
-              <div className="relative z-10">
-                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/50 mx-auto mb-3">
-                  <img
-                    src={testimonial.imageUrl}
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      const root = document.documentElement;
-                      const computed = getComputedStyle(root).getPropertyValue('--color-primary').trim();
-                      const hex = computed.startsWith('#') ? computed.slice(1) : computed;
-                      target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=${hex}&color=fff&size=200`;
-                    }}
-                  />
+              <div className="relative z-10 flex flex-col h-full">
+                <div className="flex items-center space-x-3 mb-2">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-white/50 flex-shrink-0">
+                    <img
+                      src={testimonial.imageUrl}
+                      alt={testimonial.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        const root = document.documentElement;
+                        const computed = getComputedStyle(root).getPropertyValue('--color-primary').trim();
+                        const hex = computed.startsWith('#') ? computed.slice(1) : computed;
+                        target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(testimonial.name)}&background=${hex}&color=fff&size=200`;
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-caption weight-semibold truncate">
+                      {testimonial.name}
+                    </div>
+                    <div className="flex space-x-1 mt-1">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className={`w-3 h-3 fill-current ${
+                          index === activeIndex ? 'text-warning' : 'text-warning'
+                        }`} />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-sm font-semibold truncate mb-1">
-                  {testimonial.name}
-                </div>
-                <div className={`text-xs truncate mb-2 ${
-                  index === activeIndex ? 'text-white/80' : 'text-gray-500'
+                <div className={`text-caption truncate ${
+                  index === activeIndex ? 'text-white/80' : 'text-muted'
                 }`}>
                   {testimonial.project}
-                </div>
-                <div className="flex space-x-1">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className={`w-3 h-3 fill-current ${
-                      index === activeIndex ? 'text-warning' : 'text-warning'
-                    }`} />
-                  ))}
                 </div>
               </div>
 
               {/* Видео индикатор */}
               {testimonial.videoReview && (
                 <div className={`absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center ${
-                  index === activeIndex ? 'bg-white/20' : 'bg-primary/10'
+                  index === activeIndex ? 'bg-white/20' : 'bg-primary-10'
                 }`}>
                   <Play className={`w-3 h-3 fill-current ${
                     index === activeIndex ? 'text-white' : 'text-primary'
@@ -419,11 +423,11 @@ export default function Testimonials() {
                 initial={{ scale: 0 }}
                 animate={inView ? { scale: 1 } : { scale: 0 }}
                 transition={{ delay: 0.8 + index * 0.1, type: "spring", stiffness: 200 }}
-                className={`text-3xl md:text-4xl font-bold mb-2 ${stat.color}`}
+                className={`text-display-3 weight-bold mb-2 ${stat.color}`}
               >
                 {stat.number}
               </motion.div>
-              <div className="text-sm text-gray-600 leading-tight">
+              <div className="text-caption text-muted leading-tight">
                 {stat.label}
               </div>
             </motion.div>

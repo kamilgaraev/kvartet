@@ -19,7 +19,7 @@ function AnimatedNumber({ from = 0, to, duration = 1.6, suffix = '' }: { from?: 
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-bg overflow-hidden pt-24 pb-12">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-bg overflow-hidden section-padding-y">
       {/* Современные геометрические фоновые элементы */}
       <div className="absolute inset-0">
         <motion.div
@@ -49,7 +49,7 @@ export default function Hero() {
         }}></div> */}
       </div>
 
-      <div className="relative hero-container mx-auto w-full">
+      <div className="relative container-adaptive w-full">
         <div className="grid lg:grid-cols-12 hero-gap items-center">
           {/* Левая часть - контент */}
           <motion.div
@@ -58,16 +58,16 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="lg:col-span-7 hero-gap flex flex-col"
           >
-            {/* Современный бейдж */}
+            {/* Корпоративный бейдж */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center space-x-2 bg-gradient-primary text-white rounded-full btn-adaptive shadow-lg shadow-primary self-start"
+              className="inline-flex items-center space-x-2 bg-primary-bg text-primary-dark rounded-full px-6 py-3 border border-primary-light shadow-card self-start"
             >
-              <Sparkles className="icon-adaptive" />
-              <span className="hero-subtitle">Рекламное агентство полного цикла</span>
-              <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+              <Award className="w-5 h-5 text-primary" />
+              <span className="text-body-sm weight-semibold">Рекламное агентство полного цикла</span>
+              <div className="w-2 h-2 bg-primary rounded-full"></div>
             </motion.div>
 
             {/* SEO-оптимизированный заголовок */}
@@ -77,47 +77,46 @@ export default function Hero() {
               transition={{ delay: 0.3 }}
               className="hero-gap flex flex-col"
             >
-              <h1 className="hero-title text-primary-dark tracking-tight">
-                Широкоформатная печать
+              <h1 className="text-display-2 text-primary-dark tracking-tight leading-tight-kw weight-bold">
+                Профессиональная широкоформатная печать
                 <br />
                 и{' '}
-                <span className="text-primary relative">
+                <span className="relative text-primary">
                   изготовление вывесок
-                  {/* <motion.div
+                  <motion.div
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ delay: 1, duration: 0.8 }}
-                    className="absolute bottom-0 left-0 right-0 h-1 lg:h-2 bg-gradient-primary rounded-full"
-                  /> */}
+                    className="absolute bottom-0 left-0 right-0 h-1 bg-primary-light rounded-full opacity-60"
+                  />
                 </span>
                 <br />
                 <span className="text-primary">в Уфе</span>
               </h1>
               
               <div className="hero-gap flex flex-col">
-                <p className="hero-text text-muted leading-relaxed max-w-3xl">
-                  Профессиональная широкоформатная печать баннеров, изготовление вывесок, 
-                  интерьерная печать и полное брендирование для вашего бизнеса.
+                <p className="text-body-xl text-muted leading-relaxed-kw max-w-3xl">
+                  Комплексные решения для наружной рекламы, полиграфии и брендинга. 
+                  Собственное производство, качественные материалы, профессиональный монтаж.
                 </p>
                 
-                                {/* SEO ключевые фразы */}
-                <div className="flex flex-wrap card-gap">
+                {/* Ключевые услуги */}
+                <div className="inline-flex flex-wrap gap-3">
                   {[
-                    'Печать баннеров',
+                    'Широкоформатная печать',
                     'Изготовление вывесок', 
                     'Интерьерная реклама',
-                    'Цифровая печать',
-                    'Брендирование'
-                  ].map((keyword, index) => (
-                    <motion.span
-                      key={keyword}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                    'Цифровая печать'
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
-                      className="bg-primary-light-30 text-primary-dark btn-adaptive hero-subtitle"
+                      className="bg-primary-bg text-primary-dark border border-primary-light rounded-full px-4 py-2 hover:border-primary hover:bg-primary-light transition-all duration-300"
                     >
-                      {keyword}
-                    </motion.span>
+                      <span className="text-body-sm weight-medium">{item}</span>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -147,220 +146,236 @@ export default function Hero() {
                   <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} card-adaptive flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
                     <service.icon className="icon-adaptive text-white" />
                   </div>
-                  <span className="text-primary-dark hero-text hover:text-primary transition-colors">
+                  <span className="text-primary-dark text-body hover:text-primary transition-colors">
                     {service.text}
                   </span>
                 </motion.div>
               ))}
             </motion.div>
 
-            {/* Современные CTA кнопки */}
+            {/* Корпоративные CTA кнопки */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
-              className="flex flex-col sm:flex-row card-gap"
+              className="flex flex-col sm:flex-row gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative bg-gradient-primary text-white btn-adaptive shadow-xl shadow-primary hover:shadow-2xl hover:shadow-primary-lg transition-all duration-300 overflow-hidden"
+                className="group bg-primary text-white px-8 py-4 rounded-xl shadow-primary hover:bg-primary-dark transition-all duration-300 flex items-center justify-center space-x-2"
               >
-                <span className="relative z-10 hero-subtitle">Рассчитать стоимость</span>
-                <motion.div
-                  className="relative z-10 inline-block ml-2"
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <ArrowRight className="icon-adaptive" />
-                </motion.div>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.6 }}
-                />
+                <span className="text-body-lg weight-semibold">Рассчитать стоимость</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </motion.button>
               
               <motion.button
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
-                className="group bg-card backdrop-blur-sm text-primary-dark btn-adaptive border-2 border-primary-light hover:border-primary hover:text-primary transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg"
+                className="group bg-card border border-light hover:border-primary text-primary-dark hover:text-primary px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-card"
               >
-                <Phone className="icon-adaptive group-hover:scale-110 transition-transform" />
-                <span className="hero-subtitle">+7 (347) 123-45-67</span>
+                <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span className="text-body-lg weight-semibold">+7 (347) 123-45-67</span>
               </motion.button>
             </motion.div>
 
-            {/* Гарантии и особенности */}
+            {/* Корпоративные преимущества */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.4 }}
-              className="grid grid-cols-2 lg:grid-cols-3 card-gap"
+              className="grid grid-cols-1 lg:grid-cols-3 gap-4"
             >
               {[
-                { icon: TrendingUp, text: 'Быстрое производство' },
-                { icon: Target, text: 'Точная цветопередача' },
-                { icon: Eye, text: 'Индивидуальный дизайн' }
+                { icon: TrendingUp, text: 'Быстрое производство', desc: 'от 24 часов' },
+                { icon: Target, text: 'Точная цветопередача', desc: '100% качество' },
+                { icon: Shield, text: 'Гарантия качества', desc: 'до 3 лет' }
               ].map((feature, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.5 + index * 0.1 }}
-                  className="flex items-center space-x-2 hero-text text-muted"
+                  className="flex items-center space-x-3 bg-primary-bg border border-primary-light rounded-xl p-4"
                 >
-                  <feature.icon className="icon-adaptive text-primary" />
-                  <span className="font-medium">{feature.text}</span>
+                  <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                    <feature.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <div className="text-body-sm weight-semibold text-primary-dark">{feature.text}</div>
+                    <div className="text-caption text-muted">{feature.desc}</div>
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
           </motion.div>
 
-                    {/* Правая часть - интерактивное портфолио */}
+                    {/* Правая часть - корпоративная панель достижений */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 relative flex items-center justify-center"
           >
-            {/* Интерактивное портфолио */}
-            <div className="relative bg-gradient-to-br from-primary-bg to-primary-light-30 card-adaptive min-h-[400px] lg:min-h-[500px] xl:min-h-[600px] overflow-hidden border border-primary-light-40 shadow-2xl shadow-primary">
-              {/* Динамический фон */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-05 via-transparent to-primary-dark-05"></div>
+            {/* Основная корпоративная карточка */}
+            <div className="relative bg-white/95 backdrop-blur-sm border border-light rounded-3xl p-8 lg:p-12 shadow-card-hover min-h-[600px] w-full max-w-lg">
               
-              {/* Декоративная сетка */}
-              <div className="absolute inset-0 opacity-[0.03]" style={{
-                backgroundImage: `
-                  radial-gradient(circle at 1px 1px, var(--color-primary) 1px, transparent 0)
-                `,
-                backgroundSize: '30px 30px'
-              }}></div>
-              
-              {/* Floating элементы */}
+              {/* Заголовок секции */}
               <motion.div
-                animate={{ 
-                  rotate: [0, 360],
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{ duration: 20, repeat: Infinity }}
-                className="absolute top-8 right-8 w-16 h-16 bg-gradient-to-br from-primary-20 to-primary-dark-20 rounded-2xl rotate-12"
-              />
-              
-              <motion.div
-                animate={{ 
-                  rotate: [0, -180, 0],
-                  y: [0, -20, 0]
-                }}
-                transition={{ duration: 15, repeat: Infinity }}
-                className="absolute bottom-20 left-8 w-12 h-12 bg-gradient-to-br from-primary-light to-primary-30 rounded-xl"
-              />
-              
-              {/* Главный контент портфолио */}
-              <div className="relative h-full flex flex-col justify-center items-center text-center p-8">
-                {/* Центральная статистика */}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="text-center mb-12"
+              >
+                <div className="inline-flex items-center space-x-2 bg-primary-bg text-primary-dark rounded-full px-4 py-2 border border-primary-light mb-4">
+                  <Award className="w-4 h-4 text-primary" />
+                  <span className="text-caption weight-semibold">Наши достижения</span>
+                </div>
+                <h3 className="text-title-lg text-primary-dark weight-bold leading-snug-kw">
+                  Результаты работы
+                </h3>
+              </motion.div>
+
+              {/* Основная статистика в строгой сетке */}
+              <div className="space-y-8">
+                {/* Главная метрика */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  className="mb-8"
+                  transition={{ delay: 0.7 }}
+                  className="text-center bg-primary-bg rounded-2xl p-6 border border-primary-light"
                 >
-                  <div className="text-6xl lg:text-8xl font-black text-primary mb-4">
+                  <div className="text-display-2 text-primary weight-black leading-tight-kw mb-2">
                     <AnimatedNumber to={2500} suffix="+" />
                   </div>
-                  <div className="text-xl lg:text-2xl font-bold text-primary-dark mb-2">
-                    Успешных проектов
-                  </div>
-                  <div className="text-lg text-muted">
-                    по всей Республике Башкортостан
+                  <div className="text-body weight-semibold text-primary-dark">
+                    выполненных проектов
                   </div>
                 </motion.div>
 
-                {/* Ключевые достижения */}
+                {/* Сетка дополнительных метрик */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="grid grid-cols-2 gap-6 w-full max-w-md"
+                  transition={{ delay: 0.9 }}
+                  className="grid grid-cols-3 gap-4"
                 >
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1"><AnimatedNumber to={15} /></div>
-                    <div className="text-sm text-muted">лет опыта</div>
+                  <div className="text-center bg-white rounded-xl p-4 border border-light shadow-card">
+                    <div className="text-title-lg text-primary weight-bold mb-1">
+                      <AnimatedNumber to={15} />
+                    </div>
+                    <div className="text-caption text-muted weight-medium">лет опыта</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">100%</div>
-                    <div className="text-sm text-muted">качество</div>
+                  
+                  <div className="text-center bg-success rounded-xl p-4 text-white shadow-card">
+                    <div className="text-title-lg weight-bold mb-1">100%</div>
+                    <div className="text-caption opacity-90 weight-medium">качество</div>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">24/7</div>
-                    <div className="text-sm text-muted">поддержка</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1"><AnimatedNumber to={500} suffix="+" /></div>
-                    <div className="text-sm text-muted">клиентов</div>
+                  
+                  <div className="text-center bg-white rounded-xl p-4 border border-light shadow-card">
+                    <div className="text-title-lg text-primary weight-bold mb-1">
+                      <AnimatedNumber to={500} suffix="+" />
+                    </div>
+                    <div className="text-caption text-muted weight-medium">клиентов</div>
                   </div>
                 </motion.div>
 
-                {/* Кнопка портфолио */}
+                {/* Корпоративные показатели */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1, duration: 0.6 }}
-                  className="mt-8"
+                  transition={{ delay: 1.1 }}
+                  className="space-y-4"
+                >
+                  {[
+                    { label: 'Срок выполнения', value: 'от 24 часов', icon: Zap },
+                    { label: 'Гарантия качества', value: 'до 3 лет', icon: Shield },
+                    { label: 'Довольных клиентов', value: '98%', icon: Users }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 1.2 + index * 0.1 }}
+                      className="flex items-center justify-between bg-primary-bg rounded-xl p-4 border border-primary-light"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                          <item.icon className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-body-sm text-primary-dark weight-medium">{item.label}</span>
+                      </div>
+                      <span className="text-body-sm text-primary weight-semibold">{item.value}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {/* Корпоративная CTA */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5 }}
+                  className="pt-4"
                 >
                   <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-flex items-center space-x-3 bg-gradient-primary text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:shadow-xl transition-all duration-300"
+                    whileHover={{ scale: 1.02, y: -1 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="w-full bg-primary text-white rounded-xl py-4 px-6 text-body weight-semibold hover:bg-primary-dark transition-all duration-300 flex items-center justify-center space-x-2 shadow-primary"
                   >
-                    <Eye className="w-5 h-5" />
                     <span>Смотреть портфолио</span>
                     <ArrowRight className="w-5 h-5" />
                   </motion.button>
                 </motion.div>
               </div>
+
+              {/* Декоративный элемент в углу */}
+              <div className="absolute top-6 right-6">
+                <motion.div
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center opacity-20"
+                >
+                  <Target className="w-6 h-6 text-white" />
+                </motion.div>
+              </div>
+
+              {/* Тонкая линия акцента */}
+              <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-primary rounded-full"></div>
             </div>
-            
-            {/* Плавающие достижения */}
+
+            {/* Минималистичные плавающие элементы для lg+ экранов */}
             <motion.div
-              animate={{ 
-                y: [0, -15, 0],
-                rotate: [0, 3, 0]
-              }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute top-4 left-4 bg-white card-adaptive shadow-xl border border-primary/40 z-10 rotate-2"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.6 }}
+              className="hidden xl:block absolute -top-8 -right-8 bg-white border border-light rounded-2xl px-6 py-4 shadow-card"
             >
-              <div className="text-center">
-                <div className="hero-title text-primary mb-1"><AnimatedNumber to={2500} suffix="+" /></div>
-                <div className="hero-text text-primary-dark font-semibold">Проектов</div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-success rounded-full flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-body-sm text-primary-dark weight-semibold">Сертифицированы</div>
+                  <div className="text-caption text-muted">ISO 9001:2015</div>
+                </div>
               </div>
             </motion.div>
 
             <motion.div
-              animate={{ 
-                y: [0, 20, 0],
-                rotate: [0, -3, 0]
-              }}
-              transition={{ duration: 5, repeat: Infinity }}
-              className="absolute bottom-4 right-4 bg-gradient-primary text-white card-adaptive shadow-xl z-10 -rotate-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.8 }}
+              className="hidden xl:block absolute -bottom-8 -left-8 bg-white border border-light rounded-2xl px-6 py-4 shadow-card"
             >
-              <div className="text-center">
-                <div className="hero-title mb-1"><AnimatedNumber to={15} /></div>
-                <div className="hero-text font-semibold opacity-90">Лет опыта</div>
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-warning rounded-full flex items-center justify-center">
+                  <Award className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <div className="text-body-sm text-primary-dark weight-semibold">Лучшие в регионе</div>
+                  <div className="text-caption text-muted">2023 год</div>
+                </div>
               </div>
-            </motion.div>
-
-            {/* Индикатор качества */}
-            <motion.div
-              animate={{ 
-                x: [0, 10, 0],
-                scale: [1, 1.05, 1]
-              }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute top-1/2 right-2 bg-primary card-adaptive shadow-lg z-10"
-            >
-              <Star className="icon-adaptive text-white fill-current" />
             </motion.div>
           </motion.div>
         </div>

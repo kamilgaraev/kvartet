@@ -98,7 +98,7 @@ export default function FloatingAction() {
                 className={`group flex items-center space-x-3 ${action.color} text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300`}
               >
                 <action.icon className="w-5 h-5" />
-                <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                <span className="text-body-sm weight-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
                   {action.label}
                 </span>
               </motion.button>
@@ -162,7 +162,7 @@ export default function FloatingAction() {
             initial={{ opacity: 0, x: 20, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 20, scale: 0.8 }}
-            className="absolute right-20 bottom-4 bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap pointer-events-none"
+            className="absolute right-20 bottom-4 bg-gray-900 text-white text-body-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap pointer-events-none"
           >
             Связаться с нами
             <div className="absolute top-1/2 -right-1 w-2 h-2 bg-gray-900 transform rotate-45 -translate-y-1/2" />

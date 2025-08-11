@@ -19,8 +19,8 @@ export default function ContactMap() {
   })
 
   return (
-    <section className="py-20 bg-gradient-bg" ref={ref}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-16 md:py-20 bg-gradient-bg" ref={ref}>
+      <div className="container-adaptive">
         {/* Заголовок */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -28,10 +28,10 @@ export default function ContactMap() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-display-3 text-gray-900 mb-4 weight-bold">
             Как нас <span className="gradient-kvartett-text">найти</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body-xl text-gray-600 max-w-2xl mx-auto">
             Приезжайте к нам в офис или вызовите специалиста на объект
           </p>
         </motion.div>
@@ -51,12 +51,12 @@ export default function ContactMap() {
                   <MapPin className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Наш офис</h3>
-                  <p className="text-gray-600 mb-2">г. Уфа, ул. Ленская, 128</p>
-                  <p className="text-sm text-gray-500">
+                  <h3 className="text-title weight-bold text-gray-900 mb-2">Наш офис</h3>
+                  <p className="text-body text-gray-600 mb-2">г. Уфа, ул. Ленская, 128</p>
+                  <p className="text-caption text-gray-500">
                     Центральный район, рядом с остановкой "Ленская"
                   </p>
-                  <button className="mt-3 text-primary hover:text-primary-dark transition-colors flex items-center space-x-1 text-sm font-medium">
+                  <button className="mt-3 text-primary hover:text-primary-dark transition-colors flex items-center space-x-1 text-body-sm weight-medium">
                     <ExternalLink className="w-4 h-4" />
                     <span>Построить маршрут</span>
                   </button>
@@ -71,11 +71,11 @@ export default function ContactMap() {
                   <Phone className="w-6 h-6 text-primary-dark" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Телефоны</h3>
+                  <h3 className="text-title weight-bold text-gray-900 mb-2">Телефоны</h3>
                   <div className="space-y-2">
-                    <p className="text-gray-900 font-medium">+7 (347) 123-45-67</p>
-                    <p className="text-gray-600">+7 (347) 123-45-68</p>
-                    <p className="text-sm text-gray-500">Звоните с 9:00 до 18:00</p>
+                    <p className="text-body text-gray-900 weight-medium">+7 (347) 123-45-67</p>
+                    <p className="text-body text-gray-600">+7 (347) 123-45-68</p>
+                    <p className="text-caption text-gray-500">Звоните с 9:00 до 18:00</p>
                   </div>
                 </div>
               </div>
@@ -88,15 +88,15 @@ export default function ContactMap() {
                   <Mail className="w-6 h-6 text-primary-light" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Онлайн связь</h3>
+                  <h3 className="text-title weight-bold text-gray-900 mb-2">Онлайн связь</h3>
                   <div className="space-y-3">
-                    <p className="text-gray-600">info@kvartett-ufa.ru</p>
+                    <p className="text-body text-gray-600">info@kvartett-ufa.ru</p>
                     <div className="flex space-x-3">
-                      <button className="bg-success text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-success-dark transition-colors flex items-center space-x-2">
+                      <button className="bg-success text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-success-dark transition-colors flex items-center space-x-2">
                         <MessageCircle className="w-4 h-4" />
                         <span>WhatsApp</span>
                       </button>
-                      <button className="bg-info text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-info-dark transition-colors">
+                      <button className="bg-info text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-info-dark transition-colors">
                         Telegram
                       </button>
                     </div>
@@ -112,15 +112,15 @@ export default function ContactMap() {
                   <Clock className="w-6 h-6 text-success" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-3">Время работы</h3>
-                  <div className="space-y-2 text-sm">
+                  <h3 className="text-title weight-bold text-gray-900 mb-3">Время работы</h3>
+                  <div className="space-y-2 text-caption">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Пн - Пт:</span>
-                      <span className="text-gray-900 font-medium">09:00 - 18:00</span>
+                      <span className="text-gray-900 weight-medium">09:00 - 18:00</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Суббота:</span>
-                      <span className="text-gray-900 font-medium">10:00 - 16:00</span>
+                      <span className="text-gray-900 weight-medium">10:00 - 16:00</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Воскресенье:</span>
@@ -138,8 +138,8 @@ export default function ContactMap() {
                   <Car className="w-6 h-6 text-gray-600" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Парковка</h3>
-                  <p className="text-gray-600 text-sm">
+                  <h3 className="text-title weight-bold text-gray-900 mb-2">Парковка</h3>
+                  <p className="text-body text-gray-600">
                     Бесплатная парковка рядом с офисом. 
                     Удобный подъезд для загрузки материалов.
                   </p>
@@ -162,10 +162,10 @@ export default function ContactMap() {
                 <div className="text-center space-y-4">
                   <MapPin className="w-16 h-16 text-primary mx-auto" />
                   <div>
-                    <h3 className="text-lg font-bold text-gray-700 mb-2">
+                    <h3 className="text-title weight-bold text-gray-700 mb-2">
                       Интерактивная карта
                     </h3>
-                    <p className="text-gray-600 text-sm max-w-xs">
+                    <p className="text-body text-gray-600 max-w-xs">
                       г. Уфа, ул. Ленская, 128<br />
                       Производственно-рекламная группа "Квартет"
                     </p>
@@ -187,14 +187,14 @@ export default function ContactMap() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button className="bg-primary text-white p-6 rounded-xl hover:bg-primary-dark transition-colors text-left group">
                 <Phone className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold mb-1">Заказать звонок</h3>
-                <p className="text-sm text-white/90">Перезвоним за 5 минут</p>
+                <h3 className="text-title weight-bold mb-1">Заказать звонок</h3>
+                <p className="text-caption text-white/90">Перезвоним за 5 минут</p>
               </button>
 
               <button className="bg-primary-dark text-white p-6 rounded-xl hover:bg-primary-dark-hover transition-colors text-left group">
                 <Car className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="font-bold mb-1">Выезд на объект</h3>
-                <p className="text-sm text-white/90">Бесплатный замер</p>
+                <h3 className="text-title weight-bold mb-1">Выезд на объект</h3>
+                <p className="text-caption text-white/90">Бесплатный замер</p>
               </button>
             </div>
           </motion.div>

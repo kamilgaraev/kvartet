@@ -119,7 +119,7 @@ export default function Header() {
             : 'bg-card backdrop-blur-md'
         }`}
       >
-        <div className="hero-container mx-auto">
+        <div className="container-adaptive">
           <div className="flex justify-between items-center py-2">
             {/* Логотип */}
             <Link href="/" className="flex items-center space-x-3 group">
@@ -129,7 +129,7 @@ export default function Header() {
                 className="relative"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg shadow-primary group-hover:shadow-xl hover:shadow-primary transition-all duration-300">
-                  <span className="text-white font-bold text-xl">К</span>
+                  <span className="text-white weight-bold text-title">К</span>
                 </div>
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
@@ -166,7 +166,7 @@ export default function Header() {
                           : 'text-primary-dark hover:text-primary hover:bg-primary-bg'
                       }`}
                     >
-                      <span className="relative z-10">{item.name}</span>
+                      <span className="relative z-10 text-body">{item.name}</span>
                       {item.hasDropdown && (
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
                           activeDropdown === item.name ? 'rotate-180' : ''
@@ -214,14 +214,14 @@ export default function Header() {
                                 href={dropItem.href}
                                 className="flex items-center hero-gap nav-item hover:bg-primary-bg transition-all group/item"
                               >
-                                <div className="text-2xl flex-shrink-0">{dropItem.icon}</div>
+                                <div className="text-title-lg flex-shrink-0">{dropItem.icon}</div>
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-1">
                                     <span className="nav-text text-primary-dark group-hover/item:text-primary transition-colors">
                                       {dropItem.name}
                                     </span>
                                     {dropItem.popular && (
-                                      <span className="bg-primary text-white text-xs font-bold px-2 py-1 rounded-full">
+                                      <span className="bg-primary text-white text-caption weight-bold px-2 py-1 rounded-full">
                                         ХИТ
                                       </span>
                                     )}
@@ -229,7 +229,7 @@ export default function Header() {
                                   <p className="nav-logo-subtitle text-primary-dark opacity-70 group-hover/item:text-primary-dark transition-colors mb-1">
                                     {dropItem.description}
                                   </p>
-                                  <div className="nav-logo-subtitle font-bold text-primary">
+                                  <div className="nav-logo-subtitle weight-bold text-primary">
                                     {dropItem.price}
                                   </div>
                                 </div>
@@ -242,7 +242,7 @@ export default function Header() {
                         {/* Футер с контактами */}
                         <div className="bg-gradient-primary card-adaptive">
                           <div className="text-white text-center">
-                            <div className="nav-text font-bold mb-1">
+                            <div className="nav-text weight-bold mb-1">
                               БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ
                             </div>
                             <div className="nav-logo-subtitle opacity-90">+7 (347) 123-45-67</div>
@@ -280,7 +280,7 @@ export default function Header() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="flex items-center space-x-2 bg-gradient-primary text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-primary transition-all duration-300 font-bold group"
+                  className="flex items-center space-x-2 bg-gradient-primary text-white px-6 py-3 rounded-xl hover:shadow-lg hover:shadow-primary transition-all duration-300 weight-bold group"
                 >
                   <PhoneCall className="w-4 h-4 group-hover:scale-110 transition-transform" />
                   <span>ЗАКАЗАТЬ</span>
@@ -387,11 +387,11 @@ export default function Header() {
                       <div className="grid grid-cols-2 gap-4 text-center">
                         <div>
                           <Printer className="w-6 h-6 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-bold text-primary-dark">Печать</div>
+                          <div className="text-caption weight-bold text-primary-dark">Печать</div>
                         </div>
                         <div>
                           <Monitor className="w-6 h-6 text-primary mx-auto mb-1" />
-                          <div className="text-xs font-bold text-primary-dark">Вывески</div>
+                          <div className="text-caption weight-bold text-primary-dark">Вывески</div>
                         </div>
                       </div>
                     </div>

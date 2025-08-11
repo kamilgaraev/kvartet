@@ -88,7 +88,7 @@ export default function Footer() {
 
       {/* Верхняя секция с CTA */}
       <div className="relative border-b border-gray-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="container-adaptive section-padding-y">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -96,18 +96,18 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+              <h2 className="text-display-3 weight-bold mb-6 leading-tight-kw">
                 Готовы начать свой{' '}
                 <span className="gradient-kvartett-text">успешный проект?</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+              <p className="text-body-xl text-gray-300 mb-8 leading-relaxed-kw">
                 Получите бесплатную консультацию и персональное предложение уже сегодня
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-gradient-primary text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-primary transition-all duration-300"
+                  className="bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-primary transition-all duration-300"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Заказать звонок</span>
@@ -115,7 +115,7 @@ export default function Footer() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 font-semibold"
+                  className="bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300 weight-semibold"
                 >
                   Рассчитать стоимость
                 </motion.button>
@@ -129,11 +129,11 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
             >
-              <h3 className="text-xl font-bold mb-6 flex items-center space-x-2">
+              <h3 className="text-title weight-bold mb-6 flex items-center space-x-2">
                 <Mail className="w-6 h-6 text-primary" />
                 <span>Подписаться на новости</span>
               </h3>
-              <p className="text-gray-300 mb-6">
+              <p className="text-body text-gray-300 mb-6">
                 Получайте полезные материалы о рекламе и специальные предложения
               </p>
               <form onSubmit={handleSubscribe} className="space-y-4">
@@ -151,7 +151,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full bg-gradient-primary text-white py-3 rounded-xl font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300"
+                  className="w-full bg-gradient-primary text-white py-3 rounded-xl weight-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300"
                 >
                   {isSubscribed ? (
                     <>
@@ -160,7 +160,7 @@ export default function Footer() {
                         animate={{ scale: 1 }}
                         className="w-5 h-5 bg-white rounded-full flex items-center justify-center"
                       >
-                        <span className="text-primary-dark text-xs">✓</span>
+                        <span className="text-primary-dark text-caption">✓</span>
                       </motion.div>
                       <span>Подписка оформлена!</span>
                     </>
@@ -178,7 +178,7 @@ export default function Footer() {
       </div>
 
       {/* Основной контент */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative container-adaptive section-padding-y">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* О компании */}
           <motion.div
@@ -194,17 +194,17 @@ export default function Footer() {
                   whileHover={{ scale: 1.05, rotate: 5 }}
                   className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300"
                 >
-                  <span className="text-white font-bold text-xl">К</span>
+                  <span className="text-white weight-bold text-title">К</span>
                 </motion.div>
                 <div>
-                  <h1 className="text-2xl font-bold group-hover:text-primary transition-colors">
+                  <h1 className="text-title-lg weight-bold group-hover:text-primary transition-colors">
                     КВАРТЕТ
                   </h1>
-                  <p className="text-sm text-gray-400 font-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
+                  <p className="text-caption text-gray-400 weight-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
                 </div>
               </Link>
               
-              <p className="text-gray-300 leading-relaxed mb-6">
+              <p className="text-body text-gray-300 leading-relaxed-kw mb-6">
                 Производственно-рекламная группа "Квартет" — ваш надежный партнер 
                 в мире рекламы. Полный цикл услуг от идеи до воплощения.
               </p>
@@ -226,8 +226,8 @@ export default function Footer() {
                     className="text-center p-3 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer"
                   >
                     <achievement.icon className="w-6 h-6 text-primary mx-auto mb-2" />
-                    <div className="text-lg font-bold text-white">{achievement.number}</div>
-                    <div className="text-xs text-gray-400">{achievement.label}</div>
+                    <div className="text-title weight-bold text-white">{achievement.number}</div>
+                    <div className="text-caption text-gray-400">{achievement.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -235,7 +235,7 @@ export default function Footer() {
 
             {/* Социальные сети */}
             <div>
-              <h4 className="text-lg font-semibold mb-4">Мы в соцсетях</h4>
+              <h4 className="text-title weight-semibold mb-4">Мы в соцсетях</h4>
               <div className="flex space-x-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
@@ -247,7 +247,7 @@ export default function Footer() {
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.9 }}
-                    className={`w-12 h-12 ${social.color} rounded-xl flex items-center justify-center text-white font-bold transition-all duration-300 shadow-lg hover:shadow-xl`}
+                    className={`w-12 h-12 ${social.color} rounded-xl flex items-center justify-center text-white weight-bold transition-all duration-300 shadow-lg hover:shadow-xl`}
                     title={social.name}
                   >
                     {social.icon}
@@ -267,7 +267,7 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: sectionIndex * 0.1 }}
               className="space-y-6"
             >
-              <h3 className="text-lg font-bold text-white">{section.title}</h3>
+              <h3 className="text-title weight-bold text-white">{section.title}</h3>
               <nav className="space-y-3">
                 {section.links.map((link, linkIndex) => (
                   <motion.div
@@ -279,9 +279,9 @@ export default function Footer() {
                   >
                     <Link
                       href={link.href}
-                      className="group flex items-center space-x-3 text-gray-300 hover:text-primary transition-all duration-300 text-sm py-2"
+                        className="group flex items-center space-x-3 text-gray-300 hover:text-primary transition-all duration-300 text-body-sm py-2"
                     >
-                      <span className="text-base">{link.icon}</span>
+                      <span className="text-title">{link.icon}</span>
                       <span className="group-hover:translate-x-1 transition-transform">
                         {link.name}
                       </span>
@@ -302,7 +302,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 pt-8 border-t border-gray-700/50"
         >
-          <h3 className="text-lg font-bold mb-6">Контакты</h3>
+          <h3 className="text-title weight-bold mb-6">Контакты</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -341,9 +341,9 @@ export default function Footer() {
               >
                 <div className="flex items-center space-x-3 mb-3">
                   <contact.icon className={`w-5 h-5 ${contact.color}`} />
-                  <h4 className="font-semibold text-white">{contact.title}</h4>
+                  <h4 className="text-title-sm weight-semibold text-white">{contact.title}</h4>
                 </div>
-                <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-line">
+                <p className="text-body-sm text-gray-300 leading-relaxed whitespace-pre-line">
                   {contact.content}
                 </p>
               </motion.div>
@@ -360,7 +360,7 @@ export default function Footer() {
           className="border-t border-gray-700/50 mt-12 pt-8"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-4 text-sm text-gray-400">
+            <div className="flex items-center space-x-4 text-body-sm text-gray-400">
               <span>© 2024 Квартет. Все права защищены.</span>
               <span className="flex items-center space-x-1">
                 <span>Сделано с</span>
@@ -374,7 +374,7 @@ export default function Footer() {
               </span>
             </div>
             
-            <div className="flex items-center space-x-6 text-sm text-gray-400">
+            <div className="flex items-center space-x-6 text-body-sm text-gray-400">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 Политика конфиденциальности
               </Link>

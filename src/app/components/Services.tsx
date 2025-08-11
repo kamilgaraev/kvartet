@@ -61,14 +61,14 @@ export default function Services() {
   })
 
   return (
-    <section className="py-24 bg-gradient-bg relative overflow-hidden" ref={ref}>
+    <section className="section-padding-y bg-gradient-bg relative overflow-hidden" ref={ref}>
       {/* Декоративные элементы */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-05 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary-dark-05 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative container-adaptive">
         {/* Заголовок секции */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -83,13 +83,13 @@ export default function Services() {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-6"
           >
             <Sparkles className="w-5 h-5 text-primary" />
-            <span className="text-sm font-semibold text-gray-700">Наши услуги</span>
+            <span className="text-caption weight-semibold text-gray-700">Наши услуги</span>
           </motion.div>
 
-          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight" style={{ textShadow: '0 2px 8px var(--color-bg-card-hover)' }}>
+          <h2 className="text-display-2 text-gray-900 mb-6 leading-tight-kw" style={{ textShadow: '0 2px 8px var(--color-bg-card-hover)' }}>
             Полный спектр{' '}
             <span className="relative inline-block">
-              <span className="text-gray-900 font-extrabold">рекламных услуг</span>
+              <span className="text-gray-900 weight-extrabold">рекламных услуг</span>
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
@@ -98,7 +98,7 @@ export default function Services() {
               />
             </span>
           </h2>
-          <p className="text-xl text-gray-800 max-w-3xl mx-auto leading-relaxed font-medium" style={{ textShadow: '0 1px 3px var(--color-bg-card)' }}>
+          <p className="text-body-xl text-gray-800 max-w-3xl mx-auto leading-relaxed-kw weight-medium" style={{ textShadow: '0 1px 3px var(--color-bg-card)' }}>
             От концепции до реализации — создаем эффективную рекламу, 
             которая работает на результат вашего бизнеса
           </p>
@@ -121,7 +121,7 @@ export default function Services() {
                   initial={{ opacity: 0, scale: 0 }}
                   animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
                   transition={{ delay: index * 0.15 + 0.5 }}
-                  className="absolute -top-3 -right-3 z-10 bg-gradient-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-1"
+                  className="absolute -top-3 -right-3 z-10 bg-gradient-primary text-white text-caption weight-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-1"
                 >
                   <Star className="w-3 h-3 fill-current" />
                   <span>Популярно</span>
@@ -151,11 +151,11 @@ export default function Services() {
                 {/* Контент */}
                 <div className="relative z-10 space-y-6">
                   <div>
-                    <h3 className="text-xl font-bold text-primary-dark mb-3 hover:text-primary transition-colors">
+                    <h3 className="text-title text-primary-dark mb-3 hover:text-primary transition-colors weight-bold">
                       {service.title}
                     </h3>
                     
-                    <p className="text-muted text-sm leading-relaxed">
+                    <p className="text-muted text-body-sm leading-relaxed-kw">
                       {service.description}
                     </p>
                   </div>
@@ -168,7 +168,7 @@ export default function Services() {
                         initial={{ opacity: 0, x: -10 }}
                         animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
                         transition={{ delay: index * 0.15 + 0.3 }}
-                        className="flex items-center space-x-3 text-sm text-muted"
+                        className="flex items-center space-x-3 text-body-sm text-muted"
                       >
                         <div className="w-5 h-5 rounded-full bg-primary-20 flex items-center justify-center flex-shrink-0">
                           <Check className="w-3 h-3 text-primary" />
@@ -182,7 +182,7 @@ export default function Services() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full mt-6 bg-gradient-to-r from-card to-white text-muted py-4 rounded-2xl border border-light hover:border-hover hover:text-primary hover:shadow-lg transition-all duration-300 font-semibold flex items-center justify-center space-x-2 group"
+                    className="w-full mt-6 bg-gradient-to-r from-card to-white text-muted py-4 rounded-2xl border border-light hover:border-hover hover:text-primary hover:shadow-lg transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 group"
                   >
                     <span>Подробнее</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -226,10 +226,10 @@ export default function Services() {
                 </div>
               </motion.div>
 
-              <h3 className="text-3xl md:text-4xl font-bold mb-6">
+              <h3 className="text-display-3 weight-bold mb-6">
                 Не знаете, какую услугу выбрать?
               </h3>
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-body-xl text-white/90 mb-8 leading-relaxed-kw">
                 Получите бесплатную консультацию наших экспертов и найдите 
                 идеальное решение для роста вашего бизнеса
               </p>
@@ -238,7 +238,7 @@ export default function Services() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-primary px-8 py-4 rounded-2xl hover:bg-card transition-colors font-semibold shadow-lg flex items-center justify-center space-x-2"
+                  className="bg-white text-primary px-8 py-4 rounded-2xl hover:bg-card transition-colors weight-semibold shadow-lg flex items-center justify-center space-x-2"
                 >
                   <span>Получить консультацию</span>
                   <ArrowRight className="w-5 h-5" />
@@ -247,7 +247,7 @@ export default function Services() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-colors font-semibold"
+                  className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-colors weight-semibold"
                 >
                   Калькулятор стоимости
                 </motion.button>

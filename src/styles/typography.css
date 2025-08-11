@@ -1,0 +1,134 @@
+/* ==========================================================================
+   ТИПОГРАФИКА САЙТА КВАРТЕТ
+   Централизованные шрифтовые токены, размеры, интервалы, утилиты
+   ========================================================================== */
+
+:root {
+  /* Базовые семейства шрифтов */
+  --font-family-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+  --font-family-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Масштаб размеров для всех экранов до 4K */
+  --font-size-display-1: clamp(3.5rem, 8vw + 1rem, 8rem);     /* ~56 → 128px */
+  --font-size-display-2: clamp(2.75rem, 6vw + 0.5rem, 6rem);  /* ~44 → 96px */
+  --font-size-display-3: clamp(2.25rem, 4.5vw + 0.5rem, 4.5rem); /* ~36 → 72px */
+  --font-size-title-lg: clamp(1.75rem, 3vw + 0.25rem, 3rem);  /* ~28 → 48px */
+  --font-size-title: clamp(1.5rem, 2.5vw + 0.25rem, 2.25rem); /* ~24 → 36px */
+  --font-size-title-sm: clamp(1.25rem, 2vw + 0.25rem, 1.875rem); /* ~20 → 30px */
+  --font-size-body-xl: clamp(1.25rem, 2vw + 0.125rem, 1.75rem);  /* ~20 → 28px */
+  --font-size-body-lg: clamp(1.125rem, 1.75vw + 0.125rem, 1.5rem); /* ~18 → 24px */
+  --font-size-body: clamp(1rem, 1.5vw + 0.125rem, 1.375rem);     /* ~16 → 22px */
+  --font-size-body-sm: clamp(0.9375rem, 1.25vw + 0.125rem, 1.25rem); /* ~15 → 20px */
+  --font-size-caption: clamp(0.875rem, 1vw + 0.125rem, 1.125rem);    /* ~14 → 18px */
+
+  /* Межстрочные интервалы */
+  --line-height-tight: 1.05;
+  --line-height-snug: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.65;
+
+  /* Начертания */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+}
+
+/* Семейства */
+.font-primary-sans { font-family: var(--font-family-sans); }
+.font-primary-mono { font-family: var(--font-family-mono); }
+
+/* Дисплейные размеры */
+.text-display-1 { font-size: var(--font-size-display-1); line-height: var(--line-height-tight); font-weight: var(--font-weight-black); }
+.text-display-2 { font-size: var(--font-size-display-2); line-height: var(--line-height-tight); font-weight: var(--font-weight-black); }
+.text-display-3 { font-size: var(--font-size-display-3); line-height: var(--line-height-snug); font-weight: var(--font-weight-extrabold); }
+
+/* Заголовки */
+.text-title-lg { font-size: var(--font-size-title-lg); line-height: var(--line-height-snug); font-weight: var(--font-weight-bold); }
+.text-title { font-size: var(--font-size-title); line-height: var(--line-height-snug); font-weight: var(--font-weight-bold); }
+.text-title-sm { font-size: var(--font-size-title-sm); line-height: var(--line-height-snug); font-weight: var(--font-weight-semibold); }
+
+/* Основной текст */
+.text-body-xl { font-size: var(--font-size-body-xl); line-height: var(--line-height-normal); font-weight: var(--font-weight-medium); }
+.text-body-lg { font-size: var(--font-size-body-lg); line-height: var(--line-height-normal); font-weight: var(--font-weight-medium); }
+.text-body { font-size: var(--font-size-body); line-height: var(--line-height-normal); font-weight: var(--font-weight-regular); }
+.text-body-sm { font-size: var(--font-size-body-sm); line-height: var(--line-height-normal); font-weight: var(--font-weight-regular); }
+.text-caption { font-size: var(--font-size-caption); line-height: var(--line-height-normal); font-weight: var(--font-weight-medium); }
+
+/* Вспомогательные утилиты */
+.leading-tight-kw { line-height: var(--line-height-tight); }
+.leading-snug-kw { line-height: var(--line-height-snug); }
+.leading-normal-kw { line-height: var(--line-height-normal); }
+.leading-relaxed-kw { line-height: var(--line-height-relaxed); }
+
+/* Адаптивные контейнеры для всех экранов до 4K+ */
+:root {
+  --container-width: clamp(320px, 92vw, 2400px);
+  --container-padding: clamp(1rem, 4vw, 8rem);
+  --container-gap: clamp(1rem, 3vw, 4rem);
+  --section-padding-y: clamp(3rem, 10vw, 12rem);
+  --card-padding: clamp(1rem, 3vw, 3rem);
+  --card-gap: clamp(0.75rem, 2vw, 2.5rem);
+}
+
+/* Адаптивные утилиты для контейнеров */
+.container-adaptive {
+  max-width: var(--container-width);
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-padding-y {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+.container-gap {
+  gap: var(--container-gap);
+}
+
+.card-padding-adaptive {
+  padding: var(--card-padding);
+}
+
+.card-gap-adaptive {
+  gap: var(--card-gap);
+}
+
+/* Медиа-запросы для больших мониторов и контейнеров */
+@media (min-width: 1920px) {
+  :root {
+    --container-width: clamp(1600px, 85vw, 2200px);
+    --container-padding: clamp(3rem, 5vw, 10rem);
+    --section-padding-y: clamp(6rem, 12vw, 16rem);
+  }
+}
+
+@media (min-width: 2560px) {
+  :root {
+    --container-width: clamp(2000px, 80vw, 2800px);
+    --container-padding: clamp(4rem, 6vw, 12rem);
+    --section-padding-y: clamp(8rem, 15vw, 20rem);
+  }
+}
+
+@media (min-width: 3440px) {
+  :root {
+    --container-width: clamp(2400px, 75vw, 3200px);
+    --container-padding: clamp(6rem, 8vw, 16rem);
+    --section-padding-y: clamp(10rem, 18vw, 24rem);
+  }
+}
+
+.weight-regular { font-weight: var(--font-weight-regular); }
+.weight-medium { font-weight: var(--font-weight-medium); }
+.weight-semibold { font-weight: var(--font-weight-semibold); }
+.weight-bold { font-weight: var(--font-weight-bold); }
+.weight-extrabold { font-weight: var(--font-weight-extrabold); }
+.weight-black { font-weight: var(--font-weight-black); }
+
+

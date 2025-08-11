@@ -210,7 +210,7 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Выберите тип услуги</h3>
+            <h3 className="text-title weight-bold text-gray-900 mb-6">Выберите тип услуги</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {services.map((service) => (
                 <motion.button
@@ -233,8 +233,8 @@ export default function CalculatorPage() {
                       <service.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900">{service.name}</h4>
-                      <p className="text-sm text-gray-600">{service.options.length} услуг</p>
+                      <h4 className="text-body-lg weight-semibold text-gray-900">{service.name}</h4>
+                      <p className="text-caption text-gray-600">{service.options.length} услуг</p>
                     </div>
                   </div>
                 </motion.button>
@@ -252,7 +252,7 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            <h3 className="text-title weight-bold text-gray-900 mb-6">
               Выберите конкретную услугу
             </h3>
             <div className="grid gap-4">
@@ -270,8 +270,8 @@ export default function CalculatorPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900">{option.name}</h4>
-                      <p className="text-sm text-gray-600">от {option.basePrice.toLocaleString()} ₽ за {option.unit}</p>
+                      <h4 className="text-body-lg weight-semibold text-gray-900">{option.name}</h4>
+                      <p className="text-caption text-gray-600">от {option.basePrice.toLocaleString()} ₽ за {option.unit}</p>
                     </div>
                     {calculator.selectedOption === option.id && (
                       <CheckCircle className="w-6 h-6 text-primary" />
@@ -295,10 +295,10 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Укажите количество</h3>
+            <h3 className="text-title weight-bold text-gray-900 mb-6">Укажите количество</h3>
             
             <div className="bg-gray-50 p-6 rounded-2xl">
-              <div className="text-lg font-semibold text-gray-900 mb-4">
+              <div className="text-body-lg weight-semibold text-gray-900 mb-4">
                 {selectedOption?.name}
               </div>
               
@@ -327,13 +327,13 @@ export default function CalculatorPage() {
                 </div>
               </div>
               
-              <div className="text-xl font-bold text-primary">
+              <div className="text-body-lg weight-bold text-primary">
                 Базовая стоимость: {((selectedOption?.basePrice || 0) * calculator.quantity).toLocaleString()} ₽
               </div>
             </div>
 
             <div>
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Дополнительные услуги</h4>
+              <h4 className="text-body-lg weight-semibold text-gray-900 mb-4">Дополнительные услуги</h4>
               <div className="space-y-3">
                 {additionalOptions.map((service) => (
                   <label
@@ -347,8 +347,8 @@ export default function CalculatorPage() {
                     className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
                     />
                     <div className="flex-1">
-                      <div className="font-medium text-gray-900">{service.name}</div>
-                      <div className="text-sm text-gray-600">
+                      <div className="weight-medium text-gray-900">{service.name}</div>
+                      <div className="text-caption text-gray-600">
                         {service.price ? `+${service.price.toLocaleString()} ₽` : 
                          service.multiplier ? `×${service.multiplier}` : ''}
                       </div>
@@ -368,44 +368,44 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Ваши контактные данные</h3>
+            <h3 className="text-title weight-bold text-gray-900 mb-6">Ваши контактные данные</h3>
             
             {/* Расчет */}
             <div className="p-6 rounded-2xl" style={{ background: 'linear-gradient(to right, var(--color-primary-10), var(--color-primary-dark-10))', border: '1px solid var(--color-primary-20)' }}>
-              <h4 className="text-lg font-semibold text-gray-900 mb-4">Итоговый расчет</h4>
+              <h4 className="text-body-lg weight-semibold text-gray-900 mb-4">Итоговый расчет</h4>
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Услуга:</span>
-                  <span className="font-medium">
+                  <span className="weight-medium">
                     {services.find(s => s.id === calculator.selectedService)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Тип:</span>
-                  <span className="font-medium">
+                  <span className="weight-medium">
                     {services.find(s => s.id === calculator.selectedService)
                       ?.options.find(o => o.id === calculator.selectedOption)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Количество:</span>
-                  <span className="font-medium">{calculator.quantity}</span>
+                  <span className="weight-medium">{calculator.quantity}</span>
                 </div>
                 {calculator.additionalServices.length > 0 && (
                   <div className="flex justify-between">
                     <span className="text-gray-600">Доп. услуги:</span>
-                    <span className="font-medium">{calculator.additionalServices.length}</span>
+                    <span className="weight-medium">{calculator.additionalServices.length}</span>
                   </div>
                 )}
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-xl font-bold text-gray-900">Итого:</span>
-                  <span className="text-2xl font-bold text-primary">
+                  <span className="text-body-lg weight-bold text-gray-900">Итого:</span>
+                  <span className="text-title weight-bold text-primary">
                     {calculatePrice().toLocaleString()} ₽
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">
+                <p className="text-caption text-gray-600 mt-2">
                   * Точная стоимость будет рассчитана после консультации
                 </p>
               </div>
@@ -415,7 +415,7 @@ export default function CalculatorPage() {
             <div className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-caption weight-medium text-gray-700 mb-2">
                     Ваше имя *
                   </label>
                   <input
@@ -428,7 +428,7 @@ export default function CalculatorPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-caption weight-medium text-gray-700 mb-2">
                     Телефон *
                   </label>
                   <input
@@ -443,7 +443,7 @@ export default function CalculatorPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-caption weight-medium text-gray-700 mb-2">
                   Email
                 </label>
                 <input
@@ -456,7 +456,7 @@ export default function CalculatorPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-caption weight-medium text-gray-700 mb-2">
                   Дополнительные пожелания
                 </label>
                 <textarea
@@ -511,14 +511,14 @@ export default function CalculatorPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <Calculator className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-gray-700">Калькулятор стоимости</span>
+              <span className="text-caption weight-semibold text-gray-700">Калькулятор стоимости</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold text-on-dark mb-8"
+              className="text-display-1 weight-bold text-on-dark mb-8"
             >
               Рассчитайте{' '}
               <span className="relative inline-block">
@@ -552,10 +552,10 @@ export default function CalculatorPage() {
               {/* Progress Bar */}
               <div className="mb-12">
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-gray-500">
+                  <span className="text-caption weight-medium text-gray-500">
                     Шаг {calculator.step} из 4
                   </span>
-                  <span className="text-sm font-medium text-primary">
+                  <span className="text-caption weight-medium text-primary">
                     {Math.round((calculator.step / 4) * 100)}% завершено
                   </span>
                 </div>
@@ -582,7 +582,7 @@ export default function CalculatorPage() {
                     disabled={calculator.step === 1}
                     whileHover={{ scale: calculator.step === 1 ? 1 : 1.02 }}
                     whileTap={{ scale: calculator.step === 1 ? 1 : 0.98 }}
-                    className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                    className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                       calculator.step === 1
                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -598,7 +598,7 @@ export default function CalculatorPage() {
                       disabled={!canProceed()}
                       whileHover={{ scale: canProceed() ? 1.02 : 1 }}
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
-                      className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                      className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
                           ? 'bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white hover:shadow-lg'
                           : 'bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -613,7 +613,7 @@ export default function CalculatorPage() {
                       disabled={!canProceed()}
                       whileHover={{ scale: canProceed() ? 1.02 : 1 }}
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
-                      className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                      className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
                           ? 'bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white hover:shadow-lg'
                           : 'bg-gray-100 text-gray-400 cursor-not-allowed'
@@ -642,7 +642,7 @@ export default function CalculatorPage() {
                 <CheckCircle className="w-12 h-12 text-white" />
               </motion.div>
               
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-title-lg weight-bold text-gray-900 mb-4">
                 Расчет отправлен!
               </h2>
               <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -650,7 +650,7 @@ export default function CalculatorPage() {
               </p>
               
               <div className="p-6 rounded-2xl mb-8" style={{ background: 'linear-gradient(to right, var(--color-primary-10), var(--color-primary-dark-10))' }}>
-                <div className="text-2xl font-bold text-primary mb-2">
+                <div className="text-title weight-bold text-primary mb-2">
                   Примерная стоимость: {calculator.totalPrice.toLocaleString()} ₽
                 </div>
                 <p className="text-gray-600">
@@ -661,7 +661,7 @@ export default function CalculatorPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="tel:+73471234567"
-                className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Позвонить сейчас</span>
@@ -680,7 +680,7 @@ export default function CalculatorPage() {
                       totalPrice: 0
                     })
                   }}
-                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Calculator className="w-5 h-5" />
                   <span>Новый расчет</span>
@@ -695,7 +695,7 @@ export default function CalculatorPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
               Преимущества нашего калькулятора
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -735,7 +735,7 @@ export default function CalculatorPage() {
                 >
                   <feature.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <h3 className="text-body-lg weight-bold text-gray-900 mb-3">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
               </motion.div>
             ))}
