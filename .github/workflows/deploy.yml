@@ -1,0 +1,59 @@
+name: Deploy to Timeweb VPS
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: SSH deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run remote deploy script over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.PROD_SSH_HOST }}
+          username: ${{ secrets.PROD_SSH_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script_stop: true
+          envs: WORKDIR,REPO_SSH,ENV_FILE
+          command_timeout: 30m
+        env:
+          WORKDIR: /opt/kvartett-website
+          REPO_SSH: git@github.com:kamilgaraev/kvartet.git
+          ENV_FILE: ${{ secrets.PROD_ENV_FILE }}
+          script: |
+            set -euo pipefail
+
+            WORKDIR="${WORKDIR:-/opt/kvartett-website}"
+            REPO_SSH="${REPO_SSH:-git@github.com:kamilgaraev/kvartet.git}"
+
+            if [ ! -d "$WORKDIR/.git" ]; then
+              sudo mkdir -p "$WORKDIR"
+              sudo chown "$USER":"$USER" "$WORKDIR"
+              git clone "$REPO_SSH" "$WORKDIR"
+            fi
+
+            cd "$WORKDIR"
+            git fetch --all --prune
+            git reset --hard origin/main
+
+            # Обновляем .env из секрета, если он задан
+            if [ -n "${ENV_FILE:-}" ]; then
+              printf "%s" "$ENV_FILE" > .env
+            fi
+
+            docker compose down || true
+            docker compose pull || true
+            docker compose build --no-cache --pull
+            docker compose up -d
+
+            docker image prune -f || true
+            docker system df || true
+
+
