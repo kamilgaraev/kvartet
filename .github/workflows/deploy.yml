@@ -20,6 +20,7 @@ jobs:
           host: ${{ secrets.PROD_SSH_HOST }}
           username: ${{ secrets.PROD_SSH_USER }}
           key: ${{ secrets.PROD_SSH_KEY }}
+          passphrase: ${{ secrets.PROD_SSH_PASSPHRASE }}
           script_stop: true
           envs: WORKDIR,REPO_SSH,ENV_FILE
           command_timeout: 30m
