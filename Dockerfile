@@ -2,7 +2,9 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 
+# Устанавливаем прод-окружение, но разрешаем установку dev-зависимостей для сборки
 ENV NODE_ENV=production
+ENV NPM_CONFIG_PRODUCTION=false
 
 # Системные зависимости для sharp
 RUN apk add --no-cache libc6-compat python3 make g++
