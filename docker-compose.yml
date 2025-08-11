@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    container_name: kvartett-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    container_name: kvartett-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-kvartett}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kvartett}
+      POSTGRES_DB: ${POSTGRES_DB:-kvartett}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+
+
+
