@@ -8,4 +8,3 @@ echo "Starting Next.js server..."
 node server.js
 
 
-

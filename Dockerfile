@@ -46,4 +46,3 @@ USER nextjs
 CMD ["./docker-entrypoint.sh"]
 
 
-
