@@ -152,7 +152,7 @@ export default function ServicesPage() {
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -161,14 +161,14 @@ export default function ServicesPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-8"
             >
               <Star className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-gray-700">Полный спектр рекламных услуг</span>
+              <span className="text-sm weight-semibold text-gray-700">Полный спектр рекламных услуг</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold text-gray-900 mb-8"
+              className="text-5xl md:text-7xl weight-bold text-primary-dark mb-8"
             >
               Наши{' '}
               <span className="relative inline-block">
@@ -186,7 +186,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-muted mb-12 max-w-3xl mx-auto leading-relaxed"
             >
               От разработки концепции до полной реализации проекта. Мы предоставляем комплексные решения для продвижения вашего бизнеса
             </motion.p>
@@ -199,7 +199,7 @@ export default function ServicesPage() {
             >
               <Link
                 href="#services"
-                className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <span>Выбрать услугу</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -207,7 +207,7 @@ export default function ServicesPage() {
               
               <Link
                 href="/calculator"
-                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <span>Рассчитать стоимость</span>
                 <Zap className="w-5 h-5" />
@@ -219,17 +219,17 @@ export default function ServicesPage() {
 
       {/* Services Grid */}
       <section id="services" ref={servicesRef} className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Что мы предлагаем
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Профессиональные решения для эффективного продвижения вашего бизнеса
             </p>
           </motion.div>
@@ -254,19 +254,19 @@ export default function ServicesPage() {
                   </div>
 
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-2xl weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors">
                       {service.name}
                     </h3>
-                    <p className="text-gray-600 mb-6 leading-relaxed">
+                    <p className="text-muted mb-6 leading-relaxed">
                       {service.description}
                     </p>
 
                     <div className="grid md:grid-cols-2 gap-4 mb-6">
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Услуги:</h4>
+                        <h4 className="weight-semibold text-primary-dark mb-3">Услуги:</h4>
                         <ul className="space-y-2">
                           {service.features.slice(0, 3).map((feature, i) => (
-                            <li key={i} className="flex items-center space-x-2 text-sm text-gray-600">
+                            <li key={i} className="flex items-center space-x-2 text-sm text-muted">
                               <CheckCircle className="w-4 h-4 text-success flex-shrink-0" />
                               <span>{feature}</span>
                             </li>
@@ -275,10 +275,10 @@ export default function ServicesPage() {
                       </div>
                       
                       <div>
-                        <h4 className="font-semibold text-gray-900 mb-3">Преимущества:</h4>
+                        <h4 className="weight-semibold text-primary-dark mb-3">Преимущества:</h4>
                         <ul className="space-y-2">
                           {service.advantages.map((advantage, i) => (
-                            <li key={i} className="flex items-center space-x-2 text-sm text-gray-600">
+                            <li key={i} className="flex items-center space-x-2 text-sm text-muted">
                               <Star className="w-4 h-4 text-warning flex-shrink-0" />
                               <span>{advantage}</span>
                             </li>
@@ -290,7 +290,7 @@ export default function ServicesPage() {
                     <div className="flex items-center justify-between">
                       <div>
                         <span className="text-sm text-gray-500">Стоимость</span>
-                        <div className="text-2xl font-bold text-primary">{service.price}</div>
+                        <div className="text-2xl weight-bold text-primary">{service.price}</div>
                       </div>
                       
                       <Link
@@ -311,17 +311,17 @@ export default function ServicesPage() {
 
       {/* Advantages */}
       <section ref={advantagesRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={advantagesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Почему выбирают нас
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Наши конкурентные преимущества и гарантии качества
             </p>
           </motion.div>
@@ -342,8 +342,8 @@ export default function ServicesPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{advantage.title}</h3>
-                <p className="text-gray-600">{advantage.description}</p>
+                <h3 className="text-xl weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-muted">{advantage.description}</p>
               </motion.div>
             ))}
           </div>
@@ -353,13 +353,13 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-r from-primary via-primary-dark to-warning relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="text-center text-white">
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-4xl md:text-5xl weight-bold mb-6"
             >
               Готовы начать проект?
             </motion.h2>
@@ -380,7 +380,7 @@ export default function ServicesPage() {
             >
               <Link
                 href="/contacts"
-                className="group bg-white text-primary px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Связаться с нами</span>
@@ -388,7 +388,7 @@ export default function ServicesPage() {
               
               <Link
                 href="/calculator"
-                className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
+                className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 weight-semibold flex items-center justify-center space-x-2"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Рассчитать проект</span>

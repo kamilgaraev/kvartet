@@ -198,7 +198,7 @@ export default function PrintingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+                className="text-5xl md:text-6xl font-bold text-primary-dark mb-6"
               >
                 Качественная{' '}
                 <span className="relative inline-block">
@@ -216,7 +216,7 @@ export default function PrintingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                className="text-xl text-muted mb-8 leading-relaxed"
               >
                 От визиток до каталогов — высококачественная печать любых тиражей. Цифровая и офсетная печать, экспресс-заказы, полная постобработка.
               </motion.p>
@@ -257,7 +257,7 @@ export default function PrintingPage() {
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
                     <div className="text-2xl font-bold text-success">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-sm text-muted">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -298,10 +298,10 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Виды полиграфии
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Полный спектр полиграфических услуг от визиток до каталогов
             </p>
           </motion.div>
@@ -324,7 +324,7 @@ export default function PrintingPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <button className="w-full bg-white/90 backdrop-blur-sm text-gray-900 py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
+                      <button className="w-full bg-white/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
                         <Eye className="w-4 h-4" />
                         <span>Смотреть примеры</span>
                       </button>
@@ -333,10 +333,10 @@ export default function PrintingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-success transition-colors">
+                  <h3 className="text-xl font-bold text-primary-dark mb-2 group-hover:text-success transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-muted mb-4 text-sm leading-relaxed">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
@@ -356,10 +356,10 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Материалы и технологии
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Используем только качественные материалы и современное оборудование
             </p>
           </div>
@@ -377,8 +377,8 @@ export default function PrintingPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-success to-success-dark flex items-center justify-center shadow-lg mb-4">
                   <Layers className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{material.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{material.description}</p>
+                <h3 className="text-lg font-bold text-primary-dark mb-2">{material.name}</h3>
+                <p className="text-muted text-sm mb-3">{material.description}</p>
                 <div className="text-xs text-success font-medium bg-success/10 px-3 py-1 rounded-full">
                   {material.usage}
                 </div>
@@ -397,10 +397,10 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Как мы работаем
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Профессиональный подход на каждом этапе производства
             </p>
           </motion.div>
@@ -427,8 +427,8 @@ export default function PrintingPage() {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.description}</p>
+                  <h3 className="text-xl font-bold text-primary-dark mb-3">{step.title}</h3>
+                  <p className="text-muted mb-4 text-sm leading-relaxed">{step.description}</p>
                   <div className="inline-flex items-center space-x-1 text-success text-sm font-medium">
                     <Clock className="w-4 h-4" />
                     <span>{step.duration}</span>
@@ -450,10 +450,10 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Почему клиенты выбирают нас для печати полиграфии
             </p>
           </div>
@@ -474,8 +474,8 @@ export default function PrintingPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{advantage.title}</h3>
-                <p className="text-gray-600">{advantage.description}</p>
+                <h3 className="text-xl font-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-muted">{advantage.description}</p>
               </motion.div>
             ))}
           </div>
@@ -486,10 +486,10 @@ export default function PrintingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Качественная полиграфия для разных сфер бизнеса
             </p>
           </div>
@@ -517,7 +517,7 @@ export default function PrintingPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
                 <span className="text-success font-medium">{item.result}</span>
@@ -543,17 +543,17 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Рассчитайте стоимость
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Узнайте точную стоимость печати вашего тиража
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Быстрый расчет</h3>
+              <h3 className="text-2xl font-bold text-primary-dark mb-6">Быстрый расчет</h3>
               <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -599,7 +599,7 @@ export default function PrintingPage() {
 
             <div className="space-y-8">
               <div className="bg-gradient-to-r from-success/10 to-success-dark/10 p-6 rounded-2xl border border-success/20">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">
+                <h4 className="text-lg font-bold text-primary-dark mb-4">
                   Примерные цены
                 </h4>
                 <div className="space-y-3">
@@ -618,7 +618,7 @@ export default function PrintingPage() {
               </div>
 
               <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">
+                <h4 className="text-lg font-bold text-primary-dark mb-4">
                   Скидки на тираж
                 </h4>
                 <div className="space-y-3">

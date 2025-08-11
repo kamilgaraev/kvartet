@@ -180,13 +180,13 @@ export default function BlogPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-primary-bg relative overflow-hidden">
+      <section ref={heroRef} className="section-padding-y bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-05)' }}></div>
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -195,14 +195,14 @@ export default function BlogPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <BookOpen className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-gray-700">Блог о рекламе</span>
+              <span className="text-caption weight-semibold text-muted">Блог о рекламе</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold text-on-dark mb-8"
+              className="text-display-1 weight-bold text-primary-dark mb-8 leading-tight-kw"
             >
               Знания о{' '}
               <span className="relative inline-block">
@@ -220,7 +220,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-on-dark-muted mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-body-xl text-muted mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               Экспертные статьи о тенденциях в рекламе, советы по маркетингу и практические кейсы от профессионалов индустрии
             </motion.p>
@@ -232,13 +232,13 @@ export default function BlogPage() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="relative max-w-lg mx-auto"
             >
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted w-5 h-5" />
               <input
                 type="text"
                 placeholder="Поиск статей..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 rounded-2xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 text-lg shadow-lg"
+                className="w-full pl-12 pr-4 py-4 rounded-2xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 text-body-lg shadow-card"
               />
             </motion.div>
           </div>
@@ -246,8 +246,8 @@ export default function BlogPage() {
       </section>
 
       {/* Categories */}
-      <section className="py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 bg-white border-b border-light">
+        <div className="container-adaptive">
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => (
               <motion.button
@@ -255,15 +255,15 @@ export default function BlogPage() {
                 onClick={() => setActiveCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center space-x-2 px-6 py-3 rounded-2xl font-medium transition-all duration-300 ${
+                className={`flex items-center space-x-2 px-6 py-3 rounded-2xl weight-medium transition-all duration-300 ${
                   activeCategory === category.id
-                    ? 'bg-[#1FCAD4] text-white shadow-lg shadow-[#1FCAD4]/25'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ? 'bg-gradient-primary text-white shadow-primary'
+                    : 'bg-primary-10 text-muted hover:bg-primary-20'
                 }`}
               >
                 <span>{category.name}</span>
-                <span className={`text-sm px-2 py-1 rounded-full ${
-                  activeCategory === category.id ? 'bg-white/20' : 'bg-white/80 text-gray-600'
+                <span className={`text-caption px-2 py-1 rounded-full ${
+                  activeCategory === category.id ? 'bg-white/20' : 'bg-white/80 text-muted'
                 }`}>
                   {category.count}
                 </span>
@@ -275,18 +275,18 @@ export default function BlogPage() {
 
       {/* Featured Posts */}
       {activeCategory === 'all' && (
-        <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="section-padding-y bg-gradient-bg">
+          <div className="container-adaptive">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
                 Рекомендуемые статьи
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
                 Самые популярные и полезные материалы от наших экспертов
               </p>
             </motion.div>
@@ -299,7 +299,7 @@ export default function BlogPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -5 }}
-                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                  className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
                 >
                   <div className="relative h-64 overflow-hidden">
                     <img
@@ -308,36 +308,36 @@ export default function BlogPage() {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                      <div className="absolute top-4 left-4">
-                      <span className="bg-primary-dark text-white px-3 py-1 rounded-full text-sm font-medium">
+                      <span className="bg-primary-dark text-white px-3 py-1 rounded-full text-caption weight-medium">
                         Рекомендуем
                       </span>
                     </div>
                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1">
-                      <div className="flex items-center space-x-1 text-sm">
-                        <Eye className="w-4 h-4 text-gray-600" />
-                        <span className="text-gray-800 font-medium">{post.views}</span>
+                      <div className="flex items-center space-x-1 text-caption">
+                        <Eye className="w-4 h-4 text-muted" />
+                        <span className="text-primary-dark weight-medium">{post.views}</span>
                       </div>
                     </div>
                   </div>
                   
                   <div className="p-6">
                     <div className="flex items-center space-x-4 mb-4">
-                     <span className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">
+                     <span className="bg-primary-10 text-primary px-3 py-1 rounded-full text-caption weight-medium">
                         {post.categoryName}
                       </span>
-                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                      <div className="flex items-center space-x-2 text-caption text-muted">
                         <Calendar className="w-4 h-4" />
                         <span>{formatDate(post.publishedAt)}</span>
                       </div>
                     </div>
                     
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                    <h3 className="text-title-lg weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors leading-tight-kw">
                       <Link href={`/blog/${post.slug}`}>
                         {post.title}
                       </Link>
                     </h3>
                     
-                    <p className="text-gray-600 mb-6 leading-relaxed">
+                    <p className="text-body text-muted mb-6 leading-relaxed-kw">
                       {post.excerpt}
                     </p>
                     
@@ -349,12 +349,12 @@ export default function BlogPage() {
                           className="w-10 h-10 rounded-full object-cover"
                         />
                         <div>
-                          <div className="font-medium text-gray-900">{post.author}</div>
-                          <div className="text-sm text-gray-500">{post.readTime}</div>
+                          <div className="weight-medium text-primary-dark">{post.author}</div>
+                          <div className="text-caption text-muted">{post.readTime}</div>
                         </div>
                       </div>
                       
-                      <div className="flex items-center space-x-4 text-sm text-gray-500">
+                      <div className="flex items-center space-x-4 text-caption text-muted">
                         <div className="flex items-center space-x-1">
                           <Star className="w-4 h-4" />
                           <span>{post.likes}</span>
@@ -374,18 +374,18 @@ export default function BlogPage() {
       )}
 
       {/* Blog Posts */}
-      <section ref={postsRef} className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={postsRef} className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={postsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-display-3 weight-bold text-primary-dark mb-4 leading-tight-kw">
               {filteredPosts.length} статей найдено
             </h2>
-            <p className="text-gray-600">
+            <p className="text-body-lg text-muted">
               {activeCategory === 'all' ? 'Все публикации' : categories.find(c => c.id === activeCategory)?.name}
             </p>
           </motion.div>
@@ -398,7 +398,7 @@ export default function BlogPage() {
                 animate={postsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                className="group bg-card rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -408,48 +408,48 @@ export default function BlogPage() {
                   />
                   {post.featured && (
                     <div className="absolute top-3 left-3">
-                      <div className="bg-[#E91E63] text-white px-2 py-1 rounded-md text-xs font-medium">
+                      <div className="bg-warning text-white px-2 py-1 rounded-md text-caption weight-medium">
                         ТОП
                       </div>
                     </div>
                   )}
                   <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-md px-2 py-1">
-                    <div className="flex items-center space-x-1 text-xs">
-                      <Eye className="w-3 h-3 text-gray-600" />
-                      <span className="text-gray-800 font-medium">{post.views}</span>
+                    <div className="flex items-center space-x-1 text-caption">
+                      <Eye className="w-3 h-3 text-muted" />
+                      <span className="text-primary-dark weight-medium">{post.views}</span>
                     </div>
                   </div>
                 </div>
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-3">
-                     <span className="bg-primary/10 text-primary px-2 py-1 rounded-lg text-xs font-medium">
+                     <span className="bg-primary-10 text-primary px-2 py-1 rounded-lg text-caption weight-medium">
                       {post.categoryName}
                     </span>
-                    <div className="flex items-center space-x-1 text-xs text-gray-500">
+                    <div className="flex items-center space-x-1 text-caption text-muted">
                       <Calendar className="w-3 h-3" />
                       <span>{formatDate(post.publishedAt)}</span>
                     </div>
                   </div>
                   
-                  <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="text-title weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight-kw">
                     <Link href={`/blog/${post.slug}`}>
                       {post.title}
                     </Link>
                   </h3>
                   
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  <p className="text-body-sm text-muted mb-4 line-clamp-3 leading-relaxed-kw">
                     {post.excerpt}
                   </p>
                   
                   <div className="flex flex-wrap gap-1 mb-4">
                     {post.tags.slice(0, 2).map((tag, i) => (
-                      <span key={i} className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                      <span key={i} className="text-caption bg-primary-10 text-primary px-2 py-1 rounded-full">
                         #{tag}
                       </span>
                     ))}
                     {post.tags.length > 2 && (
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+                      <span className="text-caption bg-primary-10 text-primary px-2 py-1 rounded-full">
                         +{post.tags.length - 2}
                       </span>
                     )}
@@ -462,13 +462,13 @@ export default function BlogPage() {
                         alt={post.author}
                         className="w-8 h-8 rounded-full object-cover"
                       />
-                      <div>
-                        <div className="text-sm font-medium text-gray-900">{post.author}</div>
-                        <div className="text-xs text-gray-500">{post.readTime}</div>
-                      </div>
+                                              <div>
+                          <div className="text-body-sm weight-medium text-primary-dark">{post.author}</div>
+                          <div className="text-caption text-muted">{post.readTime}</div>
+                        </div>
                     </div>
                     
-                    <div className="flex items-center space-x-3 text-xs text-gray-500">
+                    <div className="flex items-center space-x-3 text-caption text-muted">
                       <div className="flex items-center space-x-1">
                         <Star className="w-3 h-3" />
                         <span>{post.likes}</span>
@@ -489,7 +489,7 @@ export default function BlogPage() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white px-8 py-4 rounded-2xl font-semibold flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"
+              className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center space-x-2 shadow-primary hover:shadow-primary-lg transition-all duration-300 mx-auto"
             >
               <span>Загрузить еще статьи</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -499,18 +499,18 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-gradient-bg">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Подписка на новости
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-body-xl text-muted mb-8 leading-relaxed-kw">
               Получайте свежие статьи о рекламе и маркетинге прямо на почту
             </p>
             
@@ -518,18 +518,18 @@ export default function BlogPage() {
               <input
                 type="email"
                 placeholder="Ваш email"
-                className="flex-1 px-6 py-4 rounded-2xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300"
+                className="flex-1 px-6 py-4 rounded-2xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
               />
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                 className="bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl font-semibold whitespace-nowrap shadow-lg hover:shadow-xl transition-all duration-300"
+                 className="bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold whitespace-nowrap shadow-primary hover:shadow-primary-lg transition-all duration-300"
               >
                 Подписаться
               </motion.button>
             </div>
             
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-body-sm text-muted mt-4">
               Никакого спама, только полезный контент
             </p>
           </motion.div>

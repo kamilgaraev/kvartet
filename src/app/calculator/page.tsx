@@ -210,7 +210,7 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-title weight-bold text-gray-900 mb-6">Выберите тип услуги</h3>
+            <h3 className="text-title weight-bold text-primary-dark mb-6">Выберите тип услуги</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {services.map((service) => (
                 <motion.button
@@ -228,13 +228,13 @@ export default function CalculatorPage() {
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                       calculator.selectedService === service.id
                         ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-gray-600'
+                        : 'bg-gray-100 text-muted'
                     }`}>
                       <service.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="text-body-lg weight-semibold text-gray-900">{service.name}</h4>
-                      <p className="text-caption text-gray-600">{service.options.length} услуг</p>
+                      <h4 className="text-body-lg weight-semibold text-primary-dark">{service.name}</h4>
+                      <p className="text-caption text-muted">{service.options.length} услуг</p>
                     </div>
                   </div>
                 </motion.button>
@@ -252,7 +252,7 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-title weight-bold text-gray-900 mb-6">
+            <h3 className="text-title weight-bold text-primary-dark mb-6">
               Выберите конкретную услугу
             </h3>
             <div className="grid gap-4">
@@ -270,8 +270,8 @@ export default function CalculatorPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-body-lg weight-semibold text-gray-900">{option.name}</h4>
-                      <p className="text-caption text-gray-600">от {option.basePrice.toLocaleString()} ₽ за {option.unit}</p>
+                      <h4 className="text-body-lg weight-semibold text-primary-dark">{option.name}</h4>
+                      <p className="text-caption text-muted">от {option.basePrice.toLocaleString()} ₽ за {option.unit}</p>
                     </div>
                     {calculator.selectedOption === option.id && (
                       <CheckCircle className="w-6 h-6 text-primary" />
@@ -295,10 +295,10 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-title weight-bold text-gray-900 mb-6">Укажите количество</h3>
+            <h3 className="text-title weight-bold text-primary-dark mb-6">Укажите количество</h3>
             
             <div className="bg-gray-50 p-6 rounded-2xl">
-              <div className="text-body-lg weight-semibold text-gray-900 mb-4">
+              <div className="text-body-lg weight-semibold text-primary-dark mb-4">
                 {selectedOption?.name}
               </div>
               
@@ -323,7 +323,7 @@ export default function CalculatorPage() {
                   >
                     +
                   </button>
-                  <span className="text-gray-600">{selectedOption?.unit}</span>
+                  <span className="text-muted">{selectedOption?.unit}</span>
                 </div>
               </div>
               
@@ -333,7 +333,7 @@ export default function CalculatorPage() {
             </div>
 
             <div>
-              <h4 className="text-body-lg weight-semibold text-gray-900 mb-4">Дополнительные услуги</h4>
+              <h4 className="text-body-lg weight-semibold text-primary-dark mb-4">Дополнительные услуги</h4>
               <div className="space-y-3">
                 {additionalOptions.map((service) => (
                   <label
@@ -347,8 +347,8 @@ export default function CalculatorPage() {
                     className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
                     />
                     <div className="flex-1">
-                      <div className="weight-medium text-gray-900">{service.name}</div>
-                      <div className="text-caption text-gray-600">
+                      <div className="weight-medium text-primary-dark">{service.name}</div>
+                      <div className="text-caption text-muted">
                         {service.price ? `+${service.price.toLocaleString()} ₽` : 
                          service.multiplier ? `×${service.multiplier}` : ''}
                       </div>
@@ -368,44 +368,44 @@ export default function CalculatorPage() {
             exit={{ opacity: 0, x: -30 }}
             className="space-y-6"
           >
-            <h3 className="text-title weight-bold text-gray-900 mb-6">Ваши контактные данные</h3>
+            <h3 className="text-title weight-bold text-primary-dark mb-6">Ваши контактные данные</h3>
             
             {/* Расчет */}
             <div className="p-6 rounded-2xl" style={{ background: 'linear-gradient(to right, var(--color-primary-10), var(--color-primary-dark-10))', border: '1px solid var(--color-primary-20)' }}>
-              <h4 className="text-body-lg weight-semibold text-gray-900 mb-4">Итоговый расчет</h4>
+              <h4 className="text-body-lg weight-semibold text-primary-dark mb-4">Итоговый расчет</h4>
               <div className="space-y-2 mb-4">
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Услуга:</span>
+                  <span className="text-muted">Услуга:</span>
                   <span className="weight-medium">
                     {services.find(s => s.id === calculator.selectedService)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Тип:</span>
+                  <span className="text-muted">Тип:</span>
                   <span className="weight-medium">
                     {services.find(s => s.id === calculator.selectedService)
                       ?.options.find(o => o.id === calculator.selectedOption)?.name}
                   </span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-600">Количество:</span>
+                  <span className="text-muted">Количество:</span>
                   <span className="weight-medium">{calculator.quantity}</span>
                 </div>
                 {calculator.additionalServices.length > 0 && (
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Доп. услуги:</span>
+                    <span className="text-muted">Доп. услуги:</span>
                     <span className="weight-medium">{calculator.additionalServices.length}</span>
                   </div>
                 )}
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-body-lg weight-bold text-gray-900">Итого:</span>
+                  <span className="text-body-lg weight-bold text-primary-dark">Итого:</span>
                   <span className="text-title weight-bold text-primary">
                     {calculatePrice().toLocaleString()} ₽
                   </span>
                 </div>
-                <p className="text-caption text-gray-600 mt-2">
+                <p className="text-caption text-muted mt-2">
                   * Точная стоимость будет рассчитана после консультации
                 </p>
               </div>
@@ -502,7 +502,7 @@ export default function CalculatorPage() {
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -545,7 +545,7 @@ export default function CalculatorPage() {
       </section>
 
       {/* Calculator */}
-      <section className="py-24 bg-white">
+      <section className="section-padding-y bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {!isSubmitted ? (
             <>
@@ -642,10 +642,10 @@ export default function CalculatorPage() {
                 <CheckCircle className="w-12 h-12 text-white" />
               </motion.div>
               
-              <h2 className="text-title-lg weight-bold text-gray-900 mb-4">
+              <h2 className="text-title-lg weight-bold text-primary-dark mb-4">
                 Расчет отправлен!
               </h2>
-              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl text-muted mb-8 max-w-2xl mx-auto">
                 Наш менеджер свяжется с вами в течение часа для уточнения деталей и предоставления точного коммерческого предложения
               </p>
               
@@ -653,7 +653,7 @@ export default function CalculatorPage() {
                 <div className="text-title weight-bold text-primary mb-2">
                   Примерная стоимость: {calculator.totalPrice.toLocaleString()} ₽
                 </div>
-                <p className="text-gray-600">
+                <p className="text-muted">
                   Окончательная цена может отличаться после консультации
                 </p>
               </div>
@@ -692,13 +692,13 @@ export default function CalculatorPage() {
       </section>
 
       {/* Features */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Преимущества нашего калькулятора
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Быстро, удобно и точно
             </p>
           </div>
@@ -735,8 +735,8 @@ export default function CalculatorPage() {
                 >
                   <feature.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-body-lg weight-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600">{feature.description}</p>
+                <h3 className="text-body-lg weight-bold text-primary-dark mb-3">{feature.title}</h3>
+                <p className="text-muted">{feature.description}</p>
               </motion.div>
             ))}
           </div>

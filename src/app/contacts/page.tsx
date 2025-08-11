@@ -154,7 +154,7 @@ export default function ContactsPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold text-on-dark mb-8"
+              className="text-5xl md:text-7xl weight-bold text-on-dark mb-8"
             >
               Мы всегда{' '}
               <span className="relative inline-block">
@@ -181,8 +181,8 @@ export default function ContactsPage() {
       </section>
 
       {/* Contact Cards */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {contactInfo.map((contact, index) => (
               <motion.div
@@ -199,9 +199,9 @@ export default function ContactsPage() {
                 >
                   <contact.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{contact.title}</h3>
+                <h3 className="text-xl weight-bold text-primary-dark mb-2">{contact.title}</h3>
                 <div className={`text-lg font-semibold ${contact.color} mb-1`}>{contact.content}</div>
-                <p className="text-gray-600 text-sm">{contact.description}</p>
+                <p className="text-muted text-sm">{contact.description}</p>
               </motion.div>
             ))}
           </div>
@@ -209,8 +209,8 @@ export default function ContactsPage() {
       </section>
 
       {/* Contact Form and Map */}
-      <section ref={formRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={formRef} className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div
@@ -224,8 +224,8 @@ export default function ContactsPage() {
                     <Send className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-gray-900">Оставить заявку</h3>
-                    <p className="text-gray-600">Мы свяжемся с вами в течение часа</p>
+                    <h3 className="text-2xl weight-bold text-primary-dark">Оставить заявку</h3>
+                    <p className="text-muted">Мы свяжемся с вами в течение часа</p>
                   </div>
                 </div>
 
@@ -358,7 +358,7 @@ export default function ContactsPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h4 className="text-lg font-bold text-gray-900 mb-4">Как добраться</h4>
+                  <h4 className="text-lg weight-bold text-primary-dark mb-4">Как добраться</h4>
                   <div className="space-y-4">
                     {directions.map((direction, index) => (
                       <div key={index} className="flex items-start space-x-3">
@@ -366,8 +366,8 @@ export default function ContactsPage() {
                           <direction.icon className="w-4 h-4 text-primary" />
                         </div>
                         <div>
-                          <div className="font-medium text-gray-900">{direction.title}</div>
-                          <div className="text-sm text-gray-600 mb-1">{direction.description}</div>
+                          <div className="font-medium text-primary-dark">{direction.title}</div>
+                          <div className="text-sm text-muted mb-1">{direction.description}</div>
                           <div className="text-xs text-primary font-medium">{direction.time}</div>
                         </div>
                       </div>
@@ -378,7 +378,7 @@ export default function ContactsPage() {
 
               {/* Office Features */}
               <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h4 className="text-lg font-bold text-gray-900 mb-4">Наш офис</h4>
+                <h4 className="text-lg weight-bold text-primary-dark mb-4">Наш офис</h4>
                 <div className="space-y-4">
                   {officeFeatures.map((feature, index) => (
                     <div key={index} className="flex items-start space-x-3">
@@ -386,8 +386,8 @@ export default function ContactsPage() {
                         <feature.icon className="w-4 h-4 text-primary-dark" />
                       </div>
                       <div>
-                        <div className="font-medium text-gray-900">{feature.title}</div>
-                        <div className="text-sm text-gray-600">{feature.description}</div>
+                        <div className="font-medium text-primary-dark">{feature.title}</div>
+                        <div className="text-sm text-muted">{feature.description}</div>
                       </div>
                     </div>
                   ))}
@@ -399,13 +399,13 @@ export default function ContactsPage() {
       </section>
 
       {/* Quick Contact */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Нужен быстрый ответ?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Выберите наиболее удобный способ связи
             </p>
           </div>
@@ -426,8 +426,8 @@ export default function ContactsPage() {
               >
                 <Phone className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Позвонить</h3>
-              <p className="text-gray-600 mb-4">Обсудим проект по телефону</p>
+              <h3 className="text-xl weight-bold text-primary-dark mb-3">Позвонить</h3>
+              <p className="text-muted mb-4">Обсудим проект по телефону</p>
               <a
                 href="tel:+73471234567"
                 className="inline-flex items-center space-x-2 text-primary hover:text-primary-dark font-medium transition-colors"
@@ -451,8 +451,8 @@ export default function ContactsPage() {
               >
                 <MessageCircle className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">WhatsApp</h3>
-              <p className="text-gray-600 mb-4">Быстрая переписка в мессенджере</p>
+              <h3 className="text-xl weight-bold text-primary-dark mb-3">WhatsApp</h3>
+              <p className="text-muted mb-4">Быстрая переписка в мессенджере</p>
               <a
                 href="https://wa.me/73471234567"
                 className="inline-flex items-center space-x-2 text-primary-dark hover:text-primary font-medium transition-colors"
@@ -475,8 +475,8 @@ export default function ContactsPage() {
               >
                 <Mail className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Email</h3>
-              <p className="text-gray-600 mb-4">Отправьте техническое задание</p>
+              <h3 className="text-xl weight-bold text-primary-dark mb-3">Email</h3>
+              <p className="text-muted mb-4">Отправьте техническое задание</p>
               <a
                 href="mailto:info@kvartett-ufa.ru"
                 className="inline-flex items-center space-x-2 text-warning-light hover:text-warning font-medium transition-colors"
@@ -489,13 +489,13 @@ export default function ContactsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Частые вопросы
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Ответы на самые популярные вопросы наших клиентов
             </p>
           </div>
@@ -531,8 +531,8 @@ export default function ContactsPage() {
                     <Star className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-3">{faq.question}</h4>
-                    <p className="text-gray-600">{faq.answer}</p>
+                    <h4 className="text-lg weight-bold text-primary-dark mb-3">{faq.question}</h4>
+                    <p className="text-muted">{faq.answer}</p>
                   </div>
                 </div>
               </motion.div>

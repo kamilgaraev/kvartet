@@ -284,7 +284,7 @@ export default function BrandingPage() {
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
                     <div className="text-title weight-bold text-primary">{stat.value}</div>
-                    <div className="text-caption text-gray-600">{stat.label}</div>
+                    <div className="text-caption text-muted">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -325,10 +325,10 @@ export default function BrandingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Услуги брендинга
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Полный спектр услуг по созданию и развитию фирменного стиля
             </p>
           </motion.div>
@@ -351,7 +351,7 @@ export default function BrandingPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <button className="w-full bg-white/90 backdrop-blur-sm text-gray-900 py-2 px-4 rounded-lg weight-medium flex items-center justify-center space-x-2">
+                      <button className="w-full bg-white/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg weight-medium flex items-center justify-center space-x-2">
                         <Eye className="w-4 h-4" />
                         <span>Смотреть примеры</span>
                       </button>
@@ -360,10 +360,10 @@ export default function BrandingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-body-lg weight-bold text-gray-900 mb-2 group-hover:text-warning transition-colors">
+                  <h3 className="text-body-lg weight-bold text-primary-dark mb-2 group-hover:text-warning transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-caption leading-relaxed">
+                  <p className="text-muted mb-4 text-caption leading-relaxed">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
@@ -383,10 +383,10 @@ export default function BrandingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Пакеты брендинга
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Готовые решения для разных типов бизнеса
             </p>
           </div>
@@ -417,8 +417,8 @@ export default function BrandingPage() {
                     <type.icon className="w-8 h-8 text-white" />
                   </motion.div>
                   
-                  <h3 className="text-title weight-bold text-gray-900 mb-3">{type.title}</h3>
-                  <p className="text-gray-600 mb-6">{type.description}</p>
+                  <h3 className="text-title weight-bold text-primary-dark mb-3">{type.title}</h3>
+                  <p className="text-muted mb-6">{type.description}</p>
                   
                   <div className="text-title-lg weight-bold text-warning mb-6">{type.price}</div>
                   
@@ -434,7 +434,7 @@ export default function BrandingPage() {
                   <button className={`w-full py-3 px-6 rounded-xl weight-semibold transition-all duration-300 ${
                     index === 1 
                       ? 'bg-gradient-to-r from-warning to-warning-dark text-white hover:shadow-lg'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      : 'bg-primary-10 text-gray-700 hover:bg-gray-200'
                   }`}>
                     Выбрать пакет
                   </button>
@@ -449,10 +449,10 @@ export default function BrandingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Элементы фирменного стиля
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Что входит в полный фирменный стиль бренда
             </p>
           </div>
@@ -470,8 +470,8 @@ export default function BrandingPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-warning to-warning-dark flex items-center justify-center shadow-lg mb-4">
                   <Layers className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-body-lg weight-bold text-gray-900 mb-2">{element.name}</h3>
-                <p className="text-gray-600 text-caption mb-4">{element.description}</p>
+                <h3 className="text-body-lg weight-bold text-primary-dark mb-2">{element.name}</h3>
+                <p className="text-muted text-caption mb-4">{element.description}</p>
                 <ul className="space-y-1">
                   {element.variations.map((variation, i) => (
                     <li key={i} className="text-xs text-warning bg-warning/10 px-2 py-1 rounded-full inline-block mr-1 mb-1">
@@ -494,10 +494,10 @@ export default function BrandingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Как мы создаем бренды
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Проверенная методология разработки фирменного стиля
             </p>
           </motion.div>
@@ -524,8 +524,8 @@ export default function BrandingPage() {
                     </div>
                   </div>
                   
-                  <h3 className="text-body-lg weight-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 mb-4 text-caption leading-relaxed">{step.description}</p>
+                  <h3 className="text-body-lg weight-bold text-primary-dark mb-3">{step.title}</h3>
+                  <p className="text-muted mb-4 text-caption leading-relaxed">{step.description}</p>
                   <div className="inline-flex items-center space-x-1 text-warning text-caption weight-medium">
                     <Clock className="w-4 h-4" />
                     <span>{step.duration}</span>
@@ -547,10 +547,10 @@ export default function BrandingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Почему выбирают нас для создания фирменного стиля
             </p>
           </div>
@@ -571,8 +571,8 @@ export default function BrandingPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-body-lg weight-bold text-gray-900 mb-3">{advantage.title}</h3>
-                <p className="text-gray-600">{advantage.description}</p>
+                <h3 className="text-body-lg weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-muted">{advantage.description}</p>
               </motion.div>
             ))}
           </div>
@@ -583,10 +583,10 @@ export default function BrandingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Успешные бренды, которые мы создали для наших клиентов
             </p>
           </div>
@@ -614,7 +614,7 @@ export default function BrandingPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-body-lg weight-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="text-body-lg weight-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
                 <span className="text-success weight-medium">{item.result}</span>
@@ -640,10 +640,10 @@ export default function BrandingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-gray-900 mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Проверьте свой бренд
             </h2>
-            <p className="text-body-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto">
               Ответьте на несколько вопросов и узнайте, нужен ли вам ребрендинг
             </p>
           </div>
@@ -651,7 +651,7 @@ export default function BrandingPage() {
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gradient-to-br from-[#F59E0B]/10 to-[#D97706]/10 p-8 rounded-2xl border border-[#F59E0B]/20">
-                <h3 className="text-title weight-bold text-gray-900 mb-6">Быстрый тест бренда</h3>
+                <h3 className="text-title weight-bold text-primary-dark mb-6">Быстрый тест бренда</h3>
                 <div className="space-y-4">
                   {[
                     'Ваш логотип выглядит устаревшим?',
@@ -675,10 +675,10 @@ export default function BrandingPage() {
 
               <div className="space-y-6">
                 <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                  <h4 className="text-body-lg weight-bold text-gray-900 mb-3">
+                  <h4 className="text-body-lg weight-bold text-primary-dark mb-3">
                     Когда нужен ребрендинг?
                   </h4>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-2 text-muted">
                     <li className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
                       <span>Смена направления бизнеса</span>
@@ -699,10 +699,10 @@ export default function BrandingPage() {
                 </div>
 
                 <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                  <h4 className="text-body-lg weight-bold text-gray-900 mb-3">
+                  <h4 className="text-body-lg weight-bold text-primary-dark mb-3">
                     Что даст новый бренд?
                   </h4>
-                  <ul className="space-y-2 text-gray-600">
+                  <ul className="space-y-2 text-muted">
                     <li className="flex items-center space-x-2">
                       <Star className="w-4 h-4 text-[#FBBF24] flex-shrink-0" />
                       <span>Рост узнаваемости</span>

@@ -155,13 +155,13 @@ export default function AboutPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="section-padding-y bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#1FCAD4]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-[#E91E63]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <motion.div
@@ -170,15 +170,15 @@ export default function AboutPage() {
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1FCAD4]/10 to-[#E91E63]/10 rounded-full px-4 py-2 mb-6"
               >
-                <Building className="w-4 h-4 text-[#1FCAD4]" />
-                <span className="text-sm font-semibold text-gray-700">О компании Квартет</span>
+                <Building className="w-4 h-4 text-primary" />
+                <span className="text-sm weight-semibold text-gray-700">О компании Квартет</span>
               </motion.div>
 
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+                className="text-5xl md:text-6xl weight-bold text-primary-dark mb-6"
               >
                 Создаем{' '}
                 <span className="relative inline-block">
@@ -197,7 +197,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                className="text-xl text-muted mb-8 leading-relaxed"
               >
                 Уже 15 лет мы помогаем бизнесу расти, создавая яркую и эффективную рекламу. Наша миссия — делать ваш бренд заметным и запоминающимся.
               </motion.p>
@@ -210,7 +210,7 @@ export default function AboutPage() {
               >
                 <Link
                   href="/services"
-                  className="group bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <span>Наши услуги</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -218,7 +218,7 @@ export default function AboutPage() {
                 
                 <Link
                   href="/portfolio"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-[#1FCAD4]/50 hover:text-[#1FCAD4] transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-[#1FCAD4]/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Eye className="w-5 h-5" />
                   <span>Портфолио</span>
@@ -253,18 +253,18 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section ref={statsRef} className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={statsRef} className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Цифры, которые говорят за нас
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Результаты нашей работы в цифрах и фактах
             </p>
           </motion.div>
@@ -285,8 +285,8 @@ export default function AboutPage() {
                 >
                   <stat.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <div className="text-4xl font-bold text-[#1FCAD4] mb-2">{stat.value}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-4xl weight-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-muted weight-medium">{stat.label}</div>
               </motion.div>
             ))}
           </div>
@@ -294,18 +294,18 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section ref={timelineRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={timelineRef} className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={timelineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Наша история
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               От маленькой мастерской до лидера рынка рекламных услуг
             </p>
           </motion.div>
@@ -326,9 +326,9 @@ export default function AboutPage() {
                 >
                   <div className={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
                     <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                      <div className="text-2xl font-bold text-[#1FCAD4] mb-2">{event.year}</div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{event.title}</h3>
-                      <p className="text-gray-600">{event.description}</p>
+                      <div className="text-2xl weight-bold text-primary mb-2">{event.year}</div>
+                      <h3 className="text-xl weight-bold text-primary-dark mb-3">{event.title}</h3>
+                      <p className="text-muted">{event.description}</p>
                     </div>
                   </div>
                   
@@ -345,18 +345,18 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section ref={teamRef} className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={teamRef} className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={teamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Команда профессионалов
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Знакомьтесь с людьми, которые создают лучшую рекламу в регионе
             </p>
           </motion.div>
@@ -388,10 +388,10 @@ export default function AboutPage() {
                     </div>
                   </motion.div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                  <div className="text-[#1FCAD4] font-medium mb-2">{member.position}</div>
+                  <h3 className="text-xl weight-bold text-primary-dark mb-2">{member.name}</h3>
+                  <div className="text-primary weight-medium mb-2">{member.position}</div>
                   <div className="text-sm text-gray-500 mb-3">{member.experience}</div>
-                  <p className="text-gray-600 text-sm">{member.description}</p>
+                  <p className="text-muted text-sm">{member.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -400,13 +400,13 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Наши ценности
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Принципы, которыми мы руководствуемся в работе
             </p>
           </div>
@@ -427,8 +427,8 @@ export default function AboutPage() {
                 >
                   <value.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="text-xl weight-bold text-primary-dark mb-3">{value.title}</h3>
+                <p className="text-muted">{value.description}</p>
               </motion.div>
             ))}
           </div>
@@ -436,13 +436,13 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Награды и достижения
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Признание профессионального сообщества и клиентов
             </p>
           </div>
@@ -462,9 +462,9 @@ export default function AboutPage() {
                     <Award className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-lg font-bold text-gray-900 mb-2">{achievement.title}</div>
-                    <div className="text-[#1FCAD4] font-medium mb-1">{achievement.year}</div>
-                    <div className="text-sm text-gray-600">{achievement.organization}</div>
+                    <div className="text-lg weight-bold text-primary-dark mb-2">{achievement.title}</div>
+                    <div className="text-primary weight-medium mb-1">{achievement.year}</div>
+                    <div className="text-sm text-muted">{achievement.organization}</div>
                   </div>
                 </div>
               </motion.div>
@@ -474,13 +474,13 @@ export default function AboutPage() {
       </section>
 
       {/* Location */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+        <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Наш офис в Уфе
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Приезжайте к нам для обсуждения проектов и знакомства с производством
             </p>
           </div>
@@ -497,22 +497,22 @@ export default function AboutPage() {
                     <Map className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Офис и производство</h3>
-                    <p className="text-gray-600">Полный цикл под одной крышей</p>
+                    <h3 className="text-xl weight-bold text-primary-dark">Офис и производство</h3>
+                    <p className="text-muted">Полный цикл под одной крышей</p>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <Building className="w-5 h-5 text-[#1FCAD4]" />
+                    <Building className="w-5 h-5 text-primary" />
                     <span className="text-gray-700">г. Уфа, ул. Ленская, 128</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Clock className="w-5 h-5 text-[#1FCAD4]" />
+                    <Clock className="w-5 h-5 text-primary" />
                     <span className="text-gray-700">Пн-Пт: 9:00-18:00, Сб: 10:00-16:00</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Users className="w-5 h-5 text-[#1FCAD4]" />
+                    <Users className="w-5 h-5 text-primary" />
                     <span className="text-gray-700">20+ специалистов</span>
                   </div>
                 </div>
@@ -520,7 +520,7 @@ export default function AboutPage() {
                 <div className="mt-8">
                   <Link
                     href="/contacts"
-                    className="group bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white px-6 py-3 rounded-xl font-medium inline-flex items-center space-x-2 hover:shadow-lg transition-all duration-300"
+                    className="group bg-gradient-primary text-white px-6 py-3 rounded-xl weight-medium inline-flex items-center space-x-2 hover:shadow-lg transition-all duration-300"
                   >
                     <span>Как добраться</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -549,15 +549,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-[#1FCAD4] via-[#E91E63] to-[#FBBF24] relative overflow-hidden">
+      <section className="section-padding-y bg-gradient-to-r from-[#1FCAD4] via-[#E91E63] to-[#FBBF24] relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative container-adaptive">
           <div className="text-center text-white">
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-4xl md:text-5xl weight-bold mb-6"
             >
               Готовы работать с профессионалами?
             </motion.h2>
@@ -578,7 +578,7 @@ export default function AboutPage() {
             >
               <Link
                 href="/contacts"
-                className="group bg-white text-[#1FCAD4] px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
               >
                 <Users className="w-5 h-5" />
                 <span>Познакомиться</span>
@@ -586,7 +586,7 @@ export default function AboutPage() {
               
               <Link
                 href="/services"
-                className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
+                className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 weight-semibold flex items-center justify-center space-x-2"
               >
                 <Lightbulb className="w-5 h-5" />
                 <span>Обсудить проект</span>

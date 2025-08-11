@@ -220,7 +220,7 @@ export default function InteriorPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+                className="text-5xl md:text-6xl font-bold text-primary-dark mb-6"
               >
                 Стильное{' '}
                 <span className="relative inline-block">
@@ -320,7 +320,7 @@ export default function InteriorPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Виды интерьерной рекламы
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -346,7 +346,7 @@ export default function InteriorPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <button className="w-full bg-white/90 backdrop-blur-sm text-gray-900 py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
+                      <button className="w-full bg-white/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
                         <Eye className="w-4 h-4" />
                         <span>Смотреть примеры</span>
                       </button>
@@ -355,7 +355,7 @@ export default function InteriorPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-500 transition-colors">
+                  <h3 className="text-xl font-bold text-primary-dark mb-2 group-hover:text-purple-500 transition-colors">
                     {service.name}
                   </h3>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">
@@ -378,7 +378,7 @@ export default function InteriorPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Сферы применения
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -422,7 +422,7 @@ export default function InteriorPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Материалы и технологии
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -443,7 +443,7 @@ export default function InteriorPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center shadow-lg mb-4">
                   <Layers className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 mb-2">{material.name}</h3>
+                <h3 className="text-lg font-bold text-primary-dark mb-2">{material.name}</h3>
                 <p className="text-gray-600 text-sm mb-3">{material.description}</p>
                 <div className="text-xs text-purple-500 font-medium bg-purple-500/10 px-3 py-1 rounded-full">
                   {material.usage}
@@ -463,7 +463,7 @@ export default function InteriorPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Как мы работаем
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -493,7 +493,7 @@ export default function InteriorPage() {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
+                  <h3 className="text-xl font-bold text-primary-dark mb-3">{step.title}</h3>
                   <p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.description}</p>
                   <div className="inline-flex items-center space-x-1 text-purple-500 text-sm font-medium">
                     <Clock className="w-4 h-4" />
@@ -516,7 +516,7 @@ export default function InteriorPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -540,7 +540,7 @@ export default function InteriorPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{advantage.title}</h3>
+                <h3 className="text-xl font-bold text-primary-dark mb-3">{advantage.title}</h3>
                 <p className="text-gray-600">{advantage.description}</p>
               </motion.div>
             ))}
@@ -552,7 +552,7 @@ export default function InteriorPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -583,7 +583,7 @@ export default function InteriorPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
                     <span className="text-success font-medium">{item.result}</span>

@@ -172,7 +172,7 @@ export default function OutdoorAdvertisingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
+                className="text-5xl md:text-6xl font-bold text-primary-dark mb-6"
               >
                 Яркая реклама{' '}
                 <span className="relative inline-block">
@@ -190,7 +190,7 @@ export default function OutdoorAdvertisingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                className="text-xl text-muted mb-8 leading-relaxed"
               >
                 Полный цикл производства наружной рекламы: от разработки дизайна до монтажа. Собственное производство, опыт 15+ лет, гарантия качества.
               </motion.p>
@@ -231,7 +231,7 @@ export default function OutdoorAdvertisingPage() {
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
                     <div className="text-2xl font-bold text-primary">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-sm text-muted">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -272,10 +272,10 @@ export default function OutdoorAdvertisingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Виды наружной рекламы
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Полный спектр решений для эффективного продвижения вашего бизнеса
             </p>
           </motion.div>
@@ -298,7 +298,7 @@ export default function OutdoorAdvertisingPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <button className="w-full bg-white/90 backdrop-blur-sm text-gray-900 py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
+                      <button className="w-full bg-white/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
                         <Eye className="w-4 h-4" />
                         <span>Смотреть примеры</span>
                       </button>
@@ -307,10 +307,10 @@ export default function OutdoorAdvertisingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-bold text-primary-dark mb-2 group-hover:text-primary transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-muted mb-4 text-sm leading-relaxed">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
@@ -335,10 +335,10 @@ export default function OutdoorAdvertisingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Как мы работаем
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Прозрачный процесс от первого звонка до готового результата
             </p>
           </motion.div>
@@ -365,8 +365,8 @@ export default function OutdoorAdvertisingPage() {
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">{step.description}</p>
+                  <h3 className="text-xl font-bold text-primary-dark mb-3">{step.title}</h3>
+                  <p className="text-muted mb-4 text-sm leading-relaxed">{step.description}</p>
                   <div className="inline-flex items-center space-x-1 text-primary text-sm font-medium">
                     <Clock className="w-4 h-4" />
                     <span>{step.duration}</span>
@@ -388,10 +388,10 @@ export default function OutdoorAdvertisingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Почему клиенты выбирают нас для изготовления наружной рекламы
             </p>
           </div>
@@ -412,8 +412,8 @@ export default function OutdoorAdvertisingPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{advantage.title}</h3>
-                <p className="text-gray-600">{advantage.description}</p>
+                <h3 className="text-xl font-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-muted">{advantage.description}</p>
               </motion.div>
             ))}
           </div>
@@ -424,10 +424,10 @@ export default function OutdoorAdvertisingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Успешные проекты наружной рекламы для разных сфер бизнеса
             </p>
           </div>
@@ -455,7 +455,7 @@ export default function OutdoorAdvertisingPage() {
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
                     <span className="text-success font-medium">{item.result}</span>
