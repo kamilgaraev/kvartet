@@ -1,12 +1,22 @@
 services:
   app:
-    build: .
+    image: node:20-slim
     restart: unless-stopped
+    working_dir: /app
     ports:
       - "80:3000"
-    # env_file может быть запрещён на платформе. Лучше задать переменные через UI.
-    # env_file:
-    #   - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      - .:/app
+    command: >
+      sh -c "
+        npm install --production &&
+        npm run build &&
+        npm start
+      "
     depends_on:
       - db
 
@@ -14,14 +24,8 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-kvartett}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kvartett}
-      POSTGRES_DB: ${POSTGRES_DB:-kvartett}
-    # В Timeweb Docker Compose локальные volumes запрещены. Данные будут эфемерными.
-    # volumes:
-    #   - postgres_data:/var/lib/postgresql/data
-    # Не публикуем порт БД наружу
-    # ports:
-    #   - "5432:5432"
+      POSTGRES_USER: kvartett
+      POSTGRES_PASSWORD: kvartett_password_2024
+      POSTGRES_DB: kvartett
 
 
