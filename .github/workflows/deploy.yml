@@ -49,7 +49,7 @@ jobs:
             echo "⚙️ Создаем .env конфигурацию..."
             cat > .env << 'ENVEOF'
             # Database
-            DATABASE_URL="postgresql://postgres:kvartett_password_2024@db:5432/kvartett"
+            DATABASE_URL="postgresql://kvartett:kvartett_password_2024@db:5432/kvartett"
             
             # NextAuth
             NEXTAUTH_SECRET="kvartett-super-secret-key-2024-production"
@@ -67,6 +67,7 @@ jobs:
             # 4. Создаем упрощенный docker-compose.yml без сборки
             echo "🐳 Создаем упрощенный docker-compose.yml..."
             cat > docker-compose.yml << 'COMPOSEEOF'
+            version: "3.9"
             services:
               app:
                 image: node:20-slim
@@ -82,7 +83,8 @@ jobs:
                   - .:/app
                 command: >
                   sh -c "
-                    npm install --production &&
+                    npm ci &&
+                    npx prisma generate &&
                     npm run build &&
                     npm start
                   "
@@ -97,6 +99,11 @@ jobs:
                   POSTGRES_PASSWORD: kvartett_password_2024
                   POSTGRES_DB: kvartett
             COMPOSEEOF
+            
+            # Нормализуем отступы YAML (удаляем ведущие 12 пробелов, добавленные YAML-скаляром)
+            awk '{ sub(/^ {12}/,"""); print }' docker-compose.yml > /tmp/docker-compose.yml && mv /tmp/docker-compose.yml docker-compose.yml
+            # Убираем возможные CRLF
+            sed -i 's/\r$//' docker-compose.yml
             
             # 5. Обновляем next.config.ts для standalone
             echo "📝 Обновляем Next.js конфигурацию..."
