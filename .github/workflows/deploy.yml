@@ -29,22 +29,21 @@ jobs:
             
             # Переменные
             WORKDIR="/opt/kvartett-website"
+            BUILD_DIR="/tmp/kvartett-build-$(date +%s)"
             REPO_SSH="git@github.com:kamilgaraev/kvartet.git"
             
-            # 1. Подготовка директории
-            echo "📁 Подготавливаем рабочую директорию..."
-            if [ ! -d "$WORKDIR/.git" ]; then
+            # 1. Создаем чистую директорию для сборки
+            echo "📁 Создаем чистую директорию для сборки..."
+            rm -rf "$BUILD_DIR"
+            git clone "$REPO_SSH" "$BUILD_DIR"
+            cd "$BUILD_DIR"
+            
+            # 2. Подготавливаем основную рабочую директорию
+            echo "📂 Подготавливаем рабочую директорию..."
+            if [ ! -d "$WORKDIR" ]; then
               sudo mkdir -p "$WORKDIR"
               sudo chown "$USER":"$USER" "$WORKDIR"
-              git clone "$REPO_SSH" "$WORKDIR"
             fi
-            
-            cd "$WORKDIR"
-            
-            # 2. Обновляем код
-            echo "📥 Обновляем код из репозитория..."
-            git fetch --all --prune
-            git reset --hard origin/main
             
             # 3. Создаем .env файл
             echo "⚙️ Создаем .env конфигурацию..."
@@ -151,7 +150,7 @@ jobs:
             export default nextConfig;
             NEXTCONFIG_EOF
             
-            # 6. Проверяем Docker
+            # 6. Проверяем Docker и rsync
             echo "🔍 Проверяем Docker..."
             if ! command -v docker &> /dev/null; then
               echo "📦 Устанавливаем Docker..."
@@ -160,6 +159,11 @@ jobs:
               sudo usermod -aG docker $USER
               sudo systemctl start docker
               sudo systemctl enable docker
+            fi
+            
+            if ! command -v rsync &> /dev/null; then
+              echo "📦 Устанавливаем rsync..."
+              sudo apt-get update && sudo apt-get install -y rsync
             fi
             
             # 7. Останавливаем старые контейнеры
@@ -175,14 +179,24 @@ jobs:
             echo "🗑️ Удаляем старые образы..."
             docker images | grep kvartett-website | awk '{print $3}' | xargs -r docker rmi -f || true
             
-            # 10. Собираем с нуля
+            # 10. Собираем образы в чистой директории
             echo "🔨 Собираем новые образы с нуля..."
-            DOCKER_BUILDKIT=1 docker compose build --no-cache --pull --parallel
+            DOCKER_BUILDKIT=1 docker compose build --no-cache --pull
             
+            # 11. Копируем собранные файлы в рабочую директорию
+            echo "📋 Копируем файлы в рабочую директорию..."
+            rsync -av --delete --exclude='.git' "$BUILD_DIR/" "$WORKDIR/"
+            
+            # 12. Переходим в рабочую директорию и запускаем
+            cd "$WORKDIR"
             echo "🚀 Запускаем контейнеры..."
             docker compose up -d
             
-            # 11. Ждем запуска и проверяем статус
+            # 13. Очищаем временную директорию
+            echo "🧹 Очищаем временную директорию..."
+            rm -rf "$BUILD_DIR"
+            
+            # 14. Ждем запуска и проверяем статус
             echo "⏳ Ждем запуска сервисов..."
             sleep 30
             
