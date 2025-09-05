@@ -64,46 +64,26 @@ jobs:
             PORT=3000
             ENVEOF
             
-            # 4. Создаем упрощенный docker-compose.yml без сборки
-            echo "🐳 Создаем упрощенный docker-compose.yml..."
-            cat > docker-compose.yml << 'COMPOSEEOF'
-            version: "3.9"
-            services:
-              app:
-                image: node:20-slim
-                restart: unless-stopped
-                working_dir: /app
-                ports:
-                  - "80:3000"
-                environment:
-                  - NODE_ENV=production
-                  - PORT=3000
-                  - NEXT_TELEMETRY_DISABLED=1
-                volumes:
-                  - .:/app
-                command: >
-                  sh -c "
-                    npm ci &&
-                    npx prisma generate &&
-                    npm run build &&
-                    npm start
-                  "
-                depends_on:
-                  - db
+            # 4. Поднимаем контейнеры без Docker Compose
+            echo "🐳 Готовим Docker network..."
+            docker network create kvartett-net || true
             
-              db:
-                image: postgres:16-alpine
-                restart: unless-stopped
-                environment:
-                  POSTGRES_USER: kvartett
-                  POSTGRES_PASSWORD: kvartett_password_2024
-                  POSTGRES_DB: kvartett
-            COMPOSEEOF
+            echo "🛑 Останавливаем старые контейнеры..."
+            docker rm -f kvartett-app || true
+            docker rm -f kvartett-db || true
             
-            # Нормализуем отступы YAML (удаляем ведущие 12 пробелов)
-            sed -E 's/^[[:space:]]{12}//' docker-compose.yml > /tmp/docker-compose.yml && mv /tmp/docker-compose.yml docker-compose.yml
-            # Убираем возможные CRLF
-            sed -i 's/\r$//' docker-compose.yml
+            echo "🗃️ Запускаем БД..."
+            docker run -d \
+              --name kvartett-db \
+              --network kvartett-net \
+              --restart unless-stopped \
+              -e POSTGRES_USER=kvartett \
+              -e POSTGRES_PASSWORD=kvartett_password_2024 \
+              -e POSTGRES_DB=kvartett \
+              postgres:16-alpine
+            
+            echo "⏳ Ждём готовности БД..."
+            sleep 10
             
             # 5. Обновляем next.config.ts для standalone
             echo "📝 Обновляем Next.js конфигурацию..."
@@ -147,10 +127,21 @@ jobs:
             echo "📋 Копируем файлы в рабочую директорию..."
             rsync -av --delete --exclude='.git' "$BUILD_DIR/" "$WORKDIR/"
             
-            # 9. Переходим в рабочую директорию и запускаем
-            cd "$WORKDIR"
-            echo "🚀 Запускаем контейнеры..."
-            docker compose up -d
+            # 9. Запускаем приложение (без compose)
+            echo "🚀 Запускаем приложение..."
+            docker run -d \
+              --name kvartett-app \
+              --network kvartett-net \
+              --restart unless-stopped \
+              -p 80:3000 \
+              -v "$WORKDIR":/app \
+              -w /app \
+              -e NODE_ENV=production \
+              -e NEXT_TELEMETRY_DISABLED=1 \
+              -e PORT=3000 \
+              -e DATABASE_URL="postgresql://kvartett:kvartett_password_2024@kvartett-db:5432/kvartett" \
+              node:20-slim \
+              sh -c "npm ci && npx prisma generate && npm run build && npm start"
             
             # 10. Очищаем временную директорию
             echo "🧹 Очищаем временную директорию..."
@@ -161,10 +152,10 @@ jobs:
             sleep 30
             
             echo "📊 Статус контейнеров:"
-            docker compose ps
+            docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
             
             echo "📋 Логи приложения:"
-            docker compose logs --tail=10 app
+            docker logs --tail=200 --since=1m kvartett-app || true
             
             echo "🌐 Проверяем доступность сайта..."
             if curl -f http://localhost:3000 > /dev/null 2>&1; then
@@ -172,7 +163,7 @@ jobs:
               echo "🔗 Доступен по адресу: http://${{ secrets.PROD_SSH_HOST }}:3000"
             else
               echo "❌ Сайт не отвечает, проверяем логи..."
-              docker compose logs app
+              docker logs kvartett-app
             fi
             
             echo "🎉 Деплой завершен!"
