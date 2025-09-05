@@ -1,4 +1,4 @@
-## Kvartett Website
+## Kvartett Website - Deployed!
 
 Next.js 15 (App Router) + Prisma + PostgreSQL.
 
