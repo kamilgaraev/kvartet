@@ -53,7 +53,7 @@ jobs:
             
             # NextAuth
             NEXTAUTH_SECRET="kvartett-super-secret-key-2024-production"
-            NEXTAUTH_URL="http://${{ secrets.PROD_SSH_HOST }}:3000"
+            NEXTAUTH_URL="http://${{ secrets.PROD_SSH_HOST }}"
             
             # Admin credentials
             ADMIN_EMAIL="admin@kvartett.ru"
@@ -142,7 +142,7 @@ jobs:
               -e PORT=3000 \
               -e DATABASE_URL="postgresql://kvartett:kvartett_password_2024@kvartett-db:5432/kvartett" \
               node:20-slim \
-              sh -c "apt-get update && apt-get install -y openssl ca-certificates && npm ci && npx prisma generate && npm run build && npm start"
+              sh -c "apt-get update && apt-get install -y openssl ca-certificates && npm ci && npx prisma generate && npm run build && npm start -- -p 3000 -H 0.0.0.0"
             
             # 10. Очищаем временную директорию
             echo "🧹 Очищаем временную директорию..."
@@ -151,11 +151,15 @@ jobs:
             # 11. Ждем запуска HTTP (до 10 минут)
             echo "⏳ Ждем готовности приложения..."
             for i in $(seq 1 120); do
-              if curl -fsS http://localhost:3000/ > /dev/null 2>&1; then
+              if curl -fsS http://localhost/ > /dev/null 2>&1; then
                 READY=1; break; fi; sleep 5; done
             
             echo "📊 Статус контейнеров:"
             docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Image}}'
+            echo "🔒 Проверяем порт 80 и firewall..."
+            (ss -ltnp 2>/dev/null | grep ':80 ' ) || true
+            (command -v ufw >/dev/null 2>&1 && sudo ufw status verbose) || true
+            (iptables -L -n | head -n 50) || true
             
             echo "📋 Логи приложения:"
             docker logs --tail=200 --since=1m kvartett-app || true
@@ -163,7 +167,7 @@ jobs:
             echo "🌐 Проверяем доступность сайта..."
             if [ "${READY:-0}" = "1" ]; then
               echo "✅ Сайт успешно запущен!"
-              echo "🔗 Доступен по адресу: http://${{ secrets.PROD_SSH_HOST }}:3000"
+              echo "🔗 Доступен по адресу: http://${{ secrets.PROD_SSH_HOST }}"
             else
               echo "❌ Сайт не отвечает, проверяем логи..."
               docker logs kvartett-app
@@ -172,3 +176,10 @@ jobs:
             echo "🎉 Деплой завершен!"
 
 
+      - name: External health check from runner
+        run: |
+          echo "🌐 Проверка доступности сайта извне..."
+          for i in $(seq 1 60); do
+            if curl -fsS -m 5 "http://${{ secrets.PROD_SSH_HOST }}/" > /dev/null 2>&1; then
+              echo "✅ Сайт доступен извне"; exit 0; fi; sleep 5; done
+          echo "❌ Сайт недоступен извне"; exit 1
