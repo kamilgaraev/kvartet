@@ -14,47 +14,160 @@ jobs:
     name: SSH deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Run remote deploy script over SSH
+      - name: Deploy to server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.PROD_SSH_HOST }}
           username: ${{ secrets.PROD_SSH_USER }}
           key: ${{ secrets.PROD_SSH_KEY }}
-          passphrase: ${{ secrets.PROD_SSH_PASSPHRASE }}
           script_stop: true
-          envs: WORKDIR,REPO_SSH,ENV_FILE
           command_timeout: 30m
-        env:
-          WORKDIR: /opt/kvartett-website
-          REPO_SSH: git@github.com:kamilgaraev/kvartet.git
-          ENV_FILE: ${{ secrets.PROD_ENV_FILE }}
           script: |
             set -euo pipefail
-
-            WORKDIR="${WORKDIR:-/opt/kvartett-website}"
-            REPO_SSH="${REPO_SSH:-git@github.com:kamilgaraev/kvartet.git}"
-
+            
+            echo "🚀 Начинаем деплой Kvartett Website..."
+            
+            # Переменные
+            WORKDIR="/opt/kvartett-website"
+            REPO_SSH="git@github.com:kamilgaraev/kvartet.git"
+            
+            # 1. Подготовка директории
+            echo "📁 Подготавливаем рабочую директорию..."
             if [ ! -d "$WORKDIR/.git" ]; then
               sudo mkdir -p "$WORKDIR"
               sudo chown "$USER":"$USER" "$WORKDIR"
               git clone "$REPO_SSH" "$WORKDIR"
             fi
-
+            
             cd "$WORKDIR"
+            
+            # 2. Обновляем код
+            echo "📥 Обновляем код из репозитория..."
             git fetch --all --prune
             git reset --hard origin/main
-
-            # Обновляем .env из секрета, если он задан
-            if [ -n "${ENV_FILE:-}" ]; then
-              printf "%s" "$ENV_FILE" > .env
+            
+            # 3. Создаем .env файл
+            echo "⚙️ Создаем .env конфигурацию..."
+            cat > .env << 'EOF'
+            # Database
+            DATABASE_URL="postgresql://postgres:kvartett_password_2024@db:5432/kvartett"
+            
+            # NextAuth
+            NEXTAUTH_SECRET="kvartett-super-secret-key-2024-production"
+            NEXTAUTH_URL="http://${{ secrets.PROD_SSH_HOST }}:3000"
+            
+            # Admin credentials
+            ADMIN_EMAIL="admin@kvartett.ru"
+            ADMIN_PASSWORD="admin123"
+            
+            # Environment
+            NODE_ENV="production"
+            PORT=3000
+            EOF
+            
+            # 4. Создаем оптимизированный Dockerfile
+            echo "🐳 Создаем оптимизированный Dockerfile..."
+            cat > Dockerfile << 'DOCKERFILE_EOF'
+            FROM node:20-slim AS base
+            
+            # Установка зависимостей
+            FROM base AS deps
+            WORKDIR /app
+            COPY package.json package-lock.json* ./
+            RUN npm ci --only=production && npm cache clean --force
+            
+            # Сборка приложения
+            FROM base AS builder
+            WORKDIR /app
+            COPY --from=deps /app/node_modules ./node_modules
+            COPY . .
+            ENV NEXT_TELEMETRY_DISABLED=1
+            RUN npm run build
+            
+            # Продакшн образ
+            FROM base AS runner
+            WORKDIR /app
+            
+            ENV NODE_ENV=production
+            ENV NEXT_TELEMETRY_DISABLED=1
+            ENV PORT=3000
+            
+            RUN groupadd --gid 1001 nodejs && \
+                useradd --uid 1001 --gid nodejs nextjs
+            
+            COPY --from=builder /app/public ./public
+            COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+            COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+            
+            USER nextjs
+            EXPOSE 3000
+            
+            CMD ["node", "server.js"]
+            DOCKERFILE_EOF
+            
+            # 5. Обновляем next.config.ts для standalone
+            echo "📝 Обновляем Next.js конфигурацию..."
+            cat > next.config.ts << 'NEXTCONFIG_EOF'
+            import type { NextConfig } from "next";
+            
+            const nextConfig: NextConfig = {
+              output: 'standalone',
+              experimental: {
+                serverComponentsExternalPackages: ['@prisma/client', 'prisma']
+              },
+              images: {
+                domains: ['ui-avatars.com', 'images.unsplash.com'],
+              },
+            };
+            
+            export default nextConfig;
+            NEXTCONFIG_EOF
+            
+            # 6. Проверяем Docker
+            echo "🔍 Проверяем Docker..."
+            if ! command -v docker &> /dev/null; then
+              echo "📦 Устанавливаем Docker..."
+              curl -fsSL https://get.docker.com -o get-docker.sh
+              sudo sh get-docker.sh
+              sudo usermod -aG docker $USER
+              sudo systemctl start docker
+              sudo systemctl enable docker
             fi
-
+            
+            # 7. Останавливаем старые контейнеры
+            echo "🛑 Останавливаем старые контейнеры..."
             docker compose down || true
-            docker compose pull || true
+            
+            # 8. Очищаем Docker кеш
+            echo "🧹 Очищаем Docker кеш..."
+            docker system prune -f || true
+            
+            # 9. Собираем и запускаем
+            echo "🔨 Собираем новые образы..."
             docker compose build --no-cache --pull
+            
+            echo "🚀 Запускаем контейнеры..."
             docker compose up -d
-
-            docker image prune -f || true
-            docker system df || true
+            
+            # 10. Ждем запуска и проверяем статус
+            echo "⏳ Ждем запуска сервисов..."
+            sleep 30
+            
+            echo "📊 Статус контейнеров:"
+            docker compose ps
+            
+            echo "📋 Логи приложения:"
+            docker compose logs --tail=10 app
+            
+            echo "🌐 Проверяем доступность сайта..."
+            if curl -f http://localhost:3000 > /dev/null 2>&1; then
+              echo "✅ Сайт успешно запущен!"
+              echo "🔗 Доступен по адресу: http://${{ secrets.PROD_SSH_HOST }}:3000"
+            else
+              echo "❌ Сайт не отвечает, проверяем логи..."
+              docker compose logs app
+            fi
+            
+            echo "🎉 Деплой завершен!"
 
 
