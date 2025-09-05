@@ -64,73 +64,39 @@ jobs:
             PORT=3000
             EOF
             
-            # 4. Создаем .dockerignore для оптимизации
-            echo "📋 Создаем .dockerignore..."
-            cat > .dockerignore << 'DOCKERIGNORE_EOF'
-            node_modules
-            .next
-            .git
-            .gitignore
-            README.md
-            Dockerfile
-            .dockerignore
-            npm-debug.log*
-            yarn-debug.log*
-            yarn-error.log*
-            .env*.local
-            .vercel
-            *.tgz
-            *.tar.gz
-            .cache
-            public/sw.js
-            public/workbox-*.js
-            public/worker-*.js
-            public/sw.js.map
-            public/workbox-*.js.map
-            public/worker-*.js.map
-            .DS_Store
-            Thumbs.db
-            DOCKERIGNORE_EOF
+            # 4. Создаем упрощенный docker-compose.yml без сборки
+            echo "🐳 Создаем упрощенный docker-compose.yml..."
+            cat > docker-compose.yml << 'COMPOSE_EOF'
+            services:
+              app:
+                image: node:20-slim
+                restart: unless-stopped
+                working_dir: /app
+                ports:
+                  - "80:3000"
+                environment:
+                  - NODE_ENV=production
+                  - PORT=3000
+                  - NEXT_TELEMETRY_DISABLED=1
+                volumes:
+                  - .:/app
+                command: >
+                  sh -c "
+                    npm install --production &&
+                    npm run build &&
+                    npm start
+                  "
+                depends_on:
+                  - db
             
-            # 5. Создаем оптимизированный Dockerfile
-            echo "🐳 Создаем оптимизированный Dockerfile..."
-            cat > Dockerfile << 'DOCKERFILE_EOF'
-            FROM node:20-slim AS base
-            
-            # Установка зависимостей
-            FROM base AS deps
-            WORKDIR /app
-            COPY package.json package-lock.json* ./
-            RUN npm ci --only=production && npm cache clean --force
-            
-            # Сборка приложения
-            FROM base AS builder
-            WORKDIR /app
-            COPY --from=deps /app/node_modules ./node_modules
-            COPY . .
-            ENV NEXT_TELEMETRY_DISABLED=1
-            RUN npm run build
-            
-            # Продакшн образ
-            FROM base AS runner
-            WORKDIR /app
-            
-            ENV NODE_ENV=production
-            ENV NEXT_TELEMETRY_DISABLED=1
-            ENV PORT=3000
-            
-            RUN groupadd --gid 1001 nodejs && \
-                useradd --uid 1001 --gid nodejs nextjs
-            
-            COPY --from=builder /app/public ./public
-            COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-            COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-            
-            USER nextjs
-            EXPOSE 3000
-            
-            CMD ["node", "server.js"]
-            DOCKERFILE_EOF
+              db:
+                image: postgres:16-alpine
+                restart: unless-stopped
+                environment:
+                  POSTGRES_USER: kvartett
+                  POSTGRES_PASSWORD: kvartett_password_2024
+                  POSTGRES_DB: kvartett
+            COMPOSE_EOF
             
             # 5. Обновляем next.config.ts для standalone
             echo "📝 Обновляем Next.js конфигурацию..."
@@ -166,37 +132,24 @@ jobs:
               sudo apt-get update && sudo apt-get install -y rsync
             fi
             
-            # 7. Останавливаем старые контейнеры
+            # 7. Останавливаем старые контейнеры  
             echo "🛑 Останавливаем старые контейнеры..."
             docker compose down || true
             
-            # 8. Полная очистка Docker
-            echo "🧹 Выполняем полную очистку Docker..."
-            docker system prune -af --volumes || true
-            docker builder prune -af || true
-            
-            # 9. Удаляем старые образы приложения
-            echo "🗑️ Удаляем старые образы..."
-            docker images | grep kvartett-website | awk '{print $3}' | xargs -r docker rmi -f || true
-            
-            # 10. Собираем образы в чистой директории
-            echo "🔨 Собираем новые образы с нуля..."
-            DOCKER_BUILDKIT=1 docker compose build --no-cache --pull
-            
-            # 11. Копируем собранные файлы в рабочую директорию
+            # 8. Копируем файлы в рабочую директорию
             echo "📋 Копируем файлы в рабочую директорию..."
             rsync -av --delete --exclude='.git' "$BUILD_DIR/" "$WORKDIR/"
             
-            # 12. Переходим в рабочую директорию и запускаем
+            # 9. Переходим в рабочую директорию и запускаем
             cd "$WORKDIR"
             echo "🚀 Запускаем контейнеры..."
             docker compose up -d
             
-            # 13. Очищаем временную директорию
+            # 10. Очищаем временную директорию
             echo "🧹 Очищаем временную директорию..."
             rm -rf "$BUILD_DIR"
             
-            # 14. Ждем запуска и проверяем статус
+            # 11. Ждем запуска и проверяем статус
             echo "⏳ Ждем запуска сервисов..."
             sleep 30
             
