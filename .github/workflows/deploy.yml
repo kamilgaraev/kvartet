@@ -100,8 +100,8 @@ jobs:
                   POSTGRES_DB: kvartett
             COMPOSEEOF
             
-            # Нормализуем отступы YAML (удаляем ведущие 12 пробелов, добавленные YAML-скаляром)
-            awk '{ sub(/^ {12}/,"""); print }' docker-compose.yml > /tmp/docker-compose.yml && mv /tmp/docker-compose.yml docker-compose.yml
+            # Нормализуем отступы YAML (удаляем ведущие 12 пробелов)
+            sed -E 's/^[[:space:]]{12}//' docker-compose.yml > /tmp/docker-compose.yml && mv /tmp/docker-compose.yml docker-compose.yml
             # Убираем возможные CRLF
             sed -i 's/\r$//' docker-compose.yml
             
