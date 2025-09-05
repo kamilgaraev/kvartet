@@ -221,14 +221,14 @@ export default function CalculatorPage() {
                   className={`p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
                     calculator.selectedService === service.id
                       ? 'border-primary bg-primary/5'
-                      : 'border-gray-200 hover:border-primary/50'
+                      : 'border-light hover:border-primary/50'
                   }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                       calculator.selectedService === service.id
                         ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-muted'
+                        : 'bg-primary-10 text-muted'
                     }`}>
                       <service.icon className="w-6 h-6" />
                     </div>
@@ -265,7 +265,7 @@ export default function CalculatorPage() {
                   className={`p-4 rounded-xl border-2 transition-all duration-300 text-left ${
                     calculator.selectedOption === option.id
                       ? 'border-primary bg-primary/5'
-                      : 'border-gray-200 hover:border-primary/50'
+                      : 'border-light hover:border-primary/50'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -297,17 +297,17 @@ export default function CalculatorPage() {
           >
             <h3 className="text-title weight-bold text-primary-dark mb-6">Укажите количество</h3>
             
-            <div className="bg-gray-50 p-6 rounded-2xl">
+            <div className="bg-primary-bg p-6 rounded-2xl">
               <div className="text-body-lg weight-semibold text-primary-dark mb-4">
                 {selectedOption?.name}
               </div>
               
               <div className="flex items-center space-x-4 mb-6">
-                <label className="text-gray-700">Количество:</label>
+                <label className="text-muted">Количество:</label>
                 <div className="flex items-center space-x-2">
                   <button
                     onClick={() => updateQuantity(calculator.quantity - 1)}
-                    className="w-10 h-10 rounded-lg bg-white border border-gray-200 hover:border-primary flex items-center justify-center"
+                    className="w-10 h-10 rounded-lg bg-card border border-light hover:border-primary flex items-center justify-center"
                   >
                     -
                   </button>
@@ -315,11 +315,11 @@ export default function CalculatorPage() {
                     type="number"
                     value={calculator.quantity}
                     onChange={(e) => updateQuantity(parseInt(e.target.value) || 1)}
-                    className="w-20 h-10 text-center border border-gray-200 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    className="w-20 h-10 text-center border border-light rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                   <button
                     onClick={() => updateQuantity(calculator.quantity + 1)}
-                    className="w-10 h-10 rounded-lg bg-white border border-gray-200 hover:border-primary flex items-center justify-center"
+                    className="w-10 h-10 rounded-lg bg-card border border-light hover:border-primary flex items-center justify-center"
                   >
                     +
                   </button>
@@ -338,7 +338,7 @@ export default function CalculatorPage() {
                 {additionalOptions.map((service) => (
                   <label
                     key={service.id}
-                    className="flex items-center space-x-3 p-3 rounded-lg border border-gray-200 hover:border-primary/50 cursor-pointer"
+                    className="flex items-center space-x-3 p-3 rounded-lg border border-light hover:border-primary/50 cursor-pointer"
                   >
                     <input
                       type="checkbox"
@@ -398,7 +398,7 @@ export default function CalculatorPage() {
                   </div>
                 )}
               </div>
-              <div className="border-t border-gray-200 pt-4">
+              <div className="border-t border-light pt-4">
                 <div className="flex justify-between items-center">
                   <span className="text-body-lg weight-bold text-primary-dark">Итого:</span>
                   <span className="text-title weight-bold text-primary">
@@ -415,7 +415,7 @@ export default function CalculatorPage() {
             <div className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-caption weight-medium text-gray-700 mb-2">
+                  <label className="block text-caption weight-medium text-muted mb-2">
                     Ваше имя *
                   </label>
                   <input
@@ -423,12 +423,12 @@ export default function CalculatorPage() {
                     required
                     value={calculator.contactInfo.name}
                     onChange={(e) => updateContactInfo('name', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
                     placeholder="Иван Петров"
                   />
                 </div>
                 <div>
-                  <label className="block text-caption weight-medium text-gray-700 mb-2">
+                  <label className="block text-caption weight-medium text-muted mb-2">
                     Телефон *
                   </label>
                   <input
@@ -436,34 +436,34 @@ export default function CalculatorPage() {
                     required
                     value={calculator.contactInfo.phone}
                     onChange={(e) => updateContactInfo('phone', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300"
+                    className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
                     placeholder="+7 (999) 123-45-67"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-caption weight-medium text-gray-700 mb-2">
+                <label className="block text-caption weight-medium text-muted mb-2">
                   Email
                 </label>
                 <input
                   type="email"
                   value={calculator.contactInfo.email}
                   onChange={(e) => updateContactInfo('email', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300"
+                  className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
                   placeholder="ivan@example.com"
                 />
               </div>
 
               <div>
-                <label className="block text-caption weight-medium text-gray-700 mb-2">
+                <label className="block text-caption weight-medium text-muted mb-2">
                   Дополнительные пожелания
                 </label>
                 <textarea
                   rows={3}
                   value={calculator.contactInfo.message}
                   onChange={(e) => updateContactInfo('message', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300 resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 resize-none"
                   placeholder="Расскажите о ваших требованиях..."
                 />
               </div>
@@ -511,7 +511,7 @@ export default function CalculatorPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <Calculator className="w-5 h-5 text-primary" />
-              <span className="text-caption weight-semibold text-gray-700">Калькулятор стоимости</span>
+              <span className="text-caption weight-semibold text-muted">Калькулятор стоимости</span>
             </motion.div>
 
             <motion.h1 
@@ -536,7 +536,7 @@ export default function CalculatorPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-on-dark-muted mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-body-xl text-on-dark-muted mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               Узнайте примерную стоимость рекламных услуг за 2 минуты. Пошаговый расчет с учетом всех ваших требований
             </motion.p>
@@ -545,7 +545,7 @@ export default function CalculatorPage() {
       </section>
 
       {/* Calculator */}
-      <section className="section-padding-y bg-white">
+      <section className="section-padding-y bg-card">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {!isSubmitted ? (
             <>
@@ -570,13 +570,13 @@ export default function CalculatorPage() {
               </div>
 
               {/* Calculator Steps */}
-              <div className="bg-white rounded-2xl border border-gray-200 p-8 shadow-lg">
+              <div className="bg-card rounded-2xl border border-light p-8 shadow-lg">
                 <AnimatePresence mode="wait">
                   {renderStep()}
                 </AnimatePresence>
 
                 {/* Navigation */}
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between mt-8 pt-6 border-t border-light">
                   <motion.button
                     onClick={prevStep}
                     disabled={calculator.step === 1}
@@ -584,8 +584,8 @@ export default function CalculatorPage() {
                     whileTap={{ scale: calculator.step === 1 ? 1 : 0.98 }}
                     className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                       calculator.step === 1
-                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-primary-10 text-gray-400 cursor-not-allowed'
+                        : 'bg-primary-10 text-muted hover:bg-gray-200'
                     }`}
                   >
                     <ArrowLeft className="w-5 h-5" />
@@ -600,8 +600,8 @@ export default function CalculatorPage() {
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
                       className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
-                          ? 'bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white hover:shadow-lg'
-                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          ? 'bg-gradient-to-r from-primary to-primary-dark text-white hover:shadow-lg'
+                          : 'bg-primary-10 text-gray-400 cursor-not-allowed'
                       }`}
                     >
                       <span>Далее</span>
@@ -615,8 +615,8 @@ export default function CalculatorPage() {
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
                       className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
-                          ? 'bg-gradient-to-r from-[#1FCAD4] to-[#0891A3] text-white hover:shadow-lg'
-                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          ? 'bg-gradient-to-r from-primary to-primary-dark text-white hover:shadow-lg'
+                          : 'bg-primary-10 text-gray-400 cursor-not-allowed'
                       }`}
                     >
                       <Send className="w-5 h-5" />
@@ -645,7 +645,7 @@ export default function CalculatorPage() {
               <h2 className="text-title-lg weight-bold text-primary-dark mb-4">
                 Расчет отправлен!
               </h2>
-              <p className="text-xl text-muted mb-8 max-w-2xl mx-auto">
+              <p className="text-body-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed-kw">
                 Наш менеджер свяжется с вами в течение часа для уточнения деталей и предоставления точного коммерческого предложения
               </p>
               
@@ -680,7 +680,7 @@ export default function CalculatorPage() {
                       totalPrice: 0
                     })
                   }}
-                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                className="group bg-card/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Calculator className="w-5 h-5" />
                   <span>Новый расчет</span>
@@ -698,7 +698,7 @@ export default function CalculatorPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Преимущества нашего калькулятора
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Быстро, удобно и точно
             </p>
           </div>
@@ -727,11 +727,11 @@ export default function CalculatorPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="text-center p-6 bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-[#1FCAD4]/25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary-25 mx-auto mb-4"
                 >
                   <feature.icon className="w-8 h-8 text-white" />
                 </motion.div>

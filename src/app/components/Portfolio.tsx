@@ -451,7 +451,7 @@ export default function Portfolio() {
                 <div className="text-body-sm weight-bold text-primary truncate">{item.duration}</div>
                          <div className="text-caption text-gray-600">Срок</div>
                        </div>
-                       <div className="text-center p-2 bg-primary-dark/10 rounded-lg">
+                       <div className="text-center p-2 bg-overlay rounded-lg">
                 <div className="text-body-sm weight-bold text-primary-dark truncate">{item.year}</div>
                          <div className="text-caption text-gray-600">Год</div>
                        </div>

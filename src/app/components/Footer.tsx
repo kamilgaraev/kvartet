@@ -96,11 +96,11 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-display-3 weight-bold mb-6 leading-tight-kw">
+              <h2 className="text-display-3 weight-bold mb-6 leading-tight-kw text-white">
                 Готовы начать свой{' '}
-                <span className="gradient-kvartett-text">успешный проект?</span>
+                <span className="gradient-kvartett-text-on-dark">успешный проект?</span>
               </h2>
-              <p className="text-body-xl text-gray-300 mb-8 leading-relaxed-kw">
+              <p className="text-body-xl text-white/90 mb-8 leading-relaxed-kw">
                 Получите бесплатную консультацию и персональное предложение уже сегодня
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -129,11 +129,11 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
             >
-              <h3 className="text-title weight-bold mb-6 flex items-center space-x-2">
+              <h3 className="text-title weight-bold mb-6 flex items-center space-x-2 text-white">
                 <Mail className="w-6 h-6 text-primary" />
                 <span>Подписаться на новости</span>
               </h3>
-              <p className="text-body text-gray-300 mb-6">
+              <p className="text-body text-white/80 mb-6">
                 Получайте полезные материалы о рекламе и специальные предложения
               </p>
               <form onSubmit={handleSubscribe} className="space-y-4">
@@ -143,7 +143,7 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Ваш email"
-                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
                     required
                   />
                 </div>

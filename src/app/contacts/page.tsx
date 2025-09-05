@@ -283,7 +283,7 @@ export default function ContactsPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#1FCAD4] focus:ring-2 focus:ring-[#1FCAD4]/20 transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
                     >
                       <option value="">Выберите услугу</option>
                       <option value="outdoor">Наружная реклама</option>

@@ -168,17 +168,17 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6 }}
-                className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#1FCAD4]/10 to-[#E91E63]/10 rounded-full px-4 py-2 mb-6"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <Building className="w-4 h-4 text-primary" />
-                <span className="text-sm weight-semibold text-gray-700">О компании Квартет</span>
+                <span className="text-caption weight-semibold text-muted">О компании Квартет</span>
               </motion.div>
 
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl weight-bold text-primary-dark mb-6"
+                className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw"
               >
                 Создаем{' '}
                 <span className="relative inline-block">
@@ -187,7 +187,7 @@ export default function AboutPage() {
                     initial={{ scaleX: 0 }}
                     animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] opacity-30 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
                   />
                 </span>
                 {' '}рекламы
@@ -197,7 +197,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-muted mb-8 leading-relaxed"
+                className="text-body-xl text-muted mb-8 leading-relaxed-kw"
               >
                 Уже 15 лет мы помогаем бизнесу расти, создавая яркую и эффективную рекламу. Наша миссия — делать ваш бренд заметным и запоминающимся.
               </motion.p>
@@ -218,7 +218,7 @@ export default function AboutPage() {
                 
                 <Link
                   href="/portfolio"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-[#1FCAD4]/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-card backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary-20 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-card hover:shadow-card-hover"
                 >
                   <Eye className="w-5 h-5" />
                   <span>Портфолио</span>
@@ -232,7 +232,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-[#1FCAD4]/20 to-[#E91E63]/20 rounded-3xl p-8 backdrop-blur-sm">
+              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-3xl p-8 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop"
                   alt="Команда Квартет"
@@ -243,7 +243,7 @@ export default function AboutPage() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center"
               >
                 <Heart className="w-8 h-8 text-white" />
               </motion.div>
@@ -253,7 +253,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section ref={statsRef} className="section-padding-y bg-white">
+      <section ref={statsRef} className="section-padding-y bg-card">
         <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -261,10 +261,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Цифры, которые говорят за нас
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Результаты нашей работы в цифрах и фактах
             </p>
           </motion.div>
@@ -277,15 +277,15 @@ export default function AboutPage() {
                 animate={statsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-[#1FCAD4]/30 hover:shadow-lg transition-all duration-300"
+                className="text-center p-6 bg-card rounded-2xl border border-light hover:border-primary-30 hover:shadow-card transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-[#1FCAD4]/25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary-25 mx-auto mb-4"
                 >
                   <stat.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <div className="text-4xl weight-bold text-primary mb-2">{stat.value}</div>
+                <div className="text-display-3 weight-bold text-primary mb-2">{stat.value}</div>
                 <div className="text-muted weight-medium">{stat.label}</div>
               </motion.div>
             ))}
@@ -302,16 +302,16 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наша история
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               От маленькой мастерской до лидера рынка рекламных услуг
             </p>
           </motion.div>
 
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-[#1FCAD4] to-[#E91E63] h-full rounded-full"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primary to-primary-dark h-full rounded-full"></div>
             
             <div className="space-y-12">
               {timeline.map((event, index) => (
@@ -325,18 +325,18 @@ export default function AboutPage() {
                   }`}
                 >
                   <div className={index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}>
-                    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                      <div className="text-2xl weight-bold text-primary mb-2">{event.year}</div>
-                      <h3 className="text-xl weight-bold text-primary-dark mb-3">{event.title}</h3>
+                    <div className="bg-card p-6 rounded-2xl shadow-card border border-light">
+                      <div className="text-title-lg weight-bold text-primary mb-2">{event.year}</div>
+                      <h3 className="text-title weight-bold text-primary-dark mb-3 leading-tight-kw">{event.title}</h3>
                       <p className="text-muted">{event.description}</p>
                     </div>
                   </div>
                   
                   <div className={`hidden lg:block ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <div className="w-full h-32 bg-gradient-to-br from-[#1FCAD4]/20 to-[#E91E63]/20 rounded-2xl"></div>
+                    <div className="w-full h-32 bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-2xl"></div>
                   </div>
 
-                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-white border-4 border-[#1FCAD4] rounded-full z-10"></div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-card border-4 border-primary rounded-full z-10"></div>
                 </motion.div>
               ))}
             </div>
@@ -345,7 +345,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section ref={teamRef} className="section-padding-y bg-white">
+      <section ref={teamRef} className="section-padding-y bg-card">
         <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -353,10 +353,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Команда профессионалов
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Знакомьтесь с людьми, которые создают лучшую рекламу в регионе
             </p>
           </motion.div>
@@ -371,7 +371,7 @@ export default function AboutPage() {
                 whileHover={{ y: -5 }}
                 className="text-center group"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+                <div className="bg-card rounded-2xl p-6 shadow-card hover:shadow-card-hover transition-all duration-300 border border-light">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
                     className="relative mb-6"
@@ -383,15 +383,15 @@ export default function AboutPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] rounded-full flex items-center justify-center">
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center">
                       <Star className="w-4 h-4 text-white" />
                     </div>
                   </motion.div>
                   
-                  <h3 className="text-xl weight-bold text-primary-dark mb-2">{member.name}</h3>
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">{member.name}</h3>
                   <div className="text-primary weight-medium mb-2">{member.position}</div>
-                  <div className="text-sm text-gray-500 mb-3">{member.experience}</div>
-                  <p className="text-muted text-sm">{member.description}</p>
+                  <div className="text-caption text-muted mb-3">{member.experience}</div>
+                  <p className="text-body-sm text-muted leading-relaxed-kw">{member.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -403,10 +403,10 @@ export default function AboutPage() {
       <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наши ценности
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Принципы, которыми мы руководствуемся в работе
             </p>
           </div>
@@ -419,15 +419,15 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="text-center p-6 bg-card rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-[#1FCAD4]/25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary-25 mx-auto mb-4"
                 >
                   <value.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl weight-bold text-primary-dark mb-3">{value.title}</h3>
+                <h3 className="text-title weight-bold text-primary-dark mb-3">{value.title}</h3>
                 <p className="text-muted">{value.description}</p>
               </motion.div>
             ))}
@@ -436,13 +436,13 @@ export default function AboutPage() {
       </section>
 
       {/* Achievements */}
-      <section className="section-padding-y bg-white">
+      <section className="section-padding-y bg-card">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Награды и достижения
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Признание профессионального сообщества и клиентов
             </p>
           </div>
@@ -455,16 +455,16 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-2xl border border-gray-100 hover:border-[#1FCAD4]/30 hover:shadow-lg transition-all duration-300"
+                className="bg-card p-6 rounded-2xl border border-light hover:border-primary-30 hover:shadow-card transition-all duration-300"
               >
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg flex-shrink-0">
                     <Award className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-lg weight-bold text-primary-dark mb-2">{achievement.title}</div>
+                    <div className="text-title-sm weight-bold text-primary-dark mb-2">{achievement.title}</div>
                     <div className="text-primary weight-medium mb-1">{achievement.year}</div>
-                    <div className="text-sm text-muted">{achievement.organization}</div>
+                    <div className="text-caption text-muted">{achievement.organization}</div>
                   </div>
                 </div>
               </motion.div>
@@ -477,10 +477,10 @@ export default function AboutPage() {
       <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наш офис в Уфе
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
               Приезжайте к нам для обсуждения проектов и знакомства с производством
             </p>
           </div>
@@ -491,13 +491,13 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+              <div className="bg-card p-8 rounded-2xl shadow-card border border-light">
                 <div className="flex items-center space-x-3 mb-6">
                   <div className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg">
                     <Map className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-xl weight-bold text-primary-dark">Офис и производство</h3>
+                    <h3 className="text-title weight-bold text-primary-dark">Офис и производство</h3>
                     <p className="text-muted">Полный цикл под одной крышей</p>
                   </div>
                 </div>
@@ -505,15 +505,15 @@ export default function AboutPage() {
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
                     <Building className="w-5 h-5 text-primary" />
-                    <span className="text-gray-700">г. Уфа, ул. Ленская, 128</span>
+                    <span className="text-primary-dark">г. Уфа, ул. Ленская, 128</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Clock className="w-5 h-5 text-primary" />
-                    <span className="text-gray-700">Пн-Пт: 9:00-18:00, Сб: 10:00-16:00</span>
+                    <span className="text-primary-dark">Пн-Пт: 9:00-18:00, Сб: 10:00-16:00</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <Users className="w-5 h-5 text-primary" />
-                    <span className="text-gray-700">20+ специалистов</span>
+                    <span className="text-primary-dark">20+ специалистов</span>
                   </div>
                 </div>
 
@@ -535,11 +535,11 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="aspect-video bg-gradient-to-br from-[#1FCAD4]/20 to-[#E91E63]/20 rounded-2xl p-4">
-                <div className="w-full h-full bg-gray-200 rounded-xl flex items-center justify-center">
+              <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-2xl p-4">
+                <div className="w-full h-full bg-primary-bg rounded-xl flex items-center justify-center">
                   <div className="text-center">
-                    <Map className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                    <div className="text-gray-500">Интерактивная карта</div>
+                    <Map className="w-12 h-12 text-primary mx-auto mb-3" />
+                    <div className="text-muted">Интерактивная карта</div>
                   </div>
                 </div>
               </div>
@@ -549,15 +549,15 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding-y bg-gradient-to-r from-[#1FCAD4] via-[#E91E63] to-[#FBBF24] relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section className="section-padding-y bg-gradient-to-r from-primary via-primary-dark to-warning relative overflow-hidden">
+        <div className="absolute inset-0 bg-overlay"></div>
         <div className="relative container-adaptive">
           <div className="text-center text-white">
             <motion.h2 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl weight-bold mb-6"
+              className="text-display-2 weight-bold mb-6 leading-tight-kw"
             >
               Готовы работать с профессионалами?
             </motion.h2>
@@ -565,7 +565,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
+              className="text-body-xl mb-8 max-w-2xl mx-auto text-white/90 leading-relaxed-kw"
             >
               Свяжитесь с нами и убедитесь, что мы — именно та команда, которая нужна вашему бизнесу
             </motion.p>
@@ -578,7 +578,7 @@ export default function AboutPage() {
             >
               <Link
                 href="/contacts"
-                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-card text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-primary-bg transition-all duration-300 shadow-card"
               >
                 <Users className="w-5 h-5" />
                 <span>Познакомиться</span>

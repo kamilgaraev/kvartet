@@ -43,7 +43,7 @@ export default function FloatingAction() {
     {
       icon: Mail,
       label: 'Email',
-        color: 'bg-pink-500 hover:opacity-90',
+        color: 'bg-primary-dark hover:opacity-90',
       action: () => window.open('mailto:info@kvartett-ufa.ru', '_blank')
     }
   ]

@@ -650,7 +650,7 @@ export default function BrandingPage() {
 
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-gradient-to-br from-[#F59E0B]/10 to-[#D97706]/10 p-8 rounded-2xl border border-[#F59E0B]/20">
+              <div className="bg-gradient-to-br from-warning/10 to-warning-dark/10 p-8 rounded-2xl border border-warning/20">
                 <h3 className="text-title weight-bold text-primary-dark mb-6">Быстрый тест бренда</h3>
                 <div className="space-y-4">
                   {[
@@ -668,7 +668,7 @@ export default function BrandingPage() {
                     </div>
                   ))}
                 </div>
-                <button className="w-full mt-6 bg-gradient-to-r from-[#F59E0B] to-[#D97706] text-white py-3 rounded-xl weight-semibold hover:shadow-lg transition-all duration-300">
+                <button className="w-full mt-6 bg-gradient-to-r from-warning to-warning-dark text-white py-3 rounded-xl weight-semibold hover:shadow-lg transition-all duration-300">
                   Получить результат
                 </button>
               </div>
@@ -704,19 +704,19 @@ export default function BrandingPage() {
                   </h4>
                   <ul className="space-y-2 text-muted">
                     <li className="flex items-center space-x-2">
-                      <Star className="w-4 h-4 text-[#FBBF24] flex-shrink-0" />
+                      <Star className="w-4 h-4 text-warning flex-shrink-0" />
                       <span>Рост узнаваемости</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <Star className="w-4 h-4 text-[#FBBF24] flex-shrink-0" />
+                      <Star className="w-4 h-4 text-warning flex-shrink-0" />
                       <span>Привлечение клиентов</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <Star className="w-4 h-4 text-[#FBBF24] flex-shrink-0" />
+                      <Star className="w-4 h-4 text-warning flex-shrink-0" />
                       <span>Доверие к компании</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <Star className="w-4 h-4 text-[#FBBF24] flex-shrink-0" />
+                      <Star className="w-4 h-4 text-warning flex-shrink-0" />
                       <span>Конкурентное преимущество</span>
                     </li>
                   </ul>
@@ -728,7 +728,7 @@ export default function BrandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#B45309] relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-r from-warning via-warning-dark to-warning-dark relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
