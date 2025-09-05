@@ -65,7 +65,35 @@ jobs:
             PORT=3000
             EOF
             
-            # 4. Создаем оптимизированный Dockerfile
+            # 4. Создаем .dockerignore для оптимизации
+            echo "📋 Создаем .dockerignore..."
+            cat > .dockerignore << 'DOCKERIGNORE_EOF'
+            node_modules
+            .next
+            .git
+            .gitignore
+            README.md
+            Dockerfile
+            .dockerignore
+            npm-debug.log*
+            yarn-debug.log*
+            yarn-error.log*
+            .env*.local
+            .vercel
+            *.tgz
+            *.tar.gz
+            .cache
+            public/sw.js
+            public/workbox-*.js
+            public/worker-*.js
+            public/sw.js.map
+            public/workbox-*.js.map
+            public/worker-*.js.map
+            .DS_Store
+            Thumbs.db
+            DOCKERIGNORE_EOF
+            
+            # 5. Создаем оптимизированный Dockerfile
             echo "🐳 Создаем оптимизированный Dockerfile..."
             cat > Dockerfile << 'DOCKERFILE_EOF'
             FROM node:20-slim AS base
@@ -138,18 +166,23 @@ jobs:
             echo "🛑 Останавливаем старые контейнеры..."
             docker compose down || true
             
-            # 8. Очищаем Docker кеш
-            echo "🧹 Очищаем Docker кеш..."
-            docker system prune -f || true
+            # 8. Полная очистка Docker
+            echo "🧹 Выполняем полную очистку Docker..."
+            docker system prune -af --volumes || true
+            docker builder prune -af || true
             
-            # 9. Собираем и запускаем
-            echo "🔨 Собираем новые образы..."
-            docker compose build --no-cache --pull
+            # 9. Удаляем старые образы приложения
+            echo "🗑️ Удаляем старые образы..."
+            docker images | grep kvartett-website | awk '{print $3}' | xargs -r docker rmi -f || true
+            
+            # 10. Собираем с нуля
+            echo "🔨 Собираем новые образы с нуля..."
+            DOCKER_BUILDKIT=1 docker compose build --no-cache --pull --parallel
             
             echo "🚀 Запускаем контейнеры..."
             docker compose up -d
             
-            # 10. Ждем запуска и проверяем статус
+            # 11. Ждем запуска и проверяем статус
             echo "⏳ Ждем запуска сервисов..."
             sleep 30
             
