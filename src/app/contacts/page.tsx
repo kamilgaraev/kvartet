@@ -147,7 +147,7 @@ export default function ContactsPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <MessageCircle className="w-5 h-5 text-primary" />
-              <span className="text-sm font-semibold text-gray-700">Свяжитесь с нами</span>
+              <span className="text-caption weight-semibold text-muted">Свяжитесь с нами</span>
             </motion.div>
 
             <motion.h1 
@@ -200,7 +200,7 @@ export default function ContactsPage() {
                   <contact.icon className="w-8 h-8 text-white" />
                 </motion.div>
                 <h3 className="text-xl weight-bold text-primary-dark mb-2">{contact.title}</h3>
-                <div className={`text-lg font-semibold ${contact.color} mb-1`}>{contact.content}</div>
+                <div className={`text-body-lg weight-semibold ${contact.color} mb-1`}>{contact.content}</div>
                 <p className="text-muted text-sm">{contact.description}</p>
               </motion.div>
             ))}
@@ -232,7 +232,7 @@ export default function ContactsPage() {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-caption weight-medium text-muted mb-2">
                         Ваше имя *
                       </label>
                       <input
@@ -246,7 +246,7 @@ export default function ContactsPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-caption weight-medium text-muted mb-2">
                         Телефон *
                       </label>
                       <input
@@ -262,7 +262,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-caption weight-medium text-muted mb-2">
                       Email
                     </label>
                     <input
@@ -276,7 +276,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-caption weight-medium text-muted mb-2">
                       Интересующая услуга
                     </label>
                     <select
@@ -295,7 +295,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-caption weight-medium text-muted mb-2">
                       Сообщение
                     </label>
                     <textarea
@@ -313,7 +313,7 @@ export default function ContactsPage() {
                     disabled={isSubmitting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full py-4 rounded-xl font-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
+                    className={`w-full py-4 rounded-xl weight-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
                       isSubmitted 
                         ? 'bg-success shadow-lg shadow-primary' 
                         : 'bg-gradient-to-r from-primary to-primary-dark hover:shadow-lg hover:shadow-primary'
@@ -353,7 +353,7 @@ export default function ContactsPage() {
                 <div className="aspect-video p-4 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, var(--color-primary-20), var(--color-primary-dark-20))' }}>
                   <div className="text-center">
                     <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                    <div className="text-gray-500 font-medium">Интерактивная карта</div>
+                    <div className="text-muted weight-medium">Интерактивная карта</div>
                     <div className="text-sm text-gray-400">г. Уфа, ул. Ленская, 128</div>
                   </div>
                 </div>
@@ -366,9 +366,9 @@ export default function ContactsPage() {
                           <direction.icon className="w-4 h-4 text-primary" />
                         </div>
                         <div>
-                          <div className="font-medium text-primary-dark">{direction.title}</div>
+                          <div className="weight-medium text-primary-dark">{direction.title}</div>
                           <div className="text-sm text-muted mb-1">{direction.description}</div>
-                          <div className="text-xs text-primary font-medium">{direction.time}</div>
+                          <div className="text-caption text-primary weight-medium">{direction.time}</div>
                         </div>
                       </div>
                     ))}
@@ -386,7 +386,7 @@ export default function ContactsPage() {
                         <feature.icon className="w-4 h-4 text-primary-dark" />
                       </div>
                       <div>
-                        <div className="font-medium text-primary-dark">{feature.title}</div>
+                        <div className="weight-medium text-primary-dark">{feature.title}</div>
                         <div className="text-sm text-muted">{feature.description}</div>
                       </div>
                     </div>
@@ -430,7 +430,7 @@ export default function ContactsPage() {
               <p className="text-muted mb-4">Обсудим проект по телефону</p>
               <a
                 href="tel:+73471234567"
-                className="inline-flex items-center space-x-2 text-primary hover:text-primary-dark font-medium transition-colors"
+                className="inline-flex items-center space-x-2 text-primary hover:text-primary-dark weight-medium transition-colors"
               >
                 <span>+7 (347) 123-45-67</span>
               </a>
@@ -455,7 +455,7 @@ export default function ContactsPage() {
               <p className="text-muted mb-4">Быстрая переписка в мессенджере</p>
               <a
                 href="https://wa.me/73471234567"
-                className="inline-flex items-center space-x-2 text-primary-dark hover:text-primary font-medium transition-colors"
+                className="inline-flex items-center space-x-2 text-primary-dark hover:text-primary weight-medium transition-colors"
               >
                 <span>Написать в WhatsApp</span>
               </a>
@@ -479,7 +479,7 @@ export default function ContactsPage() {
               <p className="text-muted mb-4">Отправьте техническое задание</p>
               <a
                 href="mailto:info@kvartett-ufa.ru"
-                className="inline-flex items-center space-x-2 text-warning-light hover:text-warning font-medium transition-colors"
+                className="inline-flex items-center space-x-2 text-warning-light hover:text-warning weight-medium transition-colors"
               >
                 <span>info@kvartett-ufa.ru</span>
               </a>

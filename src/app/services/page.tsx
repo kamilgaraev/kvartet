@@ -295,7 +295,7 @@ export default function ServicesPage() {
                       
                       <Link
                         href={service.slug}
-                        className="group/btn bg-gradient-primary text-white px-6 py-3 rounded-xl font-medium flex items-center space-x-2 hover:shadow-lg transition-all duration-300"
+                        className="group/btn bg-gradient-primary text-white px-6 py-3 rounded-xl weight-medium flex items-center space-x-2 hover:shadow-lg transition-all duration-300"
                       >
                         <span>Подробнее</span>
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />

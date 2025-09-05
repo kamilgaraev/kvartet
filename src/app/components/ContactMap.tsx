@@ -28,10 +28,10 @@ export default function ContactMap() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-3 text-gray-900 mb-4 weight-bold">
+          <h2 className="text-display-3 text-primary-dark mb-4 weight-bold">
             Как нас <span className="gradient-kvartett-text">найти</span>
           </h2>
-          <p className="text-body-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-body-xl text-muted max-w-2xl mx-auto">
             Приезжайте к нам в офис или вызовите специалиста на объект
           </p>
         </motion.div>
@@ -45,15 +45,15 @@ export default function ContactMap() {
             className="space-y-8"
           >
             {/* Адрес */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-card border border-light">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-primary-10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-title weight-bold text-gray-900 mb-2">Наш офис</h3>
-                  <p className="text-body text-gray-600 mb-2">г. Уфа, ул. Ленская, 128</p>
-                  <p className="text-caption text-gray-500">
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">Наш офис</h3>
+                  <p className="text-body text-muted mb-2">г. Уфа, ул. Ленская, 128</p>
+                  <p className="text-caption text-muted">
                     Центральный район, рядом с остановкой "Ленская"
                   </p>
                   <button className="mt-3 text-primary hover:text-primary-dark transition-colors flex items-center space-x-1 text-body-sm weight-medium">
@@ -65,32 +65,32 @@ export default function ContactMap() {
             </div>
 
             {/* Телефоны */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-card border border-light">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-primary-dark-10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Phone className="w-6 h-6 text-primary-dark" />
                 </div>
                 <div>
-                  <h3 className="text-title weight-bold text-gray-900 mb-2">Телефоны</h3>
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">Телефоны</h3>
                   <div className="space-y-2">
-                    <p className="text-body text-gray-900 weight-medium">+7 (347) 123-45-67</p>
-                    <p className="text-body text-gray-600">+7 (347) 123-45-68</p>
-                    <p className="text-caption text-gray-500">Звоните с 9:00 до 18:00</p>
+                    <p className="text-body text-primary-dark weight-medium">+7 (347) 123-45-67</p>
+                    <p className="text-body text-muted">+7 (347) 123-45-68</p>
+                    <p className="text-caption text-muted">Звоните с 9:00 до 18:00</p>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Email и мессенджеры */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-card border border-light">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-primary-light-10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Mail className="w-6 h-6 text-primary-light" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-title weight-bold text-gray-900 mb-2">Онлайн связь</h3>
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">Онлайн связь</h3>
                   <div className="space-y-3">
-                    <p className="text-body text-gray-600">info@kvartett-ufa.ru</p>
+                    <p className="text-body text-muted">info@kvartett-ufa.ru</p>
                     <div className="flex space-x-3">
                       <button className="bg-success text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-success-dark transition-colors flex items-center space-x-2">
                         <MessageCircle className="w-4 h-4" />
@@ -106,24 +106,24 @@ export default function ContactMap() {
             </div>
 
             {/* Время работы */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-card border border-light">
               <div className="flex items-start space-x-4">
                 <div className="w-12 h-12 bg-success-10 rounded-xl flex items-center justify-center flex-shrink-0">
                   <Clock className="w-6 h-6 text-success" />
                 </div>
                 <div>
-                  <h3 className="text-title weight-bold text-gray-900 mb-3">Время работы</h3>
+                  <h3 className="text-title weight-bold text-primary-dark mb-3">Время работы</h3>
                   <div className="space-y-2 text-caption">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Пн - Пт:</span>
-                      <span className="text-gray-900 weight-medium">09:00 - 18:00</span>
+                      <span className="text-muted">Пн - Пт:</span>
+                      <span className="text-primary-dark weight-medium">09:00 - 18:00</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Суббота:</span>
-                      <span className="text-gray-900 weight-medium">10:00 - 16:00</span>
+                      <span className="text-muted">Суббота:</span>
+                      <span className="text-primary-dark weight-medium">10:00 - 16:00</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Воскресенье:</span>
+                      <span className="text-muted">Воскресенье:</span>
                       <span className="text-gray-500">Выходной</span>
                     </div>
                   </div>
@@ -132,14 +132,14 @@ export default function ContactMap() {
             </div>
 
             {/* Парковка */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+            <div className="bg-card rounded-2xl p-6 shadow-card border border-light">
               <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                  <Car className="w-6 h-6 text-gray-600" />
+                <div className="w-12 h-12 bg-primary-10 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <Car className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-title weight-bold text-gray-900 mb-2">Парковка</h3>
-                  <p className="text-body text-gray-600">
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">Парковка</h3>
+                  <p className="text-body text-muted">
                     Бесплатная парковка рядом с офисом. 
                     Удобный подъезд для загрузки материалов.
                   </p>
@@ -162,10 +162,10 @@ export default function ContactMap() {
                 <div className="text-center space-y-4">
                   <MapPin className="w-16 h-16 text-primary mx-auto" />
                   <div>
-                    <h3 className="text-title weight-bold text-gray-700 mb-2">
+                    <h3 className="text-title weight-bold text-primary-dark mb-2">
                       Интерактивная карта
                     </h3>
-                    <p className="text-body text-gray-600 max-w-xs">
+                    <p className="text-body text-muted max-w-xs">
                       г. Уфа, ул. Ленская, 128<br />
                       Производственно-рекламная группа "Квартет"
                     </p>

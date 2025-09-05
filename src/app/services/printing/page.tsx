@@ -191,14 +191,14 @@ export default function PrintingPage() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-success/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <FileText className="w-4 h-4 text-success" />
-                <span className="text-sm font-semibold text-gray-700">Полиграфия</span>
+                <span className="text-sm weight-semibold text-muted">Полиграфия</span>
               </motion.div>
 
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl font-bold text-primary-dark mb-6"
+                className="text-5xl md:text-6xl weight-bold text-primary-dark mb-6"
               >
                 Качественная{' '}
                 <span className="relative inline-block">
@@ -229,7 +229,7 @@ export default function PrintingPage() {
               >
                 <Link
                   href="/calculator"
-                  className="group bg-gradient-to-r from-success to-success-dark text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group bg-gradient-to-r from-success to-success-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Calculator className="w-5 h-5" />
                   <span>Рассчитать тираж</span>
@@ -237,7 +237,7 @@ export default function PrintingPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-success/50 hover:text-success transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-card/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light/50 hover:border-success/50 hover:text-success transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -248,7 +248,7 @@ export default function PrintingPage() {
                 initial={{ opacity: 0 }}
                 animate={heroInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200"
+                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-light"
               >
                 {[
                   { label: 'Видов продукции', value: '50+' },
@@ -256,7 +256,7 @@ export default function PrintingPage() {
                   { label: 'Лет опыта', value: '15+' }
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl font-bold text-success">{stat.value}</div>
+                    <div className="text-2xl weight-bold text-success">{stat.value}</div>
                     <div className="text-sm text-muted">{stat.label}</div>
                   </div>
                 ))}
@@ -290,7 +290,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Services Grid */}
-      <section ref={servicesRef} className="py-24 bg-white">
+      <section ref={servicesRef} className="py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -298,7 +298,7 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Виды полиграфии
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -314,7 +314,7 @@ export default function PrintingPage() {
                 animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
+                className="group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-light"
               >
                 <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                   <img
@@ -324,7 +324,7 @@ export default function PrintingPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-4 left-4 right-4">
-                      <button className="w-full bg-white/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg font-medium flex items-center justify-center space-x-2">
+                      <button className="w-full bg-card/90 backdrop-blur-sm text-primary-dark py-2 px-4 rounded-lg weight-medium flex items-center justify-center space-x-2">
                         <Eye className="w-4 h-4" />
                         <span>Смотреть примеры</span>
                       </button>
@@ -333,15 +333,15 @@ export default function PrintingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary-dark mb-2 group-hover:text-success transition-colors">
+                  <h3 className="text-xl weight-bold text-primary-dark mb-2 group-hover:text-success transition-colors">
                     {service.name}
                   </h3>
                   <p className="text-muted mb-4 text-sm leading-relaxed">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold text-success">{service.price}</span>
-              <button className="text-success hover:bg-success hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm font-medium">
+                    <span className="text-lg weight-bold text-success">{service.price}</span>
+              <button className="text-success hover:bg-success hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm weight-medium">
                       Заказать
                     </button>
                   </div>
@@ -356,7 +356,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Материалы и технологии
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -372,14 +372,14 @@ export default function PrintingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="bg-card p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-light"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-success to-success-dark flex items-center justify-center shadow-lg mb-4">
                   <Layers className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg font-bold text-primary-dark mb-2">{material.name}</h3>
+                <h3 className="text-lg weight-bold text-primary-dark mb-2">{material.name}</h3>
                 <p className="text-muted text-sm mb-3">{material.description}</p>
-                <div className="text-xs text-success font-medium bg-success/10 px-3 py-1 rounded-full">
+                <div className="text-xs text-success weight-medium bg-success/10 px-3 py-1 rounded-full">
                   {material.usage}
                 </div>
               </motion.div>
@@ -389,7 +389,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-white">
+      <section ref={processRef} className="py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -397,7 +397,7 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Как мы работаем
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -414,7 +414,7 @@ export default function PrintingPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative text-center"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div className="bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-light">
                   <div className="relative mb-6">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -422,14 +422,14 @@ export default function PrintingPage() {
                     >
                       <step.icon className="w-8 h-8 text-white" />
                     </motion.div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center text-sm weight-bold">
                       {step.step}
                     </div>
                   </div>
                   
-                  <h3 className="text-xl font-bold text-primary-dark mb-3">{step.title}</h3>
+                  <h3 className="text-xl weight-bold text-primary-dark mb-3">{step.title}</h3>
                   <p className="text-muted mb-4 text-sm leading-relaxed">{step.description}</p>
-                  <div className="inline-flex items-center space-x-1 text-success text-sm font-medium">
+                  <div className="inline-flex items-center space-x-1 text-success text-sm weight-medium">
                     <Clock className="w-4 h-4" />
                     <span>{step.duration}</span>
                   </div>
@@ -437,7 +437,7 @@ export default function PrintingPage() {
                 
                 {index < process.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-gray-300" />
+                    <ArrowRight className="w-6 h-6 text-muted" />
                   </div>
                 )}
               </motion.div>
@@ -450,7 +450,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -466,7 +466,7 @@ export default function PrintingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-white rounded-2xl border border-gray-100 hover:border-success/30 hover:shadow-lg transition-all duration-300"
+                className="text-center p-6 bg-card rounded-2xl border border-light hover:border-success/30 hover:shadow-lg transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -474,7 +474,7 @@ export default function PrintingPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl font-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <h3 className="text-xl weight-bold text-primary-dark mb-3">{advantage.title}</h3>
                 <p className="text-muted">{advantage.description}</p>
               </motion.div>
             ))}
@@ -483,10 +483,10 @@ export default function PrintingPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -502,7 +502,7 @@ export default function PrintingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+                className="group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
                 <div className="aspect-video relative overflow-hidden">
                   <img
@@ -511,16 +511,16 @@ export default function PrintingPage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-success text-white px-3 py-1 rounded-full text-sm font-medium">
+                    <span className="bg-success text-white px-3 py-1 rounded-full text-sm weight-medium">
                       {item.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-primary-dark mb-2">{item.title}</h3>
+                  <h3 className="text-xl weight-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
-                <span className="text-success font-medium">{item.result}</span>
+                <span className="text-success weight-medium">{item.result}</span>
                   </div>
                 </div>
               </motion.div>
@@ -530,7 +530,7 @@ export default function PrintingPage() {
           <div className="text-center">
             <Link
               href="/portfolio"
-              className="group bg-gradient-to-r from-success to-success-dark text-white px-8 py-4 rounded-2xl font-semibold inline-flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group bg-gradient-to-r from-success to-success-dark text-white px-8 py-4 rounded-2xl weight-semibold inline-flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <span>Все работы</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -543,7 +543,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary-dark mb-6">
+            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Рассчитайте стоимость
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -552,14 +552,14 @@ export default function PrintingPage() {
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-              <h3 className="text-2xl font-bold text-primary-dark mb-6">Быстрый расчет</h3>
+            <div className="bg-card p-8 rounded-2xl shadow-lg border border-light">
+              <h3 className="text-2xl weight-bold text-primary-dark mb-6">Быстрый расчет</h3>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm weight-medium text-muted mb-2">
                     Тип продукции
                   </label>
-                  <select className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
+                  <select className="w-full px-4 py-3 rounded-xl border border-light focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
                     <option>Визитки</option>
                     <option>Листовки A4</option>
                     <option>Каталоги</option>
@@ -569,20 +569,20 @@ export default function PrintingPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm weight-medium text-muted mb-2">
                       Тираж
                     </label>
                     <input
                       type="number"
                       placeholder="1000"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-light focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm weight-medium text-muted mb-2">
                       Бумага
                     </label>
-                    <select className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
+                    <select className="w-full px-4 py-3 rounded-xl border border-light focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
                       <option>Мелованная 130г</option>
                       <option>Мелованная 170г</option>
                       <option>Дизайнерская</option>
@@ -590,7 +590,7 @@ export default function PrintingPage() {
                   </div>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-success to-success-dark text-white py-4 rounded-xl font-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300">
+                <button className="w-full bg-gradient-to-r from-success to-success-dark text-white py-4 rounded-xl weight-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300">
                   <Calculator className="w-5 h-5" />
                   <span>Рассчитать стоимость</span>
                 </button>
@@ -599,7 +599,7 @@ export default function PrintingPage() {
 
             <div className="space-y-8">
               <div className="bg-gradient-to-r from-success/10 to-success-dark/10 p-6 rounded-2xl border border-success/20">
-                <h4 className="text-lg font-bold text-primary-dark mb-4">
+                <h4 className="text-lg weight-bold text-primary-dark mb-4">
                   Примерные цены
                 </h4>
                 <div className="space-y-3">
@@ -610,15 +610,15 @@ export default function PrintingPage() {
                     { item: 'Календарь настенный 100 шт', price: '1 200 ₽' }
                   ].map((item, i) => (
                     <div key={i} className="flex justify-between items-center">
-                      <span className="text-gray-700">{item.item}</span>
-                      <span className="font-bold text-success">{item.price}</span>
+                      <span className="text-muted">{item.item}</span>
+                      <span className="weight-bold text-success">{item.price}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h4 className="text-lg font-bold text-primary-dark mb-4">
+              <div className="bg-card p-6 rounded-2xl shadow-lg border border-light">
+                <h4 className="text-lg weight-bold text-primary-dark mb-4">
                   Скидки на тираж
                 </h4>
                 <div className="space-y-3">
@@ -628,8 +628,8 @@ export default function PrintingPage() {
                     { range: 'От 10000 экз', discount: '15%' }
                   ].map((item, i) => (
                     <div key={i} className="flex justify-between items-center">
-                      <span className="text-gray-700">{item.range}</span>
-                      <span className="text-primary-dark font-bold">-{item.discount}</span>
+                      <span className="text-muted">{item.range}</span>
+                      <span className="text-primary-dark weight-bold">-{item.discount}</span>
                     </div>
                   ))}
                 </div>
@@ -648,7 +648,7 @@ export default function PrintingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-4xl md:text-5xl weight-bold mb-6"
             >
               Нужна качественная печать?
             </motion.h2>
@@ -669,7 +669,7 @@ export default function PrintingPage() {
             >
               <a
                 href="tel:+73471234567"
-                className="group bg-white text-success px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-card text-success px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-primary-bg transition-all duration-300 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Позвонить сейчас</span>
@@ -677,7 +677,7 @@ export default function PrintingPage() {
               
               <Link
                 href="/calculator"
-                className="group bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-all duration-300 font-semibold flex items-center justify-center space-x-2"
+                className="group bg-card/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-card/30 transition-all duration-300 weight-semibold flex items-center justify-center space-x-2"
               >
                 <Download className="w-5 h-5" />
                 <span>Прайс-лист PDF</span>

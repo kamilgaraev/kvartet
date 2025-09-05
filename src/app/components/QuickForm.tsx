@@ -54,7 +54,7 @@ export default function QuickForm() {
   }
 
   return (
-    <section className="section-padding-y bg-gradient-to-br from-primary-dark via-primary-dark to-primary-dark relative overflow-hidden" ref={ref}>
+    <section className="section-padding-y bg-gradient-bg relative overflow-hidden" ref={ref}>
       {/* Фоновые элементы */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-10 rounded-full blur-3xl"></div>
@@ -68,13 +68,13 @@ export default function QuickForm() {
             initial={{ opacity: 0, x: -50 }}
             animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8 }}
-            className="text-white space-y-8"
+            className="text-primary-dark space-y-8"
           >
             <div>
               <h2 className="text-display-3 weight-bold mb-4">
                 Готовы начать <span className="gradient-kvartett-text">проект?</span>
               </h2>
-              <p className="text-body-xl text-gray-300 leading-relaxed-kw">
+              <p className="text-body-xl text-muted leading-relaxed-kw">
                 Оставьте заявку и получите персональное предложение в течение 30 минут
               </p>
             </div>
@@ -95,18 +95,18 @@ export default function QuickForm() {
                   className="flex items-center space-x-3"
                 >
                   <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="text-gray-300">{benefit}</span>
+                  <span className="text-muted">{benefit}</span>
                 </motion.div>
               ))}
             </div>
 
             {/* Контакты */}
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-gray-300">
+              <div className="flex items-center space-x-3 text-muted">
                 <Phone className="w-5 h-5 text-primary" />
                 <span>+7 (347) 123-45-67</span>
               </div>
-              <div className="text-caption text-gray-400">
+              <div className="text-caption text-muted">
                 г. Уфа, ул. Ленская, 128
               </div>
             </div>

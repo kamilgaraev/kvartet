@@ -134,7 +134,7 @@ export default function Header() {
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute -top-1 -right-1 w-3 h-3 bg-green-600 rounded-full"
+                  className="absolute -top-1 -right-1 w-3 h-3 bg-success rounded-full"
                 />
               </motion.div>
               <div>
@@ -192,7 +192,7 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-96 bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden"
+                        className="absolute top-full left-0 mt-2 w-[36rem] bg-card backdrop-blur-xl rounded-2xl shadow-card-hover border border-light overflow-hidden"
                       >
                         {/* Заголовок */}
                         <div className="bg-primary-bg card-adaptive border-b border-primary">
@@ -212,12 +212,12 @@ export default function Header() {
                             >
                               <Link
                                 href={dropItem.href}
-                                className="flex items-center hero-gap nav-item hover:bg-primary-bg transition-all group/item"
+                                className="flex items-start hero-gap nav-item hover:bg-primary-bg transition-all group/item py-4"
                               >
                                 <div className="text-title-lg flex-shrink-0">{dropItem.icon}</div>
                                 <div className="flex-1">
                                   <div className="flex items-center space-x-2 mb-1">
-                                    <span className="nav-text text-primary-dark group-hover/item:text-primary transition-colors">
+                                    <span className="nav-text text-primary-dark group-hover/item:text-primary transition-colors break-words">
                                       {dropItem.name}
                                     </span>
                                     {dropItem.popular && (
@@ -226,7 +226,7 @@ export default function Header() {
                                       </span>
                                     )}
                                   </div>
-                                  <p className="nav-logo-subtitle text-primary-dark opacity-70 group-hover/item:text-primary-dark transition-colors mb-1">
+                                  <p className="nav-logo-subtitle text-primary-dark opacity-70 group-hover/item:text-primary-dark transition-colors mb-1 leading-relaxed">
                                     {dropItem.description}
                                   </p>
                                   <div className="nav-logo-subtitle weight-bold text-primary">
@@ -337,7 +337,7 @@ export default function Header() {
                 transition={{ duration: 0.3 }}
                 className="lg:hidden overflow-hidden"
               >
-                <div className="py-6 border-t border-gray-200/50">
+                <div className="py-6 border-t border-light">
                   <nav className="space-y-2">
                     {navigation.map((item, index) => (
                       <motion.div
@@ -366,7 +366,7 @@ export default function Header() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
-                    className="mt-6 pt-6 border-t border-gray-200/50 space-y-4"
+                    className="mt-6 pt-6 border-t border-light space-y-4"
                   >
                     <div className="flex items-center space-x-3 nav-logo-subtitle text-primary-dark/70 px-4">
                       <Phone className="icon-adaptive text-primary" />

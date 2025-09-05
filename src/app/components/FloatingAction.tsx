@@ -60,7 +60,7 @@ export default function FloatingAction() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={scrollToTop}
-            className="w-12 h-12 bg-gray-600 hover:bg-gray-700 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300"
+            className="w-12 h-12 bg-primary-dark hover:bg-primary text-white rounded-full shadow-card flex items-center justify-center transition-all duration-300"
           >
             <ArrowUp className="w-5 h-5" />
           </motion.button>
@@ -162,10 +162,10 @@ export default function FloatingAction() {
             initial={{ opacity: 0, x: 20, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 20, scale: 0.8 }}
-            className="absolute right-20 bottom-4 bg-gray-900 text-white text-body-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap pointer-events-none"
+            className="absolute right-20 bottom-4 bg-primary-dark text-white text-body-sm px-3 py-2 rounded-lg shadow-card whitespace-nowrap pointer-events-none"
           >
             Связаться с нами
-            <div className="absolute top-1/2 -right-1 w-2 h-2 bg-gray-900 transform rotate-45 -translate-y-1/2" />
+            <div className="absolute top-1/2 -right-1 w-2 h-2 bg-primary-dark transform rotate-45 -translate-y-1/2" />
           </motion.div>
         )}
       </AnimatePresence>
