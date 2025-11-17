@@ -228,7 +228,15 @@ async function main() {
   ]
 
   for (const item of testimonialsData) {
-    await db.insert(testimonials).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(testimonials)
+      .where(eq(testimonials.name, item.name))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(testimonials).values(item)
+    }
   }
   console.log('✅ Отзывы созданы')
 
@@ -278,7 +286,15 @@ async function main() {
   ]
 
   for (const item of faqData) {
-    await db.insert(faq).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(faq)
+      .where(eq(faq.question, item.question))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(faq).values(item)
+    }
   }
   console.log('✅ FAQ созданы')
 
@@ -338,7 +354,15 @@ async function main() {
   ]
 
   for (const item of teamData) {
-    await db.insert(team).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(team)
+      .where(eq(team.name, item.name))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(team).values(item)
+    }
   }
   console.log('✅ Команда создана')
 
@@ -393,7 +417,15 @@ async function main() {
   ]
 
   for (const item of partnersData) {
-    await db.insert(partners).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(partners)
+      .where(eq(partners.name, item.name))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(partners).values(item)
+    }
   }
   console.log('✅ Партнеры созданы')
 
@@ -439,7 +471,15 @@ async function main() {
   ]
 
   for (const item of socialLinksData) {
-    await db.insert(socialLinks).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(socialLinks)
+      .where(eq(socialLinks.platform, item.platform))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(socialLinks).values(item)
+    }
   }
   console.log('✅ Социальные сети созданы')
 
@@ -499,7 +539,15 @@ async function main() {
   ]
 
   for (const item of contactsData) {
-    await db.insert(contactInfo).values(item).onConflictDoNothing()
+    const existing = await db
+      .select()
+      .from(contactInfo)
+      .where(eq(contactInfo.label, item.label))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(contactInfo).values(item)
+    }
   }
   console.log('✅ Контакты созданы')
 
@@ -626,6 +674,114 @@ async function main() {
     }
   }
   console.log('✅ Посты блога созданы')
+
+  console.log('🌱 Создание портфолио...')
+  
+  const portfolioData = [
+    {
+      id: nanoid(),
+      title: 'Сеть магазинов "Продукты 24"',
+      slug: 'produkty-24-network',
+      description: 'Комплексное оформление сети магазинов: световые короба, вывески, витринная реклама с использованием современных LED технологий',
+      category: 'Наружная реклама',
+      image: '/api/placeholder/600/400',
+      gallery: [],
+      tags: ['Световые короба', 'Вывески', 'Витрины'],
+      features: ['LED подсветка', '24/7 работа', 'Гарантия 3 года'],
+      result: '+250% узнаваемости',
+      budget: '450 000 ₽',
+      duration: '3 дня',
+      year: 2024,
+      rating: 5,
+      status: 'PUBLISHED' as const,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Ресторан "Башкирская кухня"',
+      slug: 'bashkirskaya-kuhnya-restaurant',
+      description: 'Разработка уникального фирменного стиля, отражающего национальные традиции с современным подходом',
+      category: 'Брендинг',
+      image: '/api/placeholder/600/400',
+      gallery: [],
+      tags: ['Логотип', 'Фирмстиль', 'Меню'],
+      features: ['Уникальный дизайн', 'Национальные мотивы', 'Полиграфия'],
+      result: '+180% посещаемости',
+      budget: '280 000 ₽',
+      duration: '5 дней',
+      year: 2024,
+      rating: 5,
+      status: 'PUBLISHED' as const,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Строительная компания "СтройДом"',
+      slug: 'stroydom-construction',
+      description: 'Производство презентационных материалов премиум-класса для участия в крупнейшей строительной выставке',
+      category: 'Полиграфия',
+      image: '/api/placeholder/600/400',
+      gallery: [],
+      tags: ['Каталоги', 'Листовки', 'Презентации'],
+      features: ['Премиум качество', 'Срочное производство', 'Дизайн в подарок'],
+      result: '+320% лидов',
+      budget: '95 000 ₽',
+      duration: '2 дня',
+      year: 2023,
+      rating: 5,
+      status: 'PUBLISHED' as const,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Автосалон "Драйв"',
+      slug: 'drive-autosalon',
+      description: 'Создание современного торгового пространства с навигационной системой и POS-материалами',
+      category: 'Интерьерная реклама',
+      image: '/api/placeholder/600/400',
+      gallery: [],
+      tags: ['Стенды', 'Навигация', 'POS-материалы'],
+      features: ['Интерактивные элементы', 'Модульная система', 'Легкий монтаж'],
+      result: '+200% продаж',
+      budget: '320 000 ₽',
+      duration: '4 дня',
+      year: 2024,
+      rating: 5,
+      status: 'PUBLISHED' as const,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Медицинский центр "Здоровье+"',
+      slug: 'zdorovye-plus-medical',
+      description: 'Полное рекламное сопровождение медицинского центра от концепции до финальной реализации',
+      category: 'Комплексное решение',
+      image: '/api/placeholder/600/400',
+      gallery: [],
+      tags: ['Вывеска', 'Интерьер', 'Навигация'],
+      features: ['Медицинские стандарты', 'Полный цикл', 'Гарантийное обслуживание'],
+      result: '+400% клиентов',
+      budget: '850 000 ₽',
+      duration: '7 дней',
+      year: 2024,
+      rating: 5,
+      status: 'PUBLISHED' as const,
+      authorId: admin.id,
+    },
+  ]
+
+  for (const item of portfolioData) {
+    const existing = await db
+      .select()
+      .from(portfolioItems)
+      .where(eq(portfolioItems.slug, item.slug))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(portfolioItems).values(item)
+    }
+  }
+  console.log('✅ Портфолио создано')
 
   console.log('✅ Все данные успешно добавлены')
   console.log('🎉 Seed завершен!')

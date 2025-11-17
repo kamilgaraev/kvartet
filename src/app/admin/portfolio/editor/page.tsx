@@ -593,7 +593,7 @@ export default function PortfolioEditor() {
                         type="text"
                         value={formData.slug}
                         onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                         placeholder="url-proekta"
                       />
                     </div>
@@ -618,7 +618,7 @@ export default function PortfolioEditor() {
                         value={formData.shortDesc}
                         onChange={(e) => setFormData(prev => ({ ...prev, shortDesc: e.target.value }))}
                         rows={3}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                         placeholder="Краткое описание для карточки проекта..."
                       />
                     </div>
@@ -759,7 +759,7 @@ export default function PortfolioEditor() {
                             value={formData.gallery}
                             onChange={(e) => setFormData(prev => ({ ...prev, gallery: e.target.value }))}
                             rows={3}
-                            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                             placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
                           />
                           <button
@@ -856,7 +856,7 @@ export default function PortfolioEditor() {
                         value={formData.metaTitle}
                         onChange={(e) => setFormData(prev => ({ ...prev, metaTitle: e.target.value }))}
                         maxLength={60}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                         placeholder="SEO заголовок страницы"
                       />
                     </div>
@@ -871,7 +871,7 @@ export default function PortfolioEditor() {
                         onChange={(e) => setFormData(prev => ({ ...prev, metaDescription: e.target.value }))}
                         maxLength={160}
                         rows={3}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                         placeholder="Описание страницы для поисковых систем"
                       />
                     </div>
@@ -885,7 +885,7 @@ export default function PortfolioEditor() {
                         type="text"
                         value={formData.metaKeywords}
                         onChange={(e) => setFormData(prev => ({ ...prev, metaKeywords: e.target.value }))}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                         placeholder="ключевое слово, другое слово, третье слово"
                       />
                     </div>

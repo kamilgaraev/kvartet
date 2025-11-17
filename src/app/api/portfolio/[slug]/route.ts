@@ -1,32 +1,32 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { db } from '@/db'
 import { portfolioItems } from '@/db/schema'
-import { eq, and } from 'drizzle-orm'
+import { eq } from 'drizzle-orm'
 
 export async function GET(
-  request: NextRequest,
+  request: Request,
   { params }: { params: { slug: string } }
 ) {
   try {
-    const { slug } = params
-
-    const [portfolioItem] = await db
+    const item = await db
       .select()
       .from(portfolioItems)
-      .where(
-        and(
-          eq(portfolioItems.slug, slug),
-          eq(portfolioItems.active, true)
-        )
-      )
+      .where(eq(portfolioItems.slug, params.slug))
+      .limit(1)
 
-    if (!portfolioItem) {
-      return NextResponse.json({ error: 'Project not found' }, { status: 404 })
+    if (item.length === 0) {
+      return NextResponse.json(
+        { error: 'Portfolio item not found' },
+        { status: 404 }
+      )
     }
 
-    return NextResponse.json(portfolioItem)
+    return NextResponse.json(item[0])
   } catch (error) {
     console.error('Error fetching portfolio item:', error)
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'Failed to fetch portfolio item' },
+      { status: 500 }
+    )
   }
 }

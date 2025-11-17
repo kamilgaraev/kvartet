@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useInView } from 'react-intersection-observer'
@@ -29,37 +30,6 @@ const stats = [
   { value: '500+', label: 'Довольных клиентов', icon: Users },
   { value: '1000+', label: 'Выполненных проектов', icon: Award },
   { value: '98%', label: 'Точность сроков', icon: Target }
-]
-
-const team = [
-  {
-    name: 'Александр Петров',
-    position: 'Директор',
-    experience: '15 лет в рекламе',
-    photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-    description: 'Основатель компании, эксперт в области наружной рекламы'
-  },
-  {
-    name: 'Мария Сидорова',
-    position: 'Главный дизайнер',
-    experience: '10 лет в дизайне',
-    photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face',
-    description: 'Создает уникальные дизайн-решения для каждого клиента'
-  },
-  {
-    name: 'Дмитрий Козлов',
-    position: 'Руководитель производства',
-    experience: '12 лет в производстве',
-    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-    description: 'Контролирует качество на всех этапах производства'
-  },
-  {
-    name: 'Елена Волкова',
-    position: 'Менеджер проектов',
-    experience: '8 лет в управлении',
-    photo: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-    description: 'Обеспечивает своевременную реализацию проектов'
-  }
 ]
 
 const values = [
@@ -145,10 +115,27 @@ const achievements = [
 ]
 
 export default function AboutPage() {
+  const [team, setTeam] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [statsRef, statsInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [teamRef, teamInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [timelineRef, timelineInView] = useInView({ triggerOnce: true, threshold: 0.1 })
+
+  useEffect(() => {
+    fetch('/api/team')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setTeam(data)
+        }
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch team:', error)
+        setLoading(false)
+      })
+  }, [])
 
   return (
     <>
@@ -362,9 +349,9 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
+            {Array.isArray(team) && team.length > 0 ? team.map((member, index) => (
               <motion.div
-                key={index}
+                key={member.id || index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={teamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -389,12 +376,15 @@ export default function AboutPage() {
                   </motion.div>
                   
                   <h3 className="text-title weight-bold text-primary-dark mb-2">{member.name}</h3>
-                  <div className="text-primary weight-medium mb-2">{member.position}</div>
-                  <div className="text-caption text-muted mb-3">{member.experience}</div>
-                  <p className="text-body-sm text-muted leading-relaxed-kw">{member.description}</p>
+                  <div className="text-primary weight-medium mb-3">{member.position}</div>
+                  <p className="text-body-sm text-muted leading-relaxed-kw">{member.bio}</p>
                 </div>
               </motion.div>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-16">
+                <p className="text-xl text-gray-600">Команда скоро появится</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

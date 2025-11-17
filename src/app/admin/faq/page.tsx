@@ -138,7 +138,7 @@ function FAQForm({ item, onSave, onCancel }: any) {
             required
             value={formData.question}
             onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
           />
         </div>
         <div>
@@ -148,7 +148,7 @@ function FAQForm({ item, onSave, onCancel }: any) {
             rows={4}
             value={formData.answer}
             onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -157,7 +157,7 @@ function FAQForm({ item, onSave, onCancel }: any) {
             <input
               value={formData.category}
               onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
           <div>
@@ -166,7 +166,7 @@ function FAQForm({ item, onSave, onCancel }: any) {
               type="number"
               value={formData.order}
               onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
         </div>

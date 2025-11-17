@@ -84,15 +84,16 @@ export default function Footer() {
   ]
 
   const socialLinks = socials.length > 0 ? socials.map(s => ({
+    id: s.id,
     name: s.platform,
     href: s.url,
     color: `bg-primary hover:bg-primary-dark`,
     icon: s.icon
   })) : [
-    { name: 'ВКонтакте', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'В' },
-    { name: 'Telegram', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'T' },
-    { name: 'WhatsApp', href: '#', color: 'bg-success hover:bg-success-dark', icon: 'W' },
-    { name: 'Instagram', href: '#', color: 'bg-gradient-to-r from-primary-dark to-primary hover:opacity-80', icon: 'I' }
+    { id: 'vk-default', name: 'ВКонтакте', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'В' },
+    { id: 'tg-default', name: 'Telegram', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'T' },
+    { id: 'wa-default', name: 'WhatsApp', href: '#', color: 'bg-success hover:bg-success-dark', icon: 'W' },
+    { id: 'ig-default', name: 'Instagram', href: '#', color: 'bg-gradient-to-r from-primary-dark to-primary hover:opacity-80', icon: 'I' }
   ]
 
   return (
@@ -256,7 +257,7 @@ export default function Footer() {
               <div className="flex space-x-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
-                    key={social.name}
+                    key={social.id}
                     href={social.href}
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
@@ -322,30 +323,35 @@ export default function Footer() {
           <h3 className="text-title weight-bold mb-6">Контакты</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {(contacts.length > 0 ? contacts.map(c => ({
+              id: c.id, // Добавляем id
               icon: c.icon === 'MapPin' ? MapPin : c.icon === 'Phone' ? Phone : c.icon === 'Mail' ? Mail : Clock,
               title: c.label,
               content: c.value,
               color: 'text-accent'
             })) : [
               {
+                id: 'default-address',
                 icon: MapPin,
                 title: 'Адрес',
                 content: 'г. Уфа, ул. Ленская, 128',
                 color: 'text-accent'
               },
               {
+                id: 'default-phones',
                 icon: Phone,
                 title: 'Телефоны',
                 content: '+7 (347) 123-45-67\n+7 (347) 123-45-68',
                 color: 'text-primary'
               },
               {
+                id: 'default-email',
                 icon: Mail,
                 title: 'Email',
                 content: 'info@kvartett-ufa.ru\nsales@kvartett-ufa.ru',
                 color: 'text-primary-light'
               },
               {
+                id: 'default-hours',
                 icon: Clock,
                 title: 'Время работы',
                 content: 'Пн-Пт: 09:00 - 18:00\nСб: 10:00 - 16:00',
@@ -353,7 +359,7 @@ export default function Footer() {
               }
             ]).map((contact, index) => (
               <motion.div
-                key={contact.title}
+                key={contact.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

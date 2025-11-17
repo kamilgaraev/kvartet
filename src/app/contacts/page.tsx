@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { 
   MapPin, 
   Phone, 
@@ -94,9 +94,37 @@ const officeFeatures = [
 ]
 
 export default function ContactsPage() {
+  const [faqItems, setFaqItems] = useState<any[]>([])
+  const [apiContacts, setApiContacts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [mapRef, mapInView] = useInView({ triggerOnce: true, threshold: 0.1 })
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/faq').then(res => res.json()),
+      fetch('/api/settings').then(res => res.json())
+    ]).then(([faqData, settingsData]) => {
+      if (Array.isArray(faqData)) setFaqItems(faqData)
+      if (settingsData.contacts && Array.isArray(settingsData.contacts)) {
+        setApiContacts(settingsData.contacts)
+      }
+      setLoading(false)
+    }).catch((error) => {
+      console.error('Failed to fetch data:', error)
+      setLoading(false)
+    })
+  }, [])
+
+  // Объединяем данные из API с дефолтными
+  const finalContactInfo = apiContacts.length > 0 ? apiContacts.map(c => ({
+    icon: c.icon === 'MapPin' ? MapPin : c.icon === 'Phone' ? Phone : c.icon === 'Mail' ? Mail : Clock,
+    title: c.label,
+    content: c.value,
+    description: c.type,
+    color: 'text-primary-dark'
+  })) : contactInfo
   
   const [formData, setFormData] = useState({
     name: '',
@@ -181,7 +209,7 @@ export default function ContactsPage() {
       <section className="section-padding-y bg-white">
         <div className="container-adaptive">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {contactInfo.map((contact, index) => (
+            {finalContactInfo.map((contact, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -498,26 +526,9 @@ export default function ContactsPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                question: 'Сколько стоит наружная реклама?',
-                answer: 'Стоимость зависит от типа конструкции, размера и сложности. Световые короба от 25 000 ₽, баннеры от 350 ₽/м².'
-              },
-              {
-                question: 'Какие сроки изготовления?',
-                answer: 'Стандартные сроки: баннеры 1-2 дня, световые короба 5-7 дней, объемные буквы 7-10 дней.'
-              },
-              {
-                question: 'Есть ли гарантия на работы?',
-                answer: 'Да, мы предоставляем гарантию 3 года на световые конструкции и 1 год на полиграфию.'
-              },
-              {
-                question: 'Работаете ли за пределами Уфы?',
-                answer: 'Да, мы работаем по всей Республике Башкортостан. Выезд и монтаж обсуждаются индивидуально.'
-              }
-            ].map((faq, index) => (
+            {Array.isArray(faqItems) && faqItems.length > 0 ? faqItems.map((faq, index) => (
               <motion.div
-                key={index}
+                key={faq.id || index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -536,7 +547,11 @@ export default function ContactsPage() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            )) : (
+              <div className="col-span-full text-center py-16">
+                <p className="text-xl text-gray-600">FAQ скоро появится</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

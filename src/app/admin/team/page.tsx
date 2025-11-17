@@ -194,7 +194,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
           <div>
@@ -203,7 +203,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               required
               value={formData.position}
               onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
         </div>
@@ -214,7 +214,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
             rows={3}
             value={formData.bio}
             onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-            className="w-full px-4 py-2 border rounded-lg"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
           />
         </div>
 
@@ -231,7 +231,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               type="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
           <div>
@@ -240,7 +240,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               type="tel"
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
         </div>
@@ -253,7 +253,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               <input
                 value={formData.vk}
                 onChange={(e) => setFormData({ ...formData, vk: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 placeholder="https://vk.com/..."
               />
             </div>
@@ -262,7 +262,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               <input
                 value={formData.telegram}
                 onChange={(e) => setFormData({ ...formData, telegram: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 placeholder="@username"
               />
             </div>
@@ -271,7 +271,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               <input
                 value={formData.instagram}
                 onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 placeholder="@username"
               />
             </div>
@@ -280,7 +280,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               <input
                 value={formData.linkedin}
                 onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                className="w-full px-4 py-2 border rounded-lg"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 placeholder="https://linkedin.com/in/..."
               />
             </div>
@@ -294,7 +294,7 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
               type="number"
               value={formData.order}
               onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-              className="w-full px-4 py-2 border rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
           <div className="flex items-center pt-6">

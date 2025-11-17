@@ -368,11 +368,11 @@ export default function BlogPage() {
                       </div>
                     </div>
                     
-                    <h3 className="text-title-lg weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors leading-tight-kw">
-                      <Link href={`/blog/${post.slug}`}>
+                    <Link href={`/blog/${post.slug}`}>
+                      <h3 className="text-title-lg weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors leading-tight-kw">
                         {post.title}
-                      </Link>
-                    </h3>
+                      </h3>
+                    </Link>
                     
                     <p className="text-body text-muted mb-6 leading-relaxed-kw">
                       {post.excerpt}
@@ -474,11 +474,11 @@ export default function BlogPage() {
                     </div>
                   </div>
                   
-                  <h3 className="text-title weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight-kw">
                     <Link href={`/blog/${post.slug}`}>
-                      {post.title}
+                      <h3 className="text-title weight-bold text-primary-dark mb-3 group-hover:text-primary transition-colors line-clamp-2 leading-tight-kw">
+                        {post.title}
+                      </h3>
                     </Link>
-                  </h3>
                   
                   <p className="text-body-sm text-muted mb-4 line-clamp-3 leading-relaxed-kw">
                     {post.excerpt}

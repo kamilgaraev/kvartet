@@ -245,6 +245,7 @@ export default function Portfolio() {
                  onMouseLeave={() => setHoveredCard(null)}
                  className="group perspective-1000 cursor-pointer relative"
                  style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => window.location.href = `/portfolio/${item.slug || item.id}`}
                >
                  {/* Популярный бейдж - поверх всего */}
                  {item.rating === 5 && (

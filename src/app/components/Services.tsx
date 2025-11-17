@@ -54,15 +54,15 @@ export default function Services() {
         console.error('Failed to fetch services:', error)
         // Fallback к дефолтным данным
         setServices([
-          {
-            icon: Megaphone,
-            title: 'Наружная реклама',
-            description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
-            features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
-            gradient: 'bg-gradient-primary',
-            bgColor: 'bg-primary-05',
-            href: '/services/outdoor',
-            popular: true
+  {
+    icon: Megaphone,
+    title: 'Наружная реклама',
+    description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
+    features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
+    gradient: 'bg-gradient-primary',
+    bgColor: 'bg-primary-05',
+    href: '/services/outdoor',
+    popular: true
           }
         ])
         setLoading(false)

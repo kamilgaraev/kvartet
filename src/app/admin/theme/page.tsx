@@ -316,7 +316,7 @@ export default function ThemeEditorPage() {
               type="text"
               value={theme.fontSizeBase}
               onChange={(e) => setTheme({ ...theme, fontSizeBase: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
 
@@ -328,7 +328,7 @@ export default function ThemeEditorPage() {
               type="text"
               value={theme.fontSizeH1}
               onChange={(e) => setTheme({ ...theme, fontSizeH1: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
 
@@ -340,7 +340,7 @@ export default function ThemeEditorPage() {
               type="text"
               value={theme.fontSizeH2}
               onChange={(e) => setTheme({ ...theme, fontSizeH2: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
 
@@ -352,7 +352,7 @@ export default function ThemeEditorPage() {
               type="text"
               value={theme.fontSizeH3}
               onChange={(e) => setTheme({ ...theme, fontSizeH3: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
           </div>
 
@@ -368,7 +368,7 @@ export default function ThemeEditorPage() {
                   type="text"
                   value={theme.borderRadiusBase}
                   onChange={(e) => setTheme({ ...theme, borderRadiusBase: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 />
               </div>
 
@@ -380,7 +380,7 @@ export default function ThemeEditorPage() {
                   type="text"
                   value={theme.borderRadiusLg}
                   onChange={(e) => setTheme({ ...theme, borderRadiusLg: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 />
               </div>
 
@@ -392,7 +392,7 @@ export default function ThemeEditorPage() {
                   type="text"
                   value={theme.borderRadiusXl}
                   onChange={(e) => setTheme({ ...theme, borderRadiusXl: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
                 />
               </div>
             </div>
