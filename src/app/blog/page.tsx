@@ -166,13 +166,13 @@ export default function BlogPage() {
           setBlogPosts(data)
         } else {
           console.error('Blog API returned non-array data:', data)
-          setBlogPosts(defaultBlogPosts)
+          setBlogPosts([])
         }
         setLoading(false)
       })
       .catch((error) => {
         console.error('Failed to fetch blog posts:', error)
-        setBlogPosts(defaultBlogPosts)
+        setBlogPosts([])
         setLoading(false)
       })
   }, [])
@@ -427,7 +427,12 @@ export default function BlogPage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredPosts.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-xl text-gray-600">Статей пока нет. Скоро здесь появятся интересные публикации!</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredPosts.map((post, index) => (
               <motion.article
                 key={post.id}
@@ -520,8 +525,10 @@ export default function BlogPage() {
               </motion.article>
             ))}
           </div>
+          )}
 
           {/* Load More */}
+          {filteredPosts.length > 0 && (
           <div className="text-center mt-12">
             <motion.button
               whileHover={{ scale: 1.02 }}
@@ -532,6 +539,7 @@ export default function BlogPage() {
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </motion.button>
           </div>
+          )}
         </div>
       </section>
 

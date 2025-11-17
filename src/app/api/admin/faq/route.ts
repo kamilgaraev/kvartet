@@ -79,12 +79,19 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields: any = {
+      updatedAt: new Date(),
+    }
+    if (updateData.question !== undefined) allowedFields.question = updateData.question
+    if (updateData.answer !== undefined) allowedFields.answer = updateData.answer
+    if (updateData.category !== undefined) allowedFields.category = updateData.category
+    if (updateData.active !== undefined) allowedFields.active = updateData.active
+    if (updateData.order !== undefined) allowedFields.order = updateData.order
+
     const updatedFaq = await db
       .update(faq)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(faq.id, id))
       .returning()
 
@@ -98,8 +105,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedFaq[0])
   } catch (error) {
     console.error('Error updating FAQ:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update FAQ' },
+      { error: 'Failed to update FAQ', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

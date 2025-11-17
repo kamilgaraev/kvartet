@@ -81,12 +81,21 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields: any = {
+      updatedAt: new Date(),
+    }
+    if (updateData.type !== undefined) allowedFields.type = updateData.type
+    if (updateData.label !== undefined) allowedFields.label = updateData.label
+    if (updateData.value !== undefined) allowedFields.value = updateData.value
+    if (updateData.icon !== undefined) allowedFields.icon = updateData.icon
+    if (updateData.isPrimary !== undefined) allowedFields.isPrimary = updateData.isPrimary
+    if (updateData.active !== undefined) allowedFields.active = updateData.active
+    if (updateData.order !== undefined) allowedFields.order = updateData.order
+
     const updatedContact = await db
       .update(contactInfo)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(contactInfo.id, id))
       .returning()
 
@@ -100,8 +109,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedContact[0])
   } catch (error) {
     console.error('Error updating contact:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update contact' },
+      { error: 'Failed to update contact', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

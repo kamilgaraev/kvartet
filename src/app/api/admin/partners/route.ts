@@ -71,6 +71,8 @@ export async function PUT(request: NextRequest) {
     }
 
     const data = await request.json()
+    console.log('PUT /api/admin/partners - Received data:', data)
+    
     const { id, ...updateData } = data
 
     if (!id) {
@@ -80,12 +82,22 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields = {
+      name: updateData.name,
+      logo: updateData.logo,
+      website: updateData.website,
+      description: updateData.description,
+      active: updateData.active,
+      order: updateData.order,
+      updatedAt: new Date(),
+    }
+
+    console.log('Updating partner with fields:', allowedFields)
+
     const updatedPartner = await db
       .update(partners)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(partners.id, id))
       .returning()
 
@@ -96,11 +108,13 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    console.log('Partner updated successfully:', updatedPartner[0])
     return NextResponse.json(updatedPartner[0])
   } catch (error) {
     console.error('Error updating partner:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update partner' },
+      { error: 'Failed to update partner', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

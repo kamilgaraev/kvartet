@@ -534,6 +534,99 @@ async function main() {
     console.log('✅ Тема уже существует')
   }
 
+  console.log('🌱 Создание постов блога...')
+  
+  const blogPostsData = [
+    {
+      id: nanoid(),
+      title: 'Как выбрать правильный размер для наружной рекламы',
+      slug: 'how-to-choose-outdoor-advertising-size',
+      excerpt: 'Подробное руководство по выбору оптимального размера рекламных конструкций для максимальной эффективности',
+      content: 'Полный контент статьи о выборе размеров наружной рекламы...',
+      category: 'outdoor',
+      tags: ['размеры', 'эффективность', 'планирование'],
+      image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop',
+      status: 'PUBLISHED' as const,
+      publishedAt: new Date('2024-01-15'),
+      views: 1234,
+      readingTime: 5,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Тренды в дизайне логотипов 2024',
+      slug: 'logo-design-trends-2024',
+      excerpt: 'Разбираем главные тенденции в создании логотипов: от минимализма до экспериментальной типографики',
+      content: 'Полный контент статьи о трендах в дизайне логотипов...',
+      category: 'design',
+      tags: ['логотип', 'тренды', 'брендинг'],
+      image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop',
+      status: 'PUBLISHED' as const,
+      publishedAt: new Date('2024-01-12'),
+      views: 987,
+      readingTime: 7,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'ROI рекламных кампаний: как измерить эффективность',
+      slug: 'roi-advertising-campaigns-measurement',
+      excerpt: 'Практические методы оценки возврата инвестиций в рекламу и инструменты для точного измерения',
+      content: 'Полный контент статьи о ROI рекламных кампаний...',
+      category: 'business',
+      tags: ['ROI', 'аналитика', 'эффективность'],
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      status: 'PUBLISHED' as const,
+      publishedAt: new Date('2024-01-10'),
+      views: 756,
+      readingTime: 10,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'LED-технологии в наружной рекламе',
+      slug: 'led-technologies-outdoor-advertising',
+      excerpt: 'Преимущества LED-экранов, особенности выбора и установки для максимального воздействия на аудиторию',
+      content: 'Полный контент статьи о LED-технологиях...',
+      category: 'outdoor',
+      tags: ['LED', 'технологии', 'инновации'],
+      image: 'https://images.unsplash.com/photo-1566204773863-cf63e6d4ab88?w=800&h=600&fit=crop',
+      status: 'PUBLISHED' as const,
+      publishedAt: new Date('2024-01-08'),
+      views: 654,
+      readingTime: 6,
+      authorId: admin.id,
+    },
+    {
+      id: nanoid(),
+      title: 'Психология цвета в рекламе',
+      slug: 'color-psychology-advertising',
+      excerpt: 'Как правильно использовать цвета для воздействия на эмоции и поведение потребителей',
+      content: 'Полный контент статьи о психологии цвета...',
+      category: 'design',
+      tags: ['психология', 'цвет', 'дизайн'],
+      image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=600&fit=crop',
+      status: 'PUBLISHED' as const,
+      publishedAt: new Date('2024-01-05'),
+      views: 543,
+      readingTime: 8,
+      authorId: admin.id,
+    },
+  ]
+
+  for (const post of blogPostsData) {
+    const existing = await db
+      .select()
+      .from(blogPosts)
+      .where(eq(blogPosts.slug, post.slug))
+      .limit(1)
+
+    if (existing.length === 0) {
+      await db.insert(blogPosts).values(post)
+    }
+  }
+  console.log('✅ Посты блога созданы')
+
   console.log('✅ Все данные успешно добавлены')
   console.log('🎉 Seed завершен!')
 }

@@ -86,12 +86,26 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields: any = {
+      updatedAt: new Date(),
+    }
+    if (updateData.name !== undefined) allowedFields.name = updateData.name
+    if (updateData.position !== undefined) allowedFields.position = updateData.position
+    if (updateData.rating !== undefined) allowedFields.rating = updateData.rating
+    if (updateData.text !== undefined) allowedFields.text = updateData.text
+    if (updateData.imageUrl !== undefined) allowedFields.imageUrl = updateData.imageUrl
+    if (updateData.project !== undefined) allowedFields.project = updateData.project
+    if (updateData.result !== undefined) allowedFields.result = updateData.result
+    if (updateData.budget !== undefined) allowedFields.budget = updateData.budget
+    if (updateData.videoReview !== undefined) allowedFields.videoReview = updateData.videoReview
+    if (updateData.videoUrl !== undefined) allowedFields.videoUrl = updateData.videoUrl
+    if (updateData.active !== undefined) allowedFields.active = updateData.active
+    if (updateData.order !== undefined) allowedFields.order = updateData.order
+
     const updatedTestimonial = await db
       .update(testimonials)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(testimonials.id, id))
       .returning()
 
@@ -105,8 +119,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedTestimonial[0])
   } catch (error) {
     console.error('Error updating testimonial:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update testimonial' },
+      { error: 'Failed to update testimonial', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

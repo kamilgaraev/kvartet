@@ -19,10 +19,14 @@ export default function Testimonials() {
     fetch('/api/testimonials')
       .then(res => res.json())
       .then(data => {
-        setTestimonials(data)
+        setTestimonials(Array.isArray(data) ? data : [])
         setLoading(false)
       })
-      .catch(() => setLoading(false))
+      .catch((error) => {
+        console.error('Failed to fetch testimonials:', error)
+        setTestimonials([])
+        setLoading(false)
+      })
   }, [])
 
   // Автопереключение отзывов
@@ -48,7 +52,7 @@ export default function Testimonials() {
     setIsAutoPlay(false)
   }
 
-  if (loading || testimonials.length === 0) {
+  if (loading || !Array.isArray(testimonials) || testimonials.length === 0) {
     return null
   }
 

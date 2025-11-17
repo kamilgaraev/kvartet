@@ -40,10 +40,15 @@ export default function SettingsPage() {
         fetch('/api/admin/contacts'),
         fetch('/api/admin/social-links'),
       ])
-      setContacts(await contactsRes.json())
-      setSocials(await socialsRes.json())
+      const contactsData = await contactsRes.json()
+      const socialsData = await socialsRes.json()
+      
+      setContacts(Array.isArray(contactsData) ? contactsData : [])
+      setSocials(Array.isArray(socialsData) ? socialsData : [])
     } catch (error) {
       console.error(error)
+      setContacts([])
+      setSocials([])
     } finally {
       setLoading(false)
     }
@@ -119,7 +124,7 @@ export default function SettingsPage() {
             />
           ) : (
             <div className="space-y-3">
-              {contacts.map((contact) => (
+              {Array.isArray(contacts) && contacts.length > 0 ? contacts.map((contact) => (
                 <div key={contact.id} className="p-4 bg-gray-50 rounded-lg flex justify-between items-start hover:bg-gray-100 transition-colors">
                   <div className="flex-1">
                     <div className="font-semibold text-gray-900">{contact.label}</div>
@@ -135,7 +140,9 @@ export default function SettingsPage() {
                     </button>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <p className="text-gray-500 text-center py-4">Нет контактов</p>
+              )}
             </div>
           )}
         </div>
@@ -160,7 +167,7 @@ export default function SettingsPage() {
             />
           ) : (
             <div className="space-y-3">
-              {socials.map((social) => (
+              {Array.isArray(socials) && socials.length > 0 ? socials.map((social) => (
                 <div key={social.id} className="p-4 bg-gray-50 rounded-lg flex justify-between items-start hover:bg-gray-100 transition-colors">
                   <div className="flex-1">
                     <div className="font-semibold text-gray-900">{social.platform}</div>
@@ -175,7 +182,9 @@ export default function SettingsPage() {
                     </button>
                   </div>
                 </div>
-              ))}
+              )) : (
+                <p className="text-gray-500 text-center py-4">Нет социальных сетей</p>
+              )}
             </div>
           )}
         </div>
@@ -199,11 +208,11 @@ function ContactForm({ item, onSave, onCancel }: any) {
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-4 border-t pt-4">
       <div>
-        <label className="block text-sm font-semibold mb-2">Тип</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">Тип</label>
         <select
           value={formData.type}
           onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
         >
           <option value="phone">Телефон</option>
           <option value="email">Email</option>
@@ -212,27 +221,27 @@ function ContactForm({ item, onSave, onCancel }: any) {
         </select>
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2">Название *</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">Название *</label>
         <input
           required
           value={formData.label}
           onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
           placeholder="Например: Отдел продаж"
         />
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2">Значение *</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">Значение *</label>
         <input
           required
           value={formData.value}
           onChange={(e) => setFormData({ ...formData, value: e.target.value })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
           placeholder="+7 (999) 123-45-67"
         />
       </div>
       <div className="flex justify-end space-x-2 pt-4 border-t">
-        <button type="button" onClick={onCancel} className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors">
+        <button type="button" onClick={onCancel} className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-gray-900">
           Отмена
         </button>
         <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">
@@ -257,37 +266,37 @@ function SocialForm({ item, onSave, onCancel }: any) {
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-4 border-t pt-4">
       <div>
-        <label className="block text-sm font-semibold mb-2">Платформа *</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">Платформа *</label>
         <input
           required
           value={formData.platform}
           onChange={(e) => setFormData({ ...formData, platform: e.target.value })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
           placeholder="Instagram, VK, Telegram..."
         />
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2">URL *</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">URL *</label>
         <input
           required
           type="url"
           value={formData.url}
           onChange={(e) => setFormData({ ...formData, url: e.target.value })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
           placeholder="https://instagram.com/..."
         />
       </div>
       <div>
-        <label className="block text-sm font-semibold mb-2">Порядок</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-900">Порядок</label>
         <input
           type="number"
           value={formData.order}
           onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary"
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary text-gray-900 bg-white"
         />
       </div>
       <div className="flex justify-end space-x-2 pt-4 border-t">
-        <button type="button" onClick={onCancel} className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition-colors">
+        <button type="button" onClick={onCancel} className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-gray-900">
           Отмена
         </button>
         <button type="submit" className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors">

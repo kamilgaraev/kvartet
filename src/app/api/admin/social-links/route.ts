@@ -80,12 +80,20 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields: any = {
+      updatedAt: new Date(),
+    }
+    if (updateData.platform !== undefined) allowedFields.platform = updateData.platform
+    if (updateData.url !== undefined) allowedFields.url = updateData.url
+    if (updateData.icon !== undefined) allowedFields.icon = updateData.icon
+    if (updateData.color !== undefined) allowedFields.color = updateData.color
+    if (updateData.active !== undefined) allowedFields.active = updateData.active
+    if (updateData.order !== undefined) allowedFields.order = updateData.order
+
     const updatedSocialLink = await db
       .update(socialLinks)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(socialLinks.id, id))
       .returning()
 
@@ -99,8 +107,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedSocialLink[0])
   } catch (error) {
     console.error('Error updating social link:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update social link' },
+      { error: 'Failed to update social link', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

@@ -86,12 +86,26 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    // Фильтруем только разрешенные поля
+    const allowedFields: any = {
+      updatedAt: new Date(),
+    }
+    if (updateData.name !== undefined) allowedFields.name = updateData.name
+    if (updateData.position !== undefined) allowedFields.position = updateData.position
+    if (updateData.bio !== undefined) allowedFields.bio = updateData.bio
+    if (updateData.photo !== undefined) allowedFields.photo = updateData.photo
+    if (updateData.email !== undefined) allowedFields.email = updateData.email
+    if (updateData.phone !== undefined) allowedFields.phone = updateData.phone
+    if (updateData.vk !== undefined) allowedFields.vk = updateData.vk
+    if (updateData.telegram !== undefined) allowedFields.telegram = updateData.telegram
+    if (updateData.instagram !== undefined) allowedFields.instagram = updateData.instagram
+    if (updateData.linkedin !== undefined) allowedFields.linkedin = updateData.linkedin
+    if (updateData.active !== undefined) allowedFields.active = updateData.active
+    if (updateData.order !== undefined) allowedFields.order = updateData.order
+
     const updatedTeamMember = await db
       .update(team)
-      .set({
-        ...updateData,
-        updatedAt: new Date(),
-      })
+      .set(allowedFields)
       .where(eq(team.id, id))
       .returning()
 
@@ -105,8 +119,9 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json(updatedTeamMember[0])
   } catch (error) {
     console.error('Error updating team member:', error)
+    console.error('Error details:', error instanceof Error ? error.message : String(error))
     return NextResponse.json(
-      { error: 'Failed to update team member' },
+      { error: 'Failed to update team member', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

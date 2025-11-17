@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     let query = db
       .select()
       .from(blogPosts)
-      .where(eq(blogPosts.isPublished, true))
+      .where(eq(blogPosts.status, 'PUBLISHED'))
       .orderBy(desc(blogPosts.publishedAt))
 
     const posts = await query

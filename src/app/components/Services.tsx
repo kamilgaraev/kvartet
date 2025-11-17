@@ -34,21 +34,24 @@ export default function Services() {
     fetch('/api/services')
       .then(res => res.json())
       .then(data => {
-        // Преобразуем данные из API в формат компонента
-        const mapped = data.map((s: any, i: number) => ({
-          icon: iconMap[s.icon] || Megaphone,
-          title: s.name,
-          description: s.description || s.shortDesc,
-          features: s.features || [],
-          gradient: ['bg-gradient-primary', 'bg-gradient-primary-reverse', 'bg-gradient-light', 'bg-gradient-accent'][i % 4],
-          bgColor: ['bg-primary-05', 'bg-primary-dark-05', 'bg-primary-light-05', 'bg-primary-light-05'][i % 4],
-          href: `/services/${s.slug}`,
-          popular: s.popular
-        }))
-        setServices(mapped)
+        if (Array.isArray(data)) {
+          // Преобразуем данные из API в формат компонента
+          const mapped = data.map((s: any, i: number) => ({
+            icon: iconMap[s.icon] || Megaphone,
+            title: s.name,
+            description: s.description || s.shortDesc,
+            features: s.features || [],
+            gradient: ['bg-gradient-primary', 'bg-gradient-primary-reverse', 'bg-gradient-light', 'bg-gradient-accent'][i % 4],
+            bgColor: ['bg-primary-05', 'bg-primary-dark-05', 'bg-primary-light-05', 'bg-primary-light-05'][i % 4],
+            href: `/services/${s.slug}`,
+            popular: s.popular
+          }))
+          setServices(mapped)
+        }
         setLoading(false)
       })
-      .catch(() => {
+      .catch((error) => {
+        console.error('Failed to fetch services:', error)
         // Fallback к дефолтным данным
         setServices([
           {
@@ -66,7 +69,7 @@ export default function Services() {
       })
   }, [])
 
-  if (loading || services.length === 0) {
+  if (loading || !Array.isArray(services) || services.length === 0) {
     return null
   }
 

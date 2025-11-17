@@ -29,10 +29,14 @@ export default function Footer() {
     fetch('/api/settings')
       .then(res => res.json())
       .then(data => {
-        setContacts(data.contacts || [])
-        setSocials(data.socialLinks || [])
+        setContacts(Array.isArray(data.contacts) ? data.contacts : [])
+        setSocials(Array.isArray(data.socialLinks) ? data.socialLinks : [])
       })
-      .catch(console.error)
+      .catch((error) => {
+        console.error('Failed to fetch settings:', error)
+        setContacts([])
+        setSocials([])
+      })
   }, [])
 
   const scrollToTop = () => {
