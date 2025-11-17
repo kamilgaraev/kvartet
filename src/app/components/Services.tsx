@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import { useState, useEffect } from 'react'
 import { 
   Megaphone, 
   Printer, 
@@ -14,51 +15,60 @@ import {
   Zap
 } from 'lucide-react'
 
-const services = [
-  {
-    icon: Megaphone,
-    title: 'Наружная реклама',
-    description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
-    features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
-    gradient: 'bg-gradient-primary',
-    bgColor: 'bg-primary-05',
-    href: '/services/outdoor',
-    popular: true
-  },
-  {
-    icon: Printer,
-    title: 'Полиграфия',
-    description: 'Визитки, листовки, каталоги, брошюры. Качественная печать на любых материалах.',
-    features: ['Визитки', 'Листовки', 'Каталоги', 'Календари'],
-    gradient: 'bg-gradient-primary-reverse',
-    bgColor: 'bg-primary-dark-05',
-    href: '/services/printing'
-  },
-  {
-    icon: Home,
-    title: 'Интерьерная реклама',
-    description: 'Оформление торговых точек, офисов, выставочных стендов и презентационных материалов.',
-    features: ['Стенды', 'Таблички', 'Указатели', 'POS-материалы'],
-    gradient: 'bg-gradient-light',
-    bgColor: 'bg-primary-light-05',
-    href: '/services/interior'
-  },
-  {
-    icon: Palette,
-    title: 'Брендинг',
-    description: 'Разработка логотипов, фирменного стиля, создание узнаваемого образа компании.',
-    features: ['Логотип', 'Фирмстиль', 'Гайдлайн', 'Айдентика'],
-    gradient: 'bg-gradient-accent',
-    bgColor: 'bg-primary-light-05',
-    href: '/services/branding'
-  }
-]
+const iconMap: any = {
+  'Megaphone': Megaphone,
+  'Printer': Printer,
+  'Home': Home,
+  'Palette': Palette,
+}
 
 export default function Services() {
+  const [services, setServices] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   })
+
+  useEffect(() => {
+    fetch('/api/services')
+      .then(res => res.json())
+      .then(data => {
+        // Преобразуем данные из API в формат компонента
+        const mapped = data.map((s: any, i: number) => ({
+          icon: iconMap[s.icon] || Megaphone,
+          title: s.name,
+          description: s.description || s.shortDesc,
+          features: s.features || [],
+          gradient: ['bg-gradient-primary', 'bg-gradient-primary-reverse', 'bg-gradient-light', 'bg-gradient-accent'][i % 4],
+          bgColor: ['bg-primary-05', 'bg-primary-dark-05', 'bg-primary-light-05', 'bg-primary-light-05'][i % 4],
+          href: `/services/${s.slug}`,
+          popular: s.popular
+        }))
+        setServices(mapped)
+        setLoading(false)
+      })
+      .catch(() => {
+        // Fallback к дефолтным данным
+        setServices([
+          {
+            icon: Megaphone,
+            title: 'Наружная реклама',
+            description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
+            features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
+            gradient: 'bg-gradient-primary',
+            bgColor: 'bg-primary-05',
+            href: '/services/outdoor',
+            popular: true
+          }
+        ])
+        setLoading(false)
+      })
+  }, [])
+
+  if (loading || services.length === 0) {
+    return null
+  }
 
   return (
     <section className="section-padding-y bg-gradient-bg relative overflow-hidden" ref={ref}>

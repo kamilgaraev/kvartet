@@ -5,96 +5,51 @@ import { useInView } from 'react-intersection-observer'
 import { Star, Quote, ChevronLeft, ChevronRight, Play, CheckCircle, Award, Users } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
-const testimonials = [
-  {
-    id: 1,
-    name: 'Александр Петров',
-    position: 'Директор, ООО "СтройМонтаж"',
-    rating: 5,
-    text: 'Квартет выполнил заказ на изготовление наружной рекламы быстро и качественно. Особенно порадовали сроки - всего за 2 дня вывеска была готова и установлена. Рекомендую!',
-    imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
-    project: 'Световая вывеска',
-    result: '+250% узнаваемости',
-    budget: '150 000 ₽',
-    videoReview: true
-  },
-  {
-    id: 2,
-    name: 'Марина Сидорова',
-    position: 'Управляющая сетью кафе "Вкусно"',
-    rating: 5,
-    text: 'Обратились в Квартет за комплексным оформлением нового кафе. Результат превзошел ожидания! Стильный дизайн, качественные материалы, профессиональный монтаж.',
-    imageUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face',
-    project: 'Комплексное оформление',
-    result: '+180% посещаемости',
-    budget: '280 000 ₽',
-    videoReview: false
-  },
-  {
-    id: 3,
-    name: 'Дмитрий Козлов',
-    position: 'Маркетолог, IT-компания "Софт"',
-    rating: 5,
-    text: 'Заказывали разработку фирменного стиля и печать презентационных материалов. Дизайнеры Квартета создали потрясающий образ компании. Очень довольны сотрудничеством!',
-    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
-    project: 'Брендинг и полиграфия',
-    result: '+320% лидов',
-    budget: '95 000 ₽',
-    videoReview: true
-  },
-  {
-    id: 4,
-    name: 'Елена Волкова',
-    position: 'Владелица магазина "Модный стиль"',
-    rating: 5,
-    text: 'Квартет помог с оформлением витрины и интерьерной рекламой. Продажи выросли на 40%! Спасибо за креативный подход и качественное исполнение.',
-    imageUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
-    project: 'Витринная реклама',
-    result: '+200% продаж',
-    budget: '120 000 ₽',
-    videoReview: false
-  },
-  {
-    id: 5,
-    name: 'Игорь Смирнов',
-    position: 'Директор автосалона "Премиум Авто"',
-    rating: 5,
-    text: 'Сотрудничаем с Квартетом уже 3 года. За это время выполнили более 20 проектов - от визиток до билбордов. Всегда высокое качество, разумные цены.',
-    imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
-    project: 'Долгосрочное партнерство',
-    result: '+400% клиентов',
-    budget: '1 500 000 ₽',
-    videoReview: true
-  }
-]
-
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isAutoPlay, setIsAutoPlay] = useState(true)
+  const [testimonials, setTestimonials] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   })
 
+  useEffect(() => {
+    fetch('/api/testimonials')
+      .then(res => res.json())
+      .then(data => {
+        setTestimonials(data)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
+
   // Автопереключение отзывов
   useEffect(() => {
-    if (!isAutoPlay) return
+    if (!isAutoPlay || testimonials.length === 0) return
     
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length)
     }, 5000)
     
     return () => clearInterval(interval)
-  }, [isAutoPlay])
+  }, [isAutoPlay, testimonials.length])
 
   const nextTestimonial = () => {
+    if (testimonials.length === 0) return
     setActiveIndex((prev) => (prev + 1) % testimonials.length)
     setIsAutoPlay(false)
   }
 
   const prevTestimonial = () => {
+    if (testimonials.length === 0) return
     setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
     setIsAutoPlay(false)
+  }
+
+  if (loading || testimonials.length === 0) {
+    return null
   }
 
   return (

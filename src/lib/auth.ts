@@ -1,6 +1,8 @@
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import { prisma } from "./prisma"
+import { db } from "@/db"
+import { users } from "@/db/schema"
+import { eq } from "drizzle-orm"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,11 +18,10 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const user = await prisma.user.findUnique({
-            where: {
-              email: credentials.email
-            }
-          })
+          const [user] = await db
+            .select()
+            .from(users)
+            .where(eq(users.email, credentials.email))
 
           if (!user) {
             return null
@@ -71,4 +72,4 @@ export const authOptions: NextAuthOptions = {
     signIn: "/admin/login",
     error: "/admin/login",
   },
-} 
+}

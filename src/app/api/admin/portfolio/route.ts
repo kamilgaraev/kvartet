@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
+import { db } from '@/db'
+import { portfolioItems, services } from '@/db/schema'
+import { eq, desc } from 'drizzle-orm'
+import { customAlphabet } from 'nanoid'
+
+const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
 export async function GET() {
   try {
@@ -11,18 +16,45 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    const portfolio = await prisma.portfolioItem.findMany({
-      include: {
+    const portfolio = await db
+      .select({
+        id: portfolioItems.id,
+        title: portfolioItems.title,
+        slug: portfolioItems.slug,
+        description: portfolioItems.description,
+        shortDesc: portfolioItems.shortDesc,
+        category: portfolioItems.category,
+        categoryColor: portfolioItems.categoryColor,
+        image: portfolioItems.image,
+        gallery: portfolioItems.gallery,
+        result: portfolioItems.result,
+        budget: portfolioItems.budget,
+        duration: portfolioItems.duration,
+        year: portfolioItems.year,
+        rating: portfolioItems.rating,
+        features: portfolioItems.features,
+        tags: portfolioItems.tags,
+        popular: portfolioItems.popular,
+        active: portfolioItems.active,
+        order: portfolioItems.order,
+        clientName: portfolioItems.clientName,
+        clientWebsite: portfolioItems.clientWebsite,
+        clientLogo: portfolioItems.clientLogo,
+        metaTitle: portfolioItems.metaTitle,
+        metaDescription: portfolioItems.metaDescription,
+        metaKeywords: portfolioItems.metaKeywords,
+        createdAt: portfolioItems.createdAt,
+        updatedAt: portfolioItems.updatedAt,
+        serviceId: portfolioItems.serviceId,
         service: {
-          select: {
-            id: true,
-            name: true,
-            slug: true
-          }
-        }
-      },
-      orderBy: { createdAt: 'desc' }
-    })
+          id: services.id,
+          name: services.name,
+          slug: services.slug,
+        },
+      })
+      .from(portfolioItems)
+      .leftJoin(services, eq(portfolioItems.serviceId, services.id))
+      .orderBy(desc(portfolioItems.createdAt))
 
     return NextResponse.json(portfolio)
   } catch (error) {
@@ -41,8 +73,10 @@ export async function POST(request: NextRequest) {
 
     const data = await request.json()
     
-    const portfolioItem = await prisma.portfolioItem.create({
-      data: {
+    const [portfolioItem] = await db
+      .insert(portfolioItems)
+      .values({
+        id: nanoid(),
         title: data.title,
         slug: data.slug,
         description: data.description,
@@ -61,12 +95,12 @@ export async function POST(request: NextRequest) {
         active: data.active ?? true,
         clientName: data.clientName,
         clientWebsite: data.clientWebsite,
-      }
-    })
+      })
+      .returning()
 
     return NextResponse.json(portfolioItem, { status: 201 })
   } catch (error) {
     console.error('Error creating portfolio item:', error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
-} 
+}

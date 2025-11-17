@@ -18,122 +18,70 @@ import {
   Share2
 } from 'lucide-react'
 
-const portfolioItems = [
-  {
-    id: 1,
-    title: 'Сеть магазинов "Продукты 24"',
-    category: 'Наружная реклама',
-    categoryColor: 'var(--color-primary)',
-    image: '/api/placeholder/600/400',
-    description: 'Комплексное оформление сети магазинов: световые короба, вывески, витринная реклама с использованием современных LED технологий',
-    result: '+250% узнаваемости',
-    budget: '450 000 ₽',
-    duration: '3 дня',
-    rating: 5,
-    tags: ['Световые короба', 'Вывески', 'Витрины'],
-    features: ['LED подсветка', '24/7 работа', 'Гарантия 3 года'],
-    year: '2024'
-  },
-  {
-    id: 2,
-    title: 'Ресторан "Башкирская кухня"',
-    category: 'Брендинг',
-    categoryColor: 'var(--color-primary-dark)',
-    image: '/api/placeholder/600/400',
-    description: 'Разработка уникального фирменного стиля, отражающего национальные традиции с современным подходом',
-    result: '+180% посещаемости',
-    budget: '280 000 ₽',
-    duration: '5 дней',
-    rating: 5,
-    tags: ['Логотип', 'Фирмстиль', 'Меню'],
-    features: ['Уникальный дизайн', 'Национальные мотивы', 'Полиграфия'],
-    year: '2024'
-  },
-  {
-    id: 3,
-    title: 'Строительная компания "СтройДом"',
-    category: 'Полиграфия',
-    categoryColor: 'var(--color-primary-light)',
-    image: '/api/placeholder/600/400',
-    description: 'Производство презентационных материалов премиум-класса для участия в крупнейшей строительной выставке',
-    result: '+320% лидов',
-    budget: '95 000 ₽',
-    duration: '2 дня',
-    rating: 5,
-    tags: ['Каталоги', 'Листовки', 'Презентации'],
-    features: ['Премиум качество', 'Срочное производство', 'Дизайн в подарок'],
-    year: '2023'
-  },
-  {
-    id: 4,
-    title: 'Автосалон "Драйв"',
-    category: 'Интерьерная реклама',
-    categoryColor: 'var(--color-primary)',
-    image: '/api/placeholder/600/400',
-    description: 'Создание современного торгового пространства с навигационной системой и POS-материалами',
-    result: '+200% продаж',
-    budget: '320 000 ₽',
-    duration: '4 дня',
-    rating: 5,
-    tags: ['Стенды', 'Навигация', 'POS-материалы'],
-    features: ['Интерактивные элементы', 'Модульная система', 'Легкий монтаж'],
-    year: '2024'
-  },
-  {
-    id: 5,
-    title: 'Медицинский центр "Здоровье+"',
-    category: 'Комплексное решение',
-    categoryColor: 'var(--color-primary-dark)',
-    image: '/api/placeholder/600/400',
-    description: 'Полное рекламное сопровождение медицинского центра от концепции до финальной реализации',
-    result: '+400% клиентов',
-    budget: '850 000 ₽',
-    duration: '7 дней',
-    rating: 5,
-    tags: ['Вывеска', 'Интерьер', 'Навигация'],
-    features: ['Медицинские стандарты', 'Полный цикл', 'Гарантийное обслуживание'],
-    year: '2024'
-  },
-  {
-    id: 6,
-    title: 'ТЦ "Мегаполис"',
-    category: 'Наружная реклама',
-    categoryColor: 'var(--color-primary)',
-    image: '/api/placeholder/600/400',
-    description: 'Комплексное оформление фасада торгового центра с интерактивными LED-экранами',
-    result: '+300% трафика',
-    budget: '1 200 000 ₽',
-    duration: '10 дней',
-    rating: 5,
-    tags: ['LED-экраны', 'Фасадное оформление', 'Интерактив'],
-    features: ['Smart управление', 'Энергоэффективность', 'Удаленный мониторинг'],
-    year: '2024'
-  }
-]
-
-const categories = [
-  { name: 'Все проекты', value: 'all', color: 'var(--color-muted)' },
-  { name: 'Наружная реклама', value: 'Наружная реклама', color: 'var(--color-primary)' },
-  { name: 'Брендинг', value: 'Брендинг', color: 'var(--color-primary-dark)' },
-  { name: 'Полиграфия', value: 'Полиграфия', color: 'var(--color-primary-light)' },
-  { name: 'Интерьерная реклама', value: 'Интерьерная реклама', color: 'var(--color-primary)' },
-  { name: 'Комплексное решение', value: 'Комплексное решение', color: 'var(--color-primary-dark)' }
-]
-
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
   const [selectedCard, setSelectedCard] = useState<number | null>(null)
   const [viewMode, setViewMode] = useState<'grid' | 'carousel'>('grid')
+  const [portfolioItems, setPortfolioItems] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
   
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   })
 
-  const filteredItems = activeCategory === 'all' 
-    ? portfolioItems 
-    : portfolioItems.filter(item => item.category === activeCategory)
+  useEffect(() => {
+    fetch('/api/portfolio')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          const mapped = data.map((item: any) => ({
+            id: item.id,
+            title: item.title,
+            category: item.category,
+            categoryColor: item.categoryColor || 'var(--color-primary)',
+            image: item.image || '/api/placeholder/600/400',
+            description: item.description,
+            result: item.result || '+100%',
+            budget: item.budget || '50 000 ₽',
+            duration: item.duration || '3 дня',
+            rating: item.rating || 5,
+            tags: item.tags || [],
+            features: item.features || [],
+            year: item.year || new Date().getFullYear()
+          }))
+          setPortfolioItems(mapped)
+        }
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch portfolio:', error)
+        setLoading(false)
+      })
+  }, [])
+
+  // Динамические категории на основе данных
+  const categories = Array.isArray(portfolioItems) && portfolioItems.length > 0 ? [
+    { name: 'Все проекты', value: 'all', color: 'var(--color-muted)' },
+    ...Array.from(new Set(portfolioItems.map(item => item.category))).map(cat => ({
+      name: cat,
+      value: cat,
+      color: 'var(--color-primary)'
+    }))
+  ] : [
+    { name: 'Все проекты', value: 'all', color: 'var(--color-muted)' }
+  ]
+
+  const filteredItems = Array.isArray(portfolioItems) ? (
+    activeCategory === 'all' 
+      ? portfolioItems 
+      : portfolioItems.filter(item => item.category === activeCategory)
+  ) : []
+
+  if (loading || !Array.isArray(portfolioItems) || portfolioItems.length === 0) {
+    return null
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },

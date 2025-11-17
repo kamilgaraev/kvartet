@@ -16,12 +16,24 @@ import {
   ChevronRight,
   Heart
 } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LogoK from './LogoK'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const [contacts, setContacts] = useState<any[]>([])
+  const [socials, setSocials] = useState<any[]>([])
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then(res => res.json())
+      .then(data => {
+        setContacts(data.contacts || [])
+        setSocials(data.socialLinks || [])
+      })
+      .catch(console.error)
+  }, [])
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -67,7 +79,12 @@ export default function Footer() {
     }
   ]
 
-  const socialLinks = [
+  const socialLinks = socials.length > 0 ? socials.map(s => ({
+    name: s.platform,
+    href: s.url,
+    color: `bg-primary hover:bg-primary-dark`,
+    icon: s.icon
+  })) : [
     { name: 'ВКонтакте', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'В' },
     { name: 'Telegram', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'T' },
     { name: 'WhatsApp', href: '#', color: 'bg-success hover:bg-success-dark', icon: 'W' },
@@ -300,7 +317,12 @@ export default function Footer() {
         >
           <h3 className="text-title weight-bold mb-6">Контакты</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
+            {(contacts.length > 0 ? contacts.map(c => ({
+              icon: c.icon === 'MapPin' ? MapPin : c.icon === 'Phone' ? Phone : c.icon === 'Mail' ? Mail : Clock,
+              title: c.label,
+              content: c.value,
+              color: 'text-accent'
+            })) : [
               {
                 icon: MapPin,
                 title: 'Адрес',
@@ -325,7 +347,7 @@ export default function Footer() {
                 content: 'Пн-Пт: 09:00 - 18:00\nСб: 10:00 - 16:00',
                 color: 'text-accent'
               }
-            ].map((contact, index) => (
+            ]).map((contact, index) => (
               <motion.div
                 key={contact.title}
                 initial={{ opacity: 0, y: 20 }}

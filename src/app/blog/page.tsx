@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { 
   BookOpen, 
@@ -22,16 +22,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 import FloatingAction from '../components/FloatingAction'
 
-const categories = [
-  { id: 'all', name: 'Все статьи', count: 24 },
-  { id: 'outdoor', name: 'Наружная реклама', count: 8 },
-  { id: 'design', name: 'Дизайн', count: 6 },
-  { id: 'business', name: 'Бизнес', count: 5 },
-  { id: 'trends', name: 'Тренды', count: 3 },
-  { id: 'tips', name: 'Советы', count: 2 }
-]
-
-const blogPosts = [
+const defaultBlogPosts = [
   {
     id: 1,
     title: 'Как выбрать правильный размер для наружной рекламы',
@@ -163,17 +154,63 @@ export default function BlogPage() {
   
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
+  const [blogPosts, setBlogPosts] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredPosts = blogPosts.filter(post => {
+  useEffect(() => {
+    fetch('/api/blog')
+      .then(res => res.json())
+      .then(data => {
+        // Убедимся что это массив
+        if (Array.isArray(data)) {
+          setBlogPosts(data)
+        } else {
+          console.error('Blog API returned non-array data:', data)
+          setBlogPosts(defaultBlogPosts)
+        }
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error('Failed to fetch blog posts:', error)
+        setBlogPosts(defaultBlogPosts)
+        setLoading(false)
+      })
+  }, [])
+
+  // Динамические категории
+  const categories = Array.isArray(blogPosts) && blogPosts.length > 0 ? [
+    { id: 'all', name: 'Все статьи', count: blogPosts.length },
+    ...Array.from(new Set(blogPosts.map(p => p.category))).map(cat => ({
+      id: cat,
+      name: cat,
+      count: blogPosts.filter(p => p.category === cat).length
+    }))
+  ] : [
+    { id: 'all', name: 'Все статьи', count: 0 }
+  ]
+
+  const filteredPosts = Array.isArray(blogPosts) ? blogPosts.filter(post => {
     const matchesCategory = activeCategory === 'all' || post.category === activeCategory
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    const matchesSearch = post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (Array.isArray(post.tags) && post.tags.some((tag: string) => tag.toLowerCase().includes(searchTerm.toLowerCase())))
     
     return matchesCategory && matchesSearch
-  })
+  }) : []
 
-  const featuredPosts = blogPosts.filter(post => post.featured)
+  const featuredPosts = Array.isArray(blogPosts) ? blogPosts.filter(post => post.isFeatured || post.featured) : []
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-xl text-gray-600">Загрузка...</div>
+        </div>
+        <Footer />
+      </>
+    )
+  }
 
   return (
     <>

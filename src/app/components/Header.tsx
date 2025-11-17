@@ -36,28 +36,33 @@ export default function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
       
-      // Проверяем, находится ли хедер над темными секциями (футер, CTA секции)
+      // Проверяем, находится ли хедер над темными секциями (только футер и секции с темным фоном)
       const footer = document.querySelector('footer')
-      const darkSections = document.querySelectorAll('.bg-gradient-primary, .bg-primary, .bg-primary-dark, [class*="from-primary"]')
+      const darkSections = document.querySelectorAll('section.bg-gradient-primary, section.bg-primary, section.bg-primary-dark, footer')
       
       const headerHeight = 80 // Примерная высота хедера
       const scrollPosition = window.scrollY
       
       let overDark = false
       
-      // Проверяем футер
+      // Проверяем только футер
       if (footer) {
-        const footerTop = footer.offsetTop
-        if (scrollPosition + headerHeight >= footerTop) {
+        const footerRect = footer.getBoundingClientRect()
+        // Хедер над футером, если футер начинается в зоне видимости хедера
+        if (footerRect.top < headerHeight && footerRect.bottom > 0) {
           overDark = true
         }
       }
       
-      // Проверяем другие темные секции
+      // Проверяем другие темные секции (только полноэкранные секции с темным фоном)
       darkSections.forEach(section => {
-        const rect = section.getBoundingClientRect()
-        if (rect.top <= headerHeight && rect.bottom > 0) {
-          overDark = true
+        if (section.tagName.toLowerCase() === 'section') {
+          const rect = section.getBoundingClientRect()
+          const sectionHeight = rect.height
+          // Только если секция достаточно большая (больше 200px) и хедер в её области
+          if (sectionHeight > 200 && rect.top < headerHeight && rect.bottom > headerHeight) {
+            overDark = true
+          }
         }
       })
       

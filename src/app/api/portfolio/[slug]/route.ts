@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '../../../../lib/prisma'
+import { db } from '@/db'
+import { portfolioItems } from '@/db/schema'
+import { eq, and } from 'drizzle-orm'
 
 export async function GET(
   request: NextRequest,
@@ -8,12 +10,15 @@ export async function GET(
   try {
     const { slug } = params
 
-    const portfolioItem = await prisma.portfolioItem.findUnique({
-      where: {
-        slug: slug,
-        active: true
-      }
-    })
+    const [portfolioItem] = await db
+      .select()
+      .from(portfolioItems)
+      .where(
+        and(
+          eq(portfolioItems.slug, slug),
+          eq(portfolioItems.active, true)
+        )
+      )
 
     if (!portfolioItem) {
       return NextResponse.json({ error: 'Project not found' }, { status: 404 })
@@ -24,4 +29,4 @@ export async function GET(
     console.error('Error fetching portfolio item:', error)
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 })
   }
-} 
+}

@@ -25,7 +25,11 @@ const navigation = [
   { name: 'Услуги', href: '/admin/services', icon: FileText },
   { name: 'Портфолио', href: '/admin/portfolio', icon: Image },
   { name: 'Блог', href: '/admin/blog', icon: FileText },
-  { name: 'Пользователи', href: '/admin/users', icon: Users },
+  { name: 'Отзывы', href: '/admin/testimonials', icon: MessageSquare },
+  { name: 'FAQ', href: '/admin/faq', icon: FileText },
+  { name: 'Команда', href: '/admin/team', icon: Users },
+  { name: 'Партнеры', href: '/admin/partners', icon: Image },
+  { name: 'Тема', href: '/admin/theme', icon: Settings },
   { name: 'Настройки', href: '/admin/settings', icon: Settings },
 ]
 
