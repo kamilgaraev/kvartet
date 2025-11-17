@@ -146,7 +146,7 @@ export default function ServicesPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
@@ -161,7 +161,7 @@ export default function ServicesPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-8"
             >
               <Star className="w-5 h-5 text-primary" />
-              <span className="text-sm weight-semibold text-gray-700">Полный спектр рекламных услуг</span>
+              <span className="text-sm weight-semibold text-muted">Полный спектр рекламных услуг</span>
             </motion.div>
 
             <motion.h1 
@@ -207,7 +207,7 @@ export default function ServicesPage() {
               
               <Link
                 href="/calculator"
-                className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
               >
                 <span>Рассчитать стоимость</span>
                 <Zap className="w-5 h-5" />
@@ -241,7 +241,7 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={servicesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-white rounded-3xl p-8 border border-gray-100 hover:border-primary/30 hover:shadow-2xl transition-all duration-300"
+                className="group bg-white rounded-3xl p-8 border border-light hover:border-primary-30 hover:shadow-2xl transition-all duration-300"
               >
                 <div className="flex items-start space-x-6">
                   <div className="flex-shrink-0">
@@ -289,7 +289,7 @@ export default function ServicesPage() {
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-sm text-gray-500">Стоимость</span>
+                        <span className="text-sm text-muted">Стоимость</span>
                         <div className="text-2xl weight-bold text-primary">{service.price}</div>
                       </div>
                       
@@ -310,7 +310,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Advantages */}
-      <section ref={advantagesRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section ref={advantagesRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -380,7 +380,7 @@ export default function ServicesPage() {
             >
               <Link
                 href="/contacts"
-                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-primary-bg transition-all duration-300 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Связаться с нами</span>

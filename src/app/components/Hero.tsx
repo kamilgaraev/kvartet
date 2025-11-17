@@ -127,7 +127,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="grid grid-cols-1 md:grid-cols-2 card-gap"
+              className="grid grid-cols-1 md:grid-cols-2 gap-5"
             >
               {[
                 { icon: Printer, text: 'Широкоформатная печать баннеров', gradient: 'from-primary to-primary-dark' },
@@ -141,12 +141,12 @@ export default function Hero() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.8 + index * 0.1 }}
                   whileHover={{ scale: 1.02, y: -2 }}
-                  className="group flex items-center space-x-3 bg-card backdrop-blur-sm card-adaptive border border-light hover:border-hover hover:shadow-lg hover:shadow-primary transition-all duration-300"
+                  className="group flex items-center space-x-4 bg-card backdrop-blur-sm p-5 rounded-xl border border-light hover:border-hover hover:shadow-lg hover:shadow-primary transition-all duration-300"
                 >
-                  <div className={`w-12 h-12 bg-gradient-to-br ${service.gradient} card-adaptive flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
-                    <service.icon className="icon-adaptive text-white" />
+                  <div className={`w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform flex-shrink-0`}>
+                    <service.icon className="w-7 h-7 text-white" />
                   </div>
-                  <span className="text-primary-dark text-body hover:text-primary transition-colors">
+                  <span className="text-primary-dark text-body-lg hover:text-primary transition-colors leading-snug-kw">
                     {service.text}
                   </span>
                 </motion.div>
@@ -361,22 +361,6 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.8 }}
-              className="hidden xl:block absolute -bottom-8 -left-8 bg-white border border-light rounded-2xl px-6 py-4 shadow-card"
-            >
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-warning rounded-full flex items-center justify-center">
-                  <Award className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <div className="text-body-sm text-primary-dark weight-semibold">Лучшие в регионе</div>
-                  <div className="text-caption text-muted">2023 год</div>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -23,6 +23,7 @@ import {
   Printer,
   Monitor
 } from 'lucide-react'
+import LogoK from './LogoK'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -129,7 +130,7 @@ export default function Header() {
                 className="relative"
               >
                 <div className="w-12 h-12 rounded-xl bg-gradient-primary flex items-center justify-center shadow-lg shadow-primary group-hover:shadow-xl hover:shadow-primary transition-all duration-300">
-                  <span className="text-white weight-bold text-title">К</span>
+                  <LogoK className="w-7 h-7 text-white" />
                 </div>
                 <motion.div
                   animate={{ scale: [1, 1.2, 1] }}

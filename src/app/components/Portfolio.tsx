@@ -175,7 +175,7 @@ export default function Portfolio() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70rem] h-[70rem] border border-gray-200/20 rounded-full"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70rem] h-[70rem] border border-primary-20 rounded-full"
         />
       </div>
 
@@ -194,10 +194,10 @@ export default function Portfolio() {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-6"
           >
             <Award className="w-5 h-5 text-primary-dark" />
-            <span className="text-body-sm weight-semibold text-gray-700">Наши работы</span>
+            <span className="text-body-sm weight-semibold text-muted">Наши работы</span>
           </motion.div>
 
-          <h2 className="text-display-2 text-gray-900 mb-6 leading-tight-kw weight-bold">
+          <h2 className="text-display-2 text-primary-dark mb-6 leading-tight-kw weight-bold">
             Портфолио{' '}
             <span className="relative inline-block">
               <span className="gradient-kvartett-text">проектов</span>
@@ -209,7 +209,7 @@ export default function Portfolio() {
               />
             </span>
           </h2>
-          <p className="text-body-xl text-gray-600 max-w-3xl mx-auto leading-relaxed-kw">
+          <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
             500+ успешных проектов в Уфе и Республике Башкортостан. От идеи до воплощения.
           </p>
         </motion.div>
@@ -235,7 +235,7 @@ export default function Portfolio() {
                 className={`relative px-6 py-3 rounded-2xl weight-semibold text-body-sm transition-all duration-300 overflow-hidden ${
                   activeCategory === category.value
                     ? 'text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 bg-white/80 backdrop-blur-sm border border-gray-200 hover:border-gray-300 hover:text-gray-800'
+                    : 'text-muted bg-white/80 backdrop-blur-sm border border-light hover:border-primary hover:text-primary-dark'
                 }`}
                 style={{
                   backgroundColor: activeCategory === category.value ? category.color : undefined
@@ -259,7 +259,7 @@ export default function Portfolio() {
 
           {/* Переключатель вида */}
           <div className="flex items-center space-x-3">
-            <span className="text-body-sm text-gray-600">Показано проектов:</span>
+            <span className="text-body-sm text-muted">Показано проектов:</span>
             <motion.div
               key={activeCategory}
               initial={{ scale: 0.8 }}
@@ -369,7 +369,7 @@ export default function Portfolio() {
                         <motion.button
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.9 }}
-                          className="bg-white text-gray-900 px-6 py-3 rounded-2xl weight-semibold flex items-center space-x-2 mx-auto shadow-xl"
+                          className="bg-white text-primary-dark px-6 py-3 rounded-2xl weight-semibold flex items-center space-x-2 mx-auto shadow-xl"
                         >
                           <ExternalLink className="w-4 h-4" />
                           <span>Смотреть проект</span>
@@ -429,14 +429,14 @@ export default function Portfolio() {
                         </div>
                       </div>
 
-                                             <h3 className="text-title weight-bold text-gray-900 group-hover:text-primary transition-colors leading-tight line-clamp-2">
+                                             <h3 className="text-title weight-bold text-primary-dark group-hover:text-primary transition-colors leading-tight line-clamp-2">
                          {item.title}
                        </h3>
                     </div>
 
                                          {/* Описание */}
                      <div className="flex-1 min-h-0">
-                       <p className="text-gray-600 text-body-sm leading-relaxed-kw line-clamp-2 overflow-hidden">
+                       <p className="text-muted text-body-sm leading-relaxed-kw line-clamp-2 overflow-hidden">
                          {item.description}
                        </p>
                      </div>
@@ -445,40 +445,40 @@ export default function Portfolio() {
                      <div className="grid grid-cols-3 gap-2">
                        <div className="text-center p-2 bg-success/10 rounded-lg">
                 <div className="text-body-sm weight-bold text-success truncate">{item.result}</div>
-                         <div className="text-caption text-gray-600">Результат</div>
+                         <div className="text-caption text-muted">Результат</div>
                        </div>
                        <div className="text-center p-2 bg-primary/10 rounded-lg">
                 <div className="text-body-sm weight-bold text-primary truncate">{item.duration}</div>
-                         <div className="text-caption text-gray-600">Срок</div>
+                         <div className="text-caption text-muted">Срок</div>
                        </div>
                        <div className="text-center p-2 bg-overlay rounded-lg">
                 <div className="text-body-sm weight-bold text-primary-dark truncate">{item.year}</div>
-                         <div className="text-caption text-gray-600">Год</div>
+                         <div className="text-caption text-muted">Год</div>
                        </div>
                      </div>
 
                                          {/* Фичи проекта */}
                      <div className="space-y-2">
-                       <h4 className="text-body-sm weight-semibold text-gray-800">Особенности:</h4>
+                       <h4 className="text-body-sm weight-semibold text-primary-dark">Особенности:</h4>
                        <div className="flex flex-wrap gap-1">
                          {item.features.slice(0, 3).map((feature) => (
                            <span 
                              key={feature}
-                             className="text-caption bg-gray-100 text-gray-600 px-2 py-1 rounded-lg truncate"
+                             className="text-caption bg-primary-bg text-muted px-2 py-1 rounded-lg truncate"
                            >
                              {feature}
                            </span>
                          ))}
                          {item.features.length > 3 && (
-                           <span className="text-caption text-gray-500">+{item.features.length - 3}</span>
+                           <span className="text-caption text-muted">+{item.features.length - 3}</span>
                          )}
                        </div>
                      </div>
 
                                          {/* Бюджет */}
-                     <div className="pt-4 border-t border-gray-100 flex items-center justify-between mt-auto">
-                       <span className="text-body-sm text-gray-600">Бюджет проекта:</span>
-                       <span className="text-title weight-bold text-gray-900">{item.budget}</span>
+                     <div className="pt-4 border-t border-light flex items-center justify-between mt-auto">
+                       <span className="text-body-sm text-muted">Бюджет проекта:</span>
+                       <span className="text-title weight-bold text-primary-dark">{item.budget}</span>
                      </div>
                   </div>
                 </div>
@@ -502,10 +502,10 @@ export default function Portfolio() {
             <Award className="w-10 h-10 text-white" />
           </motion.div>
           
-          <h3 className="text-display-3 weight-bold text-gray-900 mb-4">
+          <h3 className="text-display-3 weight-bold text-primary-dark mb-4">
             Готовы создать <span className="gradient-kvartett-text">ваш проект?</span>
           </h3>
-          <p className="text-body-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-body-xl text-muted mb-8 max-w-2xl mx-auto">
             Присоединяйтесь к 500+ довольным клиентам. Получите бесплатную консультацию и расчет стоимости.
           </p>
           
@@ -522,7 +522,7 @@ export default function Portfolio() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200 hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2"
+              className="bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2"
             >
               <TrendingUp className="w-5 h-5" />
               <span>Рассчитать проект</span>

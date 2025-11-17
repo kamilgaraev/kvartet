@@ -662,7 +662,7 @@ export default function BrandingPage() {
                     <div key={i} className="flex items-center space-x-3">
                       <input
                         type="checkbox"
-                        className="w-5 h-5 text-[#F59E0B] border-gray-300 rounded focus:ring-[#F59E0B]"
+                        className="w-5 h-5 text-primary-light border-gray-300 rounded focus:ring-primary-light"
                       />
                       <span className="text-gray-700">{question}</span>
                     </div>
@@ -680,19 +680,19 @@ export default function BrandingPage() {
                   </h4>
                   <ul className="space-y-2 text-muted">
                     <li className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>Смена направления бизнеса</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>Выход на новые рынки</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>Устаревший образ</span>
                     </li>
                     <li className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4 text-[#F59E0B] flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                       <span>Слияние компаний</span>
                     </li>
                   </ul>
@@ -757,7 +757,7 @@ export default function BrandingPage() {
             >
               <a
                 href="tel:+73471234567"
-                className="group bg-white text-[#F59E0B] px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-white text-primary-dark px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Бесплатная консультация</span>

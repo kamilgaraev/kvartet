@@ -83,13 +83,13 @@ export default function Services() {
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-6"
           >
             <Sparkles className="w-5 h-5 text-primary" />
-            <span className="text-caption weight-semibold text-gray-700">Наши услуги</span>
+            <span className="text-caption weight-semibold text-muted">Наши услуги</span>
           </motion.div>
 
-          <h2 className="text-display-2 text-gray-900 mb-6 leading-tight-kw" style={{ textShadow: '0 2px 8px var(--color-bg-card-hover)' }}>
+          <h2 className="text-display-2 text-primary-dark mb-6 leading-tight-kw">
             Полный спектр{' '}
             <span className="relative inline-block">
-              <span className="text-gray-900 weight-extrabold">рекламных услуг</span>
+              <span className="text-primary-dark weight-extrabold">рекламных услуг</span>
               <motion.div
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
@@ -98,7 +98,7 @@ export default function Services() {
               />
             </span>
           </h2>
-          <p className="text-body-xl text-gray-800 max-w-3xl mx-auto leading-relaxed-kw weight-medium" style={{ textShadow: '0 1px 3px var(--color-bg-card)' }}>
+          <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw weight-medium">
             От концепции до реализации — создаем эффективную рекламу, 
             которая работает на результат вашего бизнеса
           </p>

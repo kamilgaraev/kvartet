@@ -106,7 +106,7 @@ export default function Testimonials() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-gray-200/30 rounded-full"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-primary-20 rounded-full"
         />
       </div>
 

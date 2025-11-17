@@ -5,52 +5,80 @@
 
 :root {
   /* ==========================================================================
-     ОСНОВНАЯ ЦВЕТОВАЯ ПАЛИТРА (из Hero секции)
+     ОСНОВНАЯ ЦВЕТОВАЯ ПАЛИТРА
      ========================================================================== */
   
-  /* Основные синие цвета */
-  --color-primary: #3b82f6;           /* Основной синий - главный цвет бренда */
-  --color-primary-dark: #1e40af;      /* Темно-синий - для акцентов и текста */
-  --color-primary-light: #93c5fd;     /* Светло-синий - для второстепенных элементов */
-  --color-primary-bg: #eff6ff;        /* Фоновый светло-синий - для фонов секций */
+  /* АКТИВНАЯ ПАЛИТРА - ДРАМАТИЧНАЯ */
+  --color-primary: #2F4454;           /* Темно-синий серый - главный цвет бренда */
+  --color-primary-dark: #1C3334;      /* Очень темный бирюзово-серый - для акцентов и текста */
+  --color-primary-light: #DA7B93;     /* Пыльная роза - для второстепенных элементов */
+  --color-primary-bg: #f8f5f6;        /* Фоновый светлый - для фонов секций */
+  --color-accent: #376E6F;            /* Темный бирюзовый - для акцентов */
+  --color-text-dark: #2E151B;         /* Темный бордово-коричневый - для текста */
+  
+  /* ПАЛИТРА 2 - СПОКОЙНАЯ (закомментировано)
+  --color-primary: #7395AE;           Светло-синий - главный цвет бренда
+  --color-primary-dark: #557A95;      Темно-синий - для акцентов и текста
+  --color-primary-light: #B1A296;     Бежевый - для второстепенных элементов
+  --color-primary-bg: #f5f3f1;        Фоновый светлый - для фонов секций
+  --color-accent: #379683;            Бирюзовый - для акцентов
+  --color-text-dark: #5D5C61;         Темно-серый - для текста
+  */
+  
+  /* ПАЛИТРА 1 - ОРИГИНАЛЬНАЯ (закомментировано)
+  --color-primary: #3b82f6;           Основной синий - главный цвет бренда
+  --color-primary-dark: #1e40af;      Темно-синий - для акцентов и текста
+  --color-primary-light: #93c5fd;     Светло-синий - для второстепенных элементов
+  --color-primary-bg: #eff6ff;        Фоновый светло-синий - для фонов секций
+  */
   
   /* Градиенты */
   --gradient-primary: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   --gradient-primary-reverse: linear-gradient(to right, var(--color-primary-dark), var(--color-primary));
   --gradient-light: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
-  --gradient-bg: linear-gradient(to bottom right, var(--color-primary-bg), rgba(147, 197, 253, 0.2));
+  --gradient-bg: linear-gradient(to bottom right, var(--color-primary-bg), var(--color-primary-light-20));
+  --gradient-accent: linear-gradient(to right, var(--color-accent), var(--color-primary));
   
   /* ==========================================================================
      ЦВЕТА С ПРОЗРАЧНОСТЬЮ
      ========================================================================== */
   
-  /* Основной синий с прозрачностью */
-  --color-primary-05: rgba(59, 130, 246, 0.05);
-  --color-primary-10: rgba(59, 130, 246, 0.1);
-  --color-primary-20: rgba(59, 130, 246, 0.2);
-  --color-primary-25: rgba(59, 130, 246, 0.25);
-  --color-primary-30: rgba(59, 130, 246, 0.3);
-  --color-primary-40: rgba(59, 130, 246, 0.4);
-  --color-primary-50: rgba(59, 130, 246, 0.5);
+  /* Основной цвет с прозрачностью - #2F4454 */
+  --color-primary-05: rgba(47, 68, 84, 0.05);
+  --color-primary-10: rgba(47, 68, 84, 0.1);
+  --color-primary-20: rgba(47, 68, 84, 0.2);
+  --color-primary-25: rgba(47, 68, 84, 0.25);
+  --color-primary-30: rgba(47, 68, 84, 0.3);
+  --color-primary-40: rgba(47, 68, 84, 0.4);
+  --color-primary-50: rgba(47, 68, 84, 0.5);
+  --color-primary-60: rgba(47, 68, 84, 0.6);
+  --color-primary-70: rgba(47, 68, 84, 0.7);
   
-  /* Темно-синий с прозрачностью */
-  --color-primary-dark-05: rgba(30, 64, 175, 0.05);
-  --color-primary-dark-10: rgba(30, 64, 175, 0.1);
-  --color-primary-dark-20: rgba(30, 64, 175, 0.2);
-  --color-primary-dark-30: rgba(30, 64, 175, 0.3);
-  --color-primary-dark-60: rgba(30, 64, 175, 0.6);
-  --color-primary-dark-70: rgba(30, 64, 175, 0.7);
-  --color-primary-dark-80: rgba(30, 64, 175, 0.8);
+  /* Темный цвет с прозрачностью - #1C3334 */
+  --color-primary-dark-05: rgba(28, 51, 52, 0.05);
+  --color-primary-dark-10: rgba(28, 51, 52, 0.1);
+  --color-primary-dark-20: rgba(28, 51, 52, 0.2);
+  --color-primary-dark-30: rgba(28, 51, 52, 0.3);
+  --color-primary-dark-60: rgba(28, 51, 52, 0.6);
+  --color-primary-dark-70: rgba(28, 51, 52, 0.7);
+  --color-primary-dark-80: rgba(28, 51, 52, 0.8);
   
-  /* Основной синий с дополнительными прозрачностями */
-  --color-primary-70: rgba(59, 130, 246, 0.7);
-  --color-primary-60: rgba(59, 130, 246, 0.6);
+  /* Светлый цвет с прозрачностью - #DA7B93 */
+  --color-primary-light-20: rgba(218, 123, 147, 0.2);
+  --color-primary-light-30: rgba(218, 123, 147, 0.3);
+  --color-primary-light-40: rgba(218, 123, 147, 0.4);
+  --color-primary-light-50: rgba(218, 123, 147, 0.5);
   
-  /* Светло-синий с прозрачностью */
-  --color-primary-light-20: rgba(147, 197, 253, 0.2);
-  --color-primary-light-30: rgba(147, 197, 253, 0.3);
-  --color-primary-light-40: rgba(147, 197, 253, 0.4);
-  --color-primary-light-50: rgba(147, 197, 253, 0.5);
+  /* Акцентный цвет с прозрачностью - #376E6F */
+  --color-accent-10: rgba(55, 110, 111, 0.1);
+  --color-accent-20: rgba(55, 110, 111, 0.2);
+  --color-accent-30: rgba(55, 110, 111, 0.3);
+  --color-accent-50: rgba(55, 110, 111, 0.5);
+  
+  /* Темный текст с прозрачностью - #2E151B */
+  --color-text-dark-60: rgba(46, 21, 27, 0.6);
+  --color-text-dark-70: rgba(46, 21, 27, 0.7);
+  --color-text-dark-80: rgba(46, 21, 27, 0.8);
   
   /* ==========================================================================
      ДОПОЛНИТЕЛЬНЫЕ ЦВЕТА
@@ -139,6 +167,8 @@
 .text-primary { color: var(--color-primary); }
 .text-primary-dark { color: var(--color-primary-dark); }
 .text-primary-light { color: var(--color-primary-light); }
+.text-accent { color: var(--color-accent); }
+.text-dark { color: var(--color-text-dark); }
 .text-white { color: var(--color-text-white); }
 .text-muted { color: var(--color-text-muted); }
 .text-on-dark { color: var(--color-text-on-dark); }
@@ -153,6 +183,7 @@
 .bg-primary-dark { background-color: var(--color-primary-dark); }
 .bg-primary-light { background-color: var(--color-primary-light); }
 .bg-primary-bg { background-color: var(--color-primary-bg); }
+.bg-accent { background-color: var(--color-accent); }
 .bg-white { background-color: var(--color-bg-primary); }
 .bg-card { background-color: var(--color-bg-card); }
 .bg-success { background-color: var(--color-success); }
@@ -198,6 +229,7 @@
 .bg-gradient-primary-reverse { background: var(--gradient-primary-reverse); }
 .bg-gradient-light { background: var(--gradient-light); }
 .bg-gradient-bg { background: var(--gradient-bg); }
+.bg-gradient-accent { background: var(--gradient-accent); }
 
 /* Границы */
 .border-primary { border-color: var(--color-border-primary); }
@@ -217,8 +249,10 @@
 
 .hover\:text-primary:hover { color: var(--color-primary); }
 .hover\:text-primary-dark:hover { color: var(--color-primary-dark); }
+.hover\:text-accent:hover { color: var(--color-accent); }
 .hover\:bg-primary:hover { background-color: var(--color-primary); }
 .hover\:bg-primary-dark:hover { background-color: var(--color-primary-dark); }
+.hover\:bg-accent:hover { background-color: var(--color-accent); }
 .hover\:bg-success:hover { background-color: var(--color-success); }
 .hover\:bg-success-dark:hover { background-color: var(--color-success-dark); }
 .hover\:bg-warning:hover { background-color: var(--color-warning); }

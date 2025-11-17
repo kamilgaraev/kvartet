@@ -40,7 +40,7 @@ export default function NotFound() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
       {/* Интерактивные декоративные элементы */}
       <div className="absolute inset-0">
         <motion.div 
@@ -64,7 +64,7 @@ export default function NotFound() {
         <motion.div 
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-gray-200/20 rounded-full"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-primary-20 rounded-full"
         />
         
         {/* Плавающие элементы */}
@@ -151,10 +151,10 @@ export default function NotFound() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-12"
           >
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6" style={{ textShadow: '0 2px 8px rgba(255,255,255,0.9)' }}>
+            <h2 className="text-3xl md:text-5xl font-bold text-primary-dark mb-6">
               Страница потерялась в пространстве
             </h2>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed font-medium" style={{ textShadow: '0 1px 3px rgba(255,255,255,0.8)' }}>
+            <p className="text-xl text-muted mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
               Не волнуйтесь! Даже самые лучшие дизайнеры иногда теряют страницы. 
               Давайте найдем то, что вы искали.
             </p>
@@ -190,10 +190,10 @@ export default function NotFound() {
               >
                 <Link 
                   href={link.href}
-                  className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-gray-200/50 hover:border-primary/50 transition-all duration-300 shadow-lg hover:shadow-xl block"
+                  className="group bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-light hover:border-primary transition-all duration-300 shadow-lg hover:shadow-xl block"
                 >
                   <link.icon className="w-8 h-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-sm font-semibold text-gray-700 group-hover:text-primary transition-colors">
+                  <div className="text-sm font-semibold text-muted group-hover:text-primary transition-colors">
                     {link.name}
                   </div>
                 </Link>
@@ -231,7 +231,7 @@ export default function NotFound() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => window.history.back()}
-              className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+              className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
             >
               <RefreshCw className="w-5 h-5" />
               <span>Назад</span>
@@ -245,7 +245,7 @@ export default function NotFound() {
             transition={{ duration: 0.6, delay: 1 }}
             className="bg-white/50 backdrop-blur-sm rounded-3xl p-8 border border-white/20 shadow-xl max-w-2xl mx-auto"
           >
-            <h3 className="text-xl font-bold text-gray-900 mb-6">
+            <h3 className="text-xl font-bold text-primary-dark mb-6">
               Нужна помощь? Свяжитесь с нами!
             </h3>
             
@@ -253,7 +253,7 @@ export default function NotFound() {
               {[
                 { icon: Phone, text: '+7 (347) 123-45-67', color: 'text-primary-dark' },
                 { icon: Mail, text: 'info@kvartett-ufa.ru', color: 'text-primary' },
-                { icon: MapPin, text: 'г. Уфа, ул. Ленская, 128', color: 'text-warning' }
+                { icon: MapPin, text: 'г. Уфа, ул. Ленская, 128', color: 'text-primary-light' }
               ].map((contact, index) => (
                 <motion.div
                   key={index}
@@ -266,7 +266,7 @@ export default function NotFound() {
                   <div className={`w-12 h-12 rounded-xl bg-white shadow-lg flex items-center justify-center mx-auto mb-3 group-hover:shadow-xl transition-all ${contact.color}`}>
                     <contact.icon className="w-6 h-6" />
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">
+                  <div className="text-sm text-muted font-medium">
                     {contact.text}
                   </div>
                 </motion.div>
@@ -281,7 +281,7 @@ export default function NotFound() {
             transition={{ duration: 0.6, delay: 1.5 }}
             className="mt-12 text-center"
           >
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted">
               © 2024 Квартет. Даже в космосе мы создаем лучшую рекламу! 🚀
             </p>
           </motion.div>

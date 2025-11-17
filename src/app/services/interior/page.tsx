@@ -197,7 +197,7 @@ export default function InteriorPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-purple-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-light-10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -213,7 +213,7 @@ export default function InteriorPage() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <Home className="w-4 h-4 text-purple-500" />
-                <span className="text-sm weight-semibold text-gray-700">Интерьерная реклама</span>
+                <span className="text-sm weight-semibold text-muted">Интерьерная реклама</span>
               </motion.div>
 
               <motion.h1 
@@ -238,7 +238,7 @@ export default function InteriorPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-gray-600 mb-8 leading-relaxed"
+                className="text-xl text-muted mb-8 leading-relaxed"
               >
                 Комплексное оформление интерьеров: навигация, стенды, вывески. Создаем функциональное и стильное пространство для вашего бизнеса.
               </motion.p>
@@ -259,7 +259,7 @@ export default function InteriorPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-purple-500/50 hover:text-purple-500 transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -279,7 +279,7 @@ export default function InteriorPage() {
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
                     <div className="text-2xl weight-bold text-purple-500">{stat.value}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
+                    <div className="text-sm text-muted">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -323,7 +323,7 @@ export default function InteriorPage() {
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Виды интерьерной рекламы
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Комплексные решения для оформления внутренних пространств
             </p>
           </motion.div>
@@ -338,7 +338,7 @@ export default function InteriorPage() {
                 whileHover={{ y: -5 }}
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
               >
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-primary-10 to-primary-20 relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.name}
@@ -375,13 +375,13 @@ export default function InteriorPage() {
       </section>
 
       {/* Applications */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Сферы применения
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Оформляем интерьеры для различных типов объектов
             </p>
           </div>
@@ -425,7 +425,7 @@ export default function InteriorPage() {
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Материалы и технологии
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Используем качественные материалы, безопасные для интерьеров
             </p>
           </div>
@@ -444,7 +444,7 @@ export default function InteriorPage() {
                   <Layers className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-lg weight-bold text-primary-dark mb-2">{material.name}</h3>
-                <p className="text-gray-600 text-sm mb-3">{material.description}</p>
+                <p className="text-muted text-sm mb-3">{material.description}</p>
                 <div className="text-xs text-purple-500 weight-medium bg-purple-500/10 px-3 py-1 rounded-full">
                   {material.usage}
                 </div>
@@ -455,7 +455,7 @@ export default function InteriorPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section ref={processRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -466,7 +466,7 @@ export default function InteriorPage() {
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Как мы работаем
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               От замеров до монтажа — профессиональный подход на каждом этапе
             </p>
           </motion.div>
@@ -480,7 +480,7 @@ export default function InteriorPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative text-center"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-light">
                   <div className="relative mb-6">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -519,7 +519,7 @@ export default function InteriorPage() {
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Почему выбирают нас для оформления интерьеров
             </p>
           </div>
@@ -549,13 +549,13 @@ export default function InteriorPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
               Примеры наших работ
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-muted max-w-3xl mx-auto">
               Успешные проекты интерьерной рекламы для различных объектов
             </p>
           </div>

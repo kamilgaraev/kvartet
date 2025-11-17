@@ -98,7 +98,7 @@ export default function FloatingAction() {
                 className={`group flex items-center space-x-3 ${action.color} text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300`}
               >
                 <action.icon className="w-5 h-5" />
-                <span className="text-body-sm weight-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                <span className="text-body-sm weight-medium transition-opacity duration-300 whitespace-nowrap">
                   {action.label}
                 </span>
               </motion.button>

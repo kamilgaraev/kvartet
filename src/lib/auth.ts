@@ -15,28 +15,33 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        const user = await prisma.user.findUnique({
-          where: {
-            email: credentials.email
-          }
-        })
+        try {
+          const user = await prisma.user.findUnique({
+            where: {
+              email: credentials.email
+            }
+          })
 
-        if (!user) {
+          if (!user) {
+            return null
+          }
+
+          // В продакшене здесь должна быть проверка пароля с bcrypt
+          // Временно для разработки простая проверка
+          if (credentials.password === "admin123") {
+            return {
+              id: user.id,
+              email: user.email,
+              name: user.name,
+              role: user.role,
+            }
+          }
+
+          return null
+        } catch (error) {
+          console.error('Database connection error:', error)
           return null
         }
-
-        // В продакшене здесь должна быть проверка пароля с bcrypt
-        // Временно для разработки простая проверка
-        if (credentials.password === "admin123") {
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            role: user.role,
-          }
-        }
-
-        return null
       }
     })
   ],

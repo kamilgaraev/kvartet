@@ -637,7 +637,7 @@ export default function CalculatorPage() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="w-24 h-24 rounded-full bg-[#10B981] flex items-center justify-center mx-auto mb-6"
+                className="w-24 h-24 rounded-full bg-success flex items-center justify-center mx-auto mb-6"
               >
                 <CheckCircle className="w-12 h-12 text-white" />
               </motion.div>

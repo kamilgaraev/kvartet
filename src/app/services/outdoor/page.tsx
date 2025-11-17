@@ -149,7 +149,7 @@ export default function OutdoorAdvertisingPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -165,7 +165,7 @@ export default function OutdoorAdvertisingPage() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <Building className="w-4 h-4 text-primary" />
-                <span className="text-sm weight-semibold text-gray-700">Наружная реклама</span>
+                <span className="text-sm weight-semibold text-muted">Наружная реклама</span>
               </motion.div>
 
               <motion.h1 
@@ -211,7 +211,7 @@ export default function OutdoorAdvertisingPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -222,7 +222,7 @@ export default function OutdoorAdvertisingPage() {
                 initial={{ opacity: 0 }}
                 animate={heroInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 0.8 }}
-                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200"
+                className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-light"
               >
                 {[
                   { label: 'Проектов', value: '1000+' },
@@ -327,7 +327,7 @@ export default function OutdoorAdvertisingPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section ref={processRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -352,7 +352,7 @@ export default function OutdoorAdvertisingPage() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className="relative text-center"
               >
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100">
+                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-light">
                   <div className="relative mb-6">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
@@ -375,7 +375,7 @@ export default function OutdoorAdvertisingPage() {
                 
                 {index < process.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-gray-300" />
+                    <ArrowRight className="w-6 h-6 text-primary-30" />
                   </div>
                 )}
               </motion.div>
@@ -404,7 +404,7 @@ export default function OutdoorAdvertisingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                className="text-center p-6 bg-gradient-to-br from-primary-bg to-white rounded-2xl border border-light hover:border-primary-30 hover:shadow-lg transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -421,7 +421,7 @@ export default function OutdoorAdvertisingPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
@@ -507,7 +507,7 @@ export default function OutdoorAdvertisingPage() {
             >
               <a
                 href="tel:+73471234567"
-                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group bg-white text-primary px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 hover:bg-primary-bg transition-all duration-300 shadow-lg"
               >
                 <Phone className="w-5 h-5" />
                 <span>Позвонить сейчас</span>

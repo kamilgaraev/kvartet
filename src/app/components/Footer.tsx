@@ -17,6 +17,7 @@ import {
   Heart
 } from 'lucide-react'
 import { useState } from 'react'
+import LogoK from './LogoK'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -67,8 +68,8 @@ export default function Footer() {
   ]
 
   const socialLinks = [
-    { name: 'ВКонтакте', href: '#', color: 'bg-info hover:bg-info-dark', icon: 'В' },
-    { name: 'Telegram', href: '#', color: 'bg-info hover:bg-info-dark', icon: 'T' },
+    { name: 'ВКонтакте', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'В' },
+    { name: 'Telegram', href: '#', color: 'bg-primary hover:bg-primary-dark', icon: 'T' },
     { name: 'WhatsApp', href: '#', color: 'bg-success hover:bg-success-dark', icon: 'W' },
     { name: 'Instagram', href: '#', color: 'bg-gradient-to-r from-primary-dark to-primary hover:opacity-80', icon: 'I' }
   ]
@@ -79,15 +80,10 @@ export default function Footer() {
       <div className="absolute inset-0">
         <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-05 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary-dark-05 rounded-full blur-3xl"></div>
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-gray-700/30 rounded-full"
-        />
       </div>
 
       {/* Верхняя секция с CTA */}
-      <div className="relative border-b border-gray-700/50 bg-gradient-to-br from-primary to-primary-dark">
+      <div className="relative border-b border-primary-dark-30 bg-gradient-to-br from-primary to-primary-dark">
         <div className="container-adaptive section-padding-y">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -194,17 +190,17 @@ export default function Footer() {
                   whileHover={{ scale: 1.05, rotate: 5 }}
                   className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300"
                 >
-                  <span className="text-white weight-bold text-title">К</span>
+                  <LogoK className="w-7 h-7 text-white" />
                 </motion.div>
                 <div>
                   <h1 className="text-title-lg weight-bold group-hover:text-primary transition-colors">
                     КВАРТЕТ
                   </h1>
-                  <p className="text-caption text-gray-400 weight-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
+                  <p className="text-caption text-primary-light weight-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
                 </div>
               </Link>
               
-              <p className="text-body text-gray-300 leading-relaxed-kw mb-6">
+              <p className="text-body text-white/80 leading-relaxed-kw mb-6">
                 Производственно-рекламная группа "Квартет" — ваш надежный партнер 
                 в мире рекламы. Полный цикл услуг от идеи до воплощения.
               </p>
@@ -225,9 +221,9 @@ export default function Footer() {
                     whileHover={{ scale: 1.05 }}
                     className="text-center p-3 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer"
                   >
-                    <achievement.icon className="w-6 h-6 text-primary mx-auto mb-2" />
+                    <achievement.icon className="w-6 h-6 text-accent mx-auto mb-2" />
                     <div className="text-title weight-bold text-white">{achievement.number}</div>
-                    <div className="text-caption text-gray-400">{achievement.label}</div>
+                    <div className="text-caption text-white/60">{achievement.label}</div>
                   </motion.div>
                 ))}
               </div>
@@ -279,7 +275,7 @@ export default function Footer() {
                   >
                     <Link
                       href={link.href}
-                        className="group flex items-center space-x-3 text-gray-300 hover:text-primary transition-all duration-300 text-body-sm py-2"
+                        className="group flex items-center space-x-3 text-white/70 hover:text-accent transition-all duration-300 text-body-sm py-2"
                     >
                       <span className="text-title">{link.icon}</span>
                       <span className="group-hover:translate-x-1 transition-transform">
@@ -300,7 +296,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 pt-8 border-t border-gray-700/50"
+          className="mt-12 pt-8 border-t border-primary-dark-30"
         >
           <h3 className="text-title weight-bold mb-6">Контакты</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -309,13 +305,13 @@ export default function Footer() {
                 icon: MapPin,
                 title: 'Адрес',
                 content: 'г. Уфа, ул. Ленская, 128',
-                color: 'text-primary'
+                color: 'text-accent'
               },
               {
                 icon: Phone,
                 title: 'Телефоны',
                 content: '+7 (347) 123-45-67\n+7 (347) 123-45-68',
-                color: 'text-primary-dark'
+                color: 'text-primary'
               },
               {
                 icon: Mail,
@@ -327,7 +323,7 @@ export default function Footer() {
                 icon: Clock,
                 title: 'Время работы',
                 content: 'Пн-Пт: 09:00 - 18:00\nСб: 10:00 - 16:00',
-                color: 'text-success'
+                color: 'text-accent'
               }
             ].map((contact, index) => (
               <motion.div
@@ -343,7 +339,7 @@ export default function Footer() {
                   <contact.icon className={`w-5 h-5 ${contact.color}`} />
                   <h4 className="text-title-sm weight-semibold text-white">{contact.title}</h4>
                 </div>
-                <p className="text-body-sm text-gray-300 leading-relaxed whitespace-pre-line">
+                <p className="text-body-sm text-white/80 leading-relaxed whitespace-pre-line">
                   {contact.content}
                 </p>
               </motion.div>
@@ -357,10 +353,10 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="border-t border-gray-700/50 mt-12 pt-8"
+          className="border-t border-primary-dark-30 mt-12 pt-8"
         >
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-4 text-body-sm text-gray-400">
+            <div className="flex items-center space-x-4 text-body-sm text-white/60">
               <span>© 2024 Квартет. Все права защищены.</span>
               <span className="flex items-center space-x-1">
                 <span>Сделано с</span>
@@ -368,13 +364,13 @@ export default function Footer() {
                   animate={{ scale: [1, 1.2, 1] }}
                   transition={{ duration: 1, repeat: Infinity }}
                 >
-                  <Heart className="w-4 h-4 text-red-500 fill-current" />
+                  <Heart className="w-4 h-4 text-accent fill-current" />
                 </motion.div>
                 <span>в Уфе</span>
               </span>
             </div>
             
-            <div className="flex items-center space-x-6 text-body-sm text-gray-400">
+            <div className="flex items-center space-x-6 text-body-sm text-white/60">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 Политика конфиденциальности
               </Link>

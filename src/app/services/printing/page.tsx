@@ -175,7 +175,7 @@ export default function PrintingPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-green-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-10 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-success/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -316,7 +316,7 @@ export default function PrintingPage() {
                 whileHover={{ y: -5 }}
                 className="group bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-light"
               >
-                <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
+                <div className="aspect-video bg-gradient-to-br from-primary-10 to-primary-20 relative overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.name}
@@ -353,7 +353,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Materials */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
@@ -447,7 +447,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Advantages */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
@@ -540,7 +540,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Price Calculator */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">

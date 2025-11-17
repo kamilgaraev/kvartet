@@ -94,19 +94,19 @@ export default function QuickForm() {
                   transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
                   className="flex items-center space-x-3"
                 >
-                  <CheckCircle className="w-5 h-5 text-primary" />
-                  <span className="text-muted">{benefit}</span>
+                  <CheckCircle className="w-6 h-6 text-primary" />
+                  <span className="text-body-lg text-muted">{benefit}</span>
                 </motion.div>
               ))}
             </div>
 
             {/* Контакты */}
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-muted">
-                <Phone className="w-5 h-5 text-primary" />
-                <span>+7 (347) 123-45-67</span>
+              <div className="flex items-center space-x-3">
+                <Phone className="w-6 h-6 text-primary" />
+                <span className="text-body-lg text-muted weight-semibold">+7 (347) 123-45-67</span>
               </div>
-              <div className="text-caption text-muted">
+              <div className="text-body text-muted">
                 г. Уфа, ул. Ленская, 128
               </div>
             </div>
@@ -126,31 +126,31 @@ export default function QuickForm() {
                 className="text-center py-12"
               >
                 <CheckCircle className="w-16 h-16 text-primary mx-auto mb-4" />
-                  <h3 className="text-title-lg weight-bold text-gray-900 mb-2">
+                  <h3 className="text-title-lg weight-bold text-primary-dark mb-2">
                   Спасибо за заявку!
                 </h3>
-                  <p className="text-body text-gray-600">
+                  <p className="text-body text-muted">
                   Мы свяжемся с вами в ближайшее время
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div>
-                  <h3 className="text-title-lg weight-bold text-gray-900 mb-2">
+                  <h3 className="text-title-lg weight-bold text-primary-dark mb-2">
                     Быстрая заявка
                   </h3>
-                  <p className="text-body text-gray-600">
+                  <p className="text-body text-muted">
                     Заполните форму и мы рассчитаем стоимость
                   </p>
                 </div>
 
                 {/* Имя */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-gray-700 mb-2">
+                  <label className="block text-body-sm weight-medium text-muted mb-2">
                     Ваше имя *
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" />
                     <input
                       {...register('name')}
                       type="text"
@@ -165,11 +165,11 @@ export default function QuickForm() {
 
                 {/* Телефон */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-gray-700 mb-2">
+                  <label className="block text-body-sm weight-medium text-muted mb-2">
                     Телефон *
                   </label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" />
                     <input
                       {...register('phone')}
                       type="tel"
@@ -184,12 +184,12 @@ export default function QuickForm() {
 
                 {/* Услуга */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-gray-700 mb-2">
+                  <label className="block text-body-sm weight-medium text-muted mb-2">
                     Интересующая услуга *
                   </label>
                   <select
                     {...register('service')}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
                   >
                     <option value="">Выберите услугу</option>
                     {services.map(service => (
@@ -203,11 +203,11 @@ export default function QuickForm() {
 
                 {/* Сообщение */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-gray-700 mb-2">
+                  <label className="block text-body-sm weight-medium text-muted mb-2">
                     Дополнительная информация
                   </label>
                   <div className="relative">
-                    <MessageCircle className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                    <MessageCircle className="absolute left-3 top-3 w-5 h-5 text-muted" />
                     <textarea
                       {...register('message')}
                       rows={3}
@@ -233,7 +233,7 @@ export default function QuickForm() {
                   )}
                 </button>
 
-                <p className="text-caption text-gray-500 text-center">
+                <p className="text-caption text-muted text-center">
                   Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
                 </p>
               </form>

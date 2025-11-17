@@ -96,7 +96,7 @@ export default function ContactMap() {
                         <MessageCircle className="w-4 h-4" />
                         <span>WhatsApp</span>
                       </button>
-                      <button className="bg-info text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-info-dark transition-colors">
+                      <button className="bg-primary text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-primary-dark transition-colors">
                         Telegram
                       </button>
                     </div>
@@ -124,7 +124,7 @@ export default function ContactMap() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted">Воскресенье:</span>
-                      <span className="text-gray-500">Выходной</span>
+                      <span className="text-muted opacity-70">Выходной</span>
                     </div>
                   </div>
                 </div>
@@ -156,8 +156,8 @@ export default function ContactMap() {
             className="space-y-6"
           >
             {/* Карта */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 h-96">
-              <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400 flex items-center justify-center relative">
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-light h-96">
+              <div className="w-full h-full bg-gradient-to-br from-primary-10 via-primary-20 to-primary-30 flex items-center justify-center relative">
                 {/* Здесь будет интеграция с картами */}
                 <div className="text-center space-y-4">
                   <MapPin className="w-16 h-16 text-primary mx-auto" />
@@ -191,7 +191,7 @@ export default function ContactMap() {
                 <p className="text-caption text-white/90">Перезвоним за 5 минут</p>
               </button>
 
-              <button className="bg-primary-dark text-white p-6 rounded-xl hover:bg-primary-dark-hover transition-colors text-left group">
+              <button className="bg-primary-dark text-white p-6 rounded-xl hover:bg-accent transition-colors text-left group">
                 <Car className="w-8 h-8 mb-3 group-hover:scale-110 transition-transform" />
                 <h3 className="text-title weight-bold mb-1">Выезд на объект</h3>
                 <p className="text-caption text-white/90">Бесплатный замер</p>
