@@ -211,39 +211,41 @@ export default function PortfolioPage() {
       </section>
 
       {/* Filters and Search */}
-      <section className="py-12 bg-card border-b border-light">
+      <section className="py-12 bg-white border-b-2 border-gray-100">
         <div className="hero-container mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             {/* Search */}
             <div className="relative max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted w-5 h-5" />
+              <Search className="absolute left-5 top-1/2 transform -translate-y-1/2 text-primary w-5 h-5" />
               <input
                 type="text"
                 placeholder="Поиск проектов..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                className="w-full pl-14 pr-6 py-4 rounded-2xl border-2 border-gray-200 focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all duration-300 font-medium text-gray-900 bg-white shadow-md hover:shadow-lg"
               />
             </div>
 
             {/* Category Filters */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-4">
               {categories.map((category) => (
                 <motion.button
                   key={category.id}
                   onClick={() => setActiveCategory(category.id)}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.08, y: -3 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-xl weight-medium transition-all duration-300 ${
+                  className={`group relative flex items-center space-x-3 px-8 py-4 rounded-2xl font-bold text-sm transition-all duration-300 overflow-hidden shadow-md ${
                     activeCategory === category.id
-                      ? 'bg-primary text-white shadow-lg shadow-primary/25'
-                : 'bg-primary-10 text-muted hover:bg-primary-20'
+                      ? 'bg-primary text-white shadow-2xl transform scale-105 border-2 border-primary'
+                      : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:text-primary-dark hover:shadow-xl'
                   }`}
                 >
-                  {category.icon && <category.icon className="w-4 h-4" />}
-                  <span>{category.name}</span>
-                  <span className={`text-caption px-2 py-1 rounded-full ${
-                    activeCategory === category.id ? 'bg-card/20' : 'bg-card/80 text-muted'
+                  {category.icon && <category.icon className={`w-5 h-5 ${activeCategory === category.id ? 'text-white' : 'text-primary'}`} />}
+                  <span className="font-bold">{category.name}</span>
+                  <span className={`min-w-[28px] h-7 px-2.5 rounded-full flex items-center justify-center text-xs font-bold ${
+                    activeCategory === category.id 
+                      ? 'bg-white/30 text-white' 
+                      : 'bg-gray-100 text-gray-700 group-hover:bg-primary-10 group-hover:text-primary'
                   }`}>
                     {category.count}
                   </span>

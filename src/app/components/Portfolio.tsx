@@ -61,16 +61,22 @@ export default function Portfolio() {
       })
   }, [])
 
-  // Динамические категории на основе данных
+  // Динамические категории на основе данных с подсчетом
   const categories = Array.isArray(portfolioItems) && portfolioItems.length > 0 ? [
-    { name: 'Все проекты', value: 'all', color: 'var(--color-muted)' },
+    { 
+      name: 'Все проекты', 
+      value: 'all', 
+      color: '#2F4454',
+      count: portfolioItems.length 
+    },
     ...Array.from(new Set(portfolioItems.map(item => item.category))).map(cat => ({
       name: cat,
       value: cat,
-      color: 'var(--color-primary)'
+      color: '#DA7B93',
+      count: portfolioItems.filter(item => item.category === cat).length
     }))
   ] : [
-    { name: 'Все проекты', value: 'all', color: 'var(--color-muted)' }
+    { name: 'Все проекты', value: 'all', color: '#2F4454', count: 0 }
   ]
 
   const filteredItems = Array.isArray(portfolioItems) ? (
@@ -170,23 +176,24 @@ export default function Portfolio() {
           className="flex flex-col lg:flex-row justify-between items-center mb-12 space-y-6 lg:space-y-0"
         >
           {/* Фильтры категорий */}
-          <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
+          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
             {categories.map((category, index) => (
               <motion.button
                 key={category.value}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -2 }}
+                whileHover={{ scale: 1.08, y: -3 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveCategory(category.value)}
-                className={`relative px-6 py-3 rounded-2xl weight-semibold text-body-sm transition-all duration-300 overflow-hidden ${
+                className={`group relative px-8 py-4 rounded-2xl font-bold text-sm transition-all duration-300 overflow-hidden shadow-md ${
                   activeCategory === category.value
-                    ? 'text-white shadow-lg transform scale-105'
-                    : 'text-muted bg-white/80 backdrop-blur-sm border border-light hover:border-primary hover:text-primary-dark'
+                    ? 'text-white shadow-2xl transform scale-105'
+                    : 'text-gray-700 bg-white border-2 border-gray-200 hover:border-primary hover:text-primary-dark hover:shadow-xl'
                 }`}
                 style={{
-                  backgroundColor: activeCategory === category.value ? category.color : undefined
+                  backgroundColor: activeCategory === category.value ? category.color : undefined,
+                  borderColor: activeCategory === category.value ? category.color : undefined
                 }}
               >
                 {activeCategory === category.value && (
@@ -197,9 +204,16 @@ export default function Portfolio() {
                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                   />
                 )}
-                <span className="relative z-10 flex items-center space-x-2">
-                  <Filter className="w-4 h-4" />
-                  <span>{category.name}</span>
+                <span className="relative z-10 flex items-center space-x-3">
+                  <Filter className={`w-5 h-5 ${activeCategory === category.value ? 'text-white' : 'text-primary'}`} />
+                  <span className="font-bold">{category.name}</span>
+                  <span className={`min-w-[28px] h-7 px-2.5 rounded-full flex items-center justify-center text-xs font-bold ${
+                    activeCategory === category.value 
+                      ? 'bg-white/30 text-white' 
+                      : 'bg-gray-100 text-gray-700 group-hover:bg-primary-10 group-hover:text-primary'
+                  }`}>
+                    {category.count}
+                  </span>
                 </span>
               </motion.button>
             ))}
