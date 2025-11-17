@@ -550,7 +550,7 @@ export default function BrandingPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
               Наши преимущества
             </h2>
-            <p className="text-body-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Почему выбирают нас для создания фирменного стиля
             </p>
           </div>
@@ -567,12 +567,12 @@ export default function BrandingPage() {
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl bg-gradient-to-r from-warning to-warning-dark flex items-center justify-center shadow-lg shadow-warning/25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary mx-auto mb-4"
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-body-lg weight-bold text-primary-dark mb-3">{advantage.title}</h3>
-                <p className="text-muted">{advantage.description}</p>
+                <h3 className="text-title weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-body text-primary-dark">{advantage.description}</p>
               </motion.div>
             ))}
           </div>

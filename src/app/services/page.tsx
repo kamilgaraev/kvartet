@@ -318,10 +318,10 @@ export default function ServicesPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Почему выбирают нас
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Наши конкурентные преимущества и гарантии качества
             </p>
           </motion.div>
@@ -342,8 +342,8 @@ export default function ServicesPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl weight-bold text-primary-dark mb-3">{advantage.title}</h3>
-                <p className="text-muted">{advantage.description}</p>
+                <h3 className="text-title weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-body text-primary-dark">{advantage.description}</p>
               </motion.div>
             ))}
           </div>

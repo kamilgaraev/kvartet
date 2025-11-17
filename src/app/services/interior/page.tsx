@@ -519,7 +519,7 @@ export default function InteriorPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наши преимущества
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Почему выбирают нас для оформления интерьеров
             </p>
           </div>
@@ -536,12 +536,12 @@ export default function InteriorPage() {
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary mx-auto mb-4"
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl weight-bold text-primary-dark mb-3">{advantage.title}</h3>
-                <p className="text-gray-600">{advantage.description}</p>
+                <h3 className="text-title weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-body text-primary-dark">{advantage.description}</p>
               </motion.div>
             ))}
           </div>

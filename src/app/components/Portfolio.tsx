@@ -505,7 +505,7 @@ export default function Portfolio() {
           <h3 className="text-display-3 weight-bold text-primary-dark mb-4">
             Готовы создать <span className="gradient-kvartett-text">ваш проект?</span>
           </h3>
-          <p className="text-body-xl text-muted mb-8 max-w-2xl mx-auto">
+          <p className="text-body-xl text-primary-dark mb-8 max-w-2xl mx-auto">
             Присоединяйтесь к 500+ довольным клиентам. Получите бесплатную консультацию и расчет стоимости.
           </p>
           

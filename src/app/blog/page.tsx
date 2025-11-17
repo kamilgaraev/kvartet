@@ -195,7 +195,7 @@ export default function BlogPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <BookOpen className="w-5 h-5 text-primary" />
-              <span className="text-caption weight-semibold text-muted">Блог о рекламе</span>
+              <span className="text-caption weight-semibold text-primary-dark">Блог о рекламе</span>
             </motion.div>
 
             <motion.h1 
@@ -220,7 +220,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-body-xl text-muted mb-12 max-w-3xl mx-auto leading-relaxed-kw"
+              className="text-body-xl text-primary-dark mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               Экспертные статьи о тенденциях в рекламе, советы по маркетингу и практические кейсы от профессионалов индустрии
             </motion.p>
@@ -286,7 +286,7 @@ export default function BlogPage() {
               <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
                 Рекомендуемые статьи
               </h2>
-              <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
+              <p className="text-body-xl text-primary-dark max-w-3xl mx-auto leading-relaxed-kw">
                 Самые популярные и полезные материалы от наших экспертов
               </p>
             </motion.div>
@@ -385,7 +385,7 @@ export default function BlogPage() {
             <h2 className="text-display-3 weight-bold text-primary-dark mb-4 leading-tight-kw">
               {filteredPosts.length} статей найдено
             </h2>
-            <p className="text-body-lg text-muted">
+            <p className="text-body-lg text-primary-dark">
               {activeCategory === 'all' ? 'Все публикации' : categories.find(c => c.id === activeCategory)?.name}
             </p>
           </motion.div>
@@ -510,7 +510,7 @@ export default function BlogPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Подписка на новости
             </h2>
-            <p className="text-body-xl text-muted mb-8 leading-relaxed-kw">
+            <p className="text-body-xl text-primary-dark mb-8 leading-relaxed-kw">
               Получайте свежие статьи о рекламе и маркетинге прямо на почту
             </p>
             
@@ -529,7 +529,7 @@ export default function BlogPage() {
               </motion.button>
             </div>
             
-            <p className="text-body-sm text-muted mt-4">
+            <p className="text-body-sm text-primary-dark mt-4">
               Никакого спама, только полезный контент
             </p>
           </motion.div>

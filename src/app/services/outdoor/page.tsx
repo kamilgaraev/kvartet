@@ -388,10 +388,10 @@ export default function OutdoorAdvertisingPage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наши преимущества
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Почему клиенты выбирают нас для изготовления наружной рекламы
             </p>
           </div>
@@ -412,8 +412,8 @@ export default function OutdoorAdvertisingPage() {
                 >
                   <advantage.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl weight-bold text-primary-dark mb-3">{advantage.title}</h3>
-                <p className="text-muted">{advantage.description}</p>
+                <h3 className="text-title weight-bold text-primary-dark mb-3">{advantage.title}</h3>
+                <p className="text-body text-primary-dark">{advantage.description}</p>
               </motion.div>
             ))}
           </div>

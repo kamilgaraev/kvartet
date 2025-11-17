@@ -132,11 +132,8 @@ export default function ContactsPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-primary-bg relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-05)' }}></div>
-          <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
-        </div>
+      <section ref={heroRef} className="py-32 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-bg via-white to-primary-bg opacity-60"></div>
 
         <div className="relative hero-container mx-auto">
           <div className="text-center max-w-4xl mx-auto">
@@ -147,14 +144,14 @@ export default function ContactsPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-6 py-2 mb-8"
             >
               <MessageCircle className="w-5 h-5 text-primary" />
-              <span className="text-caption weight-semibold text-muted">Свяжитесь с нами</span>
+              <span className="text-caption weight-semibold text-primary-dark">Свяжитесь с нами</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl weight-bold text-on-dark mb-8"
+              className="text-display-1 weight-bold text-primary-dark mb-8 leading-tight-kw"
             >
               Мы всегда{' '}
               <span className="relative inline-block">
@@ -172,7 +169,7 @@ export default function ContactsPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-on-dark-muted mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-body-xl text-primary-dark mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               Готовы обсудить ваш проект? Свяжитесь с нами любым удобным способом. Мы работаем в Уфе и по всей Республике Башкортостан
             </motion.p>
@@ -199,9 +196,9 @@ export default function ContactsPage() {
                 >
                   <contact.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-xl weight-bold text-primary-dark mb-2">{contact.title}</h3>
+                <h3 className="text-title weight-bold text-primary-dark mb-2">{contact.title}</h3>
                 <div className={`text-body-lg weight-semibold ${contact.color} mb-1`}>{contact.content}</div>
-                <p className="text-muted text-sm">{contact.description}</p>
+                <p className="text-body-sm text-primary-dark">{contact.description}</p>
               </motion.div>
             ))}
           </div>
@@ -224,15 +221,15 @@ export default function ContactsPage() {
                     <Send className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl weight-bold text-primary-dark">Оставить заявку</h3>
-                    <p className="text-muted">Мы свяжемся с вами в течение часа</p>
+                    <h3 className="text-title-lg weight-bold text-primary-dark">Оставить заявку</h3>
+                    <p className="text-body text-primary-dark">Мы свяжемся с вами в течение часа</p>
                   </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-caption weight-medium text-muted mb-2">
+                      <label className="block text-caption weight-medium text-primary-dark mb-2">
                         Ваше имя *
                       </label>
                       <input
@@ -246,7 +243,7 @@ export default function ContactsPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-caption weight-medium text-muted mb-2">
+                      <label className="block text-caption weight-medium text-primary-dark mb-2">
                         Телефон *
                       </label>
                       <input
@@ -262,7 +259,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-caption weight-medium text-muted mb-2">
+                    <label className="block text-caption weight-medium text-primary-dark mb-2">
                       Email
                     </label>
                     <input
@@ -276,7 +273,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-caption weight-medium text-muted mb-2">
+                    <label className="block text-caption weight-medium text-primary-dark mb-2">
                       Интересующая услуга
                     </label>
                     <select
@@ -295,7 +292,7 @@ export default function ContactsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-caption weight-medium text-muted mb-2">
+                    <label className="block text-caption weight-medium text-primary-dark mb-2">
                       Сообщение
                     </label>
                     <textarea
@@ -350,11 +347,11 @@ export default function ContactsPage() {
             >
               {/* Map */}
               <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div className="aspect-video p-4 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, var(--color-primary-20), var(--color-primary-dark-20))' }}>
+                  <div className="aspect-video p-4 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, var(--color-primary-20), var(--color-primary-dark-20))' }}>
                   <div className="text-center">
-                    <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                    <div className="text-muted weight-medium">Интерактивная карта</div>
-                    <div className="text-sm text-gray-400">г. Уфа, ул. Ленская, 128</div>
+                    <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
+                    <div className="text-primary-dark weight-medium">Интерактивная карта</div>
+                    <div className="text-body-sm text-primary-dark">г. Уфа, ул. Ленская, 128</div>
                   </div>
                 </div>
                 <div className="p-6">
@@ -402,10 +399,10 @@ export default function ContactsPage() {
       <section className="section-padding-y bg-white">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Нужен быстрый ответ?
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Выберите наиболее удобный способ связи
             </p>
           </div>
@@ -426,8 +423,8 @@ export default function ContactsPage() {
               >
                 <Phone className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl weight-bold text-primary-dark mb-3">Позвонить</h3>
-              <p className="text-muted mb-4">Обсудим проект по телефону</p>
+              <h3 className="text-title weight-bold text-primary-dark mb-3">Позвонить</h3>
+              <p className="text-body text-primary-dark mb-4">Обсудим проект по телефону</p>
               <a
                 href="tel:+73471234567"
                 className="inline-flex items-center space-x-2 text-primary hover:text-primary-dark weight-medium transition-colors"
@@ -451,8 +448,8 @@ export default function ContactsPage() {
               >
                 <MessageCircle className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl weight-bold text-primary-dark mb-3">WhatsApp</h3>
-              <p className="text-muted mb-4">Быстрая переписка в мессенджере</p>
+              <h3 className="text-title weight-bold text-primary-dark mb-3">WhatsApp</h3>
+              <p className="text-body text-primary-dark mb-4">Быстрая переписка в мессенджере</p>
               <a
                 href="https://wa.me/73471234567"
                 className="inline-flex items-center space-x-2 text-primary-dark hover:text-primary weight-medium transition-colors"
@@ -475,8 +472,8 @@ export default function ContactsPage() {
               >
                 <Mail className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl weight-bold text-primary-dark mb-3">Email</h3>
-              <p className="text-muted mb-4">Отправьте техническое задание</p>
+              <h3 className="text-title weight-bold text-primary-dark mb-3">Email</h3>
+              <p className="text-body text-primary-dark mb-4">Отправьте техническое задание</p>
               <a
                 href="mailto:info@kvartett-ufa.ru"
                 className="inline-flex items-center space-x-2 text-warning-light hover:text-warning weight-medium transition-colors"
@@ -492,10 +489,10 @@ export default function ContactsPage() {
       <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Частые вопросы
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Ответы на самые популярные вопросы наших клиентов
             </p>
           </div>
@@ -531,8 +528,8 @@ export default function ContactsPage() {
                     <Star className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-lg weight-bold text-primary-dark mb-3">{faq.question}</h4>
-                    <p className="text-muted">{faq.answer}</p>
+                    <h4 className="text-title-sm weight-bold text-primary-dark mb-3">{faq.question}</h4>
+                    <p className="text-body text-primary-dark">{faq.answer}</p>
                   </div>
                 </div>
               </motion.div>
