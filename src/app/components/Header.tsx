@@ -193,7 +193,7 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-[36rem] bg-card backdrop-blur-xl rounded-2xl shadow-card-hover border border-light overflow-hidden"
+                        className="absolute top-full left-0 mt-2 w-[36rem] bg-white/98 backdrop-blur-xl rounded-2xl shadow-card-hover border border-light overflow-hidden"
                       >
                         {/* Заголовок */}
                         <div className="bg-primary-bg card-adaptive border-b border-primary">

@@ -212,8 +212,8 @@ body {
 .gradient-kvartett-text-on-dark {
   background: linear-gradient(135deg,
     var(--color-text-white) 0%,
-    var(--color-primary-light) 50%,
-    var(--color-primary) 100%
+    var(--color-accent) 50%,
+    var(--color-text-white) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
@@ -392,12 +392,12 @@ body {
   font-weight: 600;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-primary);
   transition: all 0.3s ease;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-primary-lg);
 }
 
 .btn-secondary {
@@ -431,24 +431,24 @@ body {
 
 /* Карточки */
 .card-modern {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--color-bg-card-hover);
   backdrop-filter: blur(0.25rem);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-primary);
   transition: all 0.3s ease;
 }
 
 .card-modern:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-primary-lg);
 }
 
 .card-glass {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--color-bg-card);
   backdrop-filter: blur(1.5rem);
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-light);
+  box-shadow: var(--shadow-primary);
 }
 
 /* Утилиты для анимаций */
@@ -496,7 +496,7 @@ body {
 .input-modern {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--color-bg-card-hover);
   backdrop-filter: blur(0.25rem);
   border: 1px solid var(--color-gray-200);
   border-radius: 0.75rem;

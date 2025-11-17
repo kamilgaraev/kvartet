@@ -196,7 +196,7 @@ export default function Footer() {
                   <h1 className="text-title-lg weight-bold group-hover:text-primary transition-colors">
                     КВАРТЕТ
                   </h1>
-                  <p className="text-caption text-primary-light weight-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
+                  <p className="text-caption text-accent weight-medium">РЕКЛАМНОЕ АГЕНТСТВО</p>
                 </div>
               </Link>
               

@@ -492,7 +492,7 @@ export default function Portfolio() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center bg-gradient-to-r from-primary/10 via-primary-dark/10 to-warning/10 rounded-3xl p-12 border border-white/20 backdrop-blur-sm"
+          className="text-center bg-white/90 backdrop-blur-lg rounded-3xl p-12 border border-primary/20 shadow-primary-lg"
         >
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}

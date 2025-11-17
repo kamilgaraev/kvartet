@@ -146,16 +146,16 @@ export default function QuickForm() {
 
                 {/* Имя */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-muted mb-2">
+                  <label className="block text-body-sm weight-medium text-primary-dark mb-2">
                     Ваше имя *
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" />
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary" />
                     <input
                       {...register('name')}
                       type="text"
                       placeholder="Введите ваше имя"
-                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-primary-dark"
                     />
                   </div>
                   {errors.name && (
@@ -165,16 +165,16 @@ export default function QuickForm() {
 
                 {/* Телефон */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-muted mb-2">
+                  <label className="block text-body-sm weight-medium text-primary-dark mb-2">
                     Телефон *
                   </label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" />
+                    <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-primary" />
                     <input
                       {...register('phone')}
                       type="tel"
                       placeholder="+7 (___) ___-__-__"
-                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-primary-dark"
                     />
                   </div>
                   {errors.phone && (
@@ -184,12 +184,12 @@ export default function QuickForm() {
 
                 {/* Услуга */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-muted mb-2">
+                  <label className="block text-body-sm weight-medium text-primary-dark mb-2">
                     Интересующая услуга *
                   </label>
                   <select
                     {...register('service')}
-                    className="w-full px-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors text-primary-dark"
                   >
                     <option value="">Выберите услугу</option>
                     {services.map(service => (
@@ -203,16 +203,16 @@ export default function QuickForm() {
 
                 {/* Сообщение */}
                 <div>
-                  <label className="block text-body-sm weight-medium text-muted mb-2">
+                  <label className="block text-body-sm weight-medium text-primary-dark mb-2">
                     Дополнительная информация
                   </label>
                   <div className="relative">
-                    <MessageCircle className="absolute left-3 top-3 w-5 h-5 text-muted" />
+                    <MessageCircle className="absolute left-3 top-3 w-5 h-5 text-primary" />
                     <textarea
                       {...register('message')}
                       rows={3}
                       placeholder="Опишите ваш проект..."
-                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
+                      className="w-full pl-10 pr-4 py-3 border border-light rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none text-primary-dark"
                     />
                   </div>
                 </div>

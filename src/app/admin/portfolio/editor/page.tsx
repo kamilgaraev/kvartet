@@ -529,7 +529,7 @@ export default function PortfolioEditor() {
               <button
                 onClick={() => saveProject(false)}
                 disabled={saving || !formData.title}
-                className="flex items-center space-x-2 px-4 py-2 bg-[#1FCAD4] text-white rounded-lg hover:bg-[#16a5ae] disabled:opacity-50"
+                className="flex items-center space-x-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-primary disabled:opacity-50"
               >
                 <Save className="w-4 h-4" />
                 <span>Опубликовать</span>
@@ -556,7 +556,7 @@ export default function PortfolioEditor() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center space-x-2 px-6 py-4 font-medium border-b-2 transition-colors ${
                       activeTab === tab.id
-                        ? 'border-[#1FCAD4] text-[#1FCAD4]'
+                        ? 'border-accent text-accent'
                         : 'border-transparent text-gray-600 hover:text-gray-900'
                     }`}
                   >
@@ -579,7 +579,7 @@ export default function PortfolioEditor() {
                         type="text"
                         value={formData.title}
                         onChange={(e) => handleTitleChange(e.target.value)}
-                        className="w-full px-4 py-3 text-lg border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-3 text-lg border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="Введите название проекта..."
                       />
                     </div>
@@ -593,7 +593,7 @@ export default function PortfolioEditor() {
                         type="text"
                         value={formData.slug}
                         onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="url-proekta"
                       />
                     </div>
@@ -618,7 +618,7 @@ export default function PortfolioEditor() {
                         value={formData.shortDesc}
                         onChange={(e) => setFormData(prev => ({ ...prev, shortDesc: e.target.value }))}
                         rows={3}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="Краткое описание для карточки проекта..."
                       />
                     </div>
@@ -644,7 +644,7 @@ export default function PortfolioEditor() {
                         />
                         <label
                           htmlFor="main-image-upload"
-                          className="inline-flex items-center space-x-2 px-4 py-2 bg-[#1FCAD4] text-white rounded-lg hover:bg-[#16a5ae] cursor-pointer transition-colors"
+                          className="inline-flex items-center space-x-2 px-4 py-2 bg-accent text-white rounded-lg hover:bg-primary cursor-pointer transition-colors"
                         >
                           <ImageIcon className="w-4 h-4" />
                           <span>Загрузить изображение</span>
@@ -660,7 +660,7 @@ export default function PortfolioEditor() {
                             type="url"
                             value={formData.image}
                             onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
-                            className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                            className="flex-1 px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                             placeholder="https://example.com/image.jpg"
                           />
                           <button
@@ -759,7 +759,7 @@ export default function PortfolioEditor() {
                             value={formData.gallery}
                             onChange={(e) => setFormData(prev => ({ ...prev, gallery: e.target.value }))}
                             rows={3}
-                            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                            className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                             placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
                           />
                           <button
@@ -856,7 +856,7 @@ export default function PortfolioEditor() {
                         value={formData.metaTitle}
                         onChange={(e) => setFormData(prev => ({ ...prev, metaTitle: e.target.value }))}
                         maxLength={60}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="SEO заголовок страницы"
                       />
                     </div>
@@ -871,7 +871,7 @@ export default function PortfolioEditor() {
                         onChange={(e) => setFormData(prev => ({ ...prev, metaDescription: e.target.value }))}
                         maxLength={160}
                         rows={3}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="Описание страницы для поисковых систем"
                       />
                     </div>
@@ -885,7 +885,7 @@ export default function PortfolioEditor() {
                         type="text"
                         value={formData.metaKeywords}
                         onChange={(e) => setFormData(prev => ({ ...prev, metaKeywords: e.target.value }))}
-                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                         placeholder="ключевое слово, другое слово, третье слово"
                       />
                     </div>
@@ -910,7 +910,7 @@ export default function PortfolioEditor() {
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                   >
                     <option value="">Выберите категорию</option>
                     <option value="advertising">Наружная реклама</option>
@@ -929,7 +929,7 @@ export default function PortfolioEditor() {
                     type="text"
                     value={formData.clientName}
                     onChange={(e) => setFormData(prev => ({ ...prev, clientName: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="Название компании"
                   />
                 </div>
@@ -944,7 +944,7 @@ export default function PortfolioEditor() {
                       type="number"
                       value={formData.year}
                       onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     />
                   </div>
                   
@@ -956,7 +956,7 @@ export default function PortfolioEditor() {
                       type="text"
                       value={formData.budget}
                       onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       placeholder="50 000 ₽"
                     />
                   </div>
@@ -971,7 +971,7 @@ export default function PortfolioEditor() {
                     type="text"
                     value={formData.tags}
                     onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="тег1, тег2, тег3"
                   />
                 </div>
@@ -985,7 +985,7 @@ export default function PortfolioEditor() {
                     value={formData.features}
                     onChange={(e) => setFormData(prev => ({ ...prev, features: e.target.value }))}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="особенность1, особенность2"
                   />
                 </div>
@@ -997,7 +997,7 @@ export default function PortfolioEditor() {
                       type="checkbox"
                       checked={formData.popular}
                       onChange={(e) => setFormData(prev => ({ ...prev, popular: e.target.checked }))}
-                      className="w-4 h-4 text-[#1FCAD4] border-gray-300 rounded focus:ring-[#1FCAD4]"
+                      className="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent"
                     />
                     <span className="ml-2 text-sm text-gray-700">Рекомендуемый проект</span>
                   </label>
@@ -1007,7 +1007,7 @@ export default function PortfolioEditor() {
                       type="checkbox"
                       checked={formData.active}
                       onChange={(e) => setFormData(prev => ({ ...prev, active: e.target.checked }))}
-                      className="w-4 h-4 text-[#1FCAD4] border-gray-300 rounded focus:ring-[#1FCAD4]"
+                      className="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent"
                     />
                     <span className="ml-2 text-sm text-gray-700">Активный</span>
                   </label>
@@ -1043,7 +1043,7 @@ export default function PortfolioEditor() {
               <div className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {projectTemplates.map(template => (
-                    <div key={template.id} className="border border-gray-200 rounded-lg p-4 hover:border-[#1FCAD4] transition-colors">
+                    <div key={template.id} className="border border-gray-200 rounded-lg p-4 hover:border-accent transition-colors">
                       <h3 className="font-semibold text-gray-900 mb-2">{template.name}</h3>
                       <p className="text-sm text-gray-600 mb-4">{template.description}</p>
                       
@@ -1059,7 +1059,7 @@ export default function PortfolioEditor() {
 
                       <button
                         onClick={() => applyTemplate(template)}
-                        className="w-full px-4 py-2 bg-[#1FCAD4] text-white rounded-lg hover:bg-[#16a5ae] transition-colors"
+                        className="w-full px-4 py-2 bg-accent text-white rounded-lg hover:bg-primary transition-colors"
                       >
                         Использовать шаблон
                       </button>

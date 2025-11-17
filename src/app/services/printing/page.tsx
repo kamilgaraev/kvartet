@@ -198,7 +198,7 @@ export default function PrintingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl weight-bold text-primary-dark mb-6"
+                className="text-display-1 weight-bold text-primary-dark mb-6 leading-tight-kw"
               >
                 Качественная{' '}
                 <span className="relative inline-block">
@@ -298,7 +298,7 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Виды полиграфии
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -356,7 +356,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Материалы и технологии
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -397,7 +397,7 @@ export default function PrintingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Как мы работаем
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -450,7 +450,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Наши преимущества
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -486,7 +486,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Примеры наших работ
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">
@@ -543,7 +543,7 @@ export default function PrintingPage() {
       <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Рассчитайте стоимость
             </h2>
             <p className="text-xl text-muted max-w-3xl mx-auto">

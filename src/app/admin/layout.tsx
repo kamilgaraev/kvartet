@@ -50,7 +50,7 @@ export default function AdminLayout({
   if (status === 'loading') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1FCAD4]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
       </div>
     )
   }
@@ -96,7 +96,7 @@ export default function AdminLayout({
             >
               <item.icon
                 className={`mr-3 w-5 h-5 transition-colors ${
-                  isActive ? 'text-[#1FCAD4]' : 'text-gray-400 group-hover:text-gray-500'
+                  isActive ? 'text-accent' : 'text-gray-400 group-hover:text-gray-500'
                 }`}
               />
               {item.name}
@@ -115,7 +115,7 @@ export default function AdminLayout({
         <div className="bg-gray-50 rounded-xl p-4">
           <div className="flex items-center space-x-3 mb-3">
             <img
-               src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=3b82f6&color=fff`}
+               src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=376E6F&color=fff`}
               alt={session?.user?.name || 'User'}
               className="w-10 h-10 rounded-full"
             />
@@ -191,7 +191,7 @@ export default function AdminLayout({
                 <input
                   type="text"
                   placeholder="Поиск..."
-                 className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm w-64"
+                 className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm w-64"
                 />
               </div>
             </div>
@@ -204,7 +204,7 @@ export default function AdminLayout({
               
               <div className="flex items-center space-x-3">
                 <img
-                 src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=3b82f6&color=fff`}
+                 src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=376E6F&color=fff`}
                   alt={session?.user?.name || 'User'}
                   className="w-8 h-8 rounded-full"
                 />

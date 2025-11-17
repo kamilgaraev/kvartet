@@ -165,14 +165,14 @@ export default function OutdoorAdvertisingPage() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <Building className="w-4 h-4 text-primary" />
-                <span className="text-sm weight-semibold text-muted">Наружная реклама</span>
+                <span className="text-caption weight-semibold text-primary-dark">Наружная реклама</span>
               </motion.div>
 
               <motion.h1 
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-5xl md:text-6xl weight-bold text-primary-dark mb-6"
+                className="text-display-1 weight-bold text-primary-dark mb-6 leading-tight-kw"
               >
                 Яркая реклама{' '}
                 <span className="relative inline-block">
@@ -190,7 +190,7 @@ export default function OutdoorAdvertisingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-muted mb-8 leading-relaxed"
+                className="text-body-xl text-primary-dark mb-8 leading-relaxed-kw"
               >
                 Полный цикл производства наружной рекламы: от разработки дизайна до монтажа. Собственное производство, опыт 15+ лет, гарантия качества.
               </motion.p>

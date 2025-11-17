@@ -103,11 +103,6 @@ export default function Testimonials() {
       <div className="absolute inset-0">
         <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] border border-primary-20 rounded-full"
-        />
       </div>
 
       <div className="relative container-adaptive">
@@ -154,7 +149,7 @@ export default function Testimonials() {
         >
           <div className="relative">
             {/* Основная карточка отзыва */}
-            <div className="relative bg-white/90 backdrop-blur-2xl rounded-[2rem] p-8 md:p-12 shadow-[0_32px_64px_-12px_rgba(59,130,246,0.15)] border border-white/40 overflow-hidden">
+            <div className="relative bg-white/90 backdrop-blur-2xl rounded-[2rem] p-8 md:p-12 shadow-primary-xl border border-white/40 overflow-hidden">
               {/* Градиентный фон */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-05 via-transparent to-primary-dark-05 opacity-50"></div>
               

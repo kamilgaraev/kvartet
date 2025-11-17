@@ -161,14 +161,14 @@ export default function ServicesPage() {
               className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-8"
             >
               <Star className="w-5 h-5 text-primary" />
-              <span className="text-sm weight-semibold text-muted">Полный спектр рекламных услуг</span>
+              <span className="text-caption weight-semibold text-primary-dark">Полный спектр рекламных услуг</span>
             </motion.div>
 
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-7xl weight-bold text-primary-dark mb-8"
+              className="text-display-1 weight-bold text-primary-dark mb-8 leading-tight-kw"
             >
               Наши{' '}
               <span className="relative inline-block">
@@ -186,7 +186,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-muted mb-12 max-w-3xl mx-auto leading-relaxed"
+              className="text-body-xl text-primary-dark mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               От разработки концепции до полной реализации проекта. Мы предоставляем комплексные решения для продвижения вашего бизнеса
             </motion.p>
@@ -359,7 +359,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl weight-bold mb-6"
+              className="text-display-2 weight-bold mb-6 leading-tight-kw"
             >
               Готовы начать проект?
             </motion.h2>
@@ -367,7 +367,7 @@ export default function ServicesPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
+              className="text-body-xl mb-8 max-w-2xl mx-auto opacity-90"
             >
               Свяжитесь с нами для консультации и расчета стоимости вашего проекта
             </motion.p>

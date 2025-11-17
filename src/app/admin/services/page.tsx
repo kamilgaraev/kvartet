@@ -98,7 +98,7 @@ export default function ServicesPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#1FCAD4]"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
       </div>
     )
   }
@@ -115,7 +115,7 @@ export default function ServicesPage() {
         <div className="flex items-center space-x-3">
           <button 
             onClick={() => setShowModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] text-white rounded-lg hover:opacity-90 transition-opacity"
+            className="flex items-center space-x-2 px-4 py-2 bg-accent hover:bg-primary text-white rounded-lg transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span>Добавить услугу</span>
@@ -133,7 +133,7 @@ export default function ServicesPage() {
                 placeholder="Поиск услуг..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-sm w-64"
+                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm w-64"
               />
             </div>
             
@@ -141,7 +141,7 @@ export default function ServicesPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-sm"
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
               >
                 {categories.map(category => (
                   <option key={category.value} value={category.value}>
@@ -153,7 +153,7 @@ export default function ServicesPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-sm"
+                className="px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
               >
                 <option value="all">Все статусы</option>
                 <option value="active">Активные</option>

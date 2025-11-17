@@ -238,7 +238,7 @@ export default function PortfolioPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1FCAD4] mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent mx-auto mb-4"></div>
           <p className="text-gray-600">Загрузка портфолио...</p>
         </div>
       </div>
@@ -256,7 +256,7 @@ export default function PortfolioPage() {
             </div>
             <Link
               href="/admin/portfolio/editor"
-              className="flex items-center px-4 py-2 bg-[#1FCAD4] hover:bg-[#16a5ae] text-white rounded-lg transition-colors"
+              className="flex items-center px-4 py-2 bg-accent hover:bg-primary text-white rounded-lg transition-colors"
             >
               <Plus className="w-4 h-4 mr-2" />
               Добавить проект
@@ -272,7 +272,7 @@ export default function PortfolioPage() {
                   placeholder="Поиск по названию, клиенту или описанию..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                 />
               </div>
             </div>
@@ -281,7 +281,7 @@ export default function PortfolioPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
               >
                 {categories.map(cat => (
                   <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -291,7 +291,7 @@ export default function PortfolioPage() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent"
+                className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
               >
                 {statuses.map(status => (
                   <option key={status.value} value={status.value}>{status.label}</option>
@@ -301,13 +301,13 @@ export default function PortfolioPage() {
               <div className="flex rounded-lg border border-gray-200 overflow-hidden">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 ${viewMode === 'grid' ? 'bg-[#1FCAD4] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                  className={`p-2 ${viewMode === 'grid' ? 'bg-accent text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                 >
                   <Grid className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 ${viewMode === 'list' ? 'bg-[#1FCAD4] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                  className={`p-2 ${viewMode === 'list' ? 'bg-accent text-white' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
                 >
                   <List className="w-4 h-4" />
                 </button>
@@ -560,7 +560,7 @@ export default function PortfolioPage() {
                     required
                     value={formData.title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Введите название проекта"
                   />
                 </div>
@@ -573,7 +573,7 @@ export default function PortfolioPage() {
                     type="text"
                     value={formData.slug}
                     onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                     placeholder="project-slug"
                   />
                 </div>
@@ -588,7 +588,7 @@ export default function PortfolioPage() {
                   value={formData.description}
                   onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                   placeholder="Описание проекта, его особенности и результаты..."
                 />
               </div>
@@ -601,7 +601,7 @@ export default function PortfolioPage() {
                   type="url"
                   value={formData.image}
                   onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.value }))}
-                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                   placeholder="https://example.com/image.jpg"
                 />
                 <p className="text-xs text-gray-500 mt-1">Ссылка на главное изображение проекта</p>
@@ -627,7 +627,7 @@ export default function PortfolioPage() {
                    type="file"
                    accept="image/*"
                    onChange={handleImageUpload}
-                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-[#1FCAD4] file:text-white hover:file:bg-[#16a5ae]"
+                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-accent file:text-white hover:file:bg-primary"
                  />
                  <p className="text-xs text-gray-500 mt-1">Поддерживаются форматы: JPG, PNG, GIF (макс. 5МБ)</p>
                </div>
@@ -640,7 +640,7 @@ export default function PortfolioPage() {
                    type="text"
                    value={formData.gallery}
                    onChange={(e) => setFormData(prev => ({ ...prev, gallery: e.target.value }))}
-                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                    placeholder="https://example.com/image1.jpg, https://example.com/image2.jpg"
                  />
                  <p className="text-xs text-gray-500 mt-1">Введите URL изображений через запятую для галереи</p>
@@ -649,7 +649,7 @@ export default function PortfolioPage() {
                    accept="image/*"
                    multiple
                    onChange={handleGalleryUpload}
-                   className="mt-2 w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-[#1FCAD4] file:text-white hover:file:bg-[#16a5ae]"
+                   className="mt-2 w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-accent file:text-white hover:file:bg-primary"
                  />
                  <p className="text-xs text-gray-500 mt-1">Или выберите несколько файлов для галереи</p>
                </div>
@@ -664,7 +664,7 @@ export default function PortfolioPage() {
                     required
                     value={formData.client}
                     onChange={(e) => setFormData(prev => ({ ...prev, client: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Название компании или имя клиента"
                   />
                 </div>
@@ -677,7 +677,7 @@ export default function PortfolioPage() {
                     required
                     value={formData.category}
                     onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white"
                   >
                     <option value="">Выберите категорию</option>
                     <option value="advertising">Реклама</option>
@@ -696,7 +696,7 @@ export default function PortfolioPage() {
                    type="text"
                    value={formData.tags}
                    onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                   className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                    placeholder="брендинг, логотип, дизайн"
                  />
                  <p className="text-xs text-gray-500 mt-1">Разделите теги запятыми</p>
@@ -711,7 +711,7 @@ export default function PortfolioPage() {
                     type="text"
                     value={formData.budget}
                     onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                     placeholder="50 000 ₽"
                   />
                 </div>
@@ -726,7 +726,7 @@ export default function PortfolioPage() {
                     max="2030"
                     value={formData.year}
                     onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#1FCAD4] focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-gray-900 bg-white placeholder-gray-500"
                   />
                 </div>
               </div>
@@ -737,7 +737,7 @@ export default function PortfolioPage() {
                     type="checkbox"
                     checked={formData.isPublished}
                     onChange={(e) => setFormData(prev => ({ ...prev, isPublished: e.target.checked }))}
-                    className="w-4 h-4 text-[#1FCAD4] border-gray-300 rounded focus:ring-[#1FCAD4]"
+                    className="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent"
                   />
                   <span className="ml-2 text-sm text-gray-700">Опубликовать проект</span>
                 </label>
@@ -747,7 +747,7 @@ export default function PortfolioPage() {
                     type="checkbox"
                     checked={formData.featured}
                     onChange={(e) => setFormData(prev => ({ ...prev, featured: e.target.checked }))}
-                    className="w-4 h-4 text-[#1FCAD4] border-gray-300 rounded focus:ring-[#1FCAD4]"
+                    className="w-4 h-4 text-accent border-gray-300 rounded focus:ring-accent"
                   />
                   <span className="ml-2 text-sm text-gray-700">Рекомендуемый проект</span>
                 </label>
@@ -764,7 +764,7 @@ export default function PortfolioPage() {
               <button
                 onClick={handleSaveProject}
                 disabled={saving || !formData.title || !formData.description || !formData.client || !formData.category}
-                className="px-4 py-2 bg-[#1FCAD4] hover:bg-[#16a5ae] text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-accent hover:bg-primary text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? 'Сохранение...' : 'Сохранить проект'}
               </button>

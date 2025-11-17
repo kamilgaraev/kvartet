@@ -157,7 +157,7 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1FCAD4]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
       </div>
     )
   }
@@ -226,7 +226,7 @@ export default function AdminDashboard() {
         >
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-bold text-gray-900">Последние заявки</h2>
-            <button className="text-[#1FCAD4] hover:text-[#1FCAD4]/80 text-sm font-medium">
+            <button className="text-accent hover:text-primary text-sm font-medium">
               Посмотреть все
             </button>
           </div>
@@ -241,7 +241,7 @@ export default function AdminDashboard() {
                 className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
               >
                 <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
                     <span className="text-white font-semibold text-sm">
                       {lead.name.charAt(0)}
                     </span>
@@ -281,7 +281,7 @@ export default function AdminDashboard() {
           <h2 className="text-xl font-bold text-gray-900 mb-6">Быстрые действия</h2>
           
           <div className="space-y-4">
-            <button className="w-full flex items-center space-x-3 p-4 bg-gradient-to-r from-[#1FCAD4] to-[#E91E63] text-white rounded-xl hover:opacity-90 transition-opacity">
+            <button className="w-full flex items-center space-x-3 p-4 bg-accent text-white rounded-xl hover:bg-primary transition-colors">
               <MessageSquare className="w-5 h-5" />
               <span>Новая заявка</span>
             </button>
