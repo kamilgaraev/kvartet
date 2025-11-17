@@ -181,7 +181,7 @@ export default function OutdoorAdvertisingPage() {
                     initial={{ scaleX: 0 }}
                     animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                   />
                 </span>
               </motion.h1>

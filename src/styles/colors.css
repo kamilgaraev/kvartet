@@ -36,7 +36,7 @@
   --gradient-primary: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   --gradient-primary-reverse: linear-gradient(to right, var(--color-primary-dark), var(--color-primary));
   --gradient-light: linear-gradient(to right, var(--color-primary), var(--color-primary-light));
-  --gradient-bg: linear-gradient(to bottom right, var(--color-primary-bg), var(--color-primary-light-20));
+  --gradient-bg: linear-gradient(to bottom right, #f9fafb, #ffffff);
   --gradient-accent: linear-gradient(to right, var(--color-accent), var(--color-primary));
   
   /* ==========================================================================

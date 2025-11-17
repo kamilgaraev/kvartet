@@ -29,13 +29,42 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [isOverDark, setIsOverDark] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
+      
+      // Проверяем, находится ли хедер над темными секциями (футер, CTA секции)
+      const footer = document.querySelector('footer')
+      const darkSections = document.querySelectorAll('.bg-gradient-primary, .bg-primary, .bg-primary-dark, [class*="from-primary"]')
+      
+      const headerHeight = 80 // Примерная высота хедера
+      const scrollPosition = window.scrollY
+      
+      let overDark = false
+      
+      // Проверяем футер
+      if (footer) {
+        const footerTop = footer.offsetTop
+        if (scrollPosition + headerHeight >= footerTop) {
+          overDark = true
+        }
+      }
+      
+      // Проверяем другие темные секции
+      darkSections.forEach(section => {
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= headerHeight && rect.bottom > 0) {
+          overDark = true
+        }
+      })
+      
+      setIsOverDark(overDark)
     }
 
+    handleScroll() // Проверка при монтировании
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -139,10 +168,10 @@ export default function Header() {
                 />
               </motion.div>
               <div>
-                <h1 className="nav-logo-title text-primary-dark group-hover:text-primary transition-colors">
+                <h1 className={`nav-logo-title ${isOverDark ? 'text-white' : 'text-primary-dark'} group-hover:text-primary transition-colors`}>
                   КВАРТЕТ
                 </h1>
-                <p className="nav-logo-subtitle text-primary-dark opacity-70">РЕКЛАМНОЕ АГЕНТСТВО</p>
+                <p className={`nav-logo-subtitle ${isOverDark ? 'text-white' : 'text-primary-dark'} opacity-70`}>РЕКЛАМНОЕ АГЕНТСТВО</p>
               </div>
             </Link>
 
@@ -164,7 +193,7 @@ export default function Header() {
                       className={`relative nav-item transition-all duration-300 flex items-center space-x-1 group ${
                         item.isActive
                           ? 'text-white bg-primary shadow-lg shadow-primary'
-                          : 'text-primary-dark hover:text-primary hover:bg-primary-bg'
+                          : `${isOverDark ? 'text-white hover:text-primary-light' : 'text-primary-dark hover:text-primary'} hover:bg-primary-bg`
                       }`}
                     >
                       <span className="relative z-10 text-body">{item.name}</span>
@@ -261,9 +290,9 @@ export default function Header() {
               {/* Телефон */}
               <motion.div 
                 whileHover={{ scale: 1.02 }}
-                className="flex items-center space-x-2 nav-text text-primary-dark bg-primary-bg nav-item border border-primary"
+                className={`flex items-center space-x-2 nav-text ${isOverDark ? 'text-white bg-white/10 border-white/30' : 'text-primary-dark bg-primary-bg border-primary'} nav-item border transition-colors`}
               >
-                <Phone className="icon-adaptive text-primary" />
+                <Phone className={`icon-adaptive ${isOverDark ? 'text-white' : 'text-primary'} transition-colors`} />
                 <span>+7 (347) 123-45-67</span>
               </motion.div>
 
@@ -299,7 +328,7 @@ export default function Header() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="lg:hidden p-3 rounded-xl bg-primary/20 hover:bg-primary/30 text-primary transition-colors"
+              className={`lg:hidden p-3 rounded-xl ${isOverDark ? 'bg-white/20 hover:bg-white/30 text-white' : 'bg-primary/20 hover:bg-primary/30 text-primary'} transition-colors`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <AnimatePresence mode="wait">

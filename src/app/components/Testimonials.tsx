@@ -462,7 +462,7 @@ export default function Testimonials() {
                   <motion.div
                     animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0, 0.5] }}
                     transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark rounded-2xl"
+                    className="absolute inset-0 bg-gradient-primary rounded-2xl"
                   />
                 )}
               </motion.button>

@@ -83,7 +83,7 @@ export default function Footer() {
       </div>
 
       {/* Верхняя секция с CTA */}
-      <div className="relative border-b border-primary-dark-30 bg-gradient-to-br from-primary to-primary-dark">
+      <div className="relative border-b border-primary-dark-30 bg-gradient-primary">
         <div className="container-adaptive section-padding-y">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
