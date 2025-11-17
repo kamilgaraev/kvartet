@@ -187,7 +187,7 @@ export default function AboutPage() {
                     initial={{ scaleX: 0 }}
                     animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                   />
                 </span>
                 {' '}рекламы
@@ -232,7 +232,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-3xl p-8 backdrop-blur-sm">
+              <div className="aspect-square bg-primary-10 rounded-3xl p-8 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop"
                   alt="Команда Квартет"
@@ -243,7 +243,7 @@ export default function AboutPage() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 3, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center"
               >
                 <Heart className="w-8 h-8 text-white" />
               </motion.div>
@@ -294,7 +294,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section ref={timelineRef} className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+      <section ref={timelineRef} className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -311,7 +311,7 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-to-b from-primary to-primary-dark h-full rounded-full"></div>
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-gradient-primary h-full rounded-full"></div>
             
             <div className="space-y-12">
               {timeline.map((event, index) => (
@@ -333,7 +333,7 @@ export default function AboutPage() {
                   </div>
                   
                   <div className={`hidden lg:block ${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                    <div className="w-full h-32 bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-2xl"></div>
+                    <div className="w-full h-32 bg-primary-10 rounded-2xl"></div>
                   </div>
 
                   <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-card border-4 border-primary rounded-full z-10"></div>
@@ -383,7 +383,7 @@ export default function AboutPage() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center">
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
                       <Star className="w-4 h-4 text-white" />
                     </div>
                   </motion.div>
@@ -400,7 +400,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+      <section className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
@@ -474,7 +474,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding-y bg-gradient-to-r from-primary via-primary-dark to-warning relative overflow-hidden">
+      <section className="section-padding-y bg-gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-overlay"></div>
         <div className="relative container-adaptive">
           <div className="text-center text-white">

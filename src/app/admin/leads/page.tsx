@@ -228,7 +228,7 @@ export default function LeadsPage() {
             <Download className="w-4 h-4" />
             <span>Экспорт</span>
           </button>
-          <button className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity">
+          <button className="flex items-center space-x-2 px-4 py-2 bg-gradient-primary text-white rounded-lg hover:opacity-90 transition-opacity">
             <MessageSquare className="w-4 h-4" />
             <span>Новая заявка</span>
           </button>
@@ -370,7 +370,7 @@ export default function LeadsPage() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                         <span className="text-white font-semibold text-sm">
                           {lead.name.charAt(0)}
                         </span>

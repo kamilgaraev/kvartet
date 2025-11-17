@@ -197,7 +197,7 @@ export default function InteriorPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-light-10 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -212,8 +212,8 @@ export default function InteriorPage() {
                 transition={{ duration: 0.6 }}
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-purple-500/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
-                <Home className="w-4 h-4 text-purple-500" />
-                <span className="text-sm weight-semibold text-muted">Интерьерная реклама</span>
+                <Home className="w-4 h-4 text-primary" />
+                <span className="text-caption weight-semibold text-primary-dark">Интерьерная реклама</span>
               </motion.div>
 
               <motion.h1 
@@ -238,7 +238,7 @@ export default function InteriorPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-muted mb-8 leading-relaxed"
+                className="text-body-xl text-primary-dark mb-8 leading-relaxed-kw"
               >
                 Комплексное оформление интерьеров: навигация, стенды, вывески. Создаем функциональное и стильное пространство для вашего бизнеса.
               </motion.p>
@@ -259,7 +259,7 @@ export default function InteriorPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-primary-dark text-white px-8 py-4 rounded-2xl border border-primary-dark hover:bg-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -278,8 +278,8 @@ export default function InteriorPage() {
                   { label: 'Лет гарантии', value: '2' }
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl weight-bold text-purple-500">{stat.value}</div>
-                    <div className="text-sm text-muted">{stat.label}</div>
+                    <div className="text-display-3 weight-bold text-primary">{stat.value}</div>
+                    <div className="text-caption text-primary-dark">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -323,7 +323,7 @@ export default function InteriorPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Виды интерьерной рекламы
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Комплексные решения для оформления внутренних пространств
             </p>
           </motion.div>
@@ -355,15 +355,15 @@ export default function InteriorPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl weight-bold text-primary-dark mb-2 group-hover:text-purple-500 transition-colors">
+                  <h3 className="text-title weight-bold text-primary-dark mb-2 group-hover:text-primary transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                  <p className="text-body text-primary-dark mb-4 leading-relaxed-kw">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg weight-bold text-purple-500">{service.price}</span>
-                    <button className="text-purple-500 hover:bg-purple-500 hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm weight-medium">
+                    <span className="text-body-lg weight-bold text-primary">{service.price}</span>
+                    <button className="text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-caption weight-medium">
                       Заказать
                     </button>
                   </div>
@@ -375,7 +375,7 @@ export default function InteriorPage() {
       </section>
 
       {/* Applications */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
@@ -455,7 +455,7 @@ export default function InteriorPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section ref={processRef} className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -549,7 +549,7 @@ export default function InteriorPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
@@ -606,7 +606,7 @@ export default function InteriorPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-purple-500 via-purple-600 to-indigo-500 relative overflow-hidden">
+      <section className="py-24 bg-gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">

@@ -40,7 +40,7 @@ export default function NotFound() {
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-bg relative overflow-hidden">
       {/* Интерактивные декоративные элементы */}
       <div className="absolute inset-0">
         <motion.div 
@@ -166,7 +166,7 @@ export default function NotFound() {
                 scale: [1, 1.1, 1]
               }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-primary to-primary-dark rounded-2xl shadow-xl mb-8"
+              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-primary rounded-2xl shadow-xl mb-8"
             >
               <Zap className="w-10 h-10 text-white" />
             </motion.div>
@@ -214,7 +214,7 @@ export default function NotFound() {
             >
               <Link 
                 href="/"
-                className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl font-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <Home className="w-5 h-5" />
                 <span>На главную</span>

@@ -149,7 +149,7 @@ export default function OutdoorAdvertisingPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -203,7 +203,7 @@ export default function OutdoorAdvertisingPage() {
               >
                 <Link
                   href="/calculator"
-                  className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Calculator className="w-5 h-5" />
                   <span>Рассчитать стоимость</span>
@@ -211,7 +211,7 @@ export default function OutdoorAdvertisingPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light hover:border-primary hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-primary-dark text-white px-8 py-4 rounded-2xl border border-primary-dark hover:bg-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -230,8 +230,8 @@ export default function OutdoorAdvertisingPage() {
                   { label: 'Гарантия', value: '3 года' }
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl weight-bold text-primary">{stat.value}</div>
-                    <div className="text-sm text-muted">{stat.label}</div>
+                    <div className="text-display-3 weight-bold text-primary">{stat.value}</div>
+                    <div className="text-caption text-primary-dark">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -243,7 +243,7 @@ export default function OutdoorAdvertisingPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-3xl p-8 backdrop-blur-sm">
+              <div className="aspect-square bg-primary-10 rounded-3xl p-8 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop"
                   alt="Наружная реклама"
@@ -254,7 +254,7 @@ export default function OutdoorAdvertisingPage() {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center"
               >
                 <Zap className="w-8 h-8 text-white" />
               </motion.div>
@@ -272,10 +272,10 @@ export default function OutdoorAdvertisingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Виды наружной рекламы
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Полный спектр решений для эффективного продвижения вашего бизнеса
             </p>
           </motion.div>
@@ -307,15 +307,15 @@ export default function OutdoorAdvertisingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl weight-bold text-primary-dark mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-title weight-bold text-primary-dark mb-2 group-hover:text-primary transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-muted mb-4 text-sm leading-relaxed">
+                  <p className="text-body text-primary-dark mb-4 leading-relaxed-kw">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg weight-bold text-primary">{service.price}</span>
-                    <button className="text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm weight-medium">
+                    <span className="text-body-lg weight-bold text-primary">{service.price}</span>
+                    <button className="text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-caption weight-medium">
                       Заказать
                     </button>
                   </div>
@@ -327,7 +327,7 @@ export default function OutdoorAdvertisingPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section ref={processRef} className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -404,7 +404,7 @@ export default function OutdoorAdvertisingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-to-br from-primary-bg to-white rounded-2xl border border-light hover:border-primary-30 hover:shadow-lg transition-all duration-300"
+                className="text-center p-6 bg-gradient-bg rounded-2xl border border-light hover:border-primary-30 hover:shadow-lg transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -421,7 +421,7 @@ export default function OutdoorAdvertisingPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl weight-bold text-primary-dark mb-6">
@@ -478,7 +478,7 @@ export default function OutdoorAdvertisingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-primary via-primary-dark to-warning relative overflow-hidden">
+      <section className="py-24 bg-gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">
@@ -486,7 +486,7 @@ export default function OutdoorAdvertisingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl weight-bold mb-6"
+              className="text-display-2 weight-bold mb-6 leading-tight-kw"
             >
               Начните с бесплатной консультации
             </motion.h2>
@@ -494,7 +494,7 @@ export default function OutdoorAdvertisingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
+              className="text-body-xl mb-8 max-w-2xl mx-auto opacity-90"
             >
               Обсудим ваш проект, подготовим дизайн-макет и рассчитаем точную стоимость
             </motion.p>

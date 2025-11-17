@@ -146,7 +146,7 @@ export default function ServicesPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-05 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
@@ -310,7 +310,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Advantages */}
-      <section ref={advantagesRef} className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section ref={advantagesRef} className="py-24 bg-gradient-bg">
         <div className="container-adaptive">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -351,7 +351,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-primary via-primary-dark to-warning relative overflow-hidden">
+      <section className="py-24 bg-gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative container-adaptive">
           <div className="text-center text-white">

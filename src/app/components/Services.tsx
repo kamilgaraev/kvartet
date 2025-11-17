@@ -20,7 +20,7 @@ const services = [
     title: 'Наружная реклама',
     description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
     features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
-    color: 'from-primary to-primary-dark',
+    gradient: 'bg-gradient-primary',
     bgColor: 'bg-primary-05',
     href: '/services/outdoor',
     popular: true
@@ -30,7 +30,7 @@ const services = [
     title: 'Полиграфия',
     description: 'Визитки, листовки, каталоги, брошюры. Качественная печать на любых материалах.',
     features: ['Визитки', 'Листовки', 'Каталоги', 'Календари'],
-    color: 'from-primary-dark to-primary',
+    gradient: 'bg-gradient-primary-reverse',
     bgColor: 'bg-primary-dark-05',
     href: '/services/printing'
   },
@@ -39,7 +39,7 @@ const services = [
     title: 'Интерьерная реклама',
     description: 'Оформление торговых точек, офисов, выставочных стендов и презентационных материалов.',
     features: ['Стенды', 'Таблички', 'Указатели', 'POS-материалы'],
-    color: 'from-primary to-primary-light',
+    gradient: 'bg-gradient-light',
     bgColor: 'bg-primary-light-05',
     href: '/services/interior'
   },
@@ -48,7 +48,7 @@ const services = [
     title: 'Брендинг',
     description: 'Разработка логотипов, фирменного стиля, создание узнаваемого образа компании.',
     features: ['Логотип', 'Фирмстиль', 'Гайдлайн', 'Айдентика'],
-    color: 'from-primary-light to-primary',
+    gradient: 'bg-gradient-accent',
     bgColor: 'bg-primary-light-05',
     href: '/services/branding'
   }
@@ -131,20 +131,20 @@ export default function Services() {
               <div className={`relative bg-card backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-light hover:shadow-2xl transition-all duration-500 overflow-hidden h-full ${service.bgColor}`}>
                 {/* Декоративный элемент */}
                 <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                  <div className={`w-full h-full rounded-full bg-gradient-to-br ${service.color} transform rotate-45 translate-x-8 -translate-y-8`}></div>
+                  <div className={`w-full h-full rounded-full ${service.gradient} transform rotate-45 translate-x-8 -translate-y-8`}></div>
                 </div>
 
                 {/* Иконка */}
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300 }}
-                  className={`relative z-10 w-20 h-20 rounded-2xl bg-gradient-to-r ${service.color} p-5 mb-6 shadow-lg`}
+                  className={`relative z-10 w-20 h-20 rounded-2xl ${service.gradient} p-5 mb-6 shadow-lg`}
                 >
                   <service.icon className="w-full h-full text-white" />
                   <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                    className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${service.color} opacity-30`}
+                    className={`absolute inset-0 rounded-2xl ${service.gradient} opacity-30`}
                   />
                 </motion.div>
 
@@ -182,7 +182,7 @@ export default function Services() {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full mt-6 bg-gradient-to-r from-card to-white text-muted py-4 rounded-2xl border border-light hover:border-hover hover:text-primary hover:shadow-lg transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 group"
+                    className="w-full mt-6 bg-card text-muted py-4 rounded-2xl border border-light hover:border-hover hover:text-primary hover:shadow-lg transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 group"
                   >
                     <span>Подробнее</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

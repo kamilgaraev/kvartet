@@ -175,15 +175,15 @@ export default function PrintingPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-primary-bg via-white to-primary-10 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-success/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
@@ -191,7 +191,7 @@ export default function PrintingPage() {
                 className="inline-flex items-center space-x-2 bg-gradient-to-r from-success/10 to-primary-dark/10 rounded-full px-4 py-2 mb-6"
               >
                 <FileText className="w-4 h-4 text-success" />
-                <span className="text-sm weight-semibold text-muted">Полиграфия</span>
+                <span className="text-caption weight-semibold text-primary-dark">Полиграфия</span>
               </motion.div>
 
               <motion.h1 
@@ -216,7 +216,7 @@ export default function PrintingPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="text-xl text-muted mb-8 leading-relaxed"
+                className="text-body-xl text-primary-dark mb-8 leading-relaxed-kw"
               >
                 От визиток до каталогов — высококачественная печать любых тиражей. Цифровая и офсетная печать, экспресс-заказы, полная постобработка.
               </motion.p>
@@ -237,7 +237,7 @@ export default function PrintingPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-card/80 backdrop-blur-sm text-muted px-8 py-4 rounded-2xl border border-light/50 hover:border-success/50 hover:text-success transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-primary-dark text-white px-8 py-4 rounded-2xl border border-primary-dark hover:bg-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -256,8 +256,8 @@ export default function PrintingPage() {
                   { label: 'Лет опыта', value: '15+' }
                 ].map((stat, index) => (
                   <div key={index} className="text-center">
-                    <div className="text-2xl weight-bold text-success">{stat.value}</div>
-                    <div className="text-sm text-muted">{stat.label}</div>
+                    <div className="text-display-3 weight-bold text-success">{stat.value}</div>
+                    <div className="text-caption text-primary-dark">{stat.label}</div>
                   </div>
                 ))}
               </motion.div>
@@ -267,7 +267,7 @@ export default function PrintingPage() {
               initial={{ opacity: 0, x: 30 }}
               animate={heroInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
+              className="relative lg:order-last order-first mb-8 lg:mb-0"
             >
               <div className="aspect-square bg-gradient-to-br from-success/20 to-primary-dark/20 rounded-3xl p-8 backdrop-blur-sm">
                 <img
@@ -301,7 +301,7 @@ export default function PrintingPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Виды полиграфии
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Полный спектр полиграфических услуг от визиток до каталогов
             </p>
           </motion.div>
@@ -333,15 +333,15 @@ export default function PrintingPage() {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl weight-bold text-primary-dark mb-2 group-hover:text-success transition-colors">
+                  <h3 className="text-title weight-bold text-primary-dark mb-2 group-hover:text-success transition-colors">
                     {service.name}
                   </h3>
-                  <p className="text-muted mb-4 text-sm leading-relaxed">
+                  <p className="text-body text-primary-dark mb-4 leading-relaxed-kw">
                     {service.description}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg weight-bold text-success">{service.price}</span>
-              <button className="text-success hover:bg-success hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-sm weight-medium">
+                    <span className="text-body-lg weight-bold text-success">{service.price}</span>
+              <button className="text-success hover:bg-success hover:text-white px-4 py-2 rounded-lg transition-all duration-300 text-caption weight-medium">
                       Заказать
                     </button>
                   </div>
@@ -353,13 +353,13 @@ export default function PrintingPage() {
       </section>
 
       {/* Materials */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Материалы и технологии
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Используем только качественные материалы и современное оборудование
             </p>
           </div>
@@ -377,9 +377,9 @@ export default function PrintingPage() {
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-success to-success-dark flex items-center justify-center shadow-lg mb-4">
                   <Layers className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-lg weight-bold text-primary-dark mb-2">{material.name}</h3>
-                <p className="text-muted text-sm mb-3">{material.description}</p>
-                <div className="text-xs text-success weight-medium bg-success/10 px-3 py-1 rounded-full">
+                <h3 className="text-title-sm weight-bold text-primary-dark mb-2">{material.name}</h3>
+                <p className="text-body-sm text-primary-dark mb-3">{material.description}</p>
+                <div className="text-caption text-success weight-medium bg-success/10 px-3 py-1 rounded-full">
                   {material.usage}
                 </div>
               </motion.div>
@@ -400,7 +400,7 @@ export default function PrintingPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Как мы работаем
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Профессиональный подход на каждом этапе производства
             </p>
           </motion.div>
@@ -422,14 +422,14 @@ export default function PrintingPage() {
                     >
                       <step.icon className="w-8 h-8 text-white" />
                     </motion.div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center text-sm weight-bold">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-dark text-white rounded-full flex items-center justify-center text-caption weight-bold">
                       {step.step}
                     </div>
                   </div>
                   
-                  <h3 className="text-xl weight-bold text-primary-dark mb-3">{step.title}</h3>
-                  <p className="text-muted mb-4 text-sm leading-relaxed">{step.description}</p>
-                  <div className="inline-flex items-center space-x-1 text-success text-sm weight-medium">
+                  <h3 className="text-title weight-bold text-primary-dark mb-3">{step.title}</h3>
+                  <p className="text-body text-primary-dark mb-4 leading-relaxed-kw">{step.description}</p>
+                  <div className="inline-flex items-center space-x-1 text-success text-caption weight-medium">
                     <Clock className="w-4 h-4" />
                     <span>{step.duration}</span>
                   </div>
@@ -447,7 +447,7 @@ export default function PrintingPage() {
       </section>
 
       {/* Advantages */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
@@ -489,7 +489,7 @@ export default function PrintingPage() {
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Примеры наших работ
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Качественная полиграфия для разных сфер бизнеса
             </p>
           </div>
@@ -511,13 +511,13 @@ export default function PrintingPage() {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="bg-success text-white px-3 py-1 rounded-full text-sm weight-medium">
+                    <span className="bg-success text-white px-3 py-1 rounded-full text-caption weight-medium">
                       {item.category}
                     </span>
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl weight-bold text-primary-dark mb-2">{item.title}</h3>
+                  <h3 className="text-title weight-bold text-primary-dark mb-2">{item.title}</h3>
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-5 h-5 text-success" />
                 <span className="text-success weight-medium">{item.result}</span>
@@ -540,23 +540,23 @@ export default function PrintingPage() {
       </section>
 
       {/* Price Calculator */}
-      <section className="py-24 bg-gradient-to-br from-primary-bg to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Рассчитайте стоимость
             </h2>
-            <p className="text-xl text-muted max-w-3xl mx-auto">
+            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
               Узнайте точную стоимость печати вашего тиража
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             <div className="bg-card p-8 rounded-2xl shadow-lg border border-light">
-              <h3 className="text-2xl weight-bold text-primary-dark mb-6">Быстрый расчет</h3>
+              <h3 className="text-title-lg weight-bold text-primary-dark mb-6">Быстрый расчет</h3>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-sm weight-medium text-muted mb-2">
+                  <label className="block text-caption weight-medium text-primary-dark mb-2">
                     Тип продукции
                   </label>
                   <select className="w-full px-4 py-3 rounded-xl border border-light focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
@@ -569,7 +569,7 @@ export default function PrintingPage() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm weight-medium text-muted mb-2">
+                    <label className="block text-caption weight-medium text-primary-dark mb-2">
                       Тираж
                     </label>
                     <input
@@ -579,7 +579,7 @@ export default function PrintingPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm weight-medium text-muted mb-2">
+                    <label className="block text-caption weight-medium text-primary-dark mb-2">
                       Бумага
                     </label>
                     <select className="w-full px-4 py-3 rounded-xl border border-light focus:border-success focus:ring-2 focus:ring-success/20 transition-all duration-300">
@@ -599,7 +599,7 @@ export default function PrintingPage() {
 
             <div className="space-y-8">
               <div className="bg-gradient-to-r from-success/10 to-success-dark/10 p-6 rounded-2xl border border-success/20">
-                <h4 className="text-lg weight-bold text-primary-dark mb-4">
+                <h4 className="text-title-sm weight-bold text-primary-dark mb-4">
                   Примерные цены
                 </h4>
                 <div className="space-y-3">
@@ -618,7 +618,7 @@ export default function PrintingPage() {
               </div>
 
               <div className="bg-card p-6 rounded-2xl shadow-lg border border-light">
-                <h4 className="text-lg weight-bold text-primary-dark mb-4">
+                <h4 className="text-title-sm weight-bold text-primary-dark mb-4">
                   Скидки на тираж
                 </h4>
                 <div className="space-y-3">
@@ -648,7 +648,7 @@ export default function PrintingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl weight-bold mb-6"
+              className="text-display-2 weight-bold mb-6 leading-tight-kw"
             >
               Нужна качественная печать?
             </motion.h2>
@@ -656,7 +656,7 @@ export default function PrintingPage() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl mb-8 max-w-2xl mx-auto opacity-90"
+              className="text-body-xl mb-8 max-w-2xl mx-auto opacity-90"
             >
               Свяжитесь с нами для консультации и расчета стоимости вашего тиража
             </motion.p>

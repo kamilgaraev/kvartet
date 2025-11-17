@@ -130,10 +130,10 @@ export default function Hero() {
               className="grid grid-cols-1 md:grid-cols-2 gap-5"
             >
               {[
-                { icon: Printer, text: 'Широкоформатная печать баннеров', gradient: 'from-primary to-primary-dark' },
-                { icon: Monitor, text: 'Изготовление вывесок и табличек', gradient: 'from-primary-dark to-primary' },
-                { icon: Palette, text: 'Интерьерное брендирование', gradient: 'from-primary to-primary-light' },
-                { icon: Layers, text: 'Цифровая печать материалов', gradient: 'from-primary-dark to-primary-light' }
+                { icon: Printer, text: 'Широкоформатная печать баннеров', gradient: 'bg-gradient-primary' },
+                { icon: Monitor, text: 'Изготовление вывесок и табличек', gradient: 'bg-gradient-primary-reverse' },
+                { icon: Palette, text: 'Интерьерное брендирование', gradient: 'bg-gradient-light' },
+                { icon: Layers, text: 'Цифровая печать материалов', gradient: 'bg-gradient-accent' }
               ].map((service, index) => (
                 <motion.div
                   key={index}
@@ -143,7 +143,7 @@ export default function Hero() {
                   whileHover={{ scale: 1.02, y: -2 }}
                   className="group flex items-center space-x-4 bg-card backdrop-blur-sm p-5 rounded-xl border border-light hover:border-hover hover:shadow-lg hover:shadow-primary transition-all duration-300"
                 >
-                  <div className={`w-14 h-14 bg-gradient-to-br ${service.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform flex-shrink-0`}>
+                  <div className={`w-14 h-14 ${service.gradient} rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform flex-shrink-0`}>
                     <service.icon className="w-7 h-7 text-white" />
                   </div>
                   <span className="text-primary-dark text-body-lg hover:text-primary transition-colors leading-snug-kw">

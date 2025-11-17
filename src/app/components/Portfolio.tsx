@@ -264,7 +264,7 @@ export default function Portfolio() {
               key={activeCategory}
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
-              className="bg-gradient-to-r from-primary to-primary-dark text-white px-4 py-2 rounded-full weight-bold text-body-sm"
+              className="bg-gradient-primary text-white px-4 py-2 rounded-full weight-bold text-body-sm"
             >
               {filteredItems.length}
             </motion.div>
@@ -303,7 +303,7 @@ export default function Portfolio() {
                    <motion.div
                      initial={{ opacity: 0, scale: 0, rotate: -12 }}
                      animate={{ opacity: 1, scale: 1, rotate: -12 }}
-                     className="absolute -top-2 -right-2 z-50 bg-gradient-to-r from-warning to-warning-dark text-white px-3 py-1 rounded-full text-caption weight-bold flex items-center space-x-1 shadow-xl border-2 border-white"
+                     className="absolute -top-2 -right-2 z-50 bg-warning text-white px-3 py-1 rounded-full text-caption weight-bold flex items-center space-x-1 shadow-xl border-2 border-white"
                    >
                      <Star className="w-3 h-3 fill-current" />
                      <span>ТОП</span>
@@ -497,7 +497,7 @@ export default function Portfolio() {
           <motion.div
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-20 h-20 bg-gradient-to-r from-primary to-primary-dark rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl"
+            className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl"
           >
             <Award className="w-10 h-10 text-white" />
           </motion.div>
@@ -513,7 +513,7 @@ export default function Portfolio() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
             >
               <Eye className="w-5 h-5" />
               <span>Смотреть всё портфолио</span>

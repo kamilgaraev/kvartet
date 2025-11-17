@@ -89,7 +89,7 @@ export default function AdminLayout({
               href={item.href}
               className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative ${
                 isActive
-                  ? 'bg-gradient-to-r from-primary/10 to-primary-dark/10 text-gray-900 border border-primary/20'
+                  ? 'bg-primary-10 text-gray-900 border border-primary/20'
                   : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
               }`}
               onClick={() => setSidebarOpen(false)}
@@ -103,7 +103,7 @@ export default function AdminLayout({
               {isActive && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute left-0 w-1 h-8 bg-gradient-to-b from-primary to-primary-dark rounded-r-lg"
+                  className="absolute left-0 w-1 h-8 bg-gradient-primary rounded-r-lg"
                 />
               )}
             </Link>

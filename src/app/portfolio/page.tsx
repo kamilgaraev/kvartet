@@ -144,7 +144,7 @@ export default function PortfolioPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-blue-50/30 relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark/5 rounded-full blur-3xl"></div>
@@ -175,7 +175,7 @@ export default function PortfolioPage() {
                   initial={{ scaleX: 0 }}
                   animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                 />
               </span>
             </motion.h1>
@@ -293,7 +293,7 @@ export default function PortfolioPage() {
               >
                 {/* Top Badge */}
                 {item.popular && (
-                  <div className="absolute -top-2 -right-2 z-50 bg-gradient-to-r from-primary-dark to-primary text-white px-3 py-1 rounded-full text-caption weight-bold border-2 border-card shadow-card">
+                  <div className="absolute -top-2 -right-2 z-50 bg-gradient-primary-reverse text-white px-3 py-1 rounded-full text-caption weight-bold border-2 border-card shadow-card">
                     ТОП
                   </div>
                 )}
@@ -417,7 +417,7 @@ export default function PortfolioPage() {
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"
+              className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300 mx-auto"
             >
               <span>Посмотреть все проекты</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

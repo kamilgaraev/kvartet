@@ -496,7 +496,7 @@ export default function CalculatorPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-primary-bg relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-05)' }}></div>
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
@@ -527,7 +527,7 @@ export default function CalculatorPage() {
                   initial={{ scaleX: 0 }}
                   animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                 />
               </span>
             </motion.h1>
@@ -564,7 +564,7 @@ export default function CalculatorPage() {
                     initial={{ width: 0 }}
                     animate={{ width: `${(calculator.step / 4) * 100}%` }}
                     transition={{ duration: 0.5 }}
-                    className="bg-gradient-to-r from-primary to-primary-dark h-2 rounded-full"
+                    className="bg-gradient-primary h-2 rounded-full"
                   />
                 </div>
               </div>
@@ -600,7 +600,7 @@ export default function CalculatorPage() {
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
                       className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
-                          ? 'bg-gradient-to-r from-primary to-primary-dark text-white hover:shadow-lg'
+                          ? 'bg-gradient-primary text-white hover:shadow-lg'
                           : 'bg-primary-10 text-gray-400 cursor-not-allowed'
                       }`}
                     >
@@ -615,7 +615,7 @@ export default function CalculatorPage() {
                       whileTap={{ scale: canProceed() ? 0.98 : 1 }}
                       className={`flex items-center space-x-2 px-6 py-3 rounded-xl weight-medium transition-all duration-300 ${
                         canProceed()
-                          ? 'bg-gradient-to-r from-primary to-primary-dark text-white hover:shadow-lg'
+                          ? 'bg-gradient-primary text-white hover:shadow-lg'
                           : 'bg-primary-10 text-gray-400 cursor-not-allowed'
                       }`}
                     >
@@ -661,7 +661,7 @@ export default function CalculatorPage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="tel:+73471234567"
-                className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Phone className="w-5 h-5" />
                   <span>Позвонить сейчас</span>
@@ -692,7 +692,7 @@ export default function CalculatorPage() {
       </section>
 
       {/* Features */}
-      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+      <section className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6">

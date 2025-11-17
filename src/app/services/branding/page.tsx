@@ -201,7 +201,7 @@ export default function BrandingPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-to-br from-gray-50 via-white to-primary-bg relative overflow-hidden">
+      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-05)' }}></div>
           <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
@@ -228,12 +228,12 @@ export default function BrandingPage() {
               >
                 Создаем{' '}
                 <span className="relative inline-block">
-                  <span className="bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">бренды</span>
+                  <span className="gradient-kvartett-text">бренды</span>
                   <motion.div
                     initial={{ scaleX: 0 }}
                     animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                     transition={{ delay: 0.8, duration: 0.8 }}
-                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                   />
                 </span>
                 {' '}с душой
@@ -256,7 +256,7 @@ export default function BrandingPage() {
               >
                 <Link
                   href="/calculator"
-                  className="group bg-gradient-to-r from-primary to-primary-dark text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="group bg-gradient-primary text-white px-8 py-4 rounded-2xl weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Calculator className="w-5 h-5" />
                   <span>Рассчитать бренд</span>
@@ -264,7 +264,7 @@ export default function BrandingPage() {
                 
                 <a
                   href="tel:+73471234567"
-                  className="group bg-white/80 backdrop-blur-sm text-gray-700 px-8 py-4 rounded-2xl border border-gray-200/50 hover:border-primary/50 hover:text-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                  className="group bg-primary-dark text-white px-8 py-4 rounded-2xl border border-primary-dark hover:bg-primary transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5" />
                   <span>+7 (347) 123-45-67</span>
@@ -296,7 +296,7 @@ export default function BrandingPage() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-primary-dark/20 rounded-3xl p-8 backdrop-blur-sm">
+              <div className="aspect-square bg-primary-10 rounded-3xl p-8 backdrop-blur-sm">
                 <img
                   src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&h=600&fit=crop"
                   alt="Брендинг"
@@ -307,7 +307,7 @@ export default function BrandingPage() {
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-primary to-primary-dark rounded-full flex items-center justify-center"
+                className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center"
               >
                 <Heart className="w-8 h-8 text-white" />
               </motion.div>
@@ -380,7 +380,7 @@ export default function BrandingPage() {
       </section>
 
       {/* Branding Types */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
@@ -486,7 +486,7 @@ export default function BrandingPage() {
       </section>
 
       {/* Process */}
-      <section ref={processRef} className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section ref={processRef} className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -580,7 +580,7 @@ export default function BrandingPage() {
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+      <section className="py-24 bg-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
@@ -728,7 +728,7 @@ export default function BrandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-gradient-to-r from-warning via-warning-dark to-warning-dark relative overflow-hidden">
+      <section className="py-24 bg-gradient-primary relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center text-white">

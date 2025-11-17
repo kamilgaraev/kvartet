@@ -133,7 +133,7 @@ export default function ContactsPage() {
       
       {/* Hero Section */}
       <section ref={heroRef} className="py-32 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-bg via-white to-primary-bg opacity-60"></div>
+        <div className="absolute inset-0 bg-gradient-bg opacity-60"></div>
 
         <div className="relative hero-container mx-auto">
           <div className="text-center max-w-4xl mx-auto">
@@ -160,7 +160,7 @@ export default function ContactsPage() {
                   initial={{ scaleX: 0 }}
                   animate={heroInView ? { scaleX: 1 } : { scaleX: 0 }}
                   transition={{ delay: 0.8, duration: 0.8 }}
-                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-primary to-primary-dark opacity-30 rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-primary opacity-30 rounded-full"
                 />
               </span>
             </motion.h1>
@@ -188,7 +188,7 @@ export default function ContactsPage() {
                 animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                className="text-center p-6 bg-gradient-bg rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
@@ -206,7 +206,7 @@ export default function ContactsPage() {
       </section>
 
       {/* Contact Form and Map */}
-      <section ref={formRef} className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+      <section ref={formRef} className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -313,7 +313,7 @@ export default function ContactsPage() {
                     className={`w-full py-4 rounded-xl weight-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
                       isSubmitted 
                         ? 'bg-success shadow-lg shadow-primary' 
-                        : 'bg-gradient-to-r from-primary to-primary-dark hover:shadow-lg hover:shadow-primary'
+                        : 'bg-gradient-primary hover:shadow-lg hover:shadow-primary'
                     }`}
                   >
                     {isSubmitting ? (
@@ -486,7 +486,7 @@ export default function ContactsPage() {
       </section>
 
       {/* FAQ */}
-      <section className="section-padding-y bg-gradient-to-br from-gray-50 to-white">
+      <section className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <div className="text-center mb-16">
             <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
@@ -521,15 +521,18 @@ export default function ContactsPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100"
+                className="group bg-white p-8 rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
               >
-                <div className="flex items-start space-x-3">
-                  <div className="w-8 h-8 rounded-lg gradient-kvartett flex items-center justify-center flex-shrink-0">
-                    <Star className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="text-title-sm weight-bold text-primary-dark mb-3">{faq.question}</h4>
-                    <p className="text-body text-primary-dark">{faq.answer}</p>
+                <div className="flex items-start space-x-4">
+                  <motion.div 
+                    whileHover={{ scale: 1.1, rotate: 5 }}
+                    className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center flex-shrink-0 shadow-lg"
+                  >
+                    <Star className="w-6 h-6 text-white" />
+                  </motion.div>
+                  <div className="flex-1">
+                    <h4 className="text-title weight-bold text-primary-dark mb-4 leading-tight-kw group-hover:text-primary transition-colors">{faq.question}</h4>
+                    <p className="text-body text-primary-dark leading-relaxed-kw">{faq.answer}</p>
                   </div>
                 </div>
               </motion.div>
