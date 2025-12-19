@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { 
   Calculator, 
   ArrowRight, 
@@ -14,7 +14,6 @@ import {
   Palette,
   Send,
   Phone,
-  Mail,
   Zap,
   Star,
   Eye
@@ -22,60 +21,6 @@ import {
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import FloatingAction from '../components/FloatingAction'
-
-const services = [
-  {
-    id: 'outdoor',
-    name: 'Наружная реклама',
-    icon: Building,
-    options: [
-      { id: 'lightbox', name: 'Световые короба', basePrice: 25000, unit: 'шт' },
-      { id: 'letters', name: 'Объемные буквы', basePrice: 2500, unit: 'буква' },
-      { id: 'banner', name: 'Баннеры', basePrice: 350, unit: 'м²' },
-      { id: 'billboard', name: 'Билборды', basePrice: 150000, unit: 'шт' }
-    ]
-  },
-  {
-    id: 'printing',
-    name: 'Полиграфия',
-    icon: FileText,
-    options: [
-      { id: 'business-cards', name: 'Визитки', basePrice: 500, unit: '1000 шт' },
-      { id: 'leaflets', name: 'Листовки A4', basePrice: 800, unit: '1000 шт' },
-      { id: 'catalogs', name: 'Каталоги', basePrice: 2500, unit: '100 шт' },
-      { id: 'wide-format', name: 'Широкоформатная печать', basePrice: 400, unit: 'м²' }
-    ]
-  },
-  {
-    id: 'interior',
-    name: 'Интерьерная реклама',
-    icon: Home,
-    options: [
-      { id: 'navigation', name: 'Навигация', basePrice: 8000, unit: 'шт' },
-      { id: 'stands', name: 'Стенды', basePrice: 12000, unit: 'шт' },
-      { id: 'light-panels', name: 'Световые панели', basePrice: 18000, unit: 'шт' },
-      { id: 'pos', name: 'POS-материалы', basePrice: 3000, unit: 'комплект' }
-    ]
-  },
-  {
-    id: 'branding',
-    name: 'Брендинг',
-    icon: Palette,
-    options: [
-      { id: 'logo', name: 'Логотип', basePrice: 25000, unit: 'проект' },
-      { id: 'brandbook', name: 'Брендбук', basePrice: 75000, unit: 'проект' },
-      { id: 'corporate', name: 'Корпоративная полиграфия', basePrice: 35000, unit: 'комплект' },
-      { id: 'packaging', name: 'Дизайн упаковки', basePrice: 45000, unit: 'проект' }
-    ]
-  }
-]
-
-const additionalOptions = [
-  { id: 'design', name: 'Дизайн-проект', price: 15000 },
-  { id: 'installation', name: 'Монтаж', price: 5000 },
-  { id: 'delivery', name: 'Доставка по городу', price: 2000 },
-  { id: 'urgent', name: 'Срочное изготовление', multiplier: 1.5 }
-]
 
 interface CalculatorState {
   step: number
@@ -95,6 +40,60 @@ interface CalculatorState {
 export default function CalculatorPage() {
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const services = useMemo(() => [
+    {
+      id: 'outdoor',
+      name: 'Наружная реклама',
+      icon: Building,
+      options: [
+        { id: 'lightbox', name: 'Световые короба', basePrice: 25000, unit: 'шт' },
+        { id: 'letters', name: 'Объемные буквы', basePrice: 2500, unit: 'буква' },
+        { id: 'banner', name: 'Баннеры', basePrice: 350, unit: 'м²' },
+        { id: 'billboard', name: 'Билборды', basePrice: 150000, unit: 'шт' }
+      ]
+    },
+    {
+      id: 'printing',
+      name: 'Полиграфия',
+      icon: FileText,
+      options: [
+        { id: 'business-cards', name: 'Визитки', basePrice: 500, unit: '1000 шт' },
+        { id: 'leaflets', name: 'Листовки A4', basePrice: 800, unit: '1000 шт' },
+        { id: 'catalogs', name: 'Каталоги', basePrice: 2500, unit: '100 шт' },
+        { id: 'wide-format', name: 'Широкоформатная печать', basePrice: 400, unit: 'м²' }
+      ]
+    },
+    {
+      id: 'interior',
+      name: 'Интерьерная реклама',
+      icon: Home,
+      options: [
+        { id: 'navigation', name: 'Навигация', basePrice: 8000, unit: 'шт' },
+        { id: 'stands', name: 'Стенды', basePrice: 12000, unit: 'шт' },
+        { id: 'light-panels', name: 'Световые панели', basePrice: 18000, unit: 'шт' },
+        { id: 'pos', name: 'POS-материалы', basePrice: 3000, unit: 'комплект' }
+      ]
+    },
+    {
+      id: 'branding',
+      name: 'Брендинг',
+      icon: Palette,
+      options: [
+        { id: 'logo', name: 'Логотип', basePrice: 25000, unit: 'проект' },
+        { id: 'brandbook', name: 'Брендбук', basePrice: 75000, unit: 'проект' },
+        { id: 'corporate', name: 'Корпоративная полиграфия', basePrice: 35000, unit: 'комплект' },
+        { id: 'packaging', name: 'Дизайн упаковки', basePrice: 45000, unit: 'проект' }
+      ]
+    }
+  ], [])
+
+  const additionalOptions = useMemo(() => [
+    { id: 'design', name: 'Дизайн-проект', price: 15000 },
+    { id: 'installation', name: 'Монтаж', price: 5000 },
+    { id: 'delivery', name: 'Доставка по городу', price: 2000 },
+    { id: 'urgent', name: 'Срочное изготовление', multiplier: 1.5 }
+  ], [])
   
   const [calculator, setCalculator] = useState<CalculatorState>({
     step: 1,
@@ -121,7 +120,6 @@ export default function CalculatorPage() {
     
     let basePrice = option.basePrice * calculator.quantity
     
-    // Добавляем дополнительные услуги
     calculator.additionalServices.forEach(serviceId => {
       const additionalService = additionalOptions.find(s => s.id === serviceId)
       if (additionalService) {
@@ -414,6 +412,10 @@ export default function CalculatorPage() {
         )
 
       case 4:
+        const currentSelectedOption = services
+          .find(s => s.id === calculator.selectedService)
+          ?.options.find(o => o.id === calculator.selectedOption)
+        
         return (
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -494,13 +496,12 @@ export default function CalculatorPage() {
                     <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
                       <span className="text-muted text-sm">Тип</span>
                       <span className="weight-medium text-right ml-4">
-                        {services.find(s => s.id === calculator.selectedService)
-                          ?.options.find(o => o.id === calculator.selectedOption)?.name}
+                        {currentSelectedOption?.name}
                       </span>
                     </div>
                     <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
                       <span className="text-muted text-sm">Количество</span>
-                      <span className="weight-medium text-right ml-4">{calculator.quantity} {selectedOption?.unit}</span>
+                      <span className="weight-medium text-right ml-4">{calculator.quantity} {currentSelectedOption?.unit}</span>
                     </div>
                     {calculator.additionalServices.length > 0 && (
                       <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">

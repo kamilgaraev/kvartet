@@ -75,6 +75,17 @@ export default function PortfolioEditor() {
         .then(data => {
           setFormData({
             ...data,
+            // Ensure null strings are converted to empty strings to prevent runtime errors
+            title: data.title || '',
+            slug: data.slug || '',
+            shortDesc: data.shortDesc || '',
+            description: data.description || '',
+            category: data.category || '',
+            image: data.image || '',
+            budget: data.budget || '',
+            clientName: data.clientName || '',
+            clientWebsite: data.clientWebsite || '',
+            
             tags: Array.isArray(data.tags) ? data.tags.join(', ') : data.tags || '',
             features: Array.isArray(data.features) ? data.features.join(', ') : data.features || '',
             year: data.year?.toString() || new Date().getFullYear().toString(),
@@ -85,7 +96,12 @@ export default function PortfolioEditor() {
             reviewAuthor: data.reviewAuthor || '',
             reviewRole: data.reviewRole || '',
             result: data.result || '',
-            duration: data.duration || ''
+            duration: data.duration || '',
+            
+            // Meta fields
+            metaTitle: data.metaTitle || '',
+            metaDescription: data.metaDescription || '',
+            metaKeywords: data.metaKeywords || ''
           })
           editor?.commands.setContent(data.description || '')
         })
