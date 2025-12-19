@@ -39,10 +39,11 @@ export default function Portfolio() {
           const mapped = data.map((item: any) => ({
             id: item.id,
             title: item.title,
+            slug: item.slug,
             category: item.category,
             categoryColor: item.categoryColor || 'var(--color-primary)',
             image: item.image || '/api/placeholder/600/400',
-            description: item.description,
+            description: item.description?.replace(/<[^>]*>/g, '') || '',
             result: item.result || '+100%',
             budget: item.budget || '50 000 ₽',
             duration: item.duration || '3 дня',
@@ -259,7 +260,7 @@ export default function Portfolio() {
                  onMouseLeave={() => setHoveredCard(null)}
                  className="group perspective-1000 cursor-pointer relative"
                  style={{ animationDelay: `${index * 100}ms` }}
-                onClick={() => window.location.href = `/portfolio/${item.slug || item.id}`}
+                onClick={() => window.location.href = `/portfolio/${item.slug}`}
                >
                  {/* Популярный бейдж - поверх всего */}
                  {item.rating === 5 && (
@@ -277,56 +278,32 @@ export default function Portfolio() {
 
                   {/* Изображение проекта */}
                   <div className="relative h-64 overflow-hidden">
-                    {/* Градиентный фон */}
+                    {/* Изображение проекта */}
+                    {item.image && (
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                    )}
+                    
+                    {/* Градиентный overlay */}
                     <div 
-                      className="absolute inset-0"
-                      style={{
-                        background: `linear-gradient(135deg, ${item.categoryColor}20, ${item.categoryColor}40)`
-                      }}
+                      className="absolute inset-0 bg-gradient-to-br from-black/40 to-black/60"
                     />
                     
-                    {/* Декоративные элементы */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div
-                        animate={{ 
-                          scale: hoveredCard === item.id ? [1, 1.2, 1] : 1,
-                          rotate: hoveredCard === item.id ? [0, 180, 360] : 0
-                        }}
-                        transition={{ duration: 1, repeat: hoveredCard === item.id ? Infinity : 0 }}
-                        className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                      >
-                        <Eye className="w-10 h-10 text-white" />
-                      </motion.div>
-                    </div>
-
-                    {/* Плавающие иконки */}
-                    <motion.div
-                      animate={{ 
-                        y: hoveredCard === item.id ? [0, -10, 0] : 0,
-                        opacity: hoveredCard === item.id ? 1 : 0.7
-                      }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="absolute top-4 left-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
-                    >
-                      <Zap className="w-4 h-4 text-white" />
-                    </motion.div>
-
-                    <motion.div
-                      animate={{ 
-                        y: hoveredCard === item.id ? [0, 10, 0] : 0,
-                        opacity: hoveredCard === item.id ? 1 : 0.7
-                      }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                      className="absolute bottom-4 right-4 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center"
-                    >
-                      <TrendingUp className="w-4 h-4 text-white" />
-                    </motion.div>
-
                     {/* Hover overlay */}
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: hoveredCard === item.id ? 1 : 0 }}
-                      className="absolute inset-0 bg-black/50 flex items-center justify-center"
+                      className="absolute inset-0 bg-black/70"
+                    />
+
+                    {/* Контент при hover */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: hoveredCard === item.id ? 1 : 0 }}
+                      className="absolute inset-0 flex items-center justify-center z-10"
                     >
                       <div className="text-center space-y-4">
                         <motion.button
