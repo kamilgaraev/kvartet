@@ -49,6 +49,10 @@ export async function PUT(
     const { id } = await params
     const data = await request.json()
 
+    console.log('Updating portfolio item:', id)
+    console.log('Description length:', data.description?.length || 0)
+    console.log('Description preview:', data.description?.substring(0, 100) || 'empty')
+
     const [updatedItem] = await db
       .update(portfolioItems)
       .set({

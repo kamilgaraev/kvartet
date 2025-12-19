@@ -65,7 +65,7 @@ export default function PortfolioEditor() {
 
   // Fetch data if editing
   useEffect(() => {
-    if (projectId) {
+    if (projectId && editor) {
       setLoading(true)
       fetch(`/api/admin/portfolio/${projectId}`)
         .then(res => {
@@ -73,6 +73,7 @@ export default function PortfolioEditor() {
           return res.json()
         })
         .then(data => {
+          console.log('Loaded project data:', data)
           setFormData({
             ...data,
             // Ensure null strings are converted to empty strings to prevent runtime errors
@@ -103,7 +104,11 @@ export default function PortfolioEditor() {
             metaDescription: data.metaDescription || '',
             metaKeywords: data.metaKeywords || ''
           })
-          editor?.commands.setContent(data.description || '')
+          
+          if (data.description) {
+            console.log('Setting editor content:', data.description.substring(0, 100))
+            editor.commands.setContent(data.description)
+          }
         })
         .catch(err => {
           console.error(err)
@@ -111,7 +116,7 @@ export default function PortfolioEditor() {
         })
         .finally(() => setLoading(false))
     }
-  }, [projectId])
+  }, [projectId, editor])
 
   const editor = useEditor({
     extensions: [
@@ -195,12 +200,17 @@ export default function PortfolioEditor() {
     setSaving(true)
     
     try {
+      const editorContent = editor?.getHTML() || ''
+      console.log('Saving with description:', editorContent.substring(0, 100))
+      
       const payload = {
         ...formData,
         tags: formData.tags.split(',').map(t => t.trim()).filter(Boolean),
         features: formData.features.split(',').map(t => t.trim()).filter(Boolean),
-        description: editor?.getHTML() || formData.description
+        description: editorContent
       }
+
+      console.log('Full payload:', payload)
 
       const url = projectId 
         ? `/api/admin/portfolio/${projectId}` 
@@ -214,18 +224,23 @@ export default function PortfolioEditor() {
         body: JSON.stringify(payload)
       })
 
-      if (!res.ok) throw new Error('Failed to save')
+      if (!res.ok) {
+        const errorData = await res.text()
+        console.error('Server error:', errorData)
+        throw new Error('Failed to save')
+      }
 
       const savedData = await res.json()
+      console.log('Saved successfully:', savedData)
       setLastSaved(new Date())
       
       if (!projectId) {
         router.push(`/admin/portfolio/editor?id=${savedData.id}`)
       } else {
-        // Optional: show toast
+        alert('Проект успешно сохранен!')
       }
     } catch (error) {
-      console.error(error)
+      console.error('Save error:', error)
       alert('Ошибка сохранения')
     } finally {
       setSaving(false)
