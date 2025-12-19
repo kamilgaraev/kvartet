@@ -244,33 +244,33 @@ export default function CalculatorPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h3 className="text-title weight-bold text-primary-dark mb-6">Выберите тип услуги</h3>
-            <div className="grid md:grid-cols-2 gap-4">
+            <h3 className="text-title weight-bold text-primary-dark mb-8">Выберите тип услуги</h3>
+            <div className="grid md:grid-cols-2 gap-6">
               {services.map((service) => (
                 <motion.button
                   key={service.id}
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={{ scale: 1.02, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => selectService(service.id)}
-                  className={`p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
+                  className={`p-6 rounded-2xl border transition-all duration-300 text-left shadow-sm hover:shadow-card ${
                     calculator.selectedService === service.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-light hover:border-primary/50'
+                      ? 'border-primary bg-primary-bg ring-1 ring-primary'
+                      : 'border-light hover:border-primary-30 bg-card'
                   }`}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                  <div className="flex items-start space-x-6">
+                    <div className={`w-14 h-14 rounded-2xl flex-shrink-0 flex items-center justify-center transition-colors duration-300 ${
                       calculator.selectedService === service.id
-                        ? 'bg-primary text-white'
-                        : 'bg-primary-10 text-muted'
+                        ? 'bg-gradient-primary text-white shadow-lg'
+                        : 'bg-primary-10 text-primary-dark group-hover:bg-primary-20'
                     }`}>
-                      <service.icon className="w-6 h-6" />
+                      <service.icon className="w-7 h-7" />
                     </div>
                     <div>
-                      <h4 className="text-body-lg weight-semibold text-primary-dark">{service.name}</h4>
-                      <p className="text-caption text-muted">{service.options.length} услуг</p>
+                      <h4 className="text-body-lg weight-bold text-primary-dark mb-2">{service.name}</h4>
+                      <p className="text-caption text-muted leading-relaxed-kw">{service.options.length} вариантов услуг</p>
                     </div>
                   </div>
                 </motion.button>
@@ -286,31 +286,37 @@ export default function CalculatorPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h3 className="text-title weight-bold text-primary-dark mb-6">
+            <h3 className="text-title weight-bold text-primary-dark mb-8">
               Выберите конкретную услугу
             </h3>
             <div className="grid gap-4">
               {selectedService?.options.map((option) => (
                 <motion.button
                   key={option.id}
-                  whileHover={{ scale: 1.01 }}
+                  whileHover={{ scale: 1.01, x: 4 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => selectOption(option.id)}
-                  className={`p-4 rounded-xl border-2 transition-all duration-300 text-left ${
+                  className={`p-5 rounded-xl border transition-all duration-300 text-left ${
                     calculator.selectedOption === option.id
-                      ? 'border-primary bg-primary/5'
-                      : 'border-light hover:border-primary/50'
+                      ? 'border-primary bg-primary-bg ring-1 ring-primary shadow-md'
+                      : 'border-light hover:border-primary-30 hover:bg-gray-50'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-body-lg weight-semibold text-primary-dark">{option.name}</h4>
+                      <h4 className="text-body-lg weight-semibold text-primary-dark mb-1">{option.name}</h4>
                       <p className="text-caption text-muted">от {option.basePrice.toLocaleString()} ₽ за {option.unit}</p>
                     </div>
                     {calculator.selectedOption === option.id && (
-                      <CheckCircle className="w-6 h-6 text-primary" />
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="bg-primary text-white rounded-full p-1"
+                      >
+                        <CheckCircle className="w-5 h-5" />
+                      </motion.div>
                     )}
                   </div>
                 </motion.button>
@@ -329,62 +335,73 @@ export default function CalculatorPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h3 className="text-title weight-bold text-primary-dark mb-6">Укажите количество</h3>
+            <h3 className="text-title weight-bold text-primary-dark mb-8">Укажите количество</h3>
             
-            <div className="bg-primary-bg p-6 rounded-2xl">
-              <div className="text-body-lg weight-semibold text-primary-dark mb-4">
+            <div className="bg-primary-10/50 p-8 rounded-2xl border border-primary-10">
+              <div className="text-title-sm weight-bold text-primary-dark mb-6">
                 {selectedOption?.name}
               </div>
               
-              <div className="flex items-center space-x-4 mb-6">
-                <label className="text-muted">Количество:</label>
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => updateQuantity(calculator.quantity - 1)}
-                    className="w-10 h-10 rounded-lg bg-card border border-light hover:border-primary flex items-center justify-center"
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    value={calculator.quantity}
-                    onChange={(e) => updateQuantity(parseInt(e.target.value) || 1)}
-                    className="w-20 h-10 text-center border border-light rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  />
-                  <button
-                    onClick={() => updateQuantity(calculator.quantity + 1)}
-                    className="w-10 h-10 rounded-lg bg-card border border-light hover:border-primary flex items-center justify-center"
-                  >
-                    +
-                  </button>
-                  <span className="text-muted">{selectedOption?.unit}</span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
+                <div className="flex items-center space-x-4">
+                  <label className="text-body text-muted">Количество:</label>
+                  <div className="flex items-center bg-card rounded-xl border border-light p-1">
+                    <button
+                      onClick={() => updateQuantity(calculator.quantity - 1)}
+                      className="w-10 h-10 rounded-lg hover:bg-gray-100 text-primary-dark flex items-center justify-center transition-colors"
+                    >
+                      -
+                    </button>
+                    <input
+                      type="number"
+                      value={calculator.quantity}
+                      onChange={(e) => updateQuantity(parseInt(e.target.value) || 1)}
+                      className="w-16 h-10 text-center bg-transparent border-none focus:ring-0 text-primary-dark weight-bold"
+                    />
+                    <button
+                      onClick={() => updateQuantity(calculator.quantity + 1)}
+                      className="w-10 h-10 rounded-lg hover:bg-gray-100 text-primary-dark flex items-center justify-center transition-colors"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <span className="text-muted text-sm">{selectedOption?.unit}</span>
                 </div>
-              </div>
-              
-              <div className="text-body-lg weight-bold text-primary">
-                Базовая стоимость: {((selectedOption?.basePrice || 0) * calculator.quantity).toLocaleString()} ₽
+                
+                <div className="text-right">
+                  <div className="text-caption text-muted mb-1">Предварительная стоимость</div>
+                  <div className="text-title weight-bold text-primary">
+                    {((selectedOption?.basePrice || 0) * calculator.quantity).toLocaleString()} ₽
+                  </div>
+                </div>
               </div>
             </div>
 
             <div>
-              <h4 className="text-body-lg weight-semibold text-primary-dark mb-4">Дополнительные услуги</h4>
-              <div className="space-y-3">
+              <h4 className="text-body-lg weight-bold text-primary-dark mb-6">Дополнительные услуги</h4>
+              <div className="grid sm:grid-cols-2 gap-4">
                 {additionalOptions.map((service) => (
                   <label
                     key={service.id}
-                    className="flex items-center space-x-3 p-3 rounded-lg border border-light hover:border-primary/50 cursor-pointer"
+                    className={`flex items-start space-x-4 p-4 rounded-xl border cursor-pointer transition-all duration-300 ${
+                      calculator.additionalServices.includes(service.id)
+                        ? 'border-primary bg-primary-bg/50 ring-1 ring-primary-20'
+                        : 'border-light hover:border-primary-30 hover:bg-gray-50'
+                    }`}
                   >
-                    <input
-                      type="checkbox"
-                      checked={calculator.additionalServices.includes(service.id)}
-                      onChange={() => toggleAdditionalService(service.id)}
-                    className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
-                    />
+                    <div className="pt-1">
+                      <input
+                        type="checkbox"
+                        checked={calculator.additionalServices.includes(service.id)}
+                        onChange={() => toggleAdditionalService(service.id)}
+                        className="w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary"
+                      />
+                    </div>
                     <div className="flex-1">
-                      <div className="weight-medium text-primary-dark">{service.name}</div>
-                      <div className="text-caption text-muted">
+                      <div className="weight-semibold text-primary-dark mb-1">{service.name}</div>
+                      <div className="text-caption text-primary weight-medium">
                         {service.price ? `+${service.price.toLocaleString()} ₽` : 
                          service.multiplier ? `×${service.multiplier}` : ''}
                       </div>
@@ -402,106 +419,108 @@ export default function CalculatorPage() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
-            className="space-y-6"
+            className="space-y-8"
           >
-            <h3 className="text-title weight-bold text-primary-dark mb-6">Ваши контактные данные</h3>
+            <h3 className="text-title weight-bold text-primary-dark mb-8">Ваши контактные данные</h3>
             
-            {/* Расчет */}
-            <div className="p-6 rounded-2xl" style={{ background: 'linear-gradient(to right, var(--color-primary-10), var(--color-primary-dark-10))', border: '1px solid var(--color-primary-20)' }}>
-              <h4 className="text-body-lg weight-semibold text-primary-dark mb-4">Итоговый расчет</h4>
-              <div className="space-y-2 mb-4">
-                <div className="flex justify-between">
-                  <span className="text-muted">Услуга:</span>
-                  <span className="weight-medium">
-                    {services.find(s => s.id === calculator.selectedService)?.name}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted">Тип:</span>
-                  <span className="weight-medium">
-                    {services.find(s => s.id === calculator.selectedService)
-                      ?.options.find(o => o.id === calculator.selectedOption)?.name}
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-muted">Количество:</span>
-                  <span className="weight-medium">{calculator.quantity}</span>
-                </div>
-                {calculator.additionalServices.length > 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-muted">Доп. услуги:</span>
-                    <span className="weight-medium">{calculator.additionalServices.length}</span>
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Форма контактов */}
+              <div className="space-y-6 order-2 lg:order-1">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-caption weight-medium text-muted mb-2">
+                      Ваше имя *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={calculator.contactInfo.name}
+                      onChange={(e) => updateContactInfo('name', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 bg-card"
+                      placeholder="Иван Петров"
+                    />
                   </div>
-                )}
-              </div>
-              <div className="border-t border-light pt-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-body-lg weight-bold text-primary-dark">Итого:</span>
-                  <span className="text-title weight-bold text-primary">
-                    {calculatePrice().toLocaleString()} ₽
-                  </span>
-                </div>
-                <p className="text-caption text-muted mt-2">
-                  * Точная стоимость будет рассчитана после консультации
-                </p>
-              </div>
-            </div>
-
-            {/* Форма контактов */}
-            <div className="space-y-4">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-caption weight-medium text-muted mb-2">
-                    Ваше имя *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={calculator.contactInfo.name}
-                    onChange={(e) => updateContactInfo('name', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
-                    placeholder="Иван Петров"
-                  />
-                </div>
-                <div>
-                  <label className="block text-caption weight-medium text-muted mb-2">
-                    Телефон *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    value={calculator.contactInfo.phone}
-                    onChange={(e) => updateContactInfo('phone', e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
-                    placeholder="+7 (999) 123-45-67"
-                  />
+                  <div>
+                    <label className="block text-caption weight-medium text-muted mb-2">
+                      Телефон *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={calculator.contactInfo.phone}
+                      onChange={(e) => updateContactInfo('phone', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 bg-card"
+                      placeholder="+7 (999) 123-45-67"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-caption weight-medium text-muted mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={calculator.contactInfo.email}
+                      onChange={(e) => updateContactInfo('email', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 bg-card"
+                      placeholder="ivan@example.com"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-caption weight-medium text-muted mb-2">
+                      Дополнительные пожелания
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={calculator.contactInfo.message}
+                      onChange={(e) => updateContactInfo('message', e.target.value)}
+                      className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 resize-none bg-card"
+                      placeholder="Расскажите о ваших требованиях..."
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-caption weight-medium text-muted mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={calculator.contactInfo.email}
-                  onChange={(e) => updateContactInfo('email', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
-                  placeholder="ivan@example.com"
-                />
-              </div>
-
-              <div>
-                <label className="block text-caption weight-medium text-muted mb-2">
-                  Дополнительные пожелания
-                </label>
-                <textarea
-                  rows={3}
-                  value={calculator.contactInfo.message}
-                  onChange={(e) => updateContactInfo('message', e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-light focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300 resize-none"
-                  placeholder="Расскажите о ваших требованиях..."
-                />
+              {/* Расчет */}
+              <div className="order-1 lg:order-2">
+                <div className="p-6 rounded-2xl sticky top-8" style={{ background: 'linear-gradient(to bottom right, var(--color-primary-10), var(--color-primary-05))', border: '1px solid var(--color-primary-10)' }}>
+                  <h4 className="text-body-lg weight-bold text-primary-dark mb-6">Итоговый расчет</h4>
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
+                      <span className="text-muted text-sm">Услуга</span>
+                      <span className="weight-medium text-right ml-4">
+                        {services.find(s => s.id === calculator.selectedService)?.name}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
+                      <span className="text-muted text-sm">Тип</span>
+                      <span className="weight-medium text-right ml-4">
+                        {services.find(s => s.id === calculator.selectedService)
+                          ?.options.find(o => o.id === calculator.selectedOption)?.name}
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
+                      <span className="text-muted text-sm">Количество</span>
+                      <span className="weight-medium text-right ml-4">{calculator.quantity} {selectedOption?.unit}</span>
+                    </div>
+                    {calculator.additionalServices.length > 0 && (
+                      <div className="flex justify-between items-baseline border-b border-primary-10 pb-2">
+                        <span className="text-muted text-sm">Доп. услуги</span>
+                        <span className="weight-medium text-right ml-4">{calculator.additionalServices.length}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="pt-2">
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-body weight-bold text-primary-dark">Итого:</span>
+                      <span className="text-display-3 weight-bold text-primary">
+                        {calculatePrice().toLocaleString()} ₽
+                      </span>
+                    </div>
+                    <p className="text-caption text-muted opacity-80">
+                      * Точная стоимость рассчитывается индивидуально
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -532,10 +551,10 @@ export default function CalculatorPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-gradient-bg relative overflow-hidden">
+      <section ref={heroRef} className="section-padding-y bg-gradient-bg relative overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 -left-32 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-05)' }}></div>
-          <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] rounded-full blur-3xl" style={{ backgroundColor: 'var(--color-primary-dark-05)' }}></div>
+          <div className="absolute top-1/4 -left-32 w-96 h-96 bg-primary-05 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 -right-32 w-[30rem] h-[30rem] bg-primary-dark-05 rounded-full blur-3xl"></div>
         </div>
 
         <div className="relative container-adaptive">
@@ -554,7 +573,7 @@ export default function CalculatorPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-display-1 weight-bold text-on-dark mb-8"
+              className="text-display-2 weight-bold text-primary-dark mb-8 leading-tight-kw"
             >
               Рассчитайте{' '}
               <span className="relative inline-block">
@@ -572,7 +591,7 @@ export default function CalculatorPage() {
               initial={{ opacity: 0, y: 30 }}
               animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-body-xl text-on-dark-muted mb-12 max-w-3xl mx-auto leading-relaxed-kw"
+              className="text-body-xl text-muted mb-12 max-w-3xl mx-auto leading-relaxed-kw"
             >
               Узнайте примерную стоимость рекламных услуг за 2 минуты. Пошаговый расчет с учетом всех ваших требований
             </motion.p>
@@ -582,37 +601,38 @@ export default function CalculatorPage() {
 
       {/* Calculator */}
       <section className="section-padding-y bg-card">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {!isSubmitted ? (
-            <>
-              {/* Progress Bar */}
-              <div className="mb-12">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-caption weight-medium text-gray-500">
-                    Шаг {calculator.step} из 4
-                  </span>
-                  <span className="text-caption weight-medium text-primary">
-                    {Math.round((calculator.step / 4) * 100)}% завершено
-                  </span>
+        <div className="container-adaptive">
+          <div className="max-w-5xl mx-auto">
+            {!isSubmitted ? (
+              <>
+                {/* Progress Bar */}
+                <div className="mb-12">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-caption weight-medium text-muted">
+                      Шаг {calculator.step} из 4
+                    </span>
+                    <span className="text-caption weight-medium text-primary">
+                      {Math.round((calculator.step / 4) * 100)}% завершено
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${(calculator.step / 4) * 100}%` }}
+                      transition={{ duration: 0.5 }}
+                      className="bg-gradient-primary h-2 rounded-full"
+                    />
+                  </div>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(calculator.step / 4) * 100}%` }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-gradient-primary h-2 rounded-full"
-                  />
-                </div>
-              </div>
 
-              {/* Calculator Steps */}
-              <div className="bg-card rounded-2xl border border-light p-8 shadow-lg">
-                <AnimatePresence mode="wait">
-                  {renderStep()}
-                </AnimatePresence>
+                {/* Calculator Steps */}
+                <div className="bg-card rounded-3xl border border-light p-8 shadow-card hover:shadow-card-hover transition-all duration-300">
+                  <AnimatePresence mode="wait">
+                    {renderStep()}
+                  </AnimatePresence>
 
-                {/* Navigation */}
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-light">
+                  {/* Navigation */}
+                  <div className="flex items-center justify-between mt-12 pt-8 border-t border-light">
                   <motion.button
                     onClick={prevStep}
                     disabled={calculator.step === 1}
@@ -731,7 +751,7 @@ export default function CalculatorPage() {
       <section className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
           <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-primary-dark mb-6">
+            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
               Преимущества нашего калькулятора
             </h2>
             <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
@@ -763,16 +783,16 @@ export default function CalculatorPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="text-center p-6 bg-card rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+                className="text-center p-8 bg-card rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
               >
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary-25 mx-auto mb-4"
+                  className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary-25 mx-auto mb-6"
                 >
                   <feature.icon className="w-8 h-8 text-white" />
                 </motion.div>
-                <h3 className="text-body-lg weight-bold text-primary-dark mb-3">{feature.title}</h3>
-                <p className="text-muted">{feature.description}</p>
+                <h3 className="text-title-sm weight-bold text-primary-dark mb-3">{feature.title}</h3>
+                <p className="text-body text-muted leading-relaxed-kw">{feature.description}</p>
               </motion.div>
             ))}
           </div>
