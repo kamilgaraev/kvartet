@@ -8,6 +8,7 @@ import {
   real,
   json,
   pgEnum,
+  primaryKey
 } from 'drizzle-orm/pg-core'
 
 // Enums
@@ -16,30 +17,6 @@ export const postStatusEnum = pgEnum('PostStatus', ['DRAFT', 'PUBLISHED', 'ARCHI
 export const leadTypeEnum = pgEnum('LeadType', ['CONTACT', 'QUOTE', 'CALCULATOR', 'CALLBACK', 'NEWSLETTER'])
 export const leadStatusEnum = pgEnum('LeadStatus', ['NEW', 'CONTACTED', 'IN_PROGRESS', 'CONVERTED', 'CLOSED', 'SPAM'])
 export const priorityEnum = pgEnum('Priority', ['LOW', 'MEDIUM', 'HIGH', 'URGENT'])
-
-// Account table (NextAuth)
-export const accounts = pgTable('Account', {
-  id: text('id').primaryKey().notNull(),
-  userId: text('userId').notNull(),
-  type: text('type').notNull(),
-  provider: text('provider').notNull(),
-  providerAccountId: text('providerAccountId').notNull(),
-  refresh_token: text('refresh_token'),
-  access_token: text('access_token'),
-  expires_at: integer('expires_at'),
-  token_type: text('token_type'),
-  scope: text('scope'),
-  id_token: text('id_token'),
-  session_state: text('session_state'),
-})
-
-// Session table (NextAuth)
-export const sessions = pgTable('Session', {
-  id: text('id').primaryKey().notNull(),
-  sessionToken: text('sessionToken').notNull().unique(),
-  userId: text('userId').notNull(),
-  expires: timestamp('expires').notNull(),
-})
 
 // User table
 export const users = pgTable('User', {
@@ -57,7 +34,35 @@ export const users = pgTable('User', {
 // VerificationToken table (NextAuth)
 export const verificationTokens = pgTable('VerificationToken', {
   identifier: text('identifier').notNull(),
-  token: text('token').notNull().unique(),
+  token: text('token').notNull(),
+  expires: timestamp('expires').notNull(),
+}, (vt) => ({
+  compoundKey: primaryKey(vt.identifier, vt.token),
+}))
+
+// Account table (NextAuth)
+export const accounts = pgTable('Account', {
+  id: text('id').primaryKey().notNull(),
+  userId: text('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: text('type').notNull(),
+  provider: text('provider').notNull(),
+  providerAccountId: text('providerAccountId').notNull(),
+  refresh_token: text('refresh_token'),
+  access_token: text('access_token'),
+  expires_at: integer('expires_at'),
+  token_type: text('token_type'),
+  scope: text('scope'),
+  id_token: text('id_token'),
+  session_state: text('session_state'),
+}, (account) => ({
+  compoundKey: primaryKey(account.provider, account.providerAccountId),
+}))
+
+// Session table (NextAuth)
+export const sessions = pgTable('Session', {
+  id: text('id').primaryKey().notNull(),
+  sessionToken: text('sessionToken').notNull().unique(),
+  userId: text('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
   expires: timestamp('expires').notNull(),
 })
 
@@ -101,11 +106,23 @@ export const portfolioItems = pgTable('PortfolioItem', {
   categoryColor: text('categoryColor'),
   image: text('image').notNull(),
   gallery: text('gallery').array().notNull().default([]),
+  
+  // Extended content
+  challenge: text('challenge'),
+  solution: text('solution'),
+  
+  // Metrics & Results
   result: text('result'),
   budget: text('budget'),
   duration: text('duration'),
   year: integer('year'),
   rating: real('rating').default(5.0),
+  
+  // Review
+  reviewText: text('reviewText'),
+  reviewAuthor: text('reviewAuthor'),
+  reviewRole: text('reviewRole'),
+
   features: text('features').array().notNull().default([]),
   tags: text('tags').array().notNull().default([]),
   popular: boolean('popular').notNull().default(false),

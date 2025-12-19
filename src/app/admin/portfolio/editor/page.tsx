@@ -11,7 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder'
 import { 
   Save, Eye, ArrowLeft, Image as ImageIcon,
   Bold, Italic, Underline, List, Quote, Link as LinkIcon,
-  GripVertical, X, Upload
+  GripVertical, X, Upload, Trash2
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -21,6 +21,7 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
+import { toast } from 'sonner' // Assuming sonner or similar is used, or replace with console/alert
 
 export default function PortfolioEditor() {
   const router = useRouter()
@@ -28,21 +29,33 @@ export default function PortfolioEditor() {
   const projectId = searchParams.get('id')
   
   const [saving, setSaving] = useState(false)
+  const [loading, setLoading] = useState(!!projectId)
   const [lastSaved, setLastSaved] = useState<Date | null>(null)
 
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
     shortDesc: '',
+    description: '',
     category: '',
     tags: '',
     image: '',
     gallery: [] as string[],
     budget: '',
+    duration: '',
     year: new Date().getFullYear().toString(),
     clientName: '',
     clientWebsite: '',
-    features: '',
+    features: '', // Comma separated for UI
+    
+    // New fields
+    challenge: '',
+    solution: '',
+    reviewText: '',
+    reviewAuthor: '',
+    reviewRole: '',
+    result: '',
+
     popular: false,
     active: true,
     metaTitle: '',
@@ -53,8 +66,34 @@ export default function PortfolioEditor() {
   // Fetch data if editing
   useEffect(() => {
     if (projectId) {
-      // Mock fetch - replace with actual API call
-      // fetch(`/api/admin/portfolio/${projectId}`).then...
+      setLoading(true)
+      fetch(`/api/admin/portfolio/${projectId}`)
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to load project')
+          return res.json()
+        })
+        .then(data => {
+          setFormData({
+            ...data,
+            tags: Array.isArray(data.tags) ? data.tags.join(', ') : data.tags || '',
+            features: Array.isArray(data.features) ? data.features.join(', ') : data.features || '',
+            year: data.year?.toString() || new Date().getFullYear().toString(),
+            gallery: data.gallery || [],
+            challenge: data.challenge || '',
+            solution: data.solution || '',
+            reviewText: data.reviewText || '',
+            reviewAuthor: data.reviewAuthor || '',
+            reviewRole: data.reviewRole || '',
+            result: data.result || '',
+            duration: data.duration || ''
+          })
+          editor?.commands.setContent(data.description || '')
+        })
+        .catch(err => {
+          console.error(err)
+          alert('Ошибка при загрузке проекта')
+        })
+        .finally(() => setLoading(false))
     }
   }, [projectId])
 
@@ -63,34 +102,47 @@ export default function PortfolioEditor() {
       StarterKit,
       LinkExtension.configure({ openOnClick: false }),
       ImageExtension.configure({ HTMLAttributes: { class: 'rounded-lg' } }),
-      Placeholder.configure({ placeholder: 'Описание проекта...' })
+      Placeholder.configure({ placeholder: 'Полное описание проекта...' })
     ],
     content: '',
-    immediatelyRender: false,
-    shouldRerenderOnTransaction: false,
     editorProps: {
       attributes: {
         class: 'prose prose-sm max-w-none focus:outline-none min-h-[300px] p-4'
       }
+    },
+    onUpdate: ({ editor }) => {
+      setFormData(prev => ({ ...prev, description: editor.getHTML() }))
     }
   }, [])
 
-  // Helper functions (same as before)
+  // Sync editor content when loaded
+  useEffect(() => {
+    if (editor && formData.description && editor.isEmpty) {
+       // Only set if editor is empty to avoid loop, though initial load handles it differently
+       // actually the useEffect [projectId] handles the initial setContent
+    }
+  }, [editor, formData.description])
+
   const generateSlug = (title: string) => {
-    return title.toLowerCase().replace(/[^а-яёa-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+    return title.toLowerCase()
+      .replace(/[^а-яёa-z0-9\s-]/g, '') // Remove invalid chars
+      .replace(/\s+/g, '-') // Replace spaces with -
+      .replace(/-+/g, '-') // Replace multiple - with single -
+      .replace(/^-|-$/g, '') // Remove starting/ending -
   }
 
   const handleTitleChange = (title: string) => {
     setFormData(prev => ({
       ...prev,
       title,
-      slug: generateSlug(title),
-      metaTitle: title.substring(0, 60)
+      slug: !projectId ? generateSlug(title) : prev.slug, // Only auto-gen slug on new projects
+      metaTitle: !projectId ? title.substring(0, 60) : prev.metaTitle
     }))
   }
 
   const compressImage = async (file: File): Promise<string> => {
-    // Simplified placeholder for compression logic
+    // In a real app, upload to Cloudinary/S3 here
+    // For now, we'll keep using base64 but warn about size
     return new Promise((resolve) => {
       const reader = new FileReader()
       reader.onload = (e) => resolve(e.target?.result as string)
@@ -117,12 +169,57 @@ export default function PortfolioEditor() {
 
   const saveProject = async () => {
     setSaving(true)
-    // Simulate API call
-    setTimeout(() => {
-        setSaving(false)
-        setLastSaved(new Date())
-        if (!projectId) router.push('/admin/portfolio')
-    }, 1000)
+    
+    try {
+      const payload = {
+        ...formData,
+        tags: formData.tags.split(',').map(t => t.trim()).filter(Boolean),
+        features: formData.features.split(',').map(t => t.trim()).filter(Boolean),
+        description: editor?.getHTML() || formData.description
+      }
+
+      const url = projectId 
+        ? `/api/admin/portfolio/${projectId}` 
+        : '/api/admin/portfolio'
+      
+      const method = projectId ? 'PUT' : 'POST'
+
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (!res.ok) throw new Error('Failed to save')
+
+      const savedData = await res.json()
+      setLastSaved(new Date())
+      
+      if (!projectId) {
+        router.push(`/admin/portfolio/editor?id=${savedData.id}`)
+      } else {
+        // Optional: show toast
+      }
+    } catch (error) {
+      console.error(error)
+      alert('Ошибка сохранения')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const deleteProject = async () => {
+    if (!confirm('Вы уверены? Это действие нельзя отменить.')) return
+    
+    try {
+      const res = await fetch(`/api/admin/portfolio/${projectId}`, {
+        method: 'DELETE'
+      })
+      if (!res.ok) throw new Error('Failed to delete')
+      router.push('/admin/portfolio')
+    } catch (error) {
+      alert('Ошибка удаления')
+    }
   }
 
   const EditorToolbar = () => (
@@ -137,8 +234,13 @@ export default function PortfolioEditor() {
       <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleBulletList().run()}>
         <List className="w-4 h-4" />
       </Button>
+      <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleBlockquote().run()}>
+        <Quote className="w-4 h-4" />
+      </Button>
     </div>
   )
+
+  if (loading) return <div className="p-8 text-center">Загрузка...</div>
 
   return (
     <div className="min-h-screen bg-gray-50/50 pb-20">
@@ -156,6 +258,11 @@ export default function PortfolioEditor() {
           </div>
         </div>
         <div className="flex items-center gap-2">
+            {projectId && (
+                <Button variant="destructive" size="icon" onClick={deleteProject}>
+                    <Trash2 className="w-4 h-4" />
+                </Button>
+            )}
           <Button variant="outline" onClick={() => window.open(`/portfolio/${formData.slug}`, '_blank')}>
             <Eye className="w-4 h-4 mr-2" /> Предпросмотр
           </Button>
@@ -176,31 +283,59 @@ export default function PortfolioEditor() {
               <div className="space-y-2">
                 <Label>Название</Label>
                 <Input 
-                        value={formData.title}
-                        onChange={(e) => handleTitleChange(e.target.value)}
+                  value={formData.title}
+                  onChange={(e) => handleTitleChange(e.target.value)}
                   placeholder="Введите название проекта"
-                      />
-                    </div>
+                />
+              </div>
               <div className="space-y-2">
-                <Label>Slug</Label>
+                <Label>Slug (URL)</Label>
                 <Input 
-                        value={formData.slug}
-                        onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                      />
-                    </div>
+                  value={formData.slug}
+                  onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                />
+              </div>
               <div className="space-y-2">
-                <Label>Краткое описание</Label>
+                <Label>Краткое описание (для карточки)</Label>
                 <Textarea 
-                        value={formData.shortDesc}
-                        onChange={(e) => setFormData(prev => ({ ...prev, shortDesc: e.target.value }))}
-                      />
-                    </div>
+                  value={formData.shortDesc}
+                  onChange={(e) => setFormData(prev => ({ ...prev, shortDesc: e.target.value }))}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Case Study Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Case Study</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <Label className="text-base font-semibold">Задача (Challenge)</Label>
+                <Textarea 
+                  className="min-h-[100px]"
+                  value={formData.challenge}
+                  onChange={(e) => setFormData(prev => ({ ...prev, challenge: e.target.value }))}
+                  placeholder="Опишите проблему, с которой пришел клиент..."
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label className="text-base font-semibold">Решение (Solution)</Label>
+                <Textarea 
+                  className="min-h-[150px]"
+                  value={formData.solution}
+                  onChange={(e) => setFormData(prev => ({ ...prev, solution: e.target.value }))}
+                  placeholder="Опишите, как вы решили проблему..."
+                />
+              </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Контент</CardTitle>
+              <CardTitle>Полное описание (Контент)</CardTitle>
             </CardHeader>
             <CardContent className="p-0 border-t">
               {editor && (
@@ -209,11 +344,41 @@ export default function PortfolioEditor() {
                   <EditorContent editor={editor} />
                 </>
               )}
-              {!editor && (
-                <div className="p-4 text-center text-muted-foreground">
-                  Загрузка редактора...
+            </CardContent>
+          </Card>
+
+          {/* Review Section */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Отзыв клиента</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label>Текст отзыва</Label>
+                <Textarea 
+                  value={formData.reviewText}
+                  onChange={(e) => setFormData(prev => ({ ...prev, reviewText: e.target.value }))}
+                  placeholder="Прекрасная работа..."
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <Label>Автор</Label>
+                    <Input 
+                        value={formData.reviewAuthor}
+                        onChange={(e) => setFormData(prev => ({ ...prev, reviewAuthor: e.target.value }))}
+                        placeholder="Иван Иванов"
+                    />
                 </div>
-              )}
+                <div className="space-y-2">
+                    <Label>Должность</Label>
+                    <Input 
+                        value={formData.reviewRole}
+                        onChange={(e) => setFormData(prev => ({ ...prev, reviewRole: e.target.value }))}
+                        placeholder="Директор"
+                    />
+                </div>
+              </div>
             </CardContent>
           </Card>
 
@@ -222,15 +387,15 @@ export default function PortfolioEditor() {
               <CardTitle>Галерея</CardTitle>
               <div className="relative">
                 <Input 
-                          type="file"
-                          multiple
-                    className="absolute inset-0 opacity-0 cursor-pointer" 
-                    onChange={(e) => handleImageUpload(e, true)}
+                  type="file"
+                  multiple
+                  className="absolute inset-0 opacity-0 cursor-pointer" 
+                  onChange={(e) => handleImageUpload(e, true)}
                 />
                 <Button variant="outline" size="sm">
                   <Upload className="w-4 h-4 mr-2" /> Добавить фото
                 </Button>
-                      </div>
+              </div>
             </CardHeader>
             <CardContent>
               <Reorder.Group axis="y" values={formData.gallery} onReorder={(newOrder) => setFormData(prev => ({ ...prev, gallery: newOrder }))} className="space-y-2">
@@ -254,8 +419,8 @@ export default function PortfolioEditor() {
               {formData.gallery.length === 0 && (
                 <div className="text-center py-8 text-muted-foreground border-2 border-dashed rounded-lg">
                   Нет изображений в галерее
-                  </div>
-                )}
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -267,24 +432,24 @@ export default function PortfolioEditor() {
               <div className="space-y-2">
                 <Label>Meta Title</Label>
                 <Input 
-                        value={formData.metaTitle}
-                        onChange={(e) => setFormData(prev => ({ ...prev, metaTitle: e.target.value }))}
-                        maxLength={60}
-                      />
+                  value={formData.metaTitle}
+                  onChange={(e) => setFormData(prev => ({ ...prev, metaTitle: e.target.value }))}
+                  maxLength={60}
+                />
                 <p className="text-xs text-muted-foreground text-right">{formData.metaTitle.length}/60</p>
-                    </div>
+              </div>
               <div className="space-y-2">
                 <Label>Meta Description</Label>
                 <Textarea 
-                        value={formData.metaDescription}
-                        onChange={(e) => setFormData(prev => ({ ...prev, metaDescription: e.target.value }))}
-                        maxLength={160}
-                      />
+                  value={formData.metaDescription}
+                  onChange={(e) => setFormData(prev => ({ ...prev, metaDescription: e.target.value }))}
+                  maxLength={160}
+                />
                 <p className="text-xs text-muted-foreground text-right">{formData.metaDescription.length}/160</p>
               </div>
             </CardContent>
           </Card>
-                    </div>
+        </div>
 
         {/* Sidebar */}
         <div className="space-y-6">
@@ -345,47 +510,73 @@ export default function PortfolioEditor() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Детали</CardTitle>
+              <CardTitle>Детали проекта</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label>Категория</Label>
                 <Input 
-                    value={formData.category}
-                    onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                    placeholder="branding, web..." 
+                  value={formData.category}
+                  onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                  placeholder="branding, web..." 
                 />
-                </div>
+              </div>
               <div className="space-y-2">
                 <Label>Клиент</Label>
                 <Input 
-                    value={formData.clientName}
-                    onChange={(e) => setFormData(prev => ({ ...prev, clientName: e.target.value }))}
+                  value={formData.clientName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, clientName: e.target.value }))}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Год</Label>
+                  <Input 
+                    type="number"
+                    value={formData.year}
+                    onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                    <Label>Год</Label>
-                    <Input 
-                      type="number"
-                      value={formData.year}
-                      onChange={(e) => setFormData(prev => ({ ...prev, year: e.target.value }))}
-                    />
-                  </div>
-                <div className="space-y-2">
-                    <Label>Бюджет</Label>
-                    <Input 
-                      value={formData.budget}
-                      onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
-                    />
-                  </div>
+                  <Label>Бюджет</Label>
+                  <Input 
+                    value={formData.budget}
+                    onChange={(e) => setFormData(prev => ({ ...prev, budget: e.target.value }))}
+                  />
                 </div>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                    <Label>Срок (Duration)</Label>
+                    <Input 
+                        value={formData.duration}
+                        onChange={(e) => setFormData(prev => ({ ...prev, duration: e.target.value }))}
+                        placeholder="2 недели"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <Label>Результат (кратко)</Label>
+                    <Input 
+                        value={formData.result}
+                        onChange={(e) => setFormData(prev => ({ ...prev, result: e.target.value }))}
+                        placeholder="+200% лидов"
+                    />
+                </div>
+              </div>
               <div className="space-y-2">
                 <Label>Теги</Label>
                 <Input 
-                    value={formData.tags}
-                    onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
-                    placeholder="Через запятую"
+                  value={formData.tags}
+                  onChange={(e) => setFormData(prev => ({ ...prev, tags: e.target.value }))}
+                  placeholder="Через запятую"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Особенности (Features)</Label>
+                <Textarea
+                  value={formData.features}
+                  onChange={(e) => setFormData(prev => ({ ...prev, features: e.target.value }))}
+                  placeholder="Через запятую: Адаптивность, SEO, Скорость"
                 />
               </div>
             </CardContent>
@@ -394,4 +585,4 @@ export default function PortfolioEditor() {
       </div>
     </div>
   )
-} 
+}

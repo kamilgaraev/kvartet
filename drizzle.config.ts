@@ -9,5 +9,9 @@ export default defineConfig({
   },
   verbose: true,
   strict: true,
+  migrations: {
+    table: '__drizzle_migrations',
+    schema: 'public',
+  },
 })
 

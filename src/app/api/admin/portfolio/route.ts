@@ -85,8 +85,17 @@ export async function POST(request: NextRequest) {
         categoryColor: data.categoryColor,
         image: data.image || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop',
         gallery: data.gallery || [],
+        
+        // Extended fields
+        challenge: data.challenge,
+        solution: data.solution,
+        reviewText: data.reviewText,
+        reviewAuthor: data.reviewAuthor,
+        reviewRole: data.reviewRole,
+        
         result: data.result,
         budget: data.budget,
+        duration: data.duration,
         year: data.year ? parseInt(data.year) : new Date().getFullYear(),
         rating: data.rating ? parseFloat(data.rating) : 5.0,
         features: data.features || [],

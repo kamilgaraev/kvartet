@@ -1,9 +1,39 @@
-CREATE TYPE "public"."ContactType" AS ENUM('phone', 'email', 'address', 'hours', 'other');--> statement-breakpoint
-CREATE TYPE "public"."LeadStatus" AS ENUM('NEW', 'CONTACTED', 'IN_PROGRESS', 'CONVERTED', 'CLOSED', 'SPAM');--> statement-breakpoint
-CREATE TYPE "public"."LeadType" AS ENUM('CONTACT', 'QUOTE', 'CALCULATOR', 'CALLBACK', 'NEWSLETTER');--> statement-breakpoint
-CREATE TYPE "public"."PostStatus" AS ENUM('DRAFT', 'PUBLISHED', 'ARCHIVED');--> statement-breakpoint
-CREATE TYPE "public"."Priority" AS ENUM('LOW', 'MEDIUM', 'HIGH', 'URGENT');--> statement-breakpoint
-CREATE TYPE "public"."Role" AS ENUM('ADMIN', 'MANAGER', 'EDITOR');--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."ContactType" AS ENUM('phone', 'email', 'address', 'hours', 'other');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."LeadStatus" AS ENUM('NEW', 'CONTACTED', 'IN_PROGRESS', 'CONVERTED', 'CLOSED', 'SPAM');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."LeadType" AS ENUM('CONTACT', 'QUOTE', 'CALCULATOR', 'CALLBACK', 'NEWSLETTER');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."PostStatus" AS ENUM('DRAFT', 'PUBLISHED', 'ARCHIVED');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."Priority" AS ENUM('LOW', 'MEDIUM', 'HIGH', 'URGENT');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ CREATE TYPE "public"."Role" AS ENUM('ADMIN', 'MANAGER', 'EDITOR');
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "Account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"userId" text NOT NULL,
