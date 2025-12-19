@@ -8,7 +8,7 @@ import { eq } from 'drizzle-orm'
 // GET - получить конкретную заявку
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -16,6 +16,8 @@ export async function GET(
     if (!session?.user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
+
+    const { id } = await params
 
     const [lead] = await db
       .select({
@@ -52,7 +54,7 @@ export async function GET(
       })
       .from(leads)
       .leftJoin(users, eq(leads.assignedTo, users.id))
-      .where(eq(leads.id, params.id))
+      .where(eq(leads.id, id))
 
     if (!lead) {
       return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
@@ -68,7 +70,7 @@ export async function GET(
 // PATCH - обновить заявку
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -77,6 +79,7 @@ export async function PATCH(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    const { id } = await params
     const body = await request.json()
     const { status, priority, assignedTo, notes } = body
 
@@ -90,7 +93,7 @@ export async function PATCH(
     const [updatedLead] = await db
       .update(leads)
       .set(updateData)
-      .where(eq(leads.id, params.id))
+      .where(eq(leads.id, id))
       .returning()
 
     if (!updatedLead) {
@@ -133,7 +136,7 @@ export async function PATCH(
       })
       .from(leads)
       .leftJoin(users, eq(leads.assignedTo, users.id))
-      .where(eq(leads.id, params.id))
+      .where(eq(leads.id, id))
 
     return NextResponse.json({ 
       success: true, 
@@ -149,7 +152,7 @@ export async function PATCH(
 // DELETE - удалить заявку
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -158,7 +161,8 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
-    await db.delete(leads).where(eq(leads.id, params.id))
+    const { id } = await params
+    await db.delete(leads).where(eq(leads.id, id))
 
     return NextResponse.json({ 
       success: true,

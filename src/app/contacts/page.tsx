@@ -140,12 +140,39 @@ export default function ContactsPage() {
     e.preventDefault()
     setIsSubmitting(true)
     
-    // Имитация отправки формы
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          serviceType: formData.service,
+          type: 'CONTACT',
+          source: 'contact_page'
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке формы')
+      }
+
+      const result = await response.json()
+      console.log('Lead created:', result)
+      
       setIsSubmitted(true)
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
       setTimeout(() => setIsSubmitted(false), 3000)
-    }, 1000)
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

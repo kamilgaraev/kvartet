@@ -233,7 +233,11 @@ function TestimonialForm({
   onCancel: () => void
 }) {
   const [formData, setFormData] = useState<Partial<Testimonial>>(
-    item || {
+    item ? {
+      ...item,
+      imageUrl: item.imageUrl || '',
+      videoUrl: item.videoUrl || '',
+    } : {
       name: '',
       position: '',
       rating: 5,
@@ -273,7 +277,7 @@ function TestimonialForm({
             <input
               type="text"
               required
-              value={formData.name}
+              value={formData.name || ''}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
@@ -286,7 +290,7 @@ function TestimonialForm({
             <input
               type="text"
               required
-              value={formData.position}
+              value={formData.position || ''}
               onChange={(e) => setFormData({ ...formData, position: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
@@ -300,7 +304,7 @@ function TestimonialForm({
           <textarea
             required
             rows={4}
-            value={formData.text}
+            value={formData.text || ''}
             onChange={(e) => setFormData({ ...formData, text: e.target.value })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
           />
@@ -320,7 +324,7 @@ function TestimonialForm({
             <input
               type="text"
               required
-              value={formData.project}
+              value={formData.project || ''}
               onChange={(e) => setFormData({ ...formData, project: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
@@ -333,7 +337,7 @@ function TestimonialForm({
             <input
               type="text"
               required
-              value={formData.result}
+              value={formData.result || ''}
               onChange={(e) => setFormData({ ...formData, result: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
               placeholder="+250% узнаваемости"
@@ -347,7 +351,7 @@ function TestimonialForm({
             <input
               type="text"
               required
-              value={formData.budget}
+              value={formData.budget || ''}
               onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
               placeholder="150 000 ₽"
@@ -361,7 +365,7 @@ function TestimonialForm({
               Рейтинг
             </label>
             <select
-              value={formData.rating}
+              value={formData.rating || 5}
               onChange={(e) => setFormData({ ...formData, rating: parseInt(e.target.value) })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             >
@@ -379,7 +383,7 @@ function TestimonialForm({
             </label>
             <input
               type="number"
-              value={formData.order}
+              value={formData.order || 0}
               onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
             />
@@ -389,7 +393,7 @@ function TestimonialForm({
             <label className="flex items-center space-x-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={formData.active}
+                checked={formData.active ?? true}
                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
                 className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
               />
@@ -399,7 +403,7 @@ function TestimonialForm({
             <label className="flex items-center space-x-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={formData.videoReview}
+                checked={formData.videoReview ?? false}
                 onChange={(e) => setFormData({ ...formData, videoReview: e.target.checked })}
                 className="w-4 h-4 text-primary border-gray-300 rounded focus:ring-primary"
               />
@@ -415,7 +419,7 @@ function TestimonialForm({
             </label>
             <input
               type="url"
-              value={formData.videoUrl}
+              value={formData.videoUrl || ''}
               onChange={(e) => setFormData({ ...formData, videoUrl: e.target.value })}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
               placeholder="https://youtube.com/..."

@@ -9,10 +9,7 @@ import {
   Home, 
   Palette, 
   ArrowRight,
-  Check,
-  Star,
-  Sparkles,
-  Zap
+  Check
 } from 'lucide-react'
 
 const iconMap: any = {
@@ -54,15 +51,45 @@ export default function Services() {
         console.error('Failed to fetch services:', error)
         // Fallback к дефолтным данным
         setServices([
-  {
-    icon: Megaphone,
-    title: 'Наружная реклама',
-    description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
-    features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
-    gradient: 'bg-gradient-primary',
-    bgColor: 'bg-primary-05',
-    href: '/services/outdoor',
-    popular: true
+          {
+            icon: Megaphone,
+            title: 'Наружная реклама',
+            description: 'Световые короба, баннеры, вывески. Полный цикл производства и монтажа.',
+            features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
+            gradient: 'bg-gradient-primary',
+            bgColor: 'bg-primary-05',
+            href: '/services/outdoor',
+            popular: true
+          },
+          {
+            icon: Printer,
+            title: 'Полиграфия',
+            description: 'Печать рекламной продукции. Офсетная и цифровая печать любых тиражей.',
+            features: ['Визитки', 'Листовки', 'Каталоги', 'Буклеты'],
+            gradient: 'bg-gradient-primary-reverse',
+            bgColor: 'bg-primary-dark-05',
+            href: '/services/printing',
+            popular: false
+          },
+          {
+            icon: Home,
+            title: 'Интерьерная реклама',
+            description: 'Оформление офисов и магазинов. Создаем уникальную атмосферу для вашего бизнеса.',
+            features: ['Оформление офисов', 'Навигация', 'Стенды', 'POS-материалы'],
+            gradient: 'bg-gradient-light',
+            bgColor: 'bg-primary-light-05',
+            href: '/services/interior',
+            popular: false
+          },
+          {
+            icon: Palette,
+            title: 'Брендинг и фирменный стиль',
+            description: 'Создание фирменного стиля и айдентики бренда. Разработка логотипа, фирменных цветов, шрифтов и носителей.',
+            features: ['Логотипы', 'Фирменный стиль', 'Брендбуки', 'Носители'],
+            gradient: 'bg-gradient-accent',
+            bgColor: 'bg-primary-light-05',
+            href: '/services/branding',
+            popular: false
           }
         ])
         setLoading(false)
@@ -74,20 +101,14 @@ export default function Services() {
   }
 
   return (
-    <section className="section-padding-y bg-gradient-bg relative overflow-hidden" ref={ref}>
-      {/* Декоративные элементы */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-primary-05 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-primary-dark-05 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="relative container-adaptive">
+    <section className="section-padding-y bg-gradient-bg" ref={ref}>
+      <div className="container-adaptive">
         {/* Заголовок секции */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -95,114 +116,69 @@ export default function Services() {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-10 to-primary-dark-10 rounded-full px-6 py-2 mb-6"
           >
-            <Sparkles className="w-5 h-5 text-primary" />
-            <span className="text-caption weight-semibold text-muted">Наши услуги</span>
+            <Megaphone className="w-5 h-5 text-primary-dark" />
+            <span className="text-body-sm weight-semibold text-muted">Что мы предлагаем</span>
           </motion.div>
 
-          <h2 className="text-display-2 text-primary-dark mb-6 leading-tight-kw">
-            Полный спектр{' '}
-            <span className="relative inline-block">
-              <span className="text-primary-dark weight-extrabold">рекламных услуг</span>
-              <motion.div
-                initial={{ scaleX: 0 }}
-                animate={inView ? { scaleX: 1 } : { scaleX: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-primary opacity-30 rounded-full"
-              />
-            </span>
+          <h2 className="text-display-2 text-primary-dark mb-6 leading-tight-kw weight-bold">
+            Наши <span className="text-primary">услуги</span>
           </h2>
-          <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw weight-medium">
-            От концепции до реализации — создаем эффективную рекламу, 
-            которая работает на результат вашего бизнеса
+          <p className="text-body-xl text-muted max-w-3xl mx-auto leading-relaxed-kw">
+            Мы предлагаем полный спектр рекламных услуг: от разработки дизайна до производства и монтажа. 
+            Собственное производство позволяет нам гарантировать высокое качество и сжатые сроки.
           </p>
         </motion.div>
 
         {/* Сетка услуг */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {services.map((service, index) => (
-            <motion.div
+            <motion.a
+              href={service.href}
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -8 }}
+              className="group relative block h-full"
             >
-              {/* Популярная услуга бейдж */}
               {service.popular && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-                  transition={{ delay: index * 0.15 + 0.5 }}
-                  className="absolute -top-3 -right-3 z-10 bg-gradient-primary text-white text-caption weight-bold px-3 py-1 rounded-full shadow-lg flex items-center space-x-1"
-                >
-                  <Star className="w-3 h-3 fill-current" />
-                  <span>Популярно</span>
-                </motion.div>
+                <div className="absolute -top-3 -right-3 z-10 bg-accent text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg border-2 border-white animate-pulse">
+                  ХИТ ПРОДАЖ
+                </div>
               )}
 
-              <div className={`relative bg-card backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-light hover:shadow-2xl transition-all duration-500 overflow-hidden h-full ${service.bgColor}`}>
-                {/* Декоративный элемент */}
-                <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                  <div className={`w-full h-full rounded-full ${service.gradient} transform rotate-45 translate-x-8 -translate-y-8`}></div>
+              <div className="relative bg-white rounded-3xl p-8 shadow-card hover:shadow-card-hover border border-light hover:border-primary transition-all duration-300 h-full flex flex-col group-hover:bg-primary-bg/30">
+                <div className="flex items-start justify-between mb-6">
+                  <div className={`w-16 h-16 rounded-2xl ${service.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <service.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="w-10 h-10 rounded-full bg-primary-05 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                    <ArrowRight className="w-5 h-5 text-primary group-hover:text-white transition-colors" />
+                  </div>
                 </div>
 
-                {/* Иконка */}
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className={`relative z-10 w-20 h-20 rounded-2xl ${service.gradient} p-5 mb-6 shadow-lg`}
-                >
-                  <service.icon className="w-full h-full text-white" />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                    className={`absolute inset-0 rounded-2xl ${service.gradient} opacity-30`}
-                  />
-                </motion.div>
+                <h3 className="text-title-lg font-bold text-primary-dark mb-3 group-hover:text-primary transition-colors">
+                  {service.title}
+                </h3>
+                
+                <p className="text-body text-muted mb-6 leading-relaxed-kw flex-grow">
+                  {service.description}
+                </p>
 
-                {/* Контент */}
-                <div className="relative z-10 space-y-6">
-                  <div>
-                    <h3 className="text-title text-primary-dark mb-3 hover:text-primary transition-colors weight-bold">
-                      {service.title}
-                    </h3>
-                    
-                    <p className="text-muted text-body-sm leading-relaxed-kw">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Особенности */}
-                  <div className="space-y-3">
-                    {service.features.map((feature) => (
-                      <motion.div
-                        key={feature}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-                        transition={{ delay: index * 0.15 + 0.3 }}
-                        className="flex items-center space-x-3 text-body-sm text-muted"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-primary-20 flex items-center justify-center flex-shrink-0">
+                {service.features && service.features.length > 0 && (
+                  <div className="space-y-3 pt-6 border-t border-gray-100">
+                    {service.features.slice(0, 3).map((feature, idx) => (
+                      <div key={idx} className="flex items-start space-x-3 text-body-sm text-primary-dark/80">
+                        <div className="w-5 h-5 rounded-full bg-primary-10 flex items-center justify-center flex-shrink-0 mt-0.5">
                           <Check className="w-3 h-3 text-primary" />
                         </div>
                         <span>{feature}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
-
-                  {/* Кнопка */}
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full mt-6 bg-card text-muted py-4 rounded-2xl border border-light hover:border-hover hover:text-primary hover:shadow-lg transition-all duration-300 weight-semibold flex items-center justify-center space-x-2 group"
-                  >
-                    <span>Подробнее</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </motion.button>
-                </div>
+                )}
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
 
@@ -210,60 +186,42 @@ export default function Services() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="max-w-5xl mx-auto"
         >
-          <div className="relative bg-gradient-primary rounded-3xl p-12 text-white overflow-hidden">
-            {/* Декоративные элементы */}
-            <div className="absolute inset-0">
-              <div className="absolute top-4 left-4 w-16 h-16 border-2 border-white/20 rounded-full"></div>
-              <div className="absolute bottom-4 right-4 w-24 h-24 border-2 border-white/20 rounded-full"></div>
-              <motion.div
-                animate={{ 
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 180, 360]
-                }}
-                transition={{ duration: 8, repeat: Infinity }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-white/10 rounded-full"
-              />
-            </div>
+          <div className="relative bg-gradient-primary rounded-3xl p-10 md:p-16 text-white overflow-hidden shadow-primary-lg">
+            {/* Декоративные круги */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/3 translate-x-1/3 blur-3xl"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/20 rounded-full translate-y-1/3 -translate-x-1/3 blur-2xl"></div>
+            
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="text-center md:text-left md:max-w-xl">
+                <h3 className="text-display-3 font-bold mb-4 leading-tight">
+                  Не нашли то, что искали?
+                </h3>
+                <p className="text-white/90 text-body-lg leading-relaxed">
+                  Оставьте заявку на бесплатную консультацию. Мы подберем индивидуальное решение под ваш бюджет и задачи за 15 минут.
+                </p>
+              </div>
 
-            <div className="relative z-10 max-w-3xl mx-auto">
-              <motion.div
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="flex justify-center mb-6"
-              >
-                <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
-                  <Zap className="w-8 h-8 text-white" />
-                </div>
-              </motion.div>
-
-              <h3 className="text-display-3 weight-bold mb-6">
-                Не знаете, какую услугу выбрать?
-              </h3>
-              <p className="text-body-xl text-white/90 mb-8 leading-relaxed-kw">
-                Получите бесплатную консультацию наших экспертов и найдите 
-                идеальное решение для роста вашего бизнеса
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white text-primary px-8 py-4 rounded-2xl hover:bg-card transition-colors weight-semibold shadow-lg flex items-center justify-center space-x-2"
+              <div className="flex flex-col gap-4 min-w-[280px]">
+                <motion.a
+                  href="/contacts"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white text-primary-dark px-8 py-4 rounded-xl font-bold text-body shadow-lg hover:shadow-xl hover:bg-gray-50 transition-all text-center flex items-center justify-center space-x-2"
                 >
-                  <span>Получить консультацию</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                  <span>Связаться с менеджером</span>
+                </motion.a>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white/20 backdrop-blur-sm text-white px-8 py-4 rounded-2xl border border-white/30 hover:bg-white/30 transition-colors weight-semibold"
+                <motion.a
+                  href="/calculator"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-xl border border-white/30 hover:bg-white/20 transition-all font-semibold text-body text-center"
                 >
-                  Калькулятор стоимости
-                </motion.button>
+                  Рассчитать стоимость
+                </motion.a>
               </div>
             </div>
           </div>

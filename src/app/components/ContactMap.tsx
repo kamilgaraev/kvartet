@@ -52,14 +52,19 @@ export default function ContactMap() {
                 </div>
                 <div>
                   <h3 className="text-title weight-bold text-primary-dark mb-2">Наш офис</h3>
-                  <p className="text-body text-muted mb-2">г. Уфа, ул. Ленская, 128</p>
+                  <p className="text-body text-muted mb-2">г. Уфа, ул. Ленская, 128/1</p>
                   <p className="text-caption text-muted">
-                    Центральный район, рядом с остановкой "Ленская"
+                    ООО Производственно-рекламная группа "Карандаш"
                   </p>
-                  <button className="mt-3 text-primary hover:text-primary-dark transition-colors flex items-center space-x-1 text-body-sm weight-medium">
+                  <a 
+                    href="https://yandex.ru/maps/?pt=55.911,54.728&z=17&l=map" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 text-primary hover:text-primary-dark transition-colors flex items-center space-x-1 text-body-sm weight-medium"
+                  >
                     <ExternalLink className="w-4 h-4" />
                     <span>Построить маршрут</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -73,8 +78,12 @@ export default function ContactMap() {
                 <div>
                   <h3 className="text-title weight-bold text-primary-dark mb-2">Телефоны</h3>
                   <div className="space-y-2">
-                    <p className="text-body text-primary-dark weight-medium">+7 (347) 123-45-67</p>
-                    <p className="text-body text-muted">+7 (347) 123-45-68</p>
+                    <a href="tel:+73472855596" className="text-body text-primary-dark weight-medium hover:text-primary transition-colors block">
+                      +7 (347) 285-55-96
+                    </a>
+                    <a href="tel:+79173739307" className="text-body text-muted hover:text-primary-dark transition-colors block">
+                      +7 (917) 373-93-07
+                    </a>
                     <p className="text-caption text-muted">Звоните с 9:00 до 18:00</p>
                   </div>
                 </div>
@@ -90,15 +99,27 @@ export default function ContactMap() {
                 <div className="flex-1">
                   <h3 className="text-title weight-bold text-primary-dark mb-2">Онлайн связь</h3>
                   <div className="space-y-3">
-                    <p className="text-body text-muted">info@kvartett-ufa.ru</p>
+                    <a href="mailto:kvartet-reklama@mail.ru" className="text-body text-muted hover:text-primary transition-colors block">
+                      kvartet-reklama@mail.ru
+                    </a>
                     <div className="flex space-x-3">
-                      <button className="bg-success text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-success-dark transition-colors flex items-center space-x-2">
+                      <a 
+                        href="https://wa.me/79173739307" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-success text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-success-dark transition-colors flex items-center space-x-2"
+                      >
                         <MessageCircle className="w-4 h-4" />
                         <span>WhatsApp</span>
-                      </button>
-                      <button className="bg-primary text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-primary-dark transition-colors">
+                      </a>
+                      <a 
+                        href="https://t.me/reklama_kvartet" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-primary text-white px-4 py-2 rounded-lg text-body-sm weight-medium hover:bg-primary-dark transition-colors"
+                      >
                         Telegram
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -155,32 +176,18 @@ export default function ContactMap() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="space-y-6"
           >
-            {/* Карта */}
-            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-light h-96">
-              <div className="w-full h-full bg-gradient-to-br from-primary-10 via-primary-20 to-primary-30 flex items-center justify-center relative">
-                {/* Здесь будет интеграция с картами */}
-                <div className="text-center space-y-4">
-                  <MapPin className="w-16 h-16 text-primary mx-auto" />
-                  <div>
-                    <h3 className="text-title weight-bold text-primary-dark mb-2">
-                      Интерактивная карта
-                    </h3>
-                    <p className="text-body text-muted max-w-xs">
-                      г. Уфа, ул. Ленская, 128<br />
-                      Производственно-рекламная группа "Квартет"
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Маркер на карте */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-4 h-4 bg-primary-dark rounded-full shadow-lg"
-                  />
-                </div>
-              </div>
+            {/* Яндекс.Карта */}
+            <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-light h-[500px]">
+              <iframe
+                src="https://yandex.ru/map-widget/v1/?ll=55.979954%2C54.725098&z=17&l=map&pt=55.979954,54.725098,pm2rdm"
+                width="100%"
+                height="100%"
+                frameBorder="0"
+                title="Карта офиса РА Квартет - г. Уфа, ул. Ленская, 128/1"
+                className="w-full h-full"
+                style={{ border: 0 }}
+                allowFullScreen
+              />
             </div>
 
             {/* CTA блоки */}

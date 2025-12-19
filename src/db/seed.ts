@@ -56,40 +56,61 @@ async function main() {
       id: nanoid(),
       name: 'Наружная реклама',
       slug: 'outdoor-advertising',
+      icon: 'Megaphone',
       description: 'Производство и монтаж наружной рекламы. Полный комплекс услуг от дизайна до установки рекламных конструкций.',
       shortDesc: 'Производство и монтаж наружной рекламы',
-      features: ['Производство', 'Монтаж', 'Дизайн', 'Согласование'],
+      features: ['Световые короба', 'Баннеры', 'Билборды', 'Вывески'],
       advantages: ['Опыт 10+ лет', 'Гарантия качества', 'Быстрые сроки'],
       priceFrom: 5000,
       priceTo: 100000,
       popular: true,
       active: true,
-    },
-    {
-      id: nanoid(),
-      name: 'Брендинг и фирменный стиль',
-      slug: 'branding',
-      description: 'Создание фирменного стиля и айдентики бренда. Разработка логотипа, фирменных цветов, шрифтов и носителей.',
-      shortDesc: 'Создание фирменного стиля и айдентики',
-      features: ['Логотип', 'Фирменный стиль', 'Брендбук', 'Нейминг'],
-      advantages: ['Уникальный дизайн', 'Полный пакет', 'Консультации'],
-      priceFrom: 15000,
-      priceTo: 200000,
-      popular: true,
-      active: true,
+      order: 4,
     },
     {
       id: nanoid(),
       name: 'Полиграфия',
       slug: 'printing',
+      icon: 'Printer',
       description: 'Печать рекламной продукции. Офсетная и цифровая печать любых тиражей.',
       shortDesc: 'Печать рекламной продукции',
-      features: ['Визитки', 'Флаеры', 'Каталоги', 'Буклеты'],
+      features: ['Визитки', 'Листовки', 'Каталоги', 'Буклеты'],
       advantages: ['Качественная печать', 'Любые тиражи', 'Быстро'],
       priceFrom: 1000,
       priceTo: 50000,
       popular: false,
       active: true,
+      order: 3,
+    },
+    {
+      id: nanoid(),
+      name: 'Интерьерная реклама',
+      slug: 'interior',
+      icon: 'Home',
+      description: 'Оформление офисов и магазинов. Создаем уникальную атмосферу для вашего бизнеса.',
+      shortDesc: 'Оформление офисов и магазинов',
+      features: ['Оформление офисов', 'Навигация', 'Стенды', 'POS-материалы'],
+      advantages: ['Индивидуальный подход', 'Премиум материалы', 'Быстрый монтаж'],
+      priceFrom: 3000,
+      priceTo: 150000,
+      popular: false,
+      active: true,
+      order: 2,
+    },
+    {
+      id: nanoid(),
+      name: 'Брендинг и фирменный стиль',
+      slug: 'branding',
+      icon: 'Palette',
+      description: 'Создание фирменного стиля и айдентики бренда. Разработка логотипа, фирменных цветов, шрифтов и носителей.',
+      shortDesc: 'Создание фирменного стиля и айдентики',
+      features: ['Логотипы', 'Фирменный стиль', 'Брендбуки', 'Носители'],
+      advantages: ['Уникальный дизайн', 'Полный пакет', 'Консультации'],
+      priceFrom: 15000,
+      priceTo: 200000,
+      popular: false,
+      active: true,
+      order: 1,
     }
   ]
 
@@ -429,68 +450,71 @@ async function main() {
   }
   console.log('✅ Партнеры созданы')
 
-  console.log('🌱 Создание социальных сетей...')
+  console.log('🌱 Очистка и создание социальных сетей...')
+  
+  await db.delete(socialLinks)
   
   const socialLinksData = [
     {
       id: nanoid(),
       platform: 'ВКонтакте',
-      url: 'https://vk.com/kvartett_ufa',
+      url: 'https://vk.com/reklama_kvartet',
       icon: 'В',
+      color: '#2F4454',
+      active: true,
+      order: 5,
+    },
+    {
+      id: nanoid(),
+      platform: 'Telegram',
+      url: 'https://t.me/reklama_kvartet',
+      icon: 'T',
       color: '#2F4454',
       active: true,
       order: 4,
     },
     {
       id: nanoid(),
-      platform: 'Telegram',
-      url: 'https://t.me/kvartett_ufa',
-      icon: 'T',
-      color: '#2F4454',
+      platform: 'WhatsApp',
+      url: 'https://wa.me/79173739307',
+      icon: 'W',
+      color: '#10B981',
       active: true,
       order: 3,
     },
     {
       id: nanoid(),
-      platform: 'WhatsApp',
-      url: 'https://wa.me/73471234567',
-      icon: 'W',
-      color: '#10B981',
+      platform: 'YouTube',
+      url: 'https://youtube.com/@reklama_kvartet',
+      icon: 'Y',
+      color: '#FF0000',
       active: true,
       order: 2,
     },
     {
       id: nanoid(),
-      platform: 'Instagram',
-      url: 'https://instagram.com/kvartett_ufa',
-      icon: 'I',
-      color: '#DA7B93',
+      platform: 'Одноклассники',
+      url: 'https://ok.ru/reklama.kvartet',
+      icon: 'OK',
+      color: '#EE8208',
       active: true,
       order: 1,
     },
   ]
 
-  for (const item of socialLinksData) {
-    const existing = await db
-      .select()
-      .from(socialLinks)
-      .where(eq(socialLinks.platform, item.platform))
-      .limit(1)
-
-    if (existing.length === 0) {
-      await db.insert(socialLinks).values(item)
-    }
-  }
+  await db.insert(socialLinks).values(socialLinksData)
   console.log('✅ Социальные сети созданы')
 
-  console.log('🌱 Создание контактной информации...')
+  console.log('🌱 Очистка и создание контактной информации...')
+  
+  await db.delete(contactInfo)
   
   const contactsData = [
     {
       id: nanoid(),
       type: 'address' as const,
       label: 'Адрес',
-      value: 'г. Уфа, ул. Ленская, 128',
+      value: 'г. Уфа, ул. Ленская, 128/1',
       icon: 'MapPin',
       isPrimary: true,
       active: true,
@@ -500,7 +524,7 @@ async function main() {
       id: nanoid(),
       type: 'phone' as const,
       label: 'Телефон',
-      value: '+7 (347) 123-45-67',
+      value: '+7 (347) 285-55-96',
       icon: 'Phone',
       isPrimary: true,
       active: true,
@@ -509,8 +533,8 @@ async function main() {
     {
       id: nanoid(),
       type: 'phone' as const,
-      label: 'Дополнительный телефон',
-      value: '+7 (347) 123-45-68',
+      label: 'Мобильный',
+      value: '+7 (917) 373-93-07',
       icon: 'Phone',
       isPrimary: false,
       active: true,
@@ -520,7 +544,7 @@ async function main() {
       id: nanoid(),
       type: 'email' as const,
       label: 'Email',
-      value: 'info@kvartett-ufa.ru',
+      value: 'kvartet-reklama@mail.ru',
       icon: 'Mail',
       isPrimary: true,
       active: true,
@@ -530,7 +554,7 @@ async function main() {
       id: nanoid(),
       type: 'hours' as const,
       label: 'Время работы',
-      value: 'Пн-Пт: 09:00 - 18:00\\nСб: 10:00 - 16:00',
+      value: 'Пн-Пт: 09:00 - 18:00\\nСб: 10:00 - 16:00\\nВс: Выходной',
       icon: 'Clock',
       isPrimary: false,
       active: true,
@@ -538,17 +562,7 @@ async function main() {
     },
   ]
 
-  for (const item of contactsData) {
-    const existing = await db
-      .select()
-      .from(contactInfo)
-      .where(eq(contactInfo.label, item.label))
-      .limit(1)
-
-    if (existing.length === 0) {
-      await db.insert(contactInfo).values(item)
-    }
-  }
+  await db.insert(contactInfo).values(contactsData)
   console.log('✅ Контакты созданы')
 
   console.log('🌱 Создание настроек темы...')

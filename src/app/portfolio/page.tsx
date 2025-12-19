@@ -22,6 +22,7 @@ import {
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import FloatingAction from '../components/FloatingAction'
+import Clients from '../components/Clients'
 
 const baseCategoriesConfig = [
   { id: 'all', name: 'Все проекты' },
@@ -428,7 +429,7 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-
+      <Clients />
 
       <Footer />
       <FloatingAction />

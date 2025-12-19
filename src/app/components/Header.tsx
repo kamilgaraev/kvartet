@@ -21,7 +21,9 @@ import {
   Award,
   Zap,
   Printer,
-  Monitor
+  Monitor,
+  Layers,
+  Palette
 } from 'lucide-react'
 import LogoK from './LogoK'
 
@@ -89,34 +91,42 @@ export default function Header() {
         { 
           name: 'Наружная реклама', 
           href: '/services/outdoor', 
-          icon: '🏢', 
+          icon: Monitor, 
           description: 'Вывески, световые короба, баннеры',
           price: 'от 5000₽',
-          popular: true
+          popular: true,
+          color: 'text-blue-500',
+          bg: 'bg-blue-50'
         },
         { 
           name: 'Полиграфия', 
           href: '/services/printing', 
-          icon: '📄', 
+          icon: Printer, 
           description: 'Визитки, листовки, каталоги',
           price: 'от 500₽',
-          popular: false
+          popular: false,
+          color: 'text-purple-500',
+          bg: 'bg-purple-50'
         },
         { 
           name: 'Интерьерная реклама', 
           href: '/services/interior', 
-          icon: '🏪', 
+          icon: Layers, 
           description: 'Оформление офисов и магазинов',
           price: 'от 3000₽',
-          popular: false
+          popular: false,
+          color: 'text-orange-500',
+          bg: 'bg-orange-50'
         },
         { 
           name: 'Брендинг', 
           href: '/services/branding', 
-          icon: '🎨', 
+          icon: Palette, 
           description: 'Логотипы и фирменный стиль',
           price: 'от 15000₽',
-          popular: false
+          popular: false,
+          color: 'text-pink-500',
+          bg: 'bg-pink-50'
         },
       ]
     },
@@ -219,7 +229,7 @@ export default function Header() {
                     </Link>
                   </motion.div>
 
-                  {/* Классический Dropdown */}
+                  {/* Мега-меню Dropdown */}
                   <AnimatePresence>
                     {item.hasDropdown && activeDropdown === item.name && (
                       <motion.div
@@ -227,60 +237,78 @@ export default function Header() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute top-full left-0 mt-2 w-[36rem] bg-white/98 backdrop-blur-xl rounded-2xl shadow-card-hover border border-light overflow-hidden"
+                        className="absolute top-full left-0 mt-4 w-[42rem] bg-white/98 backdrop-blur-xl rounded-2xl shadow-card-hover border border-light overflow-hidden z-50"
                       >
-                        {/* Заголовок */}
-                        <div className="bg-primary-bg card-adaptive border-b border-primary">
-                          <h3 className="nav-logo-title text-primary-dark">Наши услуги</h3>
-                          <p className="nav-logo-subtitle text-primary-dark opacity-70">Полный цикл рекламного производства</p>
-                        </div>
-                        
-                        {/* Услуги */}
-                        <div className="card-adaptive">
-                          {item.dropdownItems?.map((dropItem, index) => (
-                            <motion.div
-                              key={dropItem.name}
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              whileHover={{ scale: 1.01, x: 4 }}
-                            >
-                              <Link
-                                href={dropItem.href}
-                                className="flex items-start hero-gap nav-item hover:bg-primary-bg transition-all group/item py-4"
+                        <div className="flex">
+                          {/* Левая колонка - Основное */}
+                          <div className="flex-1 p-6">
+                            <div className="flex items-center justify-between mb-6">
+                              <div>
+                                <h3 className="text-lg font-bold text-gray-900">Наши услуги</h3>
+                                <p className="text-sm text-muted-foreground">Полный цикл производства</p>
+                              </div>
+                              <Link 
+                                href="/services"
+                                className="text-xs font-semibold text-primary hover:underline flex items-center"
                               >
-                                <div className="text-title-lg flex-shrink-0">{dropItem.icon}</div>
-                                <div className="flex-1">
-                                  <div className="flex items-center space-x-2 mb-1">
-                                    <span className="nav-text text-primary-dark group-hover/item:text-primary transition-colors break-words">
-                                      {dropItem.name}
-                                    </span>
-                                    {dropItem.popular && (
-                                      <span className="bg-primary text-white text-caption weight-bold px-2 py-1 rounded-full">
-                                        ХИТ
-                                      </span>
-                                    )}
-                                  </div>
-                                  <p className="nav-logo-subtitle text-primary-dark opacity-70 group-hover/item:text-primary-dark transition-colors mb-1 leading-relaxed">
-                                    {dropItem.description}
-                                  </p>
-                                  <div className="nav-logo-subtitle weight-bold text-primary">
-                                    {dropItem.price}
-                                  </div>
-                                </div>
-                                <ArrowRight className="w-4 h-4 text-primary-dark/50 group-hover/item:text-primary opacity-0 group-hover/item:opacity-100 transition-all" />
+                                Все услуги <ArrowRight className="w-3 h-3 ml-1" />
                               </Link>
-                            </motion.div>
-                          ))}
-                        </div>
-                        
-                        {/* Футер с контактами */}
-                        <div className="bg-gradient-primary card-adaptive">
-                          <div className="text-white text-center">
-                            <div className="nav-text weight-bold mb-1">
-                              БЕСПЛАТНАЯ КОНСУЛЬТАЦИЯ
                             </div>
-                            <div className="nav-logo-subtitle opacity-90">+7 (347) 123-45-67</div>
+                            
+                            <div className="grid grid-cols-2 gap-4">
+                              {item.dropdownItems?.map((dropItem, index) => (
+                                <Link
+                                  key={dropItem.name}
+                                  href={dropItem.href}
+                                  className="group block p-3 rounded-xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
+                                >
+                                  <div className="flex items-start space-x-3">
+                                    <div className={`w-10 h-10 rounded-lg ${dropItem.bg} flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform`}>
+                                      {/* @ts-ignore */}
+                                      <dropItem.icon className={`w-5 h-5 ${dropItem.color}`} />
+                                    </div>
+                                    <div>
+                                      <div className="flex items-center space-x-2">
+                                        <span className="font-semibold text-gray-900 group-hover:text-primary transition-colors text-sm">
+                                          {dropItem.name}
+                                        </span>
+                                        {dropItem.popular && (
+                                          <span className="bg-red-100 text-red-600 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+                                            HIT
+                                          </span>
+                                        )}
+                                      </div>
+                                      <p className="text-xs text-gray-500 mt-1 line-clamp-2 leading-relaxed">
+                                        {dropItem.description}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Правая колонка - Акцент */}
+                          <div className="w-48 bg-gray-50 p-6 flex flex-col justify-between border-l border-gray-100">
+                            <div>
+                              <h4 className="font-bold text-gray-900 mb-2 text-sm">Акции</h4>
+                              <div className="bg-white p-3 rounded-xl border border-gray-200 shadow-sm">
+                                <span className="text-xs font-bold text-green-600 mb-1 block">-15%</span>
+                                <p className="text-xs text-gray-600 leading-snug">
+                                  На первый заказ наружной рекламы
+                                </p>
+                              </div>
+                            </div>
+                            
+                            <div className="mt-6">
+                              <div className="text-xs text-gray-500 mb-2">Нужна консультация?</div>
+                              <Link 
+                                href="/contacts"
+                                className="w-full bg-primary text-white text-xs font-bold py-2.5 px-4 rounded-lg flex items-center justify-center hover:bg-primary-dark transition-colors"
+                              >
+                                Связаться
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </motion.div>

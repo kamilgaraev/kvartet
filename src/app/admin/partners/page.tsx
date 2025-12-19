@@ -1,9 +1,16 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Plus, Edit2, Trash2, ExternalLink } from 'lucide-react'
+import { motion, Reorder } from 'framer-motion'
+import { Plus, Edit2, Trash2, ExternalLink, Eye, EyeOff, GripVertical, Image as ImageIcon, Check, X } from 'lucide-react'
 import ImageUpload from '../components/ImageUpload'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface Partner {
   id: string
@@ -62,25 +69,83 @@ export default function PartnersPage() {
     await loadPartners()
   }
 
-  if (loading) return <div>Загрузка...</div>
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
 
   return (
-    <div className="space-y-6">
+    <div className="p-8 space-y-8 bg-gray-50/50 min-h-screen">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Партнеры</h1>
-          <p className="text-gray-600 mt-1">Управление партнерами и клиентами</p>
+          <h1 className="text-3xl font-bold text-gray-900">Клиенты и партнеры</h1>
+          <p className="text-muted-foreground mt-1">Управление логотипами клиентов, отображаемыми на сайте</p>
         </div>
-        <button
+        <Button
           onClick={() => {
             setEditingItem(null)
             setIsEditing(true)
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark"
+          size="lg"
         >
-          <Plus className="w-5 h-5" />
-          <span>Добавить партнера</span>
-        </button>
+          <Plus className="w-5 h-5 mr-2" />
+          Добавить клиента
+        </Button>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Всего клиентов</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{partners.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Активных: {partners.filter(p => p.active).length}
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">С логотипами</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{partners.filter(p => p.logo).length}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Без логотипа: {partners.filter(p => !p.logo).length}
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">С сайтами</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{partners.filter(p => p.website).length}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              С описанием: {partners.filter(p => p.description).length}
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Неактивных</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold text-orange-600">
+              {partners.filter(p => !p.active).length}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Скрытых на сайте
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {isEditing ? (
@@ -93,72 +158,115 @@ export default function PartnersPage() {
           }}
         />
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {partners.map((partner) => (
-            <motion.div
-              key={partner.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
+        <Card>
+          <CardHeader>
+            <CardTitle>Список клиентов</CardTitle>
+            <CardDescription>
+              Перетаскивайте карточки для изменения порядка отображения
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Reorder.Group 
+              axis="y" 
+              values={partners} 
+              onReorder={setPartners}
+              className="space-y-4"
             >
-              <div className="flex flex-col items-center">
-                {partner.logo && (
-                  <div className="w-full h-32 flex items-center justify-center mb-4 bg-gray-50 rounded-lg overflow-hidden">
-                    <img
-                      src={partner.logo}
-                      alt={partner.name}
-                      className="max-w-full max-h-full object-contain p-4"
-                    />
+              {partners.map((partner) => (
+                <Reorder.Item 
+                  key={partner.id} 
+                  value={partner}
+                  className="bg-white rounded-xl border-2 border-gray-100 hover:border-primary transition-all cursor-move"
+                >
+                  <div className="p-4">
+                    <div className="flex items-center gap-4">
+                      <GripVertical className="w-5 h-5 text-gray-400 shrink-0" />
+                      
+                      <div className="w-24 h-16 bg-gray-50 rounded-lg flex items-center justify-center shrink-0 overflow-hidden">
+                        {partner.logo ? (
+                          <img
+                            src={partner.logo}
+                            alt={partner.name}
+                            className="max-w-full max-h-full object-contain p-2"
+                          />
+                        ) : (
+                          <ImageIcon className="w-8 h-8 text-gray-300" />
+                        )}
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <h3 className="text-lg font-bold text-gray-900 truncate">
+                            {partner.name}
+                          </h3>
+                          {partner.active ? (
+                            <Badge variant="default" className="shrink-0">
+                              <Eye className="w-3 h-3 mr-1" />
+                              Активен
+                            </Badge>
+                          ) : (
+                            <Badge variant="secondary" className="shrink-0">
+                              <EyeOff className="w-3 h-3 mr-1" />
+                              Скрыт
+                            </Badge>
+                          )}
+                        </div>
+                        
+                        {partner.description && (
+                          <p className="text-sm text-muted-foreground line-clamp-1">
+                            {partner.description}
+                          </p>
+                        )}
+
+                        {partner.website && (
+                          <a
+                            href={partner.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary-dark mt-1"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            <span className="truncate">{partner.website}</span>
+                          </a>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => {
+                            setEditingItem(partner)
+                            setIsEditing(true)
+                          }}
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDelete(partner.id)}
+                          className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                )}
-                
-                <h3 className="text-lg font-bold text-gray-900 mb-2 text-center">{partner.name}</h3>
-                
-                {partner.description && (
-                  <p className="text-sm text-gray-600 text-center mb-3 line-clamp-2">
-                    {partner.description}
-                  </p>
-                )}
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
 
-                {partner.website && (
-                  <a
-                    href={partner.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-1 text-sm text-primary hover:text-primary-dark mb-3"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Сайт</span>
-                  </a>
-                )}
-
-                {!partner.active && (
-                  <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded mb-3">
-                    Неактивен
-                  </span>
-                )}
-
-                <div className="flex space-x-2 w-full mt-auto">
-                  <button
-                    onClick={() => {
-                      setEditingItem(partner)
-                      setIsEditing(true)
-                    }}
-                    className="flex-1 p-2 text-gray-600 hover:text-primary hover:bg-primary-bg rounded-lg transition-colors"
-                  >
-                    <Edit2 className="w-5 h-5 mx-auto" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(partner.id)}
-                    className="flex-1 p-2 text-gray-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                  >
-                    <Trash2 className="w-5 h-5 mx-auto" />
-                  </button>
-                </div>
+            {partners.length === 0 && (
+              <div className="text-center py-12 text-muted-foreground border-2 border-dashed rounded-xl">
+                <ImageIcon className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                <p className="text-lg font-medium">Нет клиентов</p>
+                <p className="text-sm mt-1">Добавьте первого клиента, чтобы начать</p>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            )}
+          </CardContent>
+        </Card>
       )}
     </div>
   )
@@ -177,75 +285,106 @@ function PartnerForm({ item, onSave, onCancel }: any) {
   )
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">{item ? 'Редактировать партнера' : 'Новый партнер'}</h2>
-      <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-6">
-        <div>
-          <label className="block text-sm font-semibold mb-2">Название *</label>
-          <input
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-          />
-        </div>
-
-        <ImageUpload
-          label="Логотип *"
-          value={formData.logo}
-          onChange={(url) => setFormData({ ...formData, logo: url })}
-        />
-
-        <div>
-          <label className="block text-sm font-semibold mb-2">Сайт</label>
-          <input
-            type="url"
-            value={formData.website}
-            onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-            placeholder="https://example.com"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-semibold mb-2">Описание</label>
-          <textarea
-            rows={3}
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-          />
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-semibold mb-2">Порядок</label>
-            <input
-              type="number"
-              value={formData.order}
-              onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-            />
-          </div>
-          <div className="flex items-center pt-6">
-            <label className="flex items-center space-x-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.active}
-                onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                className="w-4 h-4"
+    <Card>
+      <CardHeader>
+        <CardTitle>{item ? 'Редактировать клиента' : 'Новый клиент'}</CardTitle>
+        <CardDescription>
+          {item ? 'Обновите информацию о клиенте' : 'Добавьте нового клиента/партнера'}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-6">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="name">
+                Название компании <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="name"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="ООО Сбербанк"
               />
-              <span className="text-sm font-semibold">Активен</span>
-            </label>
-          </div>
-        </div>
+            </div>
 
-        <div className="flex justify-end space-x-3 pt-6 border-t">
-          <button type="button" onClick={onCancel} className="px-6 py-2 border rounded-lg">Отмена</button>
-          <button type="submit" className="px-6 py-2 bg-primary text-white rounded-lg">Сохранить</button>
-        </div>
-      </form>
-    </div>
+            <div className="md:col-span-2">
+              <ImageUpload
+                label="Логотип компании *"
+                value={formData.logo}
+                onChange={(url) => setFormData({ ...formData, logo: url })}
+              />
+              {formData.logo && (
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg flex items-center justify-center">
+                  <img
+                    src={formData.logo}
+                    alt="Предпросмотр"
+                    className="max-w-[200px] max-h-[100px] object-contain"
+                  />
+                </div>
+              )}
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="website">Сайт компании</Label>
+              <Input
+                id="website"
+                type="url"
+                value={formData.website}
+                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                placeholder="https://example.com"
+              />
+            </div>
+
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="description">Описание</Label>
+              <Textarea
+                id="description"
+                rows={3}
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                placeholder="Краткое описание компании или партнерства..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="order">Порядок сортировки</Label>
+              <Input
+                id="order"
+                type="number"
+                value={formData.order}
+                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) || 0 })}
+              />
+              <p className="text-xs text-muted-foreground">
+                Чем больше число, тем выше в списке
+              </p>
+            </div>
+
+            <div className="flex items-center space-x-2 pt-6">
+              <Checkbox
+                id="active"
+                checked={formData.active}
+                onCheckedChange={(checked) => setFormData({ ...formData, active: !!checked })}
+              />
+              <Label htmlFor="active" className="font-normal cursor-pointer">
+                Отображать на сайте
+              </Label>
+            </div>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-6 border-t">
+            <Button type="button" variant="outline" onClick={onCancel}>
+              <X className="w-4 h-4 mr-2" />
+              Отмена
+            </Button>
+            <Button type="submit">
+              <Check className="w-4 h-4 mr-2" />
+              Сохранить
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
 

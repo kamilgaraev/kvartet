@@ -8,20 +8,18 @@ import {
   MapPin, 
   Clock, 
   ArrowUp, 
-  Send,
   Star,
   Award,
   Users,
   Zap,
   ChevronRight,
-  Heart
+  Heart,
+  Shield
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import LogoK from './LogoK'
 
 export default function Footer() {
-  const [email, setEmail] = useState('')
-  const [isSubscribed, setIsSubscribed] = useState(false)
   const [contacts, setContacts] = useState<any[]>([])
   const [socials, setSocials] = useState<any[]>([])
 
@@ -41,13 +39,6 @@ export default function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubscribed(true)
-    setEmail('')
-    setTimeout(() => setIsSubscribed(false), 3000)
   }
 
   const footerSections = [
@@ -148,48 +139,45 @@ export default function Footer() {
               className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10"
             >
               <h3 className="text-title weight-bold mb-6 flex items-center space-x-2 text-white">
-                <Mail className="w-6 h-6 text-primary" />
-                <span>Подписаться на новости</span>
+                <Zap className="w-6 h-6 text-primary" />
+                <span>Почему выбирают нас</span>
               </h3>
-              <p className="text-body text-white/80 mb-6">
-                Получайте полезные материалы о рекламе и специальные предложения
-              </p>
-              <form onSubmit={handleSubscribe} className="space-y-4">
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Ваш email"
-                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                    required
-                  />
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full bg-gradient-primary text-white py-3 rounded-xl weight-semibold flex items-center justify-center space-x-2 hover:shadow-lg transition-all duration-300"
-                >
-                  {isSubscribed ? (
-                    <>
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="w-5 h-5 bg-white rounded-full flex items-center justify-center"
-                      >
-                        <span className="text-primary-dark text-caption">✓</span>
-                      </motion.div>
-                      <span>Подписка оформлена!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Подписаться</span>
-                    </>
-                  )}
-                </motion.button>
-              </form>
+              <div className="space-y-5">
+                {[
+                  { 
+                    icon: Shield, 
+                    title: 'Гарантия качества', 
+                    desc: 'Работаем по договору с гарантией на все виды работ' 
+                  },
+                  { 
+                    icon: Zap, 
+                    title: 'Быстрое производство', 
+                    desc: 'Собственное производство - сроки от 1 дня' 
+                  },
+                  { 
+                    icon: Award, 
+                    title: 'Опыт 15+ лет', 
+                    desc: 'Реализовали более 900 успешных проектов' 
+                  }
+                ].map((item, index) => (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="flex items-start space-x-4 group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/20 transition-all">
+                      <item.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-body weight-semibold text-white mb-1">{item.title}</h4>
+                      <p className="text-body-sm text-white/70">{item.desc}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -241,9 +229,11 @@ export default function Footer() {
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-3 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer"
+                    className="text-center p-4 bg-white/5 rounded-xl border border-white/10 hover:bg-white/10 transition-all cursor-pointer group"
                   >
-                    <achievement.icon className="w-6 h-6 text-accent mx-auto mb-2" />
+                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mx-auto mb-3 group-hover:bg-white/20 transition-all">
+                      <achievement.icon className="w-7 h-7 text-accent" />
+                    </div>
                     <div className="text-title weight-bold text-white">{achievement.number}</div>
                     <div className="text-caption text-white/60">{achievement.label}</div>
                   </motion.div>
@@ -259,13 +249,15 @@ export default function Footer() {
                   <motion.a
                     key={social.id}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     initial={{ opacity: 0, scale: 0 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`w-12 h-12 ${social.color} rounded-xl flex items-center justify-center text-white weight-bold transition-all duration-300 shadow-lg hover:shadow-xl`}
+                    whileHover={{ scale: 1.1, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`w-14 h-14 ${social.color} rounded-xl flex items-center justify-center text-white weight-bold text-lg transition-all duration-300 shadow-lg hover:shadow-2xl border border-white/10`}
                     title={social.name}
                   >
                     {social.icon}
@@ -365,15 +357,19 @@ export default function Footer() {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.02, y: -2 }}
-                className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:bg-white/10 transition-all cursor-pointer"
+                className="bg-white/5 backdrop-blur-sm rounded-xl p-5 border border-white/10 hover:bg-white/10 transition-all cursor-pointer group"
               >
-                <div className="flex items-center space-x-3 mb-3">
-                  <contact.icon className={`w-5 h-5 ${contact.color}`} />
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-all">
+                    <contact.icon className={`w-6 h-6 ${contact.color}`} />
+                  </div>
                   <h4 className="text-title-sm weight-semibold text-white">{contact.title}</h4>
                 </div>
-                <p className="text-body-sm text-white/80 leading-relaxed whitespace-pre-line">
-                  {contact.content}
-                </p>
+                <div className="text-body-sm text-white/80 leading-relaxed space-y-1">
+                  {contact.content.split('\\n').map((line: string, i: number) => (
+                    <div key={i}>{line}</div>
+                  ))}
+                </div>
               </motion.div>
             ))}
           </div>

@@ -43,13 +43,34 @@ export default function QuickForm() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      console.log('Form data:', data)
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          phone: data.phone,
+          serviceType: data.serviceType,
+          message: data.message,
+          type: 'CONTACT',
+          source: 'quick_form'
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке формы')
+      }
+
+      const result = await response.json()
+      console.log('Lead created:', result)
+      
       setIsSubmitted(true)
       reset()
       setTimeout(() => setIsSubmitted(false), 3000)
     } catch (error) {
       console.error('Error submitting form:', error)
+      alert('Произошла ошибка при отправке заявки. Пожалуйста, попробуйте еще раз.')
     }
   }
 

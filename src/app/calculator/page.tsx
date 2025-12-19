@@ -194,10 +194,46 @@ export default function CalculatorPage() {
     }))
   }
 
-  const submitCalculation = () => {
-    setIsSubmitted(true)
-    // Здесь отправка данных на сервер
-    console.log('Calculation submitted:', calculator)
+  const submitCalculation = async () => {
+    try {
+      const service = services.find(s => s.id === calculator.selectedService)
+      const option = service?.options.find(o => o.id === calculator.selectedOption)
+      
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: calculator.contactInfo.name,
+          phone: calculator.contactInfo.phone,
+          email: calculator.contactInfo.email,
+          message: calculator.contactInfo.message,
+          type: 'CALCULATOR',
+          serviceType: service?.name,
+          budget: `${calculator.totalPrice.toLocaleString('ru-RU')} ₽`,
+          source: 'calculator',
+          details: {
+            service: service?.name,
+            option: option?.name,
+            quantity: calculator.quantity,
+            additionalServices: calculator.additionalServices,
+            totalPrice: calculator.totalPrice
+          }
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Ошибка при отправке формы')
+      }
+
+      const result = await response.json()
+      console.log('Lead created:', result)
+      setIsSubmitted(true)
+    } catch (error) {
+      console.error('Error submitting calculation:', error)
+      alert('Произошла ошибка при отправке расчета. Пожалуйста, попробуйте еще раз.')
+    }
   }
 
   const renderStep = () => {
