@@ -162,23 +162,27 @@ export default function Hero() {
               transition={{ delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="group bg-primary text-white px-8 py-4 rounded-xl shadow-primary hover:bg-primary-dark transition-all duration-300 flex items-center justify-center space-x-2"
-              >
-                <span className="text-body-lg weight-semibold">Рассчитать стоимость</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              <Link href="/calculator">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group bg-primary text-white px-8 py-4 rounded-xl shadow-primary hover:bg-primary-dark transition-all duration-300 flex items-center justify-center space-x-2 w-full"
+                >
+                  <span className="text-body-lg weight-semibold">Рассчитать стоимость</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </motion.button>
+              </Link>
               
-              <motion.button
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                className="group bg-card border border-light hover:border-primary text-primary-dark hover:text-primary px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-card"
-              >
-                <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span className="text-body-lg weight-semibold">+7 (347) 123-45-67</span>
-              </motion.button>
+              <a href="tel:+73471234567">
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group bg-card border border-light hover:border-primary text-primary-dark hover:text-primary px-8 py-4 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 shadow-card w-full"
+                >
+                  <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span className="text-body-lg weight-semibold">+7 (347) 123-45-67</span>
+                </motion.button>
+              </a>
             </motion.div>
 
             {/* Корпоративные преимущества */}
