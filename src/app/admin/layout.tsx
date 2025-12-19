@@ -90,15 +90,15 @@ export default function AdminLayout({
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-slate-900 text-slate-300 relative overflow-hidden">
-      {/* Abstract Background Pattern */}
+      {/* Abstract Background Pattern with green accent */}
       <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500 rounded-full blur-3xl"></div>
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-accent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-accent rounded-full blur-3xl"></div>
       </div>
 
       <div className="flex items-center h-20 px-6 border-b border-slate-800/50 backdrop-blur-sm z-10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 ring-1 ring-white/10">
+          <div className="w-10 h-10 bg-gradient-to-br from-accent to-[#2a5859] rounded-xl flex items-center justify-center shadow-lg shadow-accent/20 ring-1 ring-white/10">
             <span className="text-white font-bold text-xl">K</span>
           </div>
           <div className="flex flex-col">
@@ -118,7 +118,7 @@ export default function AdminLayout({
               href={item.href}
               className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden ${
                 isActive
-                  ? 'text-white shadow-lg shadow-primary/10'
+                  ? 'text-white shadow-lg shadow-accent/10 border border-accent/30'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
               onClick={() => setSidebarOpen(false)}
@@ -126,7 +126,7 @@ export default function AdminLayout({
               {isActive && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-100"
+                  className="absolute inset-0 bg-gradient-to-r from-accent to-[#2a5859] opacity-100"
                   initial={false}
                   transition={{ type: "spring", stiffness: 500, damping: 30 }}
                 />
@@ -222,20 +222,20 @@ export default function AdminLayout({
       {/* Main content */}
       <div className="lg:pl-72 flex flex-col min-h-screen transition-all duration-300">
         {/* Top header */}
-        <header className={`sticky top-0 z-20 transition-all duration-200 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+        <header className={`sticky top-0 z-20 transition-all duration-200 ${scrolled ? 'bg-white/70 backdrop-blur-xl shadow-sm' : 'bg-transparent backdrop-blur-sm'}`}>
           <div className="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden -ml-2 text-gray-500 hover:text-primary"
+                className="lg:hidden -ml-2 text-gray-500 hover:text-accent"
               >
                 <Menu className="w-6 h-6" />
               </Button>
               
               <div className="hidden md:flex items-center text-sm text-muted-foreground">
-                <span className="hover:text-primary transition-colors cursor-pointer">Admin</span>
+                <span className="hover:text-accent transition-colors cursor-pointer">Admin</span>
                 <ChevronRight className="w-4 h-4 mx-1" />
                 <span className="font-medium text-gray-900">{navigation.find(n => n.href === pathname)?.name || 'Dashboard'}</span>
               </div>
@@ -243,17 +243,17 @@ export default function AdminLayout({
 
             <div className="flex items-center gap-3">
               <div className="relative hidden md:block group">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 group-focus-within:text-primary transition-colors" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 group-focus-within:text-accent transition-colors" />
                 <Input
                   type="text"
                   placeholder="Поиск..."
-                  className="pl-10 h-10 w-[200px] lg:w-[300px] bg-white border-transparent shadow-sm focus:border-primary/20 hover:bg-white transition-all focus:w-[320px] focus:shadow-md"
+                  className="pl-10 h-10 w-[200px] lg:w-[300px] bg-white/80 border-gray-200 shadow-sm focus:border-accent/30 hover:bg-white transition-all focus:w-[320px] focus:shadow-md focus:ring-accent/20"
                 />
               </div>
 
-              <div className="w-px h-6 bg-gray-200 mx-2 hidden md:block"></div>
+              <div className="w-px h-6 bg-gray-200/50 mx-2 hidden md:block"></div>
 
-              <Button variant="ghost" size="icon" className="relative text-gray-500 hover:bg-gray-100/80 hover:text-primary rounded-full transition-all duration-200">
+              <Button variant="ghost" size="icon" className="relative text-gray-500 hover:bg-white/80 hover:text-accent rounded-full transition-all duration-200">
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
               </Button>

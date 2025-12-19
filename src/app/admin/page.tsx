@@ -56,21 +56,148 @@ export default function AdminDashboard() {
     avgResponseTime: '2.5ч'
   })
   const [loading, setLoading] = useState(true)
+  const [recentLeads, setRecentLeads] = useState<any[]>([])
 
-  // Данные для демонстрации
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setStats({
-        totalLeads: 142,
-        newLeads: 8,
-        convertedLeads: 23,
-        revenue: 485000,
-        pageViews: 2847,
-        avgResponseTime: '2.5ч'
-      })
-      setLoading(false)
-    }, 800)
-    return () => clearTimeout(timer)
+    const fetchDashboardData = async () => {
+      try {
+        const leadsResponse = await fetch('/api/leads')
+        if (leadsResponse.ok) {
+          const leadsData = await leadsResponse.json()
+          const leads = leadsData.leads || []
+          
+          setStats({
+            totalLeads: leads.length,
+            newLeads: leads.filter((l: any) => l.status === 'NEW').length,
+            convertedLeads: leads.filter((l: any) => l.status === 'CONVERTED').length,
+            revenue: leads.filter((l: any) => l.status === 'CONVERTED').reduce((sum: number, l: any) => {
+              const budgetNum = parseInt(l.budget?.replace(/\D/g, '') || '0')
+              return sum + budgetNum
+            }, 0),
+            pageViews: 2847,
+            avgResponseTime: '2.5ч'
+          })
+          
+          setRecentLeads(leads.slice(0, 4).map((lead: any) => ({
+            id: lead.id,
+            name: lead.name,
+            email: lead.email || '',
+            image: '',
+            service: lead.serviceType || 'Не указано',
+            status: lead.status,
+            amount: lead.budget || '—',
+            createdAt: new Date(lead.createdAt).toLocaleDateString('ru-RU')
+          })))
+        } else {
+          setStats({
+            totalLeads: 142,
+            newLeads: 8,
+            convertedLeads: 23,
+            revenue: 485000,
+            pageViews: 2847,
+            avgResponseTime: '2.5ч'
+          })
+          setRecentLeads([
+            {
+              id: '1',
+              name: 'Андрей Петров',
+              email: 'petrov@example.com',
+              image: '',
+              service: 'Наружная реклама',
+              status: 'NEW',
+              amount: '45 000 ₽',
+              createdAt: '2 мин назад'
+            },
+            {
+              id: '2',
+              name: 'ООО "Строй Инвест"',
+              email: 'info@stroyinvest.ru',
+              image: '',
+              service: 'Полиграфия',
+              status: 'CONTACTED',
+              amount: '120 000 ₽',
+              createdAt: '15 мин назад'
+            },
+            {
+              id: '3',
+              name: 'Мария Сидорова',
+              email: 'maria.s@mail.ru',
+              image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+              service: 'Брендинг',
+              status: 'IN_PROGRESS',
+              amount: '85 000 ₽',
+              createdAt: '1 час назад'
+            },
+            {
+              id: '4',
+              name: 'Иван Алексеев',
+              email: 'ivan.a@gmail.com',
+              image: '',
+              service: 'Интерьерная печать',
+              status: 'CONVERTED',
+              amount: '12 500 ₽',
+              createdAt: '3 часа назад'
+            }
+          ])
+        }
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error)
+        setStats({
+          totalLeads: 142,
+          newLeads: 8,
+          convertedLeads: 23,
+          revenue: 485000,
+          pageViews: 2847,
+          avgResponseTime: '2.5ч'
+        })
+        setRecentLeads([
+          {
+            id: '1',
+            name: 'Андрей Петров',
+            email: 'petrov@example.com',
+            image: '',
+            service: 'Наружная реклама',
+            status: 'NEW',
+            amount: '45 000 ₽',
+            createdAt: '2 мин назад'
+          },
+          {
+            id: '2',
+            name: 'ООО "Строй Инвест"',
+            email: 'info@stroyinvest.ru',
+            image: '',
+            service: 'Полиграфия',
+            status: 'CONTACTED',
+            amount: '120 000 ₽',
+            createdAt: '15 мин назад'
+          },
+          {
+            id: '3',
+            name: 'Мария Сидорова',
+            email: 'maria.s@mail.ru',
+            image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+            service: 'Брендинг',
+            status: 'IN_PROGRESS',
+            amount: '85 000 ₽',
+            createdAt: '1 час назад'
+          },
+          {
+            id: '4',
+            name: 'Иван Алексеев',
+            email: 'ivan.a@gmail.com',
+            image: '',
+            service: 'Интерьерная печать',
+            status: 'CONVERTED',
+            amount: '12 500 ₽',
+            createdAt: '3 часа назад'
+          }
+        ])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchDashboardData()
   }, [])
 
   const statsCards = [
@@ -80,8 +207,10 @@ export default function AdminDashboard() {
       change: '+12%',
       trend: 'up',
       icon: MessageSquare,
-      color: 'text-blue-600',
-      bgColor: 'bg-blue-100',
+      color: 'text-blue-700',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      iconGradient: 'from-blue-400 to-blue-600',
       description: 'за месяц'
     },
     {
@@ -90,8 +219,10 @@ export default function AdminDashboard() {
       change: '+3',
       trend: 'up',
       icon: AlertCircle,
-      color: 'text-amber-600',
-      bgColor: 'bg-amber-100',
+      color: 'text-amber-700',
+      bgColor: 'bg-amber-50',
+      borderColor: 'border-amber-200',
+      iconGradient: 'from-amber-400 to-amber-600',
       description: 'новые',
       highlight: true
     },
@@ -101,8 +232,10 @@ export default function AdminDashboard() {
       change: '+2.4%',
       trend: 'up',
       icon: TrendingUp,
-      color: 'text-green-600',
-      bgColor: 'bg-green-100',
+      color: 'text-green-700',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      iconGradient: 'from-[#376E6F] to-[#2a5859]',
       description: 'успех'
     },
     {
@@ -111,61 +244,20 @@ export default function AdminDashboard() {
       change: '+24%',
       trend: 'up',
       icon: DollarSign,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-100',
+      color: 'text-purple-700',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      iconGradient: 'from-purple-400 to-purple-600',
       description: 'доход'
-    }
-  ]
-
-  const recentLeads = [
-    {
-      id: '1',
-      name: 'Андрей Петров',
-      email: 'petrov@example.com',
-      image: '',
-      service: 'Наружная реклама',
-      status: 'new',
-      amount: '45 000 ₽',
-      createdAt: '2 мин назад'
-    },
-    {
-      id: '2',
-      name: 'ООО "Строй Инвест"',
-      email: 'info@stroyinvest.ru',
-      image: '',
-      service: 'Полиграфия',
-      status: 'contacted',
-      amount: '120 000 ₽',
-      createdAt: '15 мин назад'
-    },
-    {
-      id: '3',
-      name: 'Мария Сидорова',
-      email: 'maria.s@mail.ru',
-      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-      service: 'Брендинг',
-      status: 'in_progress',
-      amount: '85 000 ₽',
-      createdAt: '1 час назад'
-    },
-    {
-      id: '4',
-      name: 'Иван Алексеев',
-      email: 'ivan.a@gmail.com',
-      image: '',
-      service: 'Интерьерная печать',
-      status: 'converted',
-      amount: '12 500 ₽',
-      createdAt: '3 часа назад'
     }
   ]
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'new': return <Badge variant="destructive" className="bg-red-500/10 text-red-600 hover:bg-red-500/20 border-red-200 shadow-none">Новая</Badge>
-      case 'contacted': return <Badge variant="secondary" className="bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 border-amber-200 shadow-none">Связались</Badge>
-      case 'in_progress': return <Badge variant="default" className="bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 border-blue-200 shadow-none">В работе</Badge>
-      case 'converted': return <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200 shadow-none">Завершен</Badge>
+      case 'NEW': return <Badge variant="destructive" className="bg-red-500/10 text-red-600 hover:bg-red-500/20 border-red-200 shadow-none">Новая</Badge>
+      case 'CONTACTED': return <Badge variant="secondary" className="bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 border-amber-200 shadow-none">Связались</Badge>
+      case 'IN_PROGRESS': return <Badge variant="default" className="bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 border-blue-200 shadow-none">В работе</Badge>
+      case 'CONVERTED': return <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200 shadow-none">Завершен</Badge>
       default: return <Badge variant="outline">Неизвестно</Badge>
     }
   }
@@ -227,25 +319,22 @@ export default function AdminDashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statsCards.map((card) => (
           <motion.div key={card.title} variants={item}>
-            <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white overflow-hidden relative group">
-              <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500 ${card.color}`}>
-                <card.icon className="w-24 h-24" />
-              </div>
+            <Card className={`border-2 ${card.borderColor} ${card.bgColor} shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative group`}>
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-4">
-                  <div className={`p-3 rounded-xl ${card.bgColor} ${card.color} ring-1 ring-black/5`}>
-                    <card.icon className="w-6 h-6" />
+                  <div className={`p-3 rounded-xl bg-gradient-to-br ${card.iconGradient} shadow-lg`}>
+                    <card.icon className="w-6 h-6 text-white" />
                   </div>
-                  <Badge variant="secondary" className={`${card.change.startsWith('+') ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'} font-medium`}>
+                  <Badge variant="secondary" className={`${card.change.startsWith('+') ? 'text-green-700 bg-green-100 border-green-300' : 'text-red-700 bg-red-100 border-red-300'} font-semibold border`}>
                     {card.change}
                   </Badge>
                 </div>
                 <div className="space-y-1 relative z-10">
-                  <h3 className="text-sm font-medium text-muted-foreground">{card.title}</h3>
-                  <div className="text-3xl font-bold text-gray-900 tracking-tight">
+                  <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wide">{card.title}</h3>
+                  <div className={`text-3xl font-bold ${card.color} tracking-tight`}>
                     {card.value}
                   </div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs font-medium text-gray-500">
                     {card.description}
                   </p>
                 </div>

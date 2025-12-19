@@ -11,8 +11,11 @@ import {
   Filter,
   Eye,
   Globe,
-  Bookmark
+  Bookmark,
+  CheckCircle,
+  DollarSign
 } from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface Service {
   id: string
@@ -103,27 +106,95 @@ export default function ServicesPage() {
     )
   }
 
+  const activeServices = services.filter(s => s.isActive).length
+  const totalFeatures = services.reduce((sum, s) => sum + s.features.length, 0)
+  const avgPrice = services.length > 0 
+    ? services.reduce((sum, s) => sum + (s.price.min + s.price.max) / 2, 0) / services.length
+    : 0
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Услуги</h1>
-          <p className="text-gray-600 mt-1">
+          <p className="text-muted-foreground mt-2">
             Управление каталогом услуг
           </p>
         </div>
         <div className="flex items-center space-x-3">
           <button 
             onClick={() => setShowModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-accent hover:bg-primary text-white rounded-lg transition-colors"
+            className="flex items-center space-x-2 px-6 py-3 bg-accent hover:bg-accent/90 text-white rounded-lg shadow-lg transition-all"
           >
-            <Plus className="w-4 h-4" />
+            <Plus className="w-5 h-5" />
             <span>Добавить услугу</span>
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="hover:shadow-lg transition-shadow border-2 border-blue-200 bg-blue-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-blue-700">Всего услуг</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg">
+              <FileText className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-blue-900">{services.length}</div>
+            <p className="text-xs text-blue-600 mt-1 font-medium">
+              В каталоге
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-green-200 bg-green-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-green-700">Активных</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-green-400 to-green-600 rounded-xl shadow-lg">
+              <CheckCircle className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-green-900">{activeServices}</div>
+            <p className="text-xs text-green-600 mt-1 font-medium">
+              Доступно на сайте
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-purple-200 bg-purple-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-purple-700">Особенностей</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl shadow-lg">
+              <Bookmark className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-purple-900">{totalFeatures}</div>
+            <p className="text-xs text-purple-600 mt-1 font-medium">
+              Всего характеристик
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-amber-200 bg-amber-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-amber-700">Средняя цена</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl shadow-lg">
+              <DollarSign className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-amber-900">{avgPrice.toLocaleString('ru-RU', {maximumFractionDigits: 0})} ₽</div>
+            <p className="text-xs text-amber-600 mt-1 font-medium">
+              По каталогу
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="bg-white rounded-xl shadow-lg border-2 border-gray-200">
         <div className="p-6 border-b border-gray-200">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
             <div className="relative">
@@ -179,8 +250,8 @@ export default function ServicesPage() {
                   key={service.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow"
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-accent/30 hover:shadow-xl transition-all"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
@@ -235,7 +306,7 @@ export default function ServicesPage() {
                     <div className="flex items-center space-x-2">
                       <button 
                         onClick={() => window.open(`/services/${service.slug}`, '_blank')}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                        className="p-2 text-gray-600 hover:bg-accent hover:text-white rounded-lg transition-all"
                         title="Просмотр на сайте"
                       >
                         <Eye className="w-4 h-4" />
@@ -245,7 +316,7 @@ export default function ServicesPage() {
                           setSelectedService(service)
                           setShowModal(true)
                         }}
-                        className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                        className="p-2 text-gray-600 hover:bg-accent hover:text-white rounded-lg transition-all"
                         title="Редактировать"
                       >
                         <Edit className="w-4 h-4" />
@@ -256,7 +327,7 @@ export default function ServicesPage() {
                             setServices(services.filter(s => s.id !== service.id))
                           }
                         }}
-                        className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                        className="p-2 text-gray-600 hover:bg-red-500 hover:text-white rounded-lg transition-all"
                         title="Удалить"
                       >
                         <Trash2 className="w-4 h-4" />

@@ -316,37 +316,37 @@ export default function LeadsPage() {
         animate={{ opacity: 1, y: 0 }}
         className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
       >
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto rounded-md border-2 border-gray-200">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b border-gray-200">
-              <tr>
-                <th className="px-6 py-4 text-left">
+            <thead className="bg-gray-100">
+              <tr className="border-b-2 border-gray-200">
+                <th className="px-6 py-4 text-left border-r border-gray-200">
                   <input
                     type="checkbox"
                     checked={selectedLeads.length === filteredLeads.length && filteredLeads.length > 0}
                     onChange={handleSelectAll}
-                    className="rounded border-gray-300 text-primary focus:ring-primary"
+                    className="rounded border-gray-300 text-accent focus:ring-accent"
                   />
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Клиент
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Услуга
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Статус
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Приоритет
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Исполнитель
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider border-r border-gray-200">
                   Дата
                 </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                   Действия
                 </th>
               </tr>
@@ -358,17 +358,17 @@ export default function LeadsPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-gray-50 transition-colors border-b border-gray-200"
                 >
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <input
                       type="checkbox"
                       checked={selectedLeads.includes(lead.id)}
                       onChange={() => handleSelectLead(lead.id)}
-                      className="rounded border-gray-300 text-primary focus:ring-primary"
+                      className="rounded border-gray-300 text-accent focus:ring-accent"
                     />
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center">
                         <span className="text-white font-semibold text-sm">
@@ -394,22 +394,22 @@ export default function LeadsPage() {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <div className="text-sm text-gray-900">{lead.serviceType}</div>
                     <div className="text-sm text-gray-500">{lead.budget}</div>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(lead.status)}`}>
                       {getStatusIcon(lead.status)}
                       <span className="ml-1">{getStatusText(lead.status)}</span>
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <span className={`text-sm font-medium ${getPriorityColor(lead.priority)}`}>
                       {getPriorityText(lead.priority)}
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     {lead.assignee ? (
                       <div className="flex items-center space-x-2">
                         <User className="w-4 h-4 text-gray-400" />
@@ -419,7 +419,7 @@ export default function LeadsPage() {
                       <span className="text-sm text-gray-500">Не назначен</span>
                     )}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-6 py-4 border-r border-gray-100">
                     <div className="flex items-center space-x-1 text-sm text-gray-500">
                       <Calendar className="w-4 h-4" />
                       <span>{formatDate(lead.createdAt)}</span>

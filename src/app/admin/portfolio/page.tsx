@@ -255,20 +255,21 @@ export default function PortfolioPage() {
 
         <CardContent className="p-0">
           {viewMode === 'list' ? (
+            <div className="rounded-md border-2 border-gray-200 overflow-hidden">
             <Table>
-              <TableHeader className="bg-gray-50/50">
-                <TableRow className="border-b border-gray-100 hover:bg-transparent">
-                  <TableHead className="w-[50px] pl-6">
+              <TableHeader className="bg-gray-100">
+                <TableRow className="border-b-2 border-gray-200 hover:bg-gray-100">
+                  <TableHead className="w-[50px] pl-6 border-r border-gray-200">
                     <Checkbox 
                       checked={selectedIds.length === filteredPortfolio.length && filteredPortfolio.length > 0}
                       onCheckedChange={toggleSelectAll}
                     />
                   </TableHead>
-                  <TableHead className="py-4 font-semibold text-gray-500">Проект</TableHead>
-                  <TableHead className="py-4 font-semibold text-gray-500">Клиент</TableHead>
-                  <TableHead className="py-4 font-semibold text-gray-500">Категория</TableHead>
-                  <TableHead className="py-4 font-semibold text-gray-500">Статус</TableHead>
-                  <TableHead className="py-4 font-semibold text-gray-500 text-right pr-6">Действия</TableHead>
+                  <TableHead className="py-4 font-semibold text-gray-600 border-r border-gray-200">Проект</TableHead>
+                  <TableHead className="py-4 font-semibold text-gray-600 border-r border-gray-200">Клиент</TableHead>
+                  <TableHead className="py-4 font-semibold text-gray-600 border-r border-gray-200">Категория</TableHead>
+                  <TableHead className="py-4 font-semibold text-gray-600 border-r border-gray-200">Статус</TableHead>
+                  <TableHead className="py-4 font-semibold text-gray-600 text-right pr-6">Действия</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -291,14 +292,14 @@ export default function PortfolioPage() {
                   </TableRow>
                 ) : (
                   filteredPortfolio.map((project) => (
-                    <TableRow key={project.id} className="hover:bg-gray-50/50 border-gray-100 transition-colors group">
-                      <TableCell className="pl-6">
+                    <TableRow key={project.id} className="hover:bg-gray-50/50 border-b border-gray-200 transition-colors group">
+                      <TableCell className="pl-6 border-r border-gray-100">
                         <Checkbox 
                           checked={selectedIds.includes(project.id)}
                           onCheckedChange={() => toggleSelect(project.id)}
                         />
                       </TableCell>
-                      <TableCell className="py-4">
+                      <TableCell className="py-4 border-r border-gray-100">
                         <div className="flex items-center gap-4">
                            <div className="relative h-12 w-16 rounded-lg overflow-hidden bg-gray-100 border border-gray-200 shadow-sm group-hover:shadow-md transition-all">
                              {project.image ? (
@@ -318,13 +319,13 @@ export default function PortfolioPage() {
                            </div>
                         </div>
                       </TableCell>
-                      <TableCell className="py-4 font-medium text-gray-700">{project.clientName}</TableCell>
-                      <TableCell className="py-4">
+                      <TableCell className="py-4 font-medium text-gray-700 border-r border-gray-100">{project.clientName}</TableCell>
+                      <TableCell className="py-4 border-r border-gray-100">
                         <Badge variant="outline" className="bg-gray-50 font-normal text-gray-600 border-gray-200">
                           {project.category}
                         </Badge>
                       </TableCell>
-                      <TableCell className="py-4">
+                      <TableCell className="py-4 border-r border-gray-100">
                         {project.active ? (
                           <div className="flex items-center gap-2">
                             <div className="h-2 w-2 rounded-full bg-green-500" />
@@ -376,6 +377,7 @@ export default function PortfolioPage() {
                 )}
               </TableBody>
             </Table>
+            </div>
           ) : (
             <div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPortfolio.map((project) => (

@@ -2,8 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Plus, Edit2, Trash2, Star, Video, Eye } from 'lucide-react'
+import { Plus, Edit2, Trash2, Star, Video, Eye, Users, MessageSquare } from 'lucide-react'
 import ImageUpload from '../components/ImageUpload'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 interface Testimonial {
   id: string
@@ -92,23 +95,93 @@ export default function TestimonialsPage() {
     )
   }
 
+  const activeCount = testimonials.filter(t => t.active).length
+  const withVideo = testimonials.filter(t => t.videoReview).length
+  const avgRating = testimonials.length > 0 
+    ? testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+    : 0
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Отзывы</h1>
-          <p className="text-gray-600 mt-1">Управление отзывами клиентов</p>
+          <p className="text-muted-foreground mt-2">
+            Управление отзывами клиентов
+          </p>
         </div>
-        <button
+        <Button
           onClick={() => {
             setEditingItem(null)
             setIsEditing(true)
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+          className="bg-accent hover:bg-accent/90 text-white shadow-lg"
         >
-          <Plus className="w-5 h-5" />
-          <span>Добавить отзыв</span>
-        </button>
+          <Plus className="w-5 h-5 mr-2" />
+          Добавить отзыв
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="hover:shadow-lg transition-shadow border-2 border-blue-200 bg-blue-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-blue-700">Всего отзывов</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg">
+              <MessageSquare className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-blue-900">{testimonials.length}</div>
+            <p className="text-xs text-blue-600 mt-1 font-medium">
+              В базе данных
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-green-200 bg-green-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-green-700">Активных</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-green-400 to-green-600 rounded-xl shadow-lg">
+              <Users className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-green-900">{activeCount}</div>
+            <p className="text-xs text-green-600 mt-1 font-medium">
+              Отображается на сайте
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-purple-200 bg-purple-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-purple-700">Видео отзывов</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl shadow-lg">
+              <Video className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-purple-900">{withVideo}</div>
+            <p className="text-xs text-purple-600 mt-1 font-medium">
+              С видео материалом
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 border-amber-200 bg-amber-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-amber-700">Средний рейтинг</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl shadow-lg">
+              <Star className="w-5 h-5 text-white" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-amber-900">{avgRating.toFixed(1)}</div>
+            <p className="text-xs text-amber-600 mt-1 font-medium">
+              Из 5 возможных
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {isEditing ? (
@@ -122,17 +195,28 @@ export default function TestimonialsPage() {
         />
       ) : (
         <div className="grid gap-6">
-          {testimonials.map((item) => (
-            <TestimonialCard
-              key={item.id}
-              item={item}
-              onEdit={() => {
-                setEditingItem(item)
-                setIsEditing(true)
-              }}
-              onDelete={() => handleDelete(item.id)}
-            />
-          ))}
+          {testimonials.length === 0 ? (
+            <Card className="border-2">
+              <CardContent className="py-12 text-center">
+                <MessageSquare className="w-16 h-16 mx-auto mb-4 opacity-20 text-muted-foreground" />
+                <p className="text-lg font-medium text-muted-foreground">Нет отзывов</p>
+                <p className="text-sm text-muted-foreground mt-1">Добавьте первый отзыв</p>
+              </CardContent>
+            </Card>
+          ) : (
+            testimonials.map((item, index) => (
+              <TestimonialCard
+                key={item.id}
+                item={item}
+                index={index}
+                onEdit={() => {
+                  setEditingItem(item)
+                  setIsEditing(true)
+                }}
+                onDelete={() => handleDelete(item.id)}
+              />
+            ))
+          )}
         </div>
       )}
     </div>
@@ -141,10 +225,12 @@ export default function TestimonialsPage() {
 
 function TestimonialCard({
   item,
+  index,
   onEdit,
   onDelete,
 }: {
   item: Testimonial
+  index: number
   onEdit: () => void
   onDelete: () => void
 }) {
@@ -152,14 +238,15 @@ function TestimonialCard({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
+      transition={{ delay: index * 0.05 }}
+      className="bg-white rounded-xl p-6 shadow-md border-2 border-gray-200 hover:border-accent/30 hover:shadow-xl transition-all"
     >
       <div className="flex items-start space-x-4">
         {item.imageUrl && (
           <img
             src={item.imageUrl}
             alt={item.name}
-            className="w-20 h-20 rounded-xl object-cover"
+            className="w-20 h-20 rounded-xl object-cover ring-2 ring-gray-200"
           />
         )}
         <div className="flex-1">
@@ -168,53 +255,57 @@ function TestimonialCard({
               <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
               <p className="text-sm text-gray-600">{item.position}</p>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center gap-2">
               {item.videoReview && (
-                <span className="flex items-center space-x-1 text-sm text-primary bg-primary-bg px-2 py-1 rounded-full">
-                  <Video className="w-4 h-4" />
-                  <span>Видео</span>
-                </span>
+                <Badge className="bg-accent/10 text-accent hover:bg-accent/20 border-accent/30">
+                  <Video className="w-3 h-3 mr-1" />
+                  Видео
+                </Badge>
               )}
               {!item.active && (
-                <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                <Badge variant="secondary">
                   Неактивен
-                </span>
+                </Badge>
               )}
-              <button
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={onEdit}
-                className="p-2 text-gray-600 hover:text-primary hover:bg-primary-bg rounded-lg transition-colors"
+                className="hover:bg-accent hover:text-white"
               >
                 <Edit2 className="w-5 h-5" />
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={onDelete}
-                className="p-2 text-gray-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                className="hover:bg-red-500 hover:text-white"
               >
                 <Trash2 className="w-5 h-5" />
-              </button>
+              </Button>
             </div>
           </div>
 
           <div className="flex items-center space-x-1 mb-3">
             {[...Array(item.rating)].map((_, i) => (
-              <Star key={i} className="w-4 h-4 text-warning fill-current" />
+              <Star key={i} className="w-5 h-5 text-amber-400 fill-current" />
             ))}
           </div>
 
           <p className="text-gray-700 mb-4 leading-relaxed">{item.text}</p>
 
           <div className="grid grid-cols-3 gap-4">
-            <div className="bg-primary-bg rounded-lg p-3">
-              <p className="text-xs text-gray-600 mb-1">Проект</p>
-              <p className="text-sm font-semibold text-gray-900">{item.project}</p>
+            <div className="bg-blue-50 rounded-lg p-3 border-2 border-blue-200">
+              <p className="text-xs text-blue-600 mb-1 font-medium">Проект</p>
+              <p className="text-sm font-bold text-blue-900">{item.project}</p>
             </div>
-            <div className="bg-green-50 rounded-lg p-3">
-              <p className="text-xs text-gray-600 mb-1">Результат</p>
-              <p className="text-sm font-semibold text-success">{item.result}</p>
+            <div className="bg-green-50 rounded-lg p-3 border-2 border-green-200">
+              <p className="text-xs text-green-600 mb-1 font-medium">Результат</p>
+              <p className="text-sm font-bold text-green-900">{item.result}</p>
             </div>
-            <div className="bg-gray-50 rounded-lg p-3">
-              <p className="text-xs text-gray-600 mb-1">Бюджет</p>
-              <p className="text-sm font-semibold text-gray-900">{item.budget}</p>
+            <div className="bg-amber-50 rounded-lg p-3 border-2 border-amber-200">
+              <p className="text-xs text-amber-600 mb-1 font-medium">Бюджет</p>
+              <p className="text-sm font-bold text-amber-900">{item.budget}</p>
             </div>
           </div>
         </div>
@@ -259,14 +350,14 @@ function TestimonialForm({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl p-6 shadow-lg border border-gray-100"
-    >
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        {item ? 'Редактировать отзыв' : 'Новый отзыв'}
-      </h2>
+    <Card className="border-2 shadow-xl">
+      <CardHeader className="bg-gradient-to-r from-accent/5 to-accent/10 border-b">
+        <CardTitle className="text-2xl">{item ? 'Редактировать отзыв' : 'Новый отзыв'}</CardTitle>
+        <CardDescription>
+          {item ? 'Обновите информацию об отзыве' : 'Добавьте новый отзыв клиента'}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pt-6">
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
@@ -279,7 +370,7 @@ function TestimonialForm({
               required
               value={formData.name || ''}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent text-gray-900 bg-white"
             />
           </div>
 
@@ -292,7 +383,7 @@ function TestimonialForm({
               required
               value={formData.position || ''}
               onChange={(e) => setFormData({ ...formData, position: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
+              className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent text-gray-900 bg-white"
             />
           </div>
         </div>
@@ -306,7 +397,7 @@ function TestimonialForm({
             rows={4}
             value={formData.text || ''}
             onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
+            className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent text-gray-900 bg-white resize-none"
           />
         </div>
 
@@ -427,23 +518,17 @@ function TestimonialForm({
           </div>
         )}
 
-        <div className="flex items-center justify-end space-x-3 pt-6 border-t border-gray-200">
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
-          >
+        <div className="flex justify-end gap-3 pt-6 border-t-2">
+          <Button type="button" variant="outline" onClick={onCancel} size="lg" className="min-w-[120px]">
             Отмена
-          </button>
-          <button
-            type="submit"
-            className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
-          >
-            Сохранить
-          </button>
+          </Button>
+          <Button type="submit" size="lg" className="min-w-[150px] bg-accent hover:bg-accent/90 text-white shadow-lg">
+            {item ? 'Обновить' : 'Создать'}
+          </Button>
         </div>
       </form>
-    </motion.div>
+      </CardContent>
+    </Card>
   )
 }
 

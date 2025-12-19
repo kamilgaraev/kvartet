@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Plus, Edit2, Trash2 } from 'lucide-react'
+import { Plus, Edit2, Trash2, HelpCircle, Search, Filter } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Checkbox } from '@/components/ui/checkbox'
 
 interface FAQ {
   id: string
@@ -18,6 +25,8 @@ export default function FAQPage() {
   const [loading, setLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [editingItem, setEditingItem] = useState<FAQ | null>(null)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [categoryFilter, setCategoryFilter] = useState('all')
 
   useEffect(() => {
     loadItems()
@@ -60,25 +69,160 @@ export default function FAQPage() {
     await loadItems()
   }
 
-  if (loading) return <div>Загрузка...</div>
+  const filteredItems = items.filter(item => {
+    const matchesSearch = item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         item.answer.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesCategory = categoryFilter === 'all' || item.category === categoryFilter
+    return matchesSearch && matchesCategory
+  })
+
+  const categories = Array.from(new Set(items.map(i => i.category)))
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+      </div>
+    )
+  }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">FAQ</h1>
-        <button
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">FAQ</h1>
+          <p className="text-muted-foreground mt-2">
+            Управление часто задаваемыми вопросами
+          </p>
+        </div>
+        <Button
           onClick={() => {
             setEditingItem(null)
             setIsEditing(true)
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark"
+          className="bg-accent hover:bg-accent/90 text-white shadow-lg"
         >
-          <Plus className="w-5 h-5" />
-          <span>Добавить вопрос</span>
-        </button>
+          <Plus className="w-5 h-5 mr-2" />
+          Добавить вопрос
+        </Button>
       </div>
 
-      {isEditing ? (
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-lg transition-shadow border-2">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-gray-600">Всего вопросов</CardTitle>
+            <HelpCircle className="w-5 h-5 text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-gray-900">{items.length}</div>
+            <p className="text-xs text-green-600 mt-1 font-medium">
+              ✓ Активных: {items.filter(i => i.active).length}
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2 col-span-2">
+          <CardHeader>
+            <CardTitle className="text-sm font-medium text-gray-600">Категории</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-2">
+              {categories.map(cat => (
+                <Badge key={cat} variant="outline" className="bg-gray-50">
+                  {cat} ({items.filter(i => i.category === cat).length})
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {!isEditing && (
+        <Card className="border-2">
+          <CardHeader className="border-b bg-gray-50/50">
+            <div className="flex items-center justify-between">
+              <CardTitle>Список вопросов</CardTitle>
+              <div className="flex items-center gap-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                  <Input
+                    placeholder="Поиск..."
+                    className="pl-9 w-64"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                </div>
+                <select
+                  value={categoryFilter}
+                  onChange={(e) => setCategoryFilter(e.target.value)}
+                  className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
+                >
+                  <option value="all">Все категории</option>
+                  {categories.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              {filteredItems.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-accent/30 hover:shadow-md transition-all"
+                >
+                  <div className="flex justify-between items-start gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Badge variant="outline" className="bg-accent/5 text-accent border-accent/20">
+                          {item.category}
+                        </Badge>
+                        {!item.active && (
+                          <Badge variant="secondary" className="bg-gray-100">
+                            Скрыт
+                          </Badge>
+                        )}
+                      </div>
+                      <h3 className="text-lg font-bold text-gray-900 mb-2">{item.question}</h3>
+                      <p className="text-gray-700 leading-relaxed">{item.answer}</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => { setEditingItem(item); setIsEditing(true); }}
+                        className="text-gray-600 hover:text-accent hover:bg-accent/10"
+                      >
+                        <Edit2 className="w-5 h-5" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => handleDelete(item.id)}
+                        className="text-gray-600 hover:text-red-500 hover:bg-red-50"
+                      >
+                        <Trash2 className="w-5 h-5" />
+                      </Button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+              {filteredItems.length === 0 && (
+                <div className="text-center py-12 text-muted-foreground">
+                  <HelpCircle className="w-16 h-16 mx-auto mb-4 opacity-20" />
+                  <p className="text-lg font-medium">Вопросы не найдены</p>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {isEditing && (
         <FAQForm
           item={editingItem}
           onSave={handleSave}
@@ -87,31 +231,6 @@ export default function FAQPage() {
             setEditingItem(null)
           }}
         />
-      ) : (
-        <div className="space-y-4">
-          {items.map((item) => (
-            <motion.div
-              key={item.id}
-              className="bg-white rounded-xl p-6 shadow-lg"
-            >
-              <div className="flex justify-between items-start">
-                <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{item.question}</h3>
-                  <p className="text-gray-700 mb-2">{item.answer}</p>
-                  <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">{item.category}</span>
-                </div>
-                <div className="flex space-x-2">
-                  <button onClick={() => { setEditingItem(item); setIsEditing(true); }} className="p-2 text-gray-600 hover:text-primary">
-                    <Edit2 className="w-5 h-5" />
-                  </button>
-                  <button onClick={() => handleDelete(item.id)} className="p-2 text-gray-600 hover:text-red-500">
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
       )}
     </div>
   )
@@ -129,62 +248,89 @@ function FAQForm({ item, onSave, onCancel }: any) {
   )
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">{item ? 'Редактировать' : 'Новый вопрос'}</h2>
-      <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-4">
-        <div>
-          <label className="block text-sm font-semibold mb-2">Вопрос *</label>
-          <input
-            required
-            value={formData.question}
-            onChange={(e) => setFormData({ ...formData, question: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-semibold mb-2">Ответ *</label>
-          <textarea
-            required
-            rows={4}
-            value={formData.answer}
-            onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-semibold mb-2">Категория</label>
-            <input
-              value={formData.category}
-              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
+    <Card className="border-2 shadow-xl">
+      <CardHeader className="bg-gradient-to-r from-accent/5 to-accent/10 border-b">
+        <CardTitle className="text-2xl">{item ? 'Редактировать вопрос' : 'Новый вопрос'}</CardTitle>
+        <CardDescription>
+          {item ? 'Обновите информацию о вопросе' : 'Добавьте новый вопрос в базу знаний'}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pt-6">
+        <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="question" className="text-base font-semibold">
+              Вопрос <span className="text-red-500">*</span>
+            </Label>
+            <Input
+              id="question"
+              required
+              value={formData.question}
+              onChange={(e) => setFormData({ ...formData, question: e.target.value })}
+              className="h-12 text-base"
+              placeholder="Например: Как оформить заказ?"
             />
           </div>
-          <div>
-            <label className="block text-sm font-semibold mb-2">Порядок</label>
-            <input
-              type="number"
-              value={formData.order}
-              onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 bg-white"
+
+          <div className="space-y-2">
+            <Label htmlFor="answer" className="text-base font-semibold">
+              Ответ <span className="text-red-500">*</span>
+            </Label>
+            <Textarea
+              id="answer"
+              required
+              rows={6}
+              value={formData.answer}
+              onChange={(e) => setFormData({ ...formData, answer: e.target.value })}
+              className="text-base resize-none"
+              placeholder="Подробный ответ на вопрос..."
             />
           </div>
-        </div>
-        <label className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            checked={formData.active}
-            onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-            className="w-4 h-4"
-          />
-          <span>Активен</span>
-        </label>
-        <div className="flex justify-end space-x-3 pt-4">
-          <button type="button" onClick={onCancel} className="px-6 py-2 border rounded-lg">Отмена</button>
-          <button type="submit" className="px-6 py-2 bg-primary text-white rounded-lg">Сохранить</button>
-        </div>
-      </form>
-    </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="category" className="text-base font-semibold">Категория</Label>
+              <Input
+                id="category"
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                className="h-12"
+                placeholder="general, услуги, оплата..."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="order" className="text-base font-semibold">Порядок</Label>
+              <Input
+                id="order"
+                type="number"
+                value={formData.order}
+                onChange={(e) => setFormData({ ...formData, order: parseInt(e.target.value) })}
+                className="h-12"
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2 pt-2">
+            <Checkbox
+              id="active"
+              checked={formData.active}
+              onCheckedChange={(checked) => setFormData({ ...formData, active: !!checked })}
+            />
+            <Label htmlFor="active" className="font-normal cursor-pointer">
+              Показывать на сайте
+            </Label>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-6 border-t-2">
+            <Button type="button" variant="outline" onClick={onCancel} size="lg" className="min-w-[120px]">
+              Отмена
+            </Button>
+            <Button type="submit" size="lg" className="min-w-[150px] bg-accent hover:bg-accent/90 text-white shadow-lg">
+              {item ? 'Обновить' : 'Создать'}
+            </Button>
+          </div>
+        </form>
+      </CardContent>
+    </Card>
   )
 }
-

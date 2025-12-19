@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Plus, Edit2, Trash2, Users } from 'lucide-react'
 import ImageUpload from '../components/ImageUpload'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 
 interface TeamMember {
   id: string
@@ -70,23 +72,71 @@ export default function TeamPage() {
 
   if (loading) return <div>Загрузка...</div>
 
+  const activeMembers = members.filter(m => m.active).length
+  const withPhotos = members.filter(m => m.photo).length
+
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="space-y-8">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Команда</h1>
-          <p className="text-gray-600 mt-1">Управление членами команды</p>
+          <p className="text-muted-foreground mt-2">
+            Управление членами команды
+          </p>
         </div>
-        <button
+        <Button
           onClick={() => {
             setEditingItem(null)
             setIsEditing(true)
           }}
-          className="flex items-center space-x-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary-dark"
+          className="bg-accent hover:bg-accent/90 text-white shadow-lg"
         >
-          <Plus className="w-5 h-5" />
-          <span>Добавить</span>
-        </button>
+          <Plus className="w-5 h-5 mr-2" />
+          Добавить сотрудника
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-lg transition-shadow border-2">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-gray-600">Всего сотрудников</CardTitle>
+            <Users className="w-5 h-5 text-blue-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-gray-900">{members.length}</div>
+            <p className="text-xs text-green-600 mt-1 font-medium">
+              ✓ Активных: {activeMembers}
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-gray-600">С фотографиями</CardTitle>
+            <Users className="w-5 h-5 text-purple-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-gray-900">{withPhotos}</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Без фото: {members.length - withPhotos}
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow border-2">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium text-gray-600">С соц. сетями</CardTitle>
+            <Users className="w-5 h-5 text-green-500" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-bold text-gray-900">
+              {members.filter(m => m.vk || m.telegram || m.instagram).length}
+            </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Связаны в соц. сетях
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
       {isEditing ? (
@@ -100,12 +150,13 @@ export default function TeamPage() {
         />
       ) : (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {members.map((member) => (
+          {members.map((member, index) => (
             <motion.div
               key={member.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow"
+              transition={{ delay: index * 0.05 }}
+              className="bg-white rounded-xl p-6 shadow-md border-2 border-gray-200 hover:border-accent/30 hover:shadow-xl transition-all"
             >
               <div className="flex flex-col items-center text-center">
                 {member.photo && (
@@ -139,22 +190,26 @@ export default function TeamPage() {
                   )}
                 </div>
 
-                <div className="flex space-x-2 w-full">
-                  <button
+                <div className="flex gap-2 w-full">
+                  <Button
+                    variant="outline"
+                    className="flex-1 hover:bg-accent hover:text-white hover:border-accent"
                     onClick={() => {
                       setEditingItem(member)
                       setIsEditing(true)
                     }}
-                    className="flex-1 p-2 text-gray-600 hover:text-primary hover:bg-primary-bg rounded-lg transition-colors"
                   >
-                    <Edit2 className="w-5 h-5 mx-auto" />
-                  </button>
-                  <button
+                    <Edit2 className="w-4 h-4 mr-2" />
+                    Редактировать
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="hover:bg-red-500 hover:text-white hover:border-red-500"
                     onClick={() => handleDelete(member.id)}
-                    className="flex-1 p-2 text-gray-600 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                   >
-                    <Trash2 className="w-5 h-5 mx-auto" />
-                  </button>
+                    <Trash2 className="w-5 h-5" />
+                  </Button>
                 </div>
               </div>
             </motion.div>
@@ -184,8 +239,14 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
   )
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-lg">
-      <h2 className="text-2xl font-bold mb-6">{item ? 'Редактировать' : 'Новый член команды'}</h2>
+    <Card className="border-2 shadow-xl">
+      <CardHeader className="bg-gradient-to-r from-accent/5 to-accent/10 border-b">
+        <CardTitle className="text-2xl">{item ? 'Редактировать сотрудника' : 'Новый член команды'}</CardTitle>
+        <CardDescription>
+          {item ? `Обновите информацию о ${item.name}` : 'Добавьте нового члена команды'}
+        </CardDescription>
+      </CardHeader>
+      <CardContent className="pt-6">
       <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div>
@@ -310,12 +371,17 @@ function TeamMemberForm({ item, onSave, onCancel }: any) {
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3 pt-6 border-t">
-          <button type="button" onClick={onCancel} className="px-6 py-2 border rounded-lg">Отмена</button>
-          <button type="submit" className="px-6 py-2 bg-primary text-white rounded-lg">Сохранить</button>
+        <div className="flex justify-end gap-3 pt-6 border-t-2">
+          <Button type="button" variant="outline" onClick={onCancel} size="lg" className="min-w-[120px]">
+            Отмена
+          </Button>
+          <Button type="submit" size="lg" className="min-w-[150px] bg-accent hover:bg-accent/90 text-white shadow-lg">
+            {item ? 'Обновить' : 'Создать'}
+          </Button>
         </div>
       </form>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 

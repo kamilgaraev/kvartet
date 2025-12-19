@@ -210,22 +210,22 @@ export default function BlogPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="rounded-md border">
+          <div className="rounded-md border-2 border-gray-200 overflow-hidden">
             <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-[50px]">
+              <TableHeader className="bg-gray-100">
+                <TableRow className="border-b-2 border-gray-200 hover:bg-gray-100">
+                  <TableHead className="w-[50px] border-r border-gray-200">
                     <Checkbox 
                       checked={selectedIds.length === filteredPosts.length && filteredPosts.length > 0}
                       onCheckedChange={toggleSelectAll}
                     />
                   </TableHead>
-                  <TableHead>Заголовок</TableHead>
-                  <TableHead>Автор</TableHead>
-                  <TableHead>Категория</TableHead>
-                  <TableHead>Статус</TableHead>
-                  <TableHead>Дата</TableHead>
-                  <TableHead className="text-right">Действия</TableHead>
+                  <TableHead className="font-semibold text-gray-600 border-r border-gray-200">Заголовок</TableHead>
+                  <TableHead className="font-semibold text-gray-600 border-r border-gray-200">Автор</TableHead>
+                  <TableHead className="font-semibold text-gray-600 border-r border-gray-200">Категория</TableHead>
+                  <TableHead className="font-semibold text-gray-600 border-r border-gray-200">Статус</TableHead>
+                  <TableHead className="font-semibold text-gray-600 border-r border-gray-200">Дата</TableHead>
+                  <TableHead className="text-right font-semibold text-gray-600">Действия</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -239,21 +239,21 @@ export default function BlogPage() {
                   </TableRow>
                 ) : (
                   filteredPosts.map((post) => (
-                    <TableRow key={post.id}>
-                      <TableCell>
+                    <TableRow key={post.id} className="border-b border-gray-200">
+                      <TableCell className="border-r border-gray-100">
                         <Checkbox 
                           checked={selectedIds.includes(post.id)}
                           onCheckedChange={() => toggleSelect(post.id)}
                         />
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="border-r border-gray-100">
                         <div className="font-medium text-gray-900">{post.title}</div>
                         <div className="text-xs text-muted-foreground flex items-center gap-2">
                             <span>/{post.slug}</span>
                             <span className="flex items-center gap-1"><Eye className="w-3 h-3" /> {post.views}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="border-r border-gray-100">
                         <div className="flex items-center gap-2">
                             <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-xs">
                                 {post.author.name.charAt(0)}
@@ -261,17 +261,17 @@ export default function BlogPage() {
                             <span className="text-sm">{post.author.name}</span>
                         </div>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="border-r border-gray-100">
                         <Badge variant="outline" className="bg-gray-50">{post.category}</Badge>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="border-r border-gray-100">
                          {post.isPublished ? (
                             <Badge variant="default" className="bg-green-500 hover:bg-green-600">Опубликовано</Badge>
                          ) : (
                             <Badge variant="secondary">Черновик</Badge>
                          )}
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="border-r border-gray-100">
                         <div className="text-sm">
                             {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : '-'}
                         </div>
