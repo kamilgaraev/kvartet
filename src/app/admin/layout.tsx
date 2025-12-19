@@ -16,12 +16,21 @@ import {
   X,
   Bell,
   Search,
-  Briefcase
+  Briefcase,
+  ChevronRight
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel, 
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu'
 
 const navigation = [
   { name: 'Дашборд', href: '/admin', icon: LayoutDashboard },
@@ -45,6 +54,15 @@ export default function AdminLayout({
   const router = useRouter()
   const pathname = usePathname()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     if (status === 'loading') return
@@ -71,67 +89,97 @@ export default function AdminLayout({
   }
 
   const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-slate-900 text-slate-300">
-      <div className="flex items-center h-16 px-6 border-b border-slate-800">
-        <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
-            <span className="text-white font-bold text-lg">K</span>
+    <div className="flex flex-col h-full bg-slate-900 text-slate-300 relative overflow-hidden">
+      {/* Abstract Background Pattern */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none overflow-hidden">
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-500 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="flex items-center h-20 px-6 border-b border-slate-800/50 backdrop-blur-sm z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-dark rounded-xl flex items-center justify-center shadow-lg shadow-primary/20 ring-1 ring-white/10">
+            <span className="text-white font-bold text-xl">K</span>
           </div>
-          <span className="text-white font-bold text-lg tracking-tight">Kvartett</span>
+          <div className="flex flex-col">
+            <span className="text-white font-bold text-lg tracking-tight leading-none">Kvartett</span>
+            <span className="text-xs text-slate-500 font-medium tracking-wider">ADMIN PANEL</span>
+          </div>
         </div>
       </div>
 
-      <nav className="flex-1 mt-6 px-3 space-y-1 overflow-y-auto">
-        <p className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Меню</p>
+      <nav className="flex-1 mt-6 px-4 space-y-1 overflow-y-auto z-10 custom-scrollbar">
+        <p className="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4 mt-2">Основное</p>
         {navigation.map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
+              className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative overflow-hidden ${
                 isActive
-                  ? 'bg-primary text-white shadow-md shadow-primary/20'
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
+                  ? 'text-white shadow-lg shadow-primary/10'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
               }`}
               onClick={() => setSidebarOpen(false)}
             >
+              {isActive && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-gradient-to-r from-primary to-primary-dark opacity-100"
+                  initial={false}
+                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                />
+              )}
               <item.icon
-                className={`mr-3 w-5 h-5 transition-colors ${
-                  isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'
+                className={`relative z-10 mr-3 w-5 h-5 transition-transform duration-200 ${
+                  isActive ? 'text-white' : 'text-slate-400 group-hover:text-white group-hover:scale-110'
                 }`}
               />
-              {item.name}
+              <span className="relative z-10">{item.name}</span>
+              {isActive && <ChevronRight className="relative z-10 ml-auto w-4 h-4 text-white/50" />}
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-4 border-t border-slate-800">
-        <div className="flex items-center gap-3 mb-4 px-2">
-          <Avatar className="h-9 w-9 border border-slate-700">
-            <AvatarImage src={session?.user?.image || undefined} />
-            <AvatarFallback className="bg-primary text-white">
-              {session?.user?.name?.charAt(0) || 'A'}
-            </AvatarFallback>
-          </Avatar>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-white truncate">
-              {session?.user?.name || 'Администратор'}
-            </p>
-            <p className="text-xs text-slate-500 truncate">
-              {session?.user?.email}
-            </p>
-          </div>
-        </div>
-        <Button
-          variant="destructive"
-          className="w-full justify-start text-red-200 bg-red-900/20 hover:bg-red-900/40 hover:text-red-100 border-none"
-          onClick={() => signOut()}
-        >
-          <LogOut className="w-4 h-4 mr-2" />
-          Выйти
-        </Button>
+      <div className="p-4 border-t border-slate-800/50 z-10 bg-slate-900/50 backdrop-blur-sm">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="flex items-center gap-3 w-full p-2 rounded-xl hover:bg-slate-800 transition-colors text-left group">
+              <Avatar className="h-10 w-10 border-2 border-slate-700 group-hover:border-primary transition-colors">
+                <AvatarImage src={session?.user?.image || undefined} />
+                <AvatarFallback className="bg-gradient-to-br from-primary to-purple-600 text-white">
+                  {session?.user?.name?.charAt(0) || 'A'}
+                </AvatarFallback>
+              </Avatar>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-white truncate group-hover:text-primary transition-colors">
+                  {session?.user?.name || 'Администратор'}
+                </p>
+                <p className="text-xs text-slate-500 truncate">
+                  {session?.user?.email}
+                </p>
+              </div>
+              <Settings className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuLabel className="font-normal">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">{session?.user?.name}</p>
+                <p className="text-xs leading-none text-muted-foreground">
+                  {session?.user?.email}
+                </p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => signOut()} className="text-red-600 cursor-pointer">
+              <LogOut className="w-4 h-4 mr-2" />
+              Выйти
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   )
@@ -145,14 +193,14 @@ export default function AdminLayout({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 lg:hidden bg-slate-900/50 backdrop-blur-sm"
+            className="fixed inset-0 z-40 lg:hidden bg-slate-900/60 backdrop-blur-sm"
             onClick={() => setSidebarOpen(false)}
           />
         )}
       </AnimatePresence>
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 shadow-xl z-30">
+      <div className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 shadow-2xl shadow-slate-200 z-30">
         <SidebarContent />
       </div>
 
@@ -163,8 +211,8 @@ export default function AdminLayout({
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
         className="lg:hidden fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 shadow-2xl"
       >
-        <div className="absolute top-4 right-4 lg:hidden">
-          <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white" onClick={() => setSidebarOpen(false)}>
+        <div className="absolute top-4 right-4 lg:hidden z-20">
+          <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white hover:bg-white/10" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </Button>
         </div>
@@ -174,8 +222,8 @@ export default function AdminLayout({
       {/* Main content */}
       <div className="lg:pl-72 flex flex-col min-h-screen transition-all duration-300">
         {/* Top header */}
-        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-100">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+        <header className={`sticky top-0 z-20 transition-all duration-200 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm' : 'bg-transparent'}`}>
+          <div className="flex items-center justify-between h-20 px-4 sm:px-6 lg:px-8">
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
@@ -186,28 +234,36 @@ export default function AdminLayout({
                 <Menu className="w-6 h-6" />
               </Button>
               
-              <div className="relative hidden md:block max-w-md w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                <Input
-                  type="text"
-                  placeholder="Поиск по системе..."
-                  className="pl-9 h-9 w-[300px] bg-gray-50 border-gray-200 focus:bg-white transition-colors"
-                />
+              <div className="hidden md:flex items-center text-sm text-muted-foreground">
+                <span className="hover:text-primary transition-colors cursor-pointer">Admin</span>
+                <ChevronRight className="w-4 h-4 mx-1" />
+                <span className="font-medium text-gray-900">{navigation.find(n => n.href === pathname)?.name || 'Dashboard'}</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative text-gray-500 hover:bg-gray-100 rounded-full">
+            <div className="flex items-center gap-3">
+              <div className="relative hidden md:block group">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 group-focus-within:text-primary transition-colors" />
+                <Input
+                  type="text"
+                  placeholder="Поиск..."
+                  className="pl-10 h-10 w-[200px] lg:w-[300px] bg-white border-transparent shadow-sm focus:border-primary/20 hover:bg-white transition-all focus:w-[320px] focus:shadow-md"
+                />
+              </div>
+
+              <div className="w-px h-6 bg-gray-200 mx-2 hidden md:block"></div>
+
+              <Button variant="ghost" size="icon" className="relative text-gray-500 hover:bg-gray-100/80 hover:text-primary rounded-full transition-all duration-200">
                 <Bell className="w-5 h-5" />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white animate-pulse"></span>
               </Button>
             </div>
           </div>
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto overflow-x-hidden">
+          <div className="max-w-7xl mx-auto space-y-8">
             {children}
           </div>
         </main>

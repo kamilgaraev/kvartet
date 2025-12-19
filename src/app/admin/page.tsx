@@ -12,11 +12,15 @@ import {
   AlertCircle,
   CheckCircle,
   Calendar,
-  ArrowRight
+  ArrowRight,
+  MoreHorizontal,
+  ArrowUpRight,
+  Activity
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Table,
   TableBody,
@@ -25,6 +29,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface DashboardStats {
   totalLeads: number
@@ -46,7 +57,7 @@ export default function AdminDashboard() {
   })
   const [loading, setLoading] = useState(true)
 
-  // Данные для демонстрации (в будущем заменить на реальные API вызовы)
+  // Данные для демонстрации
   useEffect(() => {
     const timer = setTimeout(() => {
       setStats({
@@ -58,7 +69,7 @@ export default function AdminDashboard() {
         avgResponseTime: '2.5ч'
       })
       setLoading(false)
-    }, 1000)
+    }, 800)
     return () => clearTimeout(timer)
   }, [])
 
@@ -67,34 +78,42 @@ export default function AdminDashboard() {
       title: 'Всего заявок',
       value: stats.totalLeads,
       change: '+12%',
-      changeType: 'positive',
+      trend: 'up',
       icon: MessageSquare,
-      description: 'за последний месяц'
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-100',
+      description: 'за месяц'
     },
     {
-      title: 'Новые заявки',
+      title: 'Требуют внимания',
       value: stats.newLeads,
       change: '+3',
-      changeType: 'positive',
+      trend: 'up',
       icon: AlertCircle,
-      description: 'требуют внимания',
+      color: 'text-amber-600',
+      bgColor: 'bg-amber-100',
+      description: 'новые',
       highlight: true
     },
     {
-      title: 'Конверсии',
-      value: stats.convertedLeads,
-      change: '+18%',
-      changeType: 'positive',
-      icon: CheckCircle,
-      description: 'успешные сделки'
+      title: 'Конверсия',
+      value: `${((stats.convertedLeads / stats.totalLeads) * 100).toFixed(1)}%`,
+      change: '+2.4%',
+      trend: 'up',
+      icon: TrendingUp,
+      color: 'text-green-600',
+      bgColor: 'bg-green-100',
+      description: 'успех'
     },
     {
       title: 'Выручка',
       value: `${(stats.revenue / 1000).toFixed(0)}К ₽`,
       change: '+24%',
-      changeType: 'positive',
+      trend: 'up',
       icon: DollarSign,
-      description: 'общий доход'
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-100',
+      description: 'доход'
     }
   ]
 
@@ -103,147 +122,209 @@ export default function AdminDashboard() {
       id: '1',
       name: 'Андрей Петров',
       email: 'petrov@example.com',
-      phone: '+7 (917) 123-45-67',
+      image: '',
       service: 'Наружная реклама',
       status: 'new',
+      amount: '45 000 ₽',
       createdAt: '2 мин назад'
     },
     {
       id: '2',
       name: 'ООО "Строй Инвест"',
       email: 'info@stroyinvest.ru',
-      phone: '+7 (347) 555-77-88',
+      image: '',
       service: 'Полиграфия',
       status: 'contacted',
+      amount: '120 000 ₽',
       createdAt: '15 мин назад'
     },
     {
       id: '3',
       name: 'Мария Сидорова',
       email: 'maria.s@mail.ru',
-      phone: '+7 (987) 654-32-10',
+      image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
       service: 'Брендинг',
       status: 'in_progress',
+      amount: '85 000 ₽',
       createdAt: '1 час назад'
     },
     {
       id: '4',
       name: 'Иван Алексеев',
       email: 'ivan.a@gmail.com',
-      phone: '+7 (999) 111-22-33',
+      image: '',
       service: 'Интерьерная печать',
       status: 'converted',
+      amount: '12 500 ₽',
       createdAt: '3 часа назад'
     }
   ]
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'new': return <Badge variant="destructive" className="bg-red-500 hover:bg-red-600">Новая</Badge>
-      case 'contacted': return <Badge variant="secondary" className="bg-yellow-500 text-white hover:bg-yellow-600">Связались</Badge>
-      case 'in_progress': return <Badge variant="default" className="bg-blue-500 hover:bg-blue-600">В работе</Badge>
-      case 'converted': return <Badge variant="outline" className="border-green-500 text-green-600">Завершен</Badge>
+      case 'new': return <Badge variant="destructive" className="bg-red-500/10 text-red-600 hover:bg-red-500/20 border-red-200 shadow-none">Новая</Badge>
+      case 'contacted': return <Badge variant="secondary" className="bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 border-amber-200 shadow-none">Связались</Badge>
+      case 'in_progress': return <Badge variant="default" className="bg-blue-500/10 text-blue-600 hover:bg-blue-500/20 border-blue-200 shadow-none">В работе</Badge>
+      case 'converted': return <Badge variant="outline" className="bg-green-500/10 text-green-600 border-green-200 shadow-none">Завершен</Badge>
       default: return <Badge variant="outline">Неизвестно</Badge>
     }
+  }
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
   }
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-[calc(100vh-200px)]">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <p className="text-muted-foreground animate-pulse">Загрузка данных...</p>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <motion.div 
+      className="space-y-8"
+      variants={container}
+      initial="hidden"
+      animate="show"
+    >
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-gray-100">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
-            Обзор ключевых показателей эффективности
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900">Обзор</h1>
+          <p className="text-muted-foreground mt-2 text-lg">
+            Добро пожаловать, {new Date().getHours() < 12 ? 'доброе утро' : new Date().getHours() < 18 ? 'добрый день' : 'добрый вечер'}! 👋
           </p>
         </div>
-        <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-lg border shadow-sm">
-          <Calendar className="w-5 h-5 text-muted-foreground" />
-          <span className="text-sm font-medium">
-            {new Date().toLocaleDateString('ru-RU', { 
-              day: 'numeric', 
-              month: 'long',
-              year: 'numeric'
-            })}
-          </span>
+        <div className="flex items-center gap-3">
+          <Button variant="outline" className="hidden sm:flex bg-white hover:bg-gray-50">
+            <Calendar className="mr-2 h-4 w-4 text-gray-500" />
+            <span>Последние 30 дней</span>
+          </Button>
+          <Button className="bg-primary hover:bg-primary-dark text-white shadow-lg shadow-primary/20 transition-all hover:scale-105">
+            <ArrowUpRight className="mr-2 h-4 w-4" />
+            Скачать отчет
+          </Button>
         </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {statsCards.map((card, index) => (
-          <motion.div
-            key={card.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-          >
-            <Card className={`hover:shadow-md transition-shadow duration-200 ${card.highlight ? 'border-primary/50 bg-primary/5' : ''}`}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {card.title}
-                </CardTitle>
-                <card.icon className={`h-4 w-4 ${card.highlight ? 'text-primary' : 'text-muted-foreground'}`} />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{card.value}</div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {card.change} {card.description}
-                </p>
+        {statsCards.map((card) => (
+          <motion.div key={card.title} variants={item}>
+            <Card className="border-none shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white overflow-hidden relative group">
+              <div className={`absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500 ${card.color}`}>
+                <card.icon className="w-24 h-24" />
+              </div>
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div className={`p-3 rounded-xl ${card.bgColor} ${card.color} ring-1 ring-black/5`}>
+                    <card.icon className="w-6 h-6" />
+                  </div>
+                  <Badge variant="secondary" className={`${card.change.startsWith('+') ? 'text-green-600 bg-green-50' : 'text-red-600 bg-red-50'} font-medium`}>
+                    {card.change}
+                  </Badge>
+                </div>
+                <div className="space-y-1 relative z-10">
+                  <h3 className="text-sm font-medium text-muted-foreground">{card.title}</h3>
+                  <div className="text-3xl font-bold text-gray-900 tracking-tight">
+                    {card.value}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    {card.description}
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid lg:grid-cols-7 gap-6">
-        {/* Recent Leads */}
-        <motion.div 
-          className="lg:col-span-5"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-        >
-          <Card className="h-full hover:shadow-md transition-shadow duration-200">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <div>
-                <CardTitle>Последние заявки</CardTitle>
-                <CardDescription>Список недавних обращений клиентов</CardDescription>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Main Content Area */}
+        <motion.div className="lg:col-span-2 space-y-8" variants={item}>
+          {/* Recent Leads Table */}
+          <Card className="border-none shadow-lg shadow-gray-100/50 bg-white">
+            <CardHeader className="flex flex-row items-center justify-between px-6 pt-6 pb-4">
+              <div className="space-y-1">
+                <CardTitle className="text-xl font-bold">Последние заявки</CardTitle>
+                <CardDescription>
+                  У вас <span className="text-primary font-medium">{stats.newLeads} новых</span> заявок за сегодня
+                </CardDescription>
               </div>
-              <Button variant="outline" size="sm" className="hidden sm:flex" asChild>
-                 <a href="/admin/leads" className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="text-primary hover:bg-primary/5 hover:text-primary-dark" asChild>
+                 <a href="/admin/leads" className="flex items-center gap-1 font-medium">
                   Все заявки <ArrowRight className="w-4 h-4" />
                  </a>
               </Button>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-0">
               <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Клиент</TableHead>
-                    <TableHead>Услуга</TableHead>
-                    <TableHead>Статус</TableHead>
-                    <TableHead className="text-right">Время</TableHead>
+                <TableHeader className="bg-gray-50/50">
+                  <TableRow className="hover:bg-transparent border-b border-gray-100">
+                    <TableHead className="px-6 py-4 font-semibold text-gray-500">Клиент</TableHead>
+                    <TableHead className="font-semibold text-gray-500">Услуга</TableHead>
+                    <TableHead className="font-semibold text-gray-500">Сумма</TableHead>
+                    <TableHead className="font-semibold text-gray-500">Статус</TableHead>
+                    <TableHead className="text-right px-6 font-semibold text-gray-500">Действия</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {recentLeads.map((lead) => (
-                    <TableRow key={lead.id} className="cursor-pointer hover:bg-muted/50">
-                      <TableCell>
-                        <div className="font-medium">{lead.name}</div>
-                        <div className="text-xs text-muted-foreground">{lead.email}</div>
+                    <TableRow key={lead.id} className="hover:bg-gray-50/50 border-gray-100 transition-colors group">
+                      <TableCell className="px-6 py-4">
+                        <div className="flex items-center gap-3">
+                          <Avatar className="h-9 w-9 border border-gray-200">
+                            <AvatarImage src={lead.image} />
+                            <AvatarFallback className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-600 font-medium">
+                              {lead.name.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="font-medium text-gray-900 group-hover:text-primary transition-colors">{lead.name}</div>
+                            <div className="text-xs text-muted-foreground">{lead.email}</div>
+                          </div>
+                        </div>
                       </TableCell>
-                      <TableCell>{lead.service}</TableCell>
-                      <TableCell>{getStatusBadge(lead.status)}</TableCell>
-                      <TableCell className="text-right text-muted-foreground text-sm">{lead.createdAt}</TableCell>
+                      <TableCell className="py-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-gray-700">{lead.service}</span>
+                        </div>
+                      </TableCell>
+                      <TableCell className="py-4 font-medium text-gray-900">
+                        {lead.amount}
+                      </TableCell>
+                      <TableCell className="py-4">{getStatusBadge(lead.status)}</TableCell>
+                      <TableCell className="text-right px-6 py-4">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-900">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Действия</DropdownMenuLabel>
+                            <DropdownMenuItem>Открыть карточку</DropdownMenuItem>
+                            <DropdownMenuItem>Изменить статус</DropdownMenuItem>
+                            <DropdownMenuItem className="text-red-600">Удалить</DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -252,51 +333,72 @@ export default function AdminDashboard() {
           </Card>
         </motion.div>
 
-        {/* Quick Actions / System Status */}
-        <motion.div 
-          className="lg:col-span-2 space-y-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.6 }}
-        >
-          <Card>
+        {/* Sidebar Widgets */}
+        <motion.div className="space-y-6" variants={item}>
+          {/* Quick Actions */}
+          <Card className="border-none shadow-md bg-gradient-to-br from-primary to-primary-dark text-white overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl -mr-8 -mt-8 pointer-events-none" />
             <CardHeader>
-              <CardTitle>Быстрые действия</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-lg">
+                <Activity className="w-5 h-5 opacity-80" />
+                Быстрые действия
+              </CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3">
-              <Button className="w-full justify-start" variant="default">
-                <MessageSquare className="mr-2 h-4 w-4" />
+            <CardContent className="grid gap-3 relative z-10">
+              <Button className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-0 h-12 text-base font-medium transition-all" variant="outline">
+                <MessageSquare className="mr-3 h-5 w-5 opacity-70" />
                 Новая заявка
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <Users className="mr-2 h-4 w-4" />
-                Добавить пользователя
+              <Button className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-0 h-12 text-base font-medium transition-all" variant="outline">
+                <Users className="mr-3 h-5 w-5 opacity-70" />
+                Добавить сотрудника
               </Button>
-              <Button className="w-full justify-start" variant="outline">
-                <DollarSign className="mr-2 h-4 w-4" />
-                Создать отчет
+              <Button className="w-full justify-start bg-white/10 hover:bg-white/20 text-white border-0 h-12 text-base font-medium transition-all" variant="outline">
+                <Clock className="mr-3 h-5 w-5 opacity-70" />
+                История действий
               </Button>
             </CardContent>
           </Card>
 
-          <Card className="bg-green-50/50 border-green-100">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base font-medium flex items-center gap-2 text-green-700">
-                <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                Статус системы
-              </CardTitle>
+          {/* System Status */}
+          <Card className="border-none shadow-sm bg-white">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base font-semibold text-gray-900">Статус системы</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-sm text-green-600 mb-2">
-                Все системы работают в штатном режиме
-              </div>
-              <div className="text-xs text-muted-foreground">
-                Последняя проверка: Только что
+              <div className="space-y-4">
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    База данных
+                  </div>
+                  <span className="text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded text-xs">OK</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    API Сервер
+                  </div>
+                  <span className="text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded text-xs">OK</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                    Email шлюз
+                  </div>
+                  <span className="text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded text-xs">OK</span>
+                </div>
+                
+                <div className="pt-4 border-t border-gray-100 mt-2">
+                  <p className="text-xs text-muted-foreground text-center">
+                    Последняя проверка: <span className="font-medium text-gray-900">Только что</span>
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   )
 }

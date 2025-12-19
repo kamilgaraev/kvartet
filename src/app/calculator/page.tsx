@@ -744,6 +744,7 @@ export default function CalculatorPage() {
               </div>
             </motion.div>
           )}
+          </div>
         </div>
       </section>
 
