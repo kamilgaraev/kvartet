@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { Calendar, Award, TrendingUp, ArrowLeft, CheckCircle, Star, Quote, ArrowRight, Clock, Banknote, Layers } from 'lucide-react'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { Calendar, Award, TrendingUp, ArrowLeft, CheckCircle, Star, Quote, ArrowRight, Clock, Banknote, Layers, Eye, ChevronLeft, ChevronRight, X } from 'lucide-react'
 import Link from 'next/link'
 import Header from '@/app/components/Header'
 import Footer from '@/app/components/Footer'
@@ -200,33 +200,99 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
           </div>
         </section>
 
-        {/* Gallery Grid */}
+        {/* Detailed Description */}
+        {item.description && (
+          <section className="section-padding-y bg-white">
+            <div className="container-adaptive max-w-4xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">О проекте</h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-accent to-primary mx-auto rounded-full"></div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-ul:text-gray-700 prose-ol:text-gray-700"
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
+            </div>
+          </section>
+        )}
+
+        {/* Gallery Grid - Enhanced */}
         {item.gallery && item.gallery.length > 0 && (
-          <section className="py-12 bg-gray-50">
+          <section className="section-padding-y bg-gradient-to-b from-gray-50 to-white">
             <div className="container-adaptive">
-              <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Галерея проекта</h2>
-              <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-center mb-16"
+              >
+                <h2 className="text-4xl font-bold text-gray-900 mb-4">Галерея проекта</h2>
+                <p className="text-xl text-gray-600">Наглядные результаты нашей работы</p>
+                <div className="w-24 h-1 bg-gradient-to-r from-accent to-primary mx-auto mt-6 rounded-full"></div>
+              </motion.div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {item.gallery.map((img, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
                     viewport={{ once: true }}
-                    className={`relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all cursor-pointer group ${
-                      index % 3 === 0 ? 'md:col-span-2 aspect-[2/1]' : 'aspect-[4/3]'
+                    className={`relative rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer group ${
+                      index === 0 ? 'lg:col-span-2 lg:row-span-2' : ''
                     }`}
                     onClick={() => setActiveImage(img)}
                   >
-                    <img 
-                      src={img} 
-                      alt={`Gallery ${index}`} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className={`relative ${index === 0 ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
+                      <img 
+                        src={img} 
+                        alt={`${item.title} - Изображение ${index + 1}`} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <motion.div
+                          initial={{ scale: 0.8 }}
+                          whileHover={{ scale: 1 }}
+                          className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border-2 border-white/40"
+                        >
+                          <Eye className="w-8 h-8 text-white" />
+                        </motion.div>
+                      </div>
+                      
+                      {/* Image Number Badge */}
+                      <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-bold">
+                        {index + 1}/{item.gallery.length}
+                      </div>
+                    </div>
                   </motion.div>
                 ))}
               </div>
+              
+              {/* Gallery Stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mt-12 text-center"
+              >
+                <p className="text-gray-600">
+                  <span className="font-bold text-2xl text-accent">{item.gallery.length}</span> изображений в галерее
+                </p>
+              </motion.div>
             </div>
           </section>
         )}
@@ -276,22 +342,76 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
       <Footer />
       <FloatingAction />
 
-      {/* Lightbox Overlay */}
-      {activeImage && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
-          onClick={() => setActiveImage(null)}
-        >
-          <img 
-            src={activeImage} 
-            alt="Full screen" 
-            className="max-w-full max-h-[90vh] rounded-lg shadow-2xl" 
-          />
-          <button className="absolute top-8 right-8 text-white hover:text-gray-300">
-            <ArrowLeft className="w-8 h-8" />
-          </button>
-        </div>
-      )}
+      {/* Enhanced Lightbox */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/98 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={() => setActiveImage(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="relative max-w-7xl w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img 
+                src={activeImage} 
+                alt="Full screen preview" 
+                className="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" 
+              />
+              
+              {/* Navigation Buttons */}
+              {item.gallery && item.gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      const currentIndex = item.gallery.indexOf(activeImage)
+                      const prevIndex = currentIndex === 0 ? item.gallery.length - 1 : currentIndex - 1
+                      setActiveImage(item.gallery[prevIndex])
+                    }}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all"
+                  >
+                    <ChevronLeft className="w-8 h-8" />
+                  </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      const currentIndex = item.gallery.indexOf(activeImage)
+                      const nextIndex = currentIndex === item.gallery.length - 1 ? 0 : currentIndex + 1
+                      setActiveImage(item.gallery[nextIndex])
+                    }}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all"
+                  >
+                    <ChevronRight className="w-8 h-8" />
+                  </button>
+                </>
+              )}
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setActiveImage(null)}
+                className="absolute -top-16 right-0 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              
+              {/* Image Counter */}
+              {item.gallery && (
+                <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white px-6 py-3 rounded-full text-sm font-medium">
+                  {item.gallery.indexOf(activeImage) + 1} / {item.gallery.length}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
