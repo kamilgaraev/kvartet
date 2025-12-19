@@ -404,6 +404,7 @@ export default function PortfolioEditor() {
               <div className="relative">
                 <Input 
                   type="file"
+                  accept="image/*"
                   multiple
                   className="absolute inset-0 opacity-0 cursor-pointer" 
                   onChange={(e) => handleImageUpload(e, true)}
@@ -517,6 +518,7 @@ export default function PortfolioEditor() {
                 <Input 
                     id="main-image" 
                     type="file" 
+                    accept="image/*"
                     className="hidden" 
                     onChange={(e) => handleImageUpload(e)}
                 />

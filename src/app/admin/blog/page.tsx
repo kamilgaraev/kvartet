@@ -131,7 +131,7 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="p-8 space-y-8 bg-gray-50/50 min-h-screen">
+    <div className="space-y-8">
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-gray-900">Блог</h1>
@@ -140,38 +140,47 @@ export default function BlogPage() {
           </p>
         </div>
         <Link href="/admin/blog/editor">
-          <Button className="bg-primary text-white hover:bg-primary/90">
+          <Button className="bg-accent text-white hover:bg-accent/90 shadow-lg">
             <Plus className="mr-2 h-4 w-4" /> Новая статья
           </Button>
         </Link>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <Card className="hover:shadow-lg transition-shadow border-2 border-blue-200 bg-blue-50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Всего статей</CardTitle>
-            <FileText className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-blue-700">Всего статей</CardTitle>
+            <div className="p-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg">
+              <FileText className="h-4 w-4 text-white" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{posts.length}</div>
+            <div className="text-3xl font-bold text-blue-900">{posts.length}</div>
+            <p className="text-xs text-blue-600 mt-1 font-medium">В базе данных</p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow border-2 border-green-200 bg-green-50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Просмотры</CardTitle>
-                <Eye className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium text-green-700">Просмотры</CardTitle>
+                <div className="p-2 bg-gradient-to-br from-green-400 to-green-600 rounded-xl shadow-lg">
+                  <Eye className="h-4 w-4 text-white" />
+                </div>
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold">{posts.reduce((acc, p) => acc + p.views, 0).toLocaleString()}</div>
+                <div className="text-3xl font-bold text-green-900">{posts.reduce((acc, p) => acc + p.views, 0).toLocaleString()}</div>
+                <p className="text-xs text-green-600 mt-1 font-medium">Всего просмотров</p>
             </CardContent>
         </Card>
-        <Card>
+        <Card className="hover:shadow-lg transition-shadow border-2 border-purple-200 bg-purple-50">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Комментарии</CardTitle>
-                <MessageCircle className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium text-purple-700">Комментарии</CardTitle>
+                <div className="p-2 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl shadow-lg">
+                  <MessageCircle className="h-4 w-4 text-white" />
+                </div>
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold">{posts.reduce((acc, p) => acc + p.comments, 0)}</div>
+                <div className="text-3xl font-bold text-purple-900">{posts.reduce((acc, p) => acc + p.comments, 0)}</div>
+                <p className="text-xs text-purple-600 mt-1 font-medium">Всего комментариев</p>
             </CardContent>
         </Card>
       </div>

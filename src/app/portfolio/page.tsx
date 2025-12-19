@@ -369,7 +369,7 @@ export default function PortfolioPage() {
                   </div>
                   
                   <p className="text-body-sm text-muted mb-4 line-clamp-2 leading-relaxed-kw min-h-0">
-                    {item.description}
+                    {item.description?.replace(/<[^>]*>/g, '') || ''}
                   </p>
 
                   {/* Metrics */}
