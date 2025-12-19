@@ -170,16 +170,24 @@ export default function PortfolioEditor() {
     const files = e.target.files
     if (!files?.length) return
 
-    if (isGallery) {
-      const newUrls = []
-      for (let i = 0; i < files.length; i++) {
-        const url = await compressImage(files[i])
-        newUrls.push(url)
+    try {
+      if (isGallery) {
+        const newUrls = []
+        for (let i = 0; i < files.length; i++) {
+          const url = await compressImage(files[i])
+          newUrls.push(url)
+        }
+        setFormData(prev => ({ ...prev, gallery: [...prev.gallery, ...newUrls] }))
+      } else {
+        const url = await compressImage(files[0])
+        console.log('Image uploaded:', url.substring(0, 50) + '...')
+        setFormData(prev => ({ ...prev, image: url }))
       }
-      setFormData(prev => ({ ...prev, gallery: [...prev.gallery, ...newUrls] }))
-    } else {
-      const url = await compressImage(files[0])
-      setFormData(prev => ({ ...prev, image: url }))
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      alert('Ошибка загрузки изображения')
+    } finally {
+      e.target.value = ''
     }
   }
 
@@ -259,7 +267,7 @@ export default function PortfolioEditor() {
   if (loading) return <div className="p-8 text-center">Загрузка...</div>
 
   return (
-    <div className="min-h-screen bg-gray-50/50 pb-20">
+    <div className="min-h-screen bg-white pb-20">
       {/* Top Bar */}
       <div className="sticky top-0 z-30 bg-white border-b px-8 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -502,10 +510,11 @@ export default function PortfolioEditor() {
               <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative group border-2 border-dashed border-gray-200 hover:border-primary transition-colors">
                 {formData.image ? (
                   <>
-                    <img src={formData.image} className="w-full h-full object-cover" />
+                    <img src={formData.image} alt="Главное изображение проекта" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                         <Label htmlFor="main-image" className="cursor-pointer text-white flex flex-col items-center">
-                            <Upload className="w-6 h-6 mb-2" /> Change
+                            <Upload className="w-6 h-6 mb-2" />
+                            <span className="text-sm font-medium">Изменить</span>
                         </Label>
                     </div>
                   </>
