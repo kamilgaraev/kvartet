@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import { db } from "@/db"
 import { users } from "@/db/schema"
 import { eq } from "drizzle-orm"
+import { compare } from "bcryptjs"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -23,13 +24,13 @@ export const authOptions: NextAuthOptions = {
             .from(users)
             .where(eq(users.email, credentials.email))
 
-          if (!user) {
+          if (!user || !user.password) {
             return null
           }
 
-          // В продакшене здесь должна быть проверка пароля с bcrypt
-          // Временно для разработки простая проверка
-          if (credentials.password === "admin123") {
+          const isValid = await compare(credentials.password, user.password)
+
+          if (isValid) {
             return {
               id: user.id,
               email: user.email,

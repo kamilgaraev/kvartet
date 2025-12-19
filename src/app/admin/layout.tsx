@@ -2,7 +2,7 @@
 
 import { useSession, signOut } from 'next-auth/react'
 import { useRouter, usePathname } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { 
   LayoutDashboard, 
@@ -15,21 +15,24 @@ import {
   Menu,
   X,
   Bell,
-  Search
+  Search,
+  Briefcase
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Input } from '@/components/ui/input'
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+  { name: 'Дашборд', href: '/admin', icon: LayoutDashboard },
   { name: 'Заявки', href: '/admin/leads', icon: MessageSquare },
-  { name: 'Услуги', href: '/admin/services', icon: FileText },
+  { name: 'Услуги', href: '/admin/services', icon: Briefcase },
   { name: 'Портфолио', href: '/admin/portfolio', icon: Image },
   { name: 'Блог', href: '/admin/blog', icon: FileText },
   { name: 'Отзывы', href: '/admin/testimonials', icon: MessageSquare },
   { name: 'FAQ', href: '/admin/faq', icon: FileText },
   { name: 'Команда', href: '/admin/team', icon: Users },
-  { name: 'Партнеры', href: '/admin/partners', icon: Image },
-  { name: 'Тема', href: '/admin/theme', icon: Settings },
+  { name: 'Партнеры', href: '/admin/partners', icon: Users },
   { name: 'Настройки', href: '/admin/settings', icon: Settings },
 ]
 
@@ -54,7 +57,7 @@ export default function AdminLayout({
   if (status === 'loading') {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-accent"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     )
   }
@@ -68,165 +71,147 @@ export default function AdminLayout({
   }
 
   const SidebarContent = () => (
-    <>
-      <div className="flex items-center justify-between h-16 px-6 bg-gradient-primary">
+    <div className="flex flex-col h-full bg-slate-900 text-slate-300">
+      <div className="flex items-center h-16 px-6 border-b border-slate-800">
         <div className="flex items-center space-x-3">
-          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <span className="text-primary font-bold text-lg">K</span>
+          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+            <span className="text-white font-bold text-lg">K</span>
           </div>
-          <span className="text-white font-bold text-lg">Квартет Admin</span>
+          <span className="text-white font-bold text-lg tracking-tight">Kvartett</span>
         </div>
-        <button
-          onClick={() => setSidebarOpen(false)}
-          className="lg:hidden text-white hover:text-gray-200"
-        >
-          <X className="w-6 h-6" />
-        </button>
       </div>
 
-      <nav className="flex-1 mt-8 px-4 space-y-2 overflow-y-auto">
+      <nav className="flex-1 mt-6 px-3 space-y-1 overflow-y-auto">
+        <p className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Меню</p>
         {navigation.map((item) => {
-          const isActive = pathname === item.href
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`)
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`group flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 relative ${
+              className={`group flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-200 ${
                 isActive
-                  ? 'bg-primary-10 text-gray-900 border border-primary/20'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-primary text-white shadow-md shadow-primary/20'
+                  : 'text-slate-400 hover:bg-slate-800 hover:text-white'
               }`}
               onClick={() => setSidebarOpen(false)}
             >
               <item.icon
                 className={`mr-3 w-5 h-5 transition-colors ${
-                  isActive ? 'text-accent' : 'text-gray-400 group-hover:text-gray-500'
+                  isActive ? 'text-white' : 'text-slate-400 group-hover:text-white'
                 }`}
               />
               {item.name}
-              {isActive && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute left-0 w-1 h-8 bg-gradient-primary rounded-r-lg"
-                />
-              )}
             </Link>
           )
         })}
       </nav>
 
-      <div className="p-4">
-        <div className="bg-gray-50 rounded-xl p-4">
-          <div className="flex items-center space-x-3 mb-3">
-            <img
-               src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=376E6F&color=fff`}
-              alt={session?.user?.name || 'User'}
-              className="w-10 h-10 rounded-full"
-            />
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-gray-900 truncate">
-                {session?.user?.name}
-              </p>
-              <p className="text-xs text-gray-500 truncate">
-                {session?.user?.email}
-              </p>
-            </div>
+      <div className="p-4 border-t border-slate-800">
+        <div className="flex items-center gap-3 mb-4 px-2">
+          <Avatar className="h-9 w-9 border border-slate-700">
+            <AvatarImage src={session?.user?.image || undefined} />
+            <AvatarFallback className="bg-primary text-white">
+              {session?.user?.name?.charAt(0) || 'A'}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white truncate">
+              {session?.user?.name || 'Администратор'}
+            </p>
+            <p className="text-xs text-slate-500 truncate">
+              {session?.user?.email}
+            </p>
           </div>
-          <button
-            onClick={() => signOut()}
-            className="w-full flex items-center px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Выйти
-          </button>
         </div>
+        <Button
+          variant="destructive"
+          className="w-full justify-start text-red-200 bg-red-900/20 hover:bg-red-900/40 hover:text-red-100 border-none"
+          onClick={() => signOut()}
+        >
+          <LogOut className="w-4 h-4 mr-2" />
+          Выйти
+        </Button>
       </div>
-    </>
+    </div>
   )
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50/50">
       {/* Mobile sidebar overlay */}
-      {sidebarOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        >
-          <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 lg:hidden bg-slate-900/50 backdrop-blur-sm"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Desktop Sidebar */}
-      <div className="hidden lg:flex lg:w-64 lg:flex-col lg:fixed lg:inset-y-0">
-        <div className="flex-1 flex flex-col min-h-0 bg-white shadow-lg">
-          <SidebarContent />
-        </div>
+      <div className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 shadow-xl z-30">
+        <SidebarContent />
       </div>
 
       {/* Mobile sidebar */}
       <motion.div
         initial={{ x: '-100%' }}
         animate={{ x: sidebarOpen ? 0 : '-100%' }}
-        className="lg:hidden fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out"
+        transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+        className="lg:hidden fixed inset-y-0 left-0 z-50 w-72 bg-slate-900 shadow-2xl"
       >
-        <div className="flex-1 flex flex-col min-h-0">
-          <SidebarContent />
+        <div className="absolute top-4 right-4 lg:hidden">
+          <Button variant="ghost" size="icon" className="text-slate-400 hover:text-white" onClick={() => setSidebarOpen(false)}>
+            <X className="w-6 h-6" />
+          </Button>
         </div>
+        <SidebarContent />
       </motion.div>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="lg:pl-72 flex flex-col min-h-screen transition-all duration-300">
         {/* Top header */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-6">
-            <div className="flex items-center space-x-4">
-              <button
+        <header className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-100">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center gap-4">
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setSidebarOpen(true)}
-                 className="lg:hidden text-gray-500 hover:text-primary"
+                className="lg:hidden -ml-2 text-gray-500 hover:text-primary"
               >
                 <Menu className="w-6 h-6" />
-              </button>
+              </Button>
               
-              <div className="relative hidden md:block">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <input
+              <div className="relative hidden md:block max-w-md w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input
                   type="text"
-                  placeholder="Поиск..."
-                 className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent text-sm w-64"
+                  placeholder="Поиск по системе..."
+                  className="pl-9 h-9 w-[300px] bg-gray-50 border-gray-200 focus:bg-white transition-colors"
                 />
               </div>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <button className="relative p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg">
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon" className="relative text-gray-500 hover:bg-gray-100 rounded-full">
                 <Bell className="w-5 h-5" />
-                 <span className="absolute top-1 right-1 w-2 h-2 bg-warning rounded-full"></span>
-              </button>
-              
-              <div className="flex items-center space-x-3">
-                <img
-                 src={session?.user?.image || `https://ui-avatars.com/api/?name=${session?.user?.name}&background=376E6F&color=fff`}
-                  alt={session?.user?.name || 'User'}
-                  className="w-8 h-8 rounded-full"
-                />
-                <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-900">
-                    {session?.user?.name}
-                  </p>
-                </div>
-              </div>
+                <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+              </Button>
             </div>
           </div>
         </header>
 
         {/* Page content */}
-        <main className="p-6">
-          {children}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
         </main>
       </div>
     </div>
   )
-} 
+}

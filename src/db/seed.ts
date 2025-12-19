@@ -17,6 +17,7 @@ import {
 } from './schema'
 import { eq } from 'drizzle-orm'
 import { customAlphabet } from 'nanoid'
+import { hash } from 'bcryptjs'
 
 const nanoid = customAlphabet('0123456789abcdefghijklmnopqrstuvwxyz', 16)
 
@@ -33,21 +34,31 @@ async function main() {
     .limit(1)
 
   let admin
-  if (existingAdmin.length > 0) {
-    admin = existingAdmin[0]
-    console.log('✅ Администратор уже существует:', admin)
-  } else {
-    [admin] = await db
-      .insert(users)
-      .values({
-        id: nanoid(),
-        email: 'admin@kvartett.ru',
-        name: 'Администратор',
-        role: 'ADMIN',
-      })
-      .returning()
-    console.log('✅ Администратор создан:', admin)
-  }
+    const hashedPassword = await hash('admin123', 10)
+    
+    if (existingAdmin.length > 0) {
+      admin = existingAdmin[0]
+      // Обновляем пароль существующего админа если его нет
+      if (!admin.password) {
+        await db.update(users)
+          .set({ password: hashedPassword })
+          .where(eq(users.id, admin.id))
+        console.log('✅ Пароль администратора обновлен')
+      }
+      console.log('✅ Администратор уже существует:', admin.email)
+    } else {
+      [admin] = await db
+        .insert(users)
+        .values({
+          id: nanoid(),
+          email: 'admin@kvartett.ru',
+          name: 'Администратор',
+          role: 'ADMIN',
+          password: hashedPassword,
+        })
+        .returning()
+      console.log('✅ Администратор создан:', admin.email)
+    }
 
   console.log('🌱 Создание тестовых услуг...')
 

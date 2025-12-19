@@ -48,6 +48,7 @@ export const users = pgTable('User', {
   email: text('email').notNull().unique(),
   emailVerified: timestamp('emailVerified'),
   image: text('image'),
+  password: text('password'),
   role: roleEnum('role').notNull().default('ADMIN'),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
