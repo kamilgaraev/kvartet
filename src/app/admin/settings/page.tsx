@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 
 interface ContactInfo {
@@ -155,34 +154,25 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Tabs defaultValue="contacts" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 h-12">
-          <TabsTrigger value="contacts" className="text-base">
-            <Phone className="w-4 h-4 mr-2" />
-            Контакты
-          </TabsTrigger>
-          <TabsTrigger value="socials" className="text-base">
-            <Globe className="w-4 h-4 mr-2" />
-            Социальные сети
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="contacts">
-          <Card className="border-2">
-            <CardHeader className="border-b bg-gray-50/50">
-              <div className="flex items-center justify-between">
+      <div className="grid md:grid-cols-2 gap-6">
+        <Card className="border-2">
+          <CardHeader className="border-b bg-gray-50/50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Phone className="w-5 h-5 text-accent" />
                 <CardTitle>Контактная информация</CardTitle>
-                <Button
-                  onClick={() => setEditingContact({})}
-                  size="sm"
-                  className="bg-accent hover:bg-accent/90 text-white"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Добавить
-                </Button>
               </div>
-            </CardHeader>
-            <CardContent className="pt-6">
+              <Button
+                onClick={() => setEditingContact({})}
+                size="sm"
+                className="bg-accent hover:bg-accent/90 text-white"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Добавить
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
               {editingContact ? (
                 <ContactForm
                   item={editingContact}
@@ -234,29 +224,30 @@ export default function SettingsPage() {
                       <p className="text-lg font-medium">Нет контактов</p>
                       <p className="text-sm mt-1">Добавьте первый контакт</p>
                     </div>
-                  )}
-                </div>
               )}
-            </CardContent>
-          </Card>
-        </TabsContent>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
-        <TabsContent value="socials">
-          <Card className="border-2">
-            <CardHeader className="border-b bg-gray-50/50">
-              <div className="flex items-center justify-between">
-                <CardTitle>Социальные сети</CardTitle>
-                <Button
-                  onClick={() => setEditingSocial({})}
-                  size="sm"
-                  className="bg-accent hover:bg-accent/90 text-white"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Добавить
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-6">
+      <Card className="border-2">
+        <CardHeader className="border-b bg-gray-50/50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Globe className="w-5 h-5 text-accent" />
+              <CardTitle>Социальные сети</CardTitle>
+            </div>
+            <Button
+              onClick={() => setEditingSocial({})}
+              size="sm"
+              className="bg-accent hover:bg-accent/90 text-white"
+            >
+              <Plus className="w-4 h-4 mr-2" />
+              Добавить
+            </Button>
+          </div>
+        </CardHeader>
+        <CardContent className="pt-6">
               {editingSocial ? (
                 <SocialForm
                   item={editingSocial}
@@ -303,12 +294,11 @@ export default function SettingsPage() {
                       <p className="text-sm mt-1">Добавьте первую социальную сеть</p>
                     </div>
                   )}
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+      </div>
     </div>
   )
 }
