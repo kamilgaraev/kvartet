@@ -8,10 +8,30 @@ import StarterKit from '@tiptap/starter-kit'
 import LinkExtension from '@tiptap/extension-link'
 import ImageExtension from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
+import Table from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import CodeBlockLowlight from '@tiptap/extension-code-block-lowlight'
+import TextAlign from '@tiptap/extension-text-align'
+import Underline from '@tiptap/extension-underline'
+import Strike from '@tiptap/extension-strike'
+import Subscript from '@tiptap/extension-subscript'
+import Superscript from '@tiptap/extension-superscript'
+import TaskList from '@tiptap/extension-task-list'
+import TaskItem from '@tiptap/extension-task-item'
+import { Color } from '@tiptap/extension-color'
+import TextStyle from '@tiptap/extension-text-style'
+import Highlight from '@tiptap/extension-highlight'
+import Typography from '@tiptap/extension-typography'
+import { createLowlight } from 'lowlight'
 import { 
   Save, Eye, ArrowLeft, Image as ImageIcon,
-  Bold, Italic, Underline, List, Quote, Link as LinkIcon,
-  GripVertical, X, Upload, Trash2
+  Bold, Italic, Underline as UnderlineIcon, List, Quote, Link as LinkIcon,
+  GripVertical, X, Upload, Trash2, AlignLeft, AlignCenter, AlignRight, AlignJustify,
+  Code, Table as TableIcon, Strikethrough, Subscript as SubscriptIcon, Superscript as SuperscriptIcon,
+  CheckSquare, Heading1, Heading2, Heading3, Palette, Highlighter, Undo, Redo, Minus,
+  Plus, Columns, Rows, Trash, Merge
 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -21,7 +41,26 @@ import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-import { toast } from 'sonner' // Assuming sonner or similar is used, or replace with console/alert
+import { toast } from 'sonner'
+import javascript from 'highlight.js/lib/languages/javascript'
+import typescript from 'highlight.js/lib/languages/typescript'
+import css from 'highlight.js/lib/languages/css'
+import html from 'highlight.js/lib/languages/xml'
+import json from 'highlight.js/lib/languages/json'
+import markdown from 'highlight.js/lib/languages/markdown'
+import bash from 'highlight.js/lib/languages/bash'
+import sql from 'highlight.js/lib/languages/sql'
+
+const lowlight = createLowlight()
+
+lowlight.register('javascript', javascript)
+lowlight.register('typescript', typescript)
+lowlight.register('css', css)
+lowlight.register('html', html)
+lowlight.register('json', json)
+lowlight.register('markdown', markdown)
+lowlight.register('bash', bash)
+lowlight.register('sql', sql)
 
 export default function PortfolioEditor() {
   const router = useRouter()
@@ -64,20 +103,89 @@ export default function PortfolioEditor() {
 
   const editor = useEditor({
     extensions: [
-      StarterKit,
-      LinkExtension.configure({ openOnClick: false }),
-      ImageExtension.configure({ HTMLAttributes: { class: 'rounded-lg' } }),
-      Placeholder.configure({ placeholder: 'Полное описание проекта...' })
+      StarterKit.configure({
+        heading: {
+          levels: [1, 2, 3],
+        },
+      }),
+      LinkExtension.configure({
+        openOnClick: false,
+        HTMLAttributes: {
+          class: 'text-primary underline hover:text-primary-dark',
+        },
+      }),
+      ImageExtension.configure({
+        HTMLAttributes: {
+          class: 'rounded-lg max-w-full h-auto',
+        },
+        inline: false,
+      }),
+      Placeholder.configure({
+        placeholder: 'Начните писать полное описание проекта...',
+      }),
+      Table.configure({
+        resizable: true,
+        HTMLAttributes: {
+          class: 'border-collapse border border-gray-300 w-full my-4',
+        },
+      }),
+      TableRow.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300',
+        },
+      }),
+      TableHeader.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300 bg-gray-100 px-4 py-2 font-bold',
+        },
+      }),
+      TableCell.configure({
+        HTMLAttributes: {
+          class: 'border border-gray-300 px-4 py-2',
+        },
+      }),
+      CodeBlockLowlight.configure({
+        lowlight,
+        HTMLAttributes: {
+          class: 'bg-gray-900 text-gray-100 rounded-lg p-4 my-4 font-mono text-sm overflow-x-auto',
+        },
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
+      Underline,
+      Strike,
+      Subscript,
+      Superscript,
+      Color,
+      TextStyle,
+      Highlight.configure({
+        multicolor: true,
+        HTMLAttributes: {
+          class: 'bg-yellow-200',
+        },
+      }),
+      Typography,
+      TaskList.configure({
+        HTMLAttributes: {
+          class: 'list-none pl-0 my-4',
+        },
+      }),
+      TaskItem.configure({
+        nested: true,
+        HTMLAttributes: {
+          class: 'flex items-start gap-2 my-2',
+        },
+      }),
     ],
     content: '',
     editorProps: {
       attributes: {
-        class: 'prose prose-sm max-w-none focus:outline-none min-h-[300px] p-4'
+        class: 'prose prose-sm max-w-none focus:outline-none min-h-[400px] p-6 text-gray-900 [&_p]:mb-4 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mt-8 [&_h1]:mb-4 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:mt-6 [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mt-4 [&_h3]:mb-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:my-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:my-4 [&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:my-4 [&_code]:bg-gray-100 [&_code]:px-1 [&_code]:rounded [&_pre]:bg-gray-900 [&_pre]:text-gray-100 [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_a]:text-primary [&_a]:underline [&_img]:rounded-lg [&_img]:my-4'
       }
     },
     onUpdate: ({ editor }) => {
       const html = editor.getHTML()
-      console.log('Editor updated, new content length:', html.length)
       setFormData(prev => ({ ...prev, description: html }))
     }
   })
@@ -269,23 +377,404 @@ export default function PortfolioEditor() {
     }
   }
 
-  const EditorToolbar = () => (
-    <div className="flex flex-wrap items-center gap-1 p-2 border-b bg-gray-50">
-      <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleBold().run()}>
-        <Bold className="w-4 h-4" />
-      </Button>
-      <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleItalic().run()}>
-        <Italic className="w-4 h-4" />
-      </Button>
-      <div className="w-px h-6 bg-gray-200 mx-2" />
-      <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleBulletList().run()}>
-        <List className="w-4 h-4" />
-      </Button>
-      <Button variant="ghost" size="sm" onClick={() => editor?.chain().focus().toggleBlockquote().run()}>
-        <Quote className="w-4 h-4" />
-      </Button>
-    </div>
-  )
+  const insertImage = () => {
+    const url = window.prompt('Введите URL изображения:')
+    if (url) {
+      editor?.chain().focus().setImage({ src: url }).run()
+    }
+  }
+
+  const insertTable = () => {
+    editor?.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
+  }
+
+  const addColumnBefore = () => {
+    editor?.chain().focus().addColumnBefore().run()
+  }
+
+  const addColumnAfter = () => {
+    editor?.chain().focus().addColumnAfter().run()
+  }
+
+  const deleteColumn = () => {
+    editor?.chain().focus().deleteColumn().run()
+  }
+
+  const addRowBefore = () => {
+    editor?.chain().focus().addRowBefore().run()
+  }
+
+  const addRowAfter = () => {
+    editor?.chain().focus().addRowAfter().run()
+  }
+
+  const deleteRow = () => {
+    editor?.chain().focus().deleteRow().run()
+  }
+
+  const deleteTable = () => {
+    editor?.chain().focus().deleteTable().run()
+  }
+
+  const mergeCells = () => {
+    editor?.chain().focus().mergeCells().run()
+  }
+
+  const splitCell = () => {
+    editor?.chain().focus().splitCell().run()
+  }
+
+  const setLink = () => {
+    const previousUrl = editor?.getAttributes('link').href
+    const url = window.prompt('URL', previousUrl)
+
+    if (url === null) {
+      return
+    }
+
+    if (url === '') {
+      editor?.chain().focus().extendMarkRange('link').unsetLink().run()
+      return
+    }
+
+    editor?.chain().focus().extendMarkRange('link').setLink({ href: url }).run()
+  }
+
+  const setColor = (color: string) => {
+    editor?.chain().focus().setColor(color).run()
+  }
+
+  const EditorToolbar = () => {
+    if (!editor) return null
+
+    return (
+      <div className="border-b bg-gray-50 p-2">
+        <div className="flex flex-wrap items-center gap-1">
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => editor.chain().focus().undo().run()}
+              disabled={!editor.can().undo()}
+              title="Отменить"
+            >
+              <Undo className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => editor.chain().focus().redo().run()}
+              disabled={!editor.can().redo()}
+              title="Повторить"
+            >
+              <Redo className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive('heading', { level: 1 }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+              title="Заголовок 1"
+            >
+              <Heading1 className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('heading', { level: 2 }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+              title="Заголовок 2"
+            >
+              <Heading2 className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('heading', { level: 3 }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+              title="Заголовок 3"
+            >
+              <Heading3 className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive('bold') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleBold().run()}
+              title="Жирный"
+            >
+              <Bold className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('italic') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleItalic().run()}
+              title="Курсив"
+            >
+              <Italic className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('underline') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleUnderline().run()}
+              title="Подчеркнутый"
+            >
+              <UnderlineIcon className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('strike') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleStrike().run()}
+              title="Зачеркнутый"
+            >
+              <Strikethrough className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive('subscript') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleSubscript().run()}
+              title="Подстрочный"
+            >
+              <SubscriptIcon className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('superscript') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleSuperscript().run()}
+              title="Надстрочный"
+            >
+              <SuperscriptIcon className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('highlight') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleHighlight().run()}
+              title="Выделение"
+            >
+              <Highlighter className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive({ textAlign: 'left' }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().setTextAlign('left').run()}
+              title="По левому краю"
+            >
+              <AlignLeft className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive({ textAlign: 'center' }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().setTextAlign('center').run()}
+              title="По центру"
+            >
+              <AlignCenter className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive({ textAlign: 'right' }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().setTextAlign('right').run()}
+              title="По правому краю"
+            >
+              <AlignRight className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive({ textAlign: 'justify' }) ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().setTextAlign('justify').run()}
+              title="По ширине"
+            >
+              <AlignJustify className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive('bulletList') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleBulletList().run()}
+              title="Маркированный список"
+            >
+              <List className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('orderedList') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleOrderedList().run()}
+              title="Нумерованный список"
+            >
+              <List className="w-4 h-4 rotate-90" />
+            </Button>
+            <Button
+              variant={editor.isActive('taskList') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleTaskList().run()}
+              title="Список задач"
+            >
+              <CheckSquare className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('blockquote') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleBlockquote().run()}
+              title="Цитата"
+            >
+              <Quote className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant={editor.isActive('code') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleCode().run()}
+              title="Инлайн код"
+            >
+              <Code className="w-4 h-4" />
+            </Button>
+            <Button
+              variant={editor.isActive('codeBlock') ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+              title="Блок кода"
+            >
+              <Code className="w-4 h-4" />
+            </Button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r pr-2 mr-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={setLink}
+              title="Вставить ссылку"
+            >
+              <LinkIcon className="w-4 h-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={insertImage}
+              title="Вставить изображение"
+            >
+              <ImageIcon className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {editor.isActive('table') && (
+            <div className="flex items-center gap-1 border-r pr-2 mr-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={addColumnBefore}
+                title="Добавить столбец слева"
+              >
+                <Columns className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={addColumnAfter}
+                title="Добавить столбец справа"
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={deleteColumn}
+                title="Удалить столбец"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+              <div className="w-px h-6 bg-gray-200 mx-1" />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={addRowBefore}
+                title="Добавить строку сверху"
+              >
+                <Rows className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={addRowAfter}
+                title="Добавить строку снизу"
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={deleteRow}
+                title="Удалить строку"
+              >
+                <X className="w-4 h-4" />
+              </Button>
+              <div className="w-px h-6 bg-gray-200 mx-1" />
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={mergeCells}
+                title="Объединить ячейки"
+              >
+                <Merge className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={splitCell}
+                title="Разделить ячейку"
+              >
+                <Minus className="w-4 h-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={deleteTable}
+                title="Удалить таблицу"
+              >
+                <Trash className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
+          {!editor.isActive('table') && (
+            <div className="flex items-center gap-1 border-r pr-2 mr-2">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={insertTable}
+                title="Вставить таблицу"
+              >
+                <TableIcon className="w-4 h-4" />
+              </Button>
+            </div>
+          )}
+
+          <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1 border rounded px-2 py-1">
+              <Palette className="w-4 h-4 text-gray-500" />
+              <input
+                type="color"
+                onChange={(e) => setColor(e.target.value)}
+                className="w-6 h-6 border-0 cursor-pointer bg-transparent"
+                title="Цвет текста"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (loading) return <div className="p-8 text-center">Загрузка...</div>
 
@@ -388,7 +877,71 @@ export default function PortfolioEditor() {
               {editor && (
                 <>
                   <EditorToolbar />
-                  <EditorContent editor={editor} />
+                  <div className="relative">
+                    <EditorContent editor={editor} />
+                    <style jsx global>{`
+                      .ProseMirror {
+                        outline: none;
+                      }
+                      .ProseMirror table {
+                        border-collapse: collapse;
+                        margin: 1rem 0;
+                        table-layout: fixed;
+                        width: 100%;
+                      }
+                      .ProseMirror table td,
+                      .ProseMirror table th {
+                        min-width: 1em;
+                        border: 1px solid #d1d5db;
+                        padding: 0.5rem;
+                        vertical-align: top;
+                        box-sizing: border-box;
+                        position: relative;
+                      }
+                      .ProseMirror table th {
+                        font-weight: bold;
+                        text-align: left;
+                        background-color: #f3f4f6;
+                      }
+                      .ProseMirror table .selectedCell:after {
+                        z-index: 2;
+                        position: absolute;
+                        content: "";
+                        left: 0; right: 0; top: 0; bottom: 0;
+                        background: rgba(200, 200, 255, 0.4);
+                        pointer-events: none;
+                      }
+                      .ProseMirror table .column-resize-handle {
+                        position: absolute;
+                        right: -2px;
+                        top: 0;
+                        bottom: -2px;
+                        width: 4px;
+                        background-color: #adf;
+                        pointer-events: none;
+                      }
+                      .ProseMirror table p {
+                        margin: 0;
+                      }
+                      .ProseMirror ul[data-type="taskList"] {
+                        list-style: none;
+                        padding: 0;
+                      }
+                      .ProseMirror ul[data-type="taskList"] li {
+                        display: flex;
+                        align-items: flex-start;
+                        gap: 0.5rem;
+                      }
+                      .ProseMirror ul[data-type="taskList"] li > label {
+                        flex: 0 0 auto;
+                        margin-right: 0.5rem;
+                        user-select: none;
+                      }
+                      .ProseMirror ul[data-type="taskList"] li > div {
+                        flex: 1 1 auto;
+                      }
+                    `}</style>
+                  </div>
                 </>
               )}
             </CardContent>
