@@ -31,26 +31,7 @@ interface PortfolioItem {
   reviewRole?: string
 }
 
-const isHtmlContentEmpty = (html: string | undefined): boolean => {
-  if (!html || html.trim() === '') return true
-  
-  const emptyPatterns = ['<p></p>', '<p><br></p>', '<p> </p>', '<p><br/></p>']
-  if (emptyPatterns.includes(html.trim())) return true
-  
-  const textContent = html.replace(/<[^>]*>/g, '').trim()
-  return textContent === ''
-}
-
 export default function PortfolioClient({ item }: { item: PortfolioItem }) {
-  console.log('PortfolioClient received:', {
-    title: item.title,
-    descriptionLength: item.description?.length || 0,
-    descriptionPreview: item.description?.substring(0, 100),
-    hasDescription: !!item.description,
-    isEmpty: isHtmlContentEmpty(item.description),
-    trimmedLength: item.description?.trim().length || 0
-  })
-  
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -211,7 +192,7 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
         </section>
 
         {/* Detailed Description */}
-        {item.description && item.description.length > 0 ? (
+        {item.description && item.description.length > 0 && (
           <section className="section-padding-y bg-white">
             <div className="container-adaptive max-w-4xl mx-auto">
               <div className="text-center mb-12">
@@ -220,15 +201,11 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
               </div>
               
               <div
-                className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-ul:text-gray-700 prose-ol:text-gray-700"
+                className="text-lg leading-relaxed text-gray-700 min-h-[100px] [&>p]:mb-6 [&>p:last-child]:mb-0 [&>p]:text-gray-700 [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-4 [&>h1]:mt-8 [&>h1:first-child]:mt-0 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-4 [&>h2]:mt-6 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:text-gray-900 [&>h3]:mb-3 [&>h3]:mt-4 [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-6 [&>ul]:text-gray-700 [&>ul>li]:mb-2 [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-6 [&>ol]:text-gray-700 [&>ol>li]:mb-2 [&>strong]:font-bold [&>strong]:text-gray-900 [&>a]:text-accent [&>a]:underline [&>a:hover]:text-primary [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600 [&>blockquote]:my-6 [&>img]:rounded-lg [&>img]:my-6 [&>img]:w-full [&>img]:h-auto"
                 dangerouslySetInnerHTML={{ __html: item.description }}
               />
             </div>
           </section>
-        ) : (
-          <div className="py-8 text-center text-gray-500">
-            [DEBUG] Description отсутствует или пустой. Length: {item.description?.length || 0}
-          </div>
         )}
 
         {/* Gallery Grid - Enhanced */}
