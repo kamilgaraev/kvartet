@@ -42,25 +42,21 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { toast } from 'sonner'
-import javascript from 'highlight.js/lib/languages/javascript'
-import typescript from 'highlight.js/lib/languages/typescript'
-import css from 'highlight.js/lib/languages/css'
-import html from 'highlight.js/lib/languages/xml'
-import json from 'highlight.js/lib/languages/json'
-import markdown from 'highlight.js/lib/languages/markdown'
-import bash from 'highlight.js/lib/languages/bash'
-import sql from 'highlight.js/lib/languages/sql'
+import { useMemo } from 'react'
 
-const lowlight = createLowlight()
+let lowlightInstance: ReturnType<typeof createLowlight> | null = null
 
-lowlight.register('javascript', javascript)
-lowlight.register('typescript', typescript)
-lowlight.register('css', css)
-lowlight.register('html', html)
-lowlight.register('json', json)
-lowlight.register('markdown', markdown)
-lowlight.register('bash', bash)
-lowlight.register('sql', sql)
+function getLowlightInstance() {
+  if (!lowlightInstance) {
+    try {
+      lowlightInstance = createLowlight()
+    } catch (error) {
+      console.error('Error creating lowlight:', error)
+      lowlightInstance = createLowlight()
+    }
+  }
+  return lowlightInstance
+}
 
 export default function PortfolioEditor() {
   const router = useRouter()
@@ -101,83 +97,137 @@ export default function PortfolioEditor() {
     metaKeywords: ''
   })
 
+  const lowlightInstance = useMemo(() => getLowlightInstance(), [])
+
+  const extensions = useMemo(() => {
+    const baseExtensions: any[] = []
+    
+    if (StarterKit) {
+      baseExtensions.push(
+        StarterKit.configure({
+          heading: {
+            levels: [1, 2, 3],
+          },
+        })
+      )
+    }
+    
+    if (LinkExtension) {
+      baseExtensions.push(
+        LinkExtension.configure({
+          openOnClick: false,
+          HTMLAttributes: {
+            class: 'text-primary underline hover:text-primary-dark',
+          },
+        })
+      )
+    }
+    
+    if (ImageExtension) {
+      baseExtensions.push(
+        ImageExtension.configure({
+          HTMLAttributes: {
+            class: 'rounded-lg max-w-full h-auto',
+          },
+          inline: false,
+        })
+      )
+    }
+    
+    if (Placeholder) {
+      baseExtensions.push(
+        Placeholder.configure({
+          placeholder: 'Начните писать полное описание проекта...',
+        })
+      )
+    }
+    
+    if (Table && TableRow && TableCell && TableHeader) {
+      baseExtensions.push(
+        Table.configure({
+          resizable: true,
+          HTMLAttributes: {
+            class: 'border-collapse border border-gray-300 w-full my-4',
+          },
+        }),
+        TableRow.configure({
+          HTMLAttributes: {
+            class: 'border border-gray-300',
+          },
+        }),
+        TableHeader.configure({
+          HTMLAttributes: {
+            class: 'border border-gray-300 bg-gray-100 px-4 py-2 font-bold',
+          },
+        }),
+        TableCell.configure({
+          HTMLAttributes: {
+            class: 'border border-gray-300 px-4 py-2',
+          },
+        })
+      )
+    }
+
+    if (CodeBlockLowlight && lowlightInstance) {
+      baseExtensions.push(
+        CodeBlockLowlight.configure({
+          lowlight: lowlightInstance,
+          HTMLAttributes: {
+            class: 'bg-gray-900 text-gray-100 rounded-lg p-4 my-4 font-mono text-sm overflow-x-auto',
+          },
+        })
+      )
+    }
+
+    if (TextAlign) {
+      baseExtensions.push(
+        TextAlign.configure({
+          types: ['heading', 'paragraph'],
+        })
+      )
+    }
+    
+    if (Underline) baseExtensions.push(Underline)
+    if (Strike) baseExtensions.push(Strike)
+    if (Subscript) baseExtensions.push(Subscript)
+    if (Superscript) baseExtensions.push(Superscript)
+    if (Color) baseExtensions.push(Color)
+    if (TextStyle) baseExtensions.push(TextStyle)
+    
+    if (Highlight) {
+      baseExtensions.push(
+        Highlight.configure({
+          multicolor: true,
+          HTMLAttributes: {
+            class: 'bg-yellow-200',
+          },
+        })
+      )
+    }
+    
+    if (Typography) baseExtensions.push(Typography)
+    
+    if (TaskList && TaskItem) {
+      baseExtensions.push(
+        TaskList.configure({
+          HTMLAttributes: {
+            class: 'list-none pl-0 my-4',
+          },
+        }),
+        TaskItem.configure({
+          nested: true,
+          HTMLAttributes: {
+            class: 'flex items-start gap-2 my-2',
+          },
+        })
+      )
+    }
+
+    return baseExtensions
+  }, [lowlightInstance])
+
   const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        heading: {
-          levels: [1, 2, 3],
-        },
-      }),
-      LinkExtension.configure({
-        openOnClick: false,
-        HTMLAttributes: {
-          class: 'text-primary underline hover:text-primary-dark',
-        },
-      }),
-      ImageExtension.configure({
-        HTMLAttributes: {
-          class: 'rounded-lg max-w-full h-auto',
-        },
-        inline: false,
-      }),
-      Placeholder.configure({
-        placeholder: 'Начните писать полное описание проекта...',
-      }),
-      Table.configure({
-        resizable: true,
-        HTMLAttributes: {
-          class: 'border-collapse border border-gray-300 w-full my-4',
-        },
-      }),
-      TableRow.configure({
-        HTMLAttributes: {
-          class: 'border border-gray-300',
-        },
-      }),
-      TableHeader.configure({
-        HTMLAttributes: {
-          class: 'border border-gray-300 bg-gray-100 px-4 py-2 font-bold',
-        },
-      }),
-      TableCell.configure({
-        HTMLAttributes: {
-          class: 'border border-gray-300 px-4 py-2',
-        },
-      }),
-      CodeBlockLowlight.configure({
-        lowlight,
-        HTMLAttributes: {
-          class: 'bg-gray-900 text-gray-100 rounded-lg p-4 my-4 font-mono text-sm overflow-x-auto',
-        },
-      }),
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      Underline,
-      Strike,
-      Subscript,
-      Superscript,
-      Color,
-      TextStyle,
-      Highlight.configure({
-        multicolor: true,
-        HTMLAttributes: {
-          class: 'bg-yellow-200',
-        },
-      }),
-      Typography,
-      TaskList.configure({
-        HTMLAttributes: {
-          class: 'list-none pl-0 my-4',
-        },
-      }),
-      TaskItem.configure({
-        nested: true,
-        HTMLAttributes: {
-          class: 'flex items-start gap-2 my-2',
-        },
-      }),
-    ],
+    extensions,
     content: '',
     editorProps: {
       attributes: {
