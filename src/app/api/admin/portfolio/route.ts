@@ -104,6 +104,9 @@ export async function POST(request: NextRequest) {
         active: data.active ?? true,
         clientName: data.clientName,
         clientWebsite: data.clientWebsite,
+        metaTitle: data.metaTitle,
+        metaDescription: data.metaDescription,
+        metaKeywords: data.metaKeywords,
       })
       .returning()
 

@@ -31,7 +31,26 @@ interface PortfolioItem {
   reviewRole?: string
 }
 
+const isHtmlContentEmpty = (html: string | undefined): boolean => {
+  if (!html || html.trim() === '') return true
+  
+  const emptyPatterns = ['<p></p>', '<p><br></p>', '<p> </p>', '<p><br/></p>']
+  if (emptyPatterns.includes(html.trim())) return true
+  
+  const textContent = html.replace(/<[^>]*>/g, '').trim()
+  return textContent === ''
+}
+
 export default function PortfolioClient({ item }: { item: PortfolioItem }) {
+  console.log('PortfolioClient received:', {
+    title: item.title,
+    descriptionLength: item.description?.length || 0,
+    descriptionPreview: item.description?.substring(0, 100),
+    hasDescription: !!item.description,
+    isEmpty: isHtmlContentEmpty(item.description),
+    trimmedLength: item.description?.trim().length || 0
+  })
+  
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -192,7 +211,7 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
         </section>
 
         {/* Detailed Description */}
-        {item.description && item.description.trim() !== '' && item.description !== '<p></p>' && (
+        {!isHtmlContentEmpty(item.description) && (
           <section className="section-padding-y bg-white">
             <div className="container-adaptive max-w-4xl mx-auto">
               <motion.div

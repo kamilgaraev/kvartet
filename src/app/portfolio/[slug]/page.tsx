@@ -16,6 +16,13 @@ async function getPortfolioItem(slug: string) {
     .where(eq(portfolioItems.slug, slug))
     .limit(1)
   
+  console.log('Server fetched portfolio item:', {
+    slug,
+    title: item?.title,
+    descriptionLength: item?.description?.length || 0,
+    descriptionPreview: item?.description?.substring(0, 100)
+  })
+  
   return item
 }
 

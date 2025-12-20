@@ -81,6 +81,7 @@ export async function PUT(
         clientWebsite: data.clientWebsite,
         metaTitle: data.metaTitle,
         metaDescription: data.metaDescription,
+        metaKeywords: data.metaKeywords,
         updatedAt: new Date(),
       })
       .where(eq(portfolioItems.id, id))
