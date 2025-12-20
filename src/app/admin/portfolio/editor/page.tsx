@@ -46,9 +46,8 @@ export default function PortfolioEditor() {
     year: new Date().getFullYear().toString(),
     clientName: '',
     clientWebsite: '',
-    features: '', // Comma separated for UI
+    features: '',
     
-    // New fields
     challenge: '',
     solution: '',
     reviewText: '',
@@ -63,7 +62,24 @@ export default function PortfolioEditor() {
     metaKeywords: ''
   })
 
-  // Fetch data if editing
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      LinkExtension.configure({ openOnClick: false }),
+      ImageExtension.configure({ HTMLAttributes: { class: 'rounded-lg' } }),
+      Placeholder.configure({ placeholder: 'Полное описание проекта...' })
+    ],
+    content: '',
+    editorProps: {
+      attributes: {
+        class: 'prose prose-sm max-w-none focus:outline-none min-h-[300px] p-4'
+      }
+    },
+    onUpdate: ({ editor }) => {
+      setFormData(prev => ({ ...prev, description: editor.getHTML() }))
+    }
+  })
+
   useEffect(() => {
     if (projectId && editor) {
       setLoading(true)
@@ -76,7 +92,6 @@ export default function PortfolioEditor() {
           console.log('Loaded project data:', data)
           setFormData({
             ...data,
-            // Ensure null strings are converted to empty strings to prevent runtime errors
             title: data.title || '',
             slug: data.slug || '',
             shortDesc: data.shortDesc || '',
@@ -99,13 +114,12 @@ export default function PortfolioEditor() {
             result: data.result || '',
             duration: data.duration || '',
             
-            // Meta fields
             metaTitle: data.metaTitle || '',
             metaDescription: data.metaDescription || '',
             metaKeywords: data.metaKeywords || ''
           })
           
-          if (data.description) {
+          if (data.description && editor) {
             console.log('Setting editor content:', data.description.substring(0, 100))
             editor.commands.setContent(data.description)
           }
@@ -117,32 +131,6 @@ export default function PortfolioEditor() {
         .finally(() => setLoading(false))
     }
   }, [projectId, editor])
-
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-      LinkExtension.configure({ openOnClick: false }),
-      ImageExtension.configure({ HTMLAttributes: { class: 'rounded-lg' } }),
-      Placeholder.configure({ placeholder: 'Полное описание проекта...' })
-    ],
-    content: '',
-    editorProps: {
-      attributes: {
-        class: 'prose prose-sm max-w-none focus:outline-none min-h-[300px] p-4'
-      }
-    },
-    onUpdate: ({ editor }) => {
-      setFormData(prev => ({ ...prev, description: editor.getHTML() }))
-    }
-  }, [])
-
-  // Sync editor content when loaded
-  useEffect(() => {
-    if (editor && formData.description && editor.isEmpty) {
-       // Only set if editor is empty to avoid loop, though initial load handles it differently
-       // actually the useEffect [projectId] handles the initial setContent
-    }
-  }, [editor, formData.description])
 
   const generateSlug = (title: string) => {
     return title.toLowerCase()

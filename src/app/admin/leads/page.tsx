@@ -534,13 +534,13 @@ function LeadViewModal({ lead, onClose }: { lead: Lead; onClose: () => void }) {
         <div className="space-y-4">
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="text-sm font-semibold text-gray-600">Имя клиента</label>
-              <p className="text-gray-900 font-medium">{lead.name}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Имя клиента</label>
+              <p className="text-gray-900 font-medium text-base">{lead.name}</p>
             </div>
             {lead.email && (
               <div>
-                <label className="text-sm font-semibold text-gray-600">Email</label>
-                <p className="text-gray-900">{lead.email}</p>
+                <label className="text-sm font-semibold text-gray-900 mb-1 block">Email</label>
+                <p className="text-gray-900 text-base">{lead.email}</p>
               </div>
             )}
           </div>
@@ -548,57 +548,57 @@ function LeadViewModal({ lead, onClose }: { lead: Lead; onClose: () => void }) {
           <div className="grid md:grid-cols-2 gap-4">
             {lead.phone && (
               <div>
-                <label className="text-sm font-semibold text-gray-600">Телефон</label>
-                <p className="text-gray-900">{lead.phone}</p>
+                <label className="text-sm font-semibold text-gray-900 mb-1 block">Телефон</label>
+                <p className="text-gray-900 text-base">{lead.phone}</p>
               </div>
             )}
             {lead.serviceType && (
               <div>
-                <label className="text-sm font-semibold text-gray-600">Услуга</label>
-                <p className="text-gray-900">{lead.serviceType}</p>
+                <label className="text-sm font-semibold text-gray-900 mb-1 block">Услуга</label>
+                <p className="text-gray-900 text-base">{lead.serviceType}</p>
               </div>
             )}
           </div>
 
           <div className="grid md:grid-cols-3 gap-4">
             <div>
-              <label className="text-sm font-semibold text-gray-600">Статус</label>
-              <p className="text-gray-900">{lead.status}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Статус</label>
+              <p className="text-gray-900 text-base">{lead.status}</p>
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-600">Приоритет</label>
-              <p className="text-gray-900">{lead.priority}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Приоритет</label>
+              <p className="text-gray-900 text-base">{lead.priority}</p>
             </div>
             <div>
-              <label className="text-sm font-semibold text-gray-600">Тип</label>
-              <p className="text-gray-900">{lead.type}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Тип</label>
+              <p className="text-gray-900 text-base">{lead.type}</p>
             </div>
           </div>
 
           {lead.budget && (
             <div>
-              <label className="text-sm font-semibold text-gray-600">Бюджет</label>
-              <p className="text-gray-900">{lead.budget}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Бюджет</label>
+              <p className="text-gray-900 text-base">{lead.budget}</p>
             </div>
           )}
 
           {lead.message && (
             <div>
-              <label className="text-sm font-semibold text-gray-600">Сообщение</label>
-              <p className="text-gray-900 whitespace-pre-wrap">{lead.message}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Сообщение</label>
+              <p className="text-gray-900 whitespace-pre-wrap text-base">{lead.message}</p>
             </div>
           )}
 
           {lead.source && (
             <div>
-              <label className="text-sm font-semibold text-gray-600">Источник</label>
-              <p className="text-gray-900">{lead.source}</p>
+              <label className="text-sm font-semibold text-gray-900 mb-1 block">Источник</label>
+              <p className="text-gray-900 text-base">{lead.source}</p>
             </div>
           )}
 
           <div>
-            <label className="text-sm font-semibold text-gray-600">Дата создания</label>
-            <p className="text-gray-900">
+            <label className="text-sm font-semibold text-gray-900 mb-1 block">Дата создания</label>
+            <p className="text-gray-900 text-base">
               {new Date(lead.createdAt).toLocaleString('ru-RU')}
             </p>
           </div>
@@ -657,23 +657,23 @@ function LeadEditModal({
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Клиент
             </label>
-            <p className="text-gray-900 font-medium">{lead.name}</p>
-            {lead.email && <p className="text-sm text-gray-600">{lead.email}</p>}
-            {lead.phone && <p className="text-sm text-gray-600">{lead.phone}</p>}
+            <p className="text-gray-900 font-medium text-base">{lead.name}</p>
+            {lead.email && <p className="text-sm text-gray-800">{lead.email}</p>}
+            {lead.phone && <p className="text-sm text-gray-800">{lead.phone}</p>}
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
                 Статус
               </label>
               <select
                 value={formData.status}
                 onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 font-medium"
               >
                 <option value="NEW">Новая</option>
                 <option value="CONTACTED">Связались</option>
@@ -685,13 +685,13 @@ function LeadEditModal({
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
                 Приоритет
               </label>
               <select
                 value={formData.priority}
                 onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900 font-medium"
               >
                 <option value="LOW">Низкий</option>
                 <option value="MEDIUM">Средний</option>
@@ -702,14 +702,14 @@ function LeadEditModal({
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-2">
+            <label className="block text-sm font-semibold text-gray-900 mb-2">
               Заметки
             </label>
             <textarea
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows={4}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-gray-900"
               placeholder="Добавьте заметки к заявке..."
             />
           </div>

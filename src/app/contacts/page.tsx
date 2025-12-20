@@ -8,20 +8,15 @@ import {
   Phone, 
   Mail, 
   Clock,
-  Car,
-  Bus,
-  Navigation,
   Send,
   CheckCircle,
   MessageCircle,
-  Building,
-  Users,
-  Calendar,
   Star
 } from 'lucide-react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import FloatingAction from '../components/FloatingAction'
+import ContactMap from '../components/ContactMap'
 
 const contactInfo = [
   {
@@ -54,52 +49,12 @@ const contactInfo = [
   }
 ]
 
-const directions = [
-  {
-    icon: Car,
-    title: 'На автомобиле',
-    description: 'Парковка рядом с офисом, въезд с ул. Ленская',
-    time: '15 мин от центра'
-  },
-  {
-    icon: Bus,
-    title: 'Общественным транспортом',
-    description: 'Автобусы №15, 32, 47 до остановки "Ленская"',
-    time: '20 мин от центра'
-  },
-  {
-    icon: Navigation,
-    title: 'Навигатор',
-    description: 'Координаты: 54.7388° N, 55.9721° E',
-    time: 'Точные координаты'
-  }
-]
-
-const officeFeatures = [
-  {
-    icon: Building,
-    title: 'Современный офис',
-    description: '300 м² офисного пространства'
-  },
-  {
-    icon: Users,
-    title: 'Переговорная',
-    description: 'Комфортная зона для встреч'
-  },
-  {
-    icon: Calendar,
-    title: 'Гибкий график',
-    description: 'Возможны встречи в выходные'
-  }
-]
-
 export default function ContactsPage() {
   const [faqItems, setFaqItems] = useState<any[]>([])
   const [apiContacts, setApiContacts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.1 })
   const [formRef, formInView] = useInView({ triggerOnce: true, threshold: 0.1 })
-  const [mapRef, mapInView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   useEffect(() => {
     Promise.all([
@@ -260,25 +215,22 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      {/* Contact Form and Map */}
+      {/* Contact Form */}
       <section ref={formRef} className="section-padding-y bg-gradient-bg">
         <div className="container-adaptive">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+          <div className="max-w-3xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-                <div className="flex items-center space-x-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg">
-                    <Send className="w-6 h-6 text-white" />
+              <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
+                <div className="text-center mb-8">
+                  <div className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg mx-auto mb-4">
+                    <Send className="w-8 h-8 text-white" />
                   </div>
-                  <div>
-                    <h3 className="text-title-lg weight-bold text-primary-dark">Оставить заявку</h3>
-                    <p className="text-body text-primary-dark">Мы свяжемся с вами в течение часа</p>
-                  </div>
+                  <h3 className="text-display-3 weight-bold text-primary-dark mb-3">Оставить заявку</h3>
+                  <p className="text-body-lg text-primary-dark">Мы свяжемся с вами в течение часа</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -293,7 +245,7 @@ export default function ContactsPage() {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                         placeholder="Иван Петров"
                       />
                     </div>
@@ -307,7 +259,7 @@ export default function ContactsPage() {
                         required
                         value={formData.phone}
                         onChange={handleInputChange}
-                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                         placeholder="+7 (999) 123-45-67"
                       />
                     </div>
@@ -322,7 +274,7 @@ export default function ContactsPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                       placeholder="ivan@example.com"
                     />
                   </div>
@@ -335,7 +287,7 @@ export default function ContactsPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary-20 transition-all duration-300"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                     >
                       <option value="">Выберите услугу</option>
                       <option value="outdoor">Наружная реклама</option>
@@ -355,7 +307,7 @@ export default function ContactsPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
                       placeholder="Опишите ваш проект..."
                     />
                   </div>
@@ -390,60 +342,6 @@ export default function ContactsPage() {
                     Нажимая кнопку, вы соглашаетесь с <a href="#" className="text-primary hover:underline">политикой конфиденциальности</a>
                   </p>
                 </form>
-              </div>
-            </motion.div>
-
-            {/* Map and Directions */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
-            >
-              {/* Map */}
-              <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                  <div className="aspect-video p-4 flex items-center justify-center" style={{ background: 'linear-gradient(to bottom right, var(--color-primary-20), var(--color-primary-dark-20))' }}>
-                  <div className="text-center">
-                    <MapPin className="w-12 h-12 text-primary mx-auto mb-3" />
-                    <div className="text-primary-dark weight-medium">Интерактивная карта</div>
-                    <div className="text-body-sm text-primary-dark">г. Уфа, ул. Ленская, 128</div>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h4 className="text-lg weight-bold text-primary-dark mb-4">Как добраться</h4>
-                  <div className="space-y-4">
-                    {directions.map((direction, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-primary-10)' }}>
-                          <direction.icon className="w-4 h-4 text-primary" />
-                        </div>
-                        <div>
-                          <div className="weight-medium text-primary-dark">{direction.title}</div>
-                          <div className="text-sm text-muted mb-1">{direction.description}</div>
-                          <div className="text-caption text-primary weight-medium">{direction.time}</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Office Features */}
-              <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-                <h4 className="text-lg weight-bold text-primary-dark mb-4">Наш офис</h4>
-                <div className="space-y-4">
-                  {officeFeatures.map((feature, index) => (
-                    <div key={index} className="flex items-start space-x-3">
-                      <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'var(--color-primary-dark-10)' }}>
-                        <feature.icon className="w-4 h-4 text-primary-dark" />
-                      </div>
-                      <div>
-                        <div className="weight-medium text-primary-dark">{feature.title}</div>
-                        <div className="text-sm text-muted">{feature.description}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </motion.div>
           </div>
@@ -582,6 +480,8 @@ export default function ContactsPage() {
           </div>
         </div>
       </section>
+
+      <ContactMap />
 
       <Footer />
       <FloatingAction />
