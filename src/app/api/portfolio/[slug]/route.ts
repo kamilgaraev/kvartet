@@ -21,7 +21,20 @@ export async function GET(
       )
     }
 
-    return NextResponse.json(item[0])
+    const result = item[0]
+    console.log('API returning portfolio item:', {
+      id: result.id,
+      title: result.title,
+      descriptionLength: result.description?.length || 0,
+      hasChallenge: !!result.challenge,
+      hasSolution: !!result.solution
+    })
+
+    return NextResponse.json(result, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      }
+    })
   } catch (error) {
     console.error('Error fetching portfolio item:', error)
     return NextResponse.json(

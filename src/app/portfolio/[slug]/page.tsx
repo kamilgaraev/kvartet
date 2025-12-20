@@ -5,8 +5,8 @@ import { portfolioItems } from '@/db/schema'
 import { eq } from 'drizzle-orm'
 import PortfolioClient from './PortfolioClient'
 
-// Force dynamic rendering if we want fresh data, or use revalidate
-export const revalidate = 60 // Revalidate every minute
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
 export const dynamicParams = true
 
 async function getPortfolioItem(slug: string) {
