@@ -211,29 +211,24 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
         </section>
 
         {/* Detailed Description */}
-        {!isHtmlContentEmpty(item.description) && (
+        {item.description && item.description.length > 0 ? (
           <section className="section-padding-y bg-white">
             <div className="container-adaptive max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-center mb-12"
-              >
+              <div className="text-center mb-12">
                 <h2 className="text-4xl font-bold text-gray-900 mb-4">О проекте</h2>
                 <div className="w-24 h-1 bg-gradient-to-r from-accent to-primary mx-auto rounded-full"></div>
-              </motion.div>
+              </div>
               
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
+              <div
                 className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-ul:text-gray-700 prose-ol:text-gray-700"
                 dangerouslySetInnerHTML={{ __html: item.description }}
               />
             </div>
           </section>
+        ) : (
+          <div className="py-8 text-center text-gray-500">
+            [DEBUG] Description отсутствует или пустой. Length: {item.description?.length || 0}
+          </div>
         )}
 
         {/* Gallery Grid - Enhanced */}
