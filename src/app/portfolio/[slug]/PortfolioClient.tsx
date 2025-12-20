@@ -186,22 +186,13 @@ export default function PortfolioClient({ item }: { item: PortfolioItem }) {
                     <p className="text-gray-600 leading-relaxed text-xl">{item.solution}</p>
                   </motion.div>
                 )}
-                
-                {/* Main Description (HTML) */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-600 prose-a:text-primary"
-                  dangerouslySetInnerHTML={{ __html: item.description }}
-                />
               </div>
             </div>
           </div>
         </section>
 
         {/* Detailed Description */}
-        {item.description && (
+        {item.description && item.description.trim() !== '' && item.description !== '<p></p>' && (
           <section className="section-padding-y bg-white">
             <div className="container-adaptive max-w-4xl mx-auto">
               <motion.div

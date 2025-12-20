@@ -76,7 +76,9 @@ export default function PortfolioEditor() {
       }
     },
     onUpdate: ({ editor }) => {
-      setFormData(prev => ({ ...prev, description: editor.getHTML() }))
+      const html = editor.getHTML()
+      console.log('Editor updated, new content length:', html.length)
+      setFormData(prev => ({ ...prev, description: html }))
     }
   })
 
@@ -188,8 +190,21 @@ export default function PortfolioEditor() {
     setSaving(true)
     
     try {
-      const editorContent = editor?.getHTML() || ''
-      console.log('Saving with description:', editorContent.substring(0, 100))
+      if (!editor) {
+        alert('Редактор не инициализирован')
+        return
+      }
+
+      const editorContent = editor.getHTML()
+      console.log('Editor content:', {
+        length: editorContent.length,
+        isEmpty: editor.isEmpty,
+        preview: editorContent.substring(0, 200)
+      })
+      
+      if (!editorContent || editorContent === '<p></p>' || editorContent.trim() === '') {
+        console.warn('Description is empty!')
+      }
       
       const payload = {
         ...formData,
@@ -198,7 +213,12 @@ export default function PortfolioEditor() {
         description: editorContent
       }
 
-      console.log('Full payload:', payload)
+      console.log('Saving payload:', {
+        title: payload.title,
+        descriptionLength: payload.description?.length || 0,
+        challenge: payload.challenge?.length || 0,
+        solution: payload.solution?.length || 0
+      })
 
       const url = projectId 
         ? `/api/admin/portfolio/${projectId}` 
@@ -219,7 +239,7 @@ export default function PortfolioEditor() {
       }
 
       const savedData = await res.json()
-      console.log('Saved successfully:', savedData)
+      console.log('Saved successfully with description length:', savedData.description?.length)
       setLastSaved(new Date())
       
       if (!projectId) {

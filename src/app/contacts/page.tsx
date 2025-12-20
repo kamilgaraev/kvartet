@@ -142,7 +142,7 @@ export default function ContactsPage() {
       <Header />
       
       {/* Hero Section */}
-      <section ref={heroRef} className="py-32 bg-white relative overflow-hidden">
+      <section ref={heroRef} className="py-24 md:py-32 bg-white relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-bg opacity-60"></div>
 
         <div className="relative hero-container mx-auto">
@@ -187,53 +187,33 @@ export default function ContactsPage() {
         </div>
       </section>
 
-      {/* Contact Cards */}
-      <section className="section-padding-y bg-white">
-        <div className="container-adaptive">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {finalContactInfo.map((contact, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                animate={heroInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="text-center p-6 bg-gradient-bg rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  className={`w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg shadow-primary mx-auto mb-4`}
-                >
-                  <contact.icon className="w-8 h-8 text-white" />
-                </motion.div>
-                <h3 className="text-title weight-bold text-primary-dark mb-2">{contact.title}</h3>
-                <div className={`text-body-lg weight-semibold ${contact.color} mb-1`}>{contact.content}</div>
-                <p className="text-body-sm text-primary-dark">{contact.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Map Section */}
+      <ContactMap />
 
-      {/* Contact Form */}
-      <section ref={formRef} className="section-padding-y bg-gradient-bg">
+      {/* Contact Form and Quick Actions */}
+      <section ref={formRef} className="section-padding-y bg-white">
         <div className="container-adaptive">
-          <div className="max-w-3xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Form */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={formInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              initial={{ opacity: 0, x: -30 }}
+              animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-100">
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 rounded-2xl gradient-kvartett flex items-center justify-center shadow-lg mx-auto mb-4">
-                    <Send className="w-8 h-8 text-white" />
+              <div className="bg-gradient-bg p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100">
+                <div className="mb-8">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <div className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg">
+                      <Send className="w-6 h-6 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-title-lg weight-bold text-primary-dark">Оставить заявку</h3>
+                      <p className="text-body text-muted">Мы свяжемся в течение часа</p>
+                    </div>
                   </div>
-                  <h3 className="text-display-3 weight-bold text-primary-dark mb-3">Оставить заявку</h3>
-                  <p className="text-body-lg text-primary-dark">Мы свяжемся с вами в течение часа</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-caption weight-medium text-primary-dark mb-2">
@@ -245,7 +225,7 @@ export default function ContactsPage() {
                         required
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                         placeholder="Иван Петров"
                       />
                     </div>
@@ -259,7 +239,7 @@ export default function ContactsPage() {
                         required
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                        className="w-full px-4 py-3 bg-white rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                         placeholder="+7 (999) 123-45-67"
                       />
                     </div>
@@ -274,7 +254,7 @@ export default function ContactsPage() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                       placeholder="ivan@example.com"
                     />
                   </div>
@@ -287,7 +267,7 @@ export default function ContactsPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
+                      className="w-full px-4 py-3 bg-white rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300"
                     >
                       <option value="">Выберите услугу</option>
                       <option value="outdoor">Наружная реклама</option>
@@ -307,7 +287,7 @@ export default function ContactsPage() {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
+                      className="w-full px-4 py-3 bg-white rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 resize-none"
                       placeholder="Опишите ваш проект..."
                     />
                   </div>
@@ -319,8 +299,8 @@ export default function ContactsPage() {
                     whileTap={{ scale: 0.98 }}
                     className={`w-full py-4 rounded-xl weight-semibold text-white transition-all duration-300 flex items-center justify-center space-x-2 ${
                       isSubmitted 
-                        ? 'bg-success shadow-lg shadow-primary' 
-                        : 'bg-gradient-primary hover:shadow-lg hover:shadow-primary'
+                        ? 'bg-success shadow-lg shadow-success/30' 
+                        : 'bg-gradient-primary hover:shadow-lg hover:shadow-primary/30'
                     }`}
                   >
                     {isSubmitting ? (
@@ -344,144 +324,147 @@ export default function ContactsPage() {
                 </form>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
 
-      {/* Quick Contact */}
-      <section className="section-padding-y bg-white">
-        <div className="container-adaptive">
-          <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
-              Нужен быстрый ответ?
-            </h2>
-            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
-              Выберите наиболее удобный способ связи
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
+            {/* Quick Contact Cards */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ y: -5 }}
-              className="text-center p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
-              style={{ background: 'linear-gradient(to bottom right, var(--color-primary-10), var(--color-primary-05))', borderColor: 'var(--color-primary-10)' }}
+              initial={{ opacity: 0, x: 30 }}
+              animate={formInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6"
             >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg mx-auto mb-4"
-                style={{ backgroundColor: 'var(--color-primary)', boxShadow: 'var(--shadow-primary)' }}
-              >
-                <Phone className="w-8 h-8 text-white" />
-              </motion.div>
-              <h3 className="text-title weight-bold text-primary-dark mb-3">Позвонить</h3>
-              <p className="text-body text-primary-dark mb-4">Обсудим проект по телефону</p>
-              <a
-                href="tel:+73471234567"
-                className="inline-flex items-center space-x-2 text-primary hover:text-primary-dark weight-medium transition-colors"
-              >
-                <span>+7 (347) 123-45-67</span>
-              </a>
-            </motion.div>
+              <div className="mb-8">
+                <h3 className="text-display-3 weight-bold text-primary-dark mb-4">
+                  Быстрая связь
+                </h3>
+                <p className="text-body-lg text-muted">
+                  Выберите удобный способ и получите ответ в течение 15 минут
+                </p>
+              </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              whileHover={{ y: -5 }}
-              className="text-center p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
-              style={{ background: 'linear-gradient(to bottom right, var(--color-primary-dark-10), var(--color-primary-dark-05))', borderColor: 'var(--color-primary-dark-10)' }}
-            >
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg mx-auto mb-4"
-                style={{ backgroundColor: 'var(--color-primary-dark)', boxShadow: 'var(--shadow-primary)' }}
+                whileHover={{ y: -5 }}
+                className="bg-gradient-bg p-6 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
               >
-                <MessageCircle className="w-8 h-8 text-white" />
+                <div className="flex items-center space-x-4">
+                  <div className="w-14 h-14 rounded-xl gradient-kvartett flex items-center justify-center shadow-lg flex-shrink-0">
+                    <Phone className="w-7 h-7 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-title weight-bold text-primary-dark mb-1">Позвонить нам</h4>
+                    <p className="text-caption text-muted mb-2">Обсудим проект по телефону</p>
+                    <a
+                      href="tel:+73471234567"
+                      className="text-body weight-semibold text-primary hover:text-primary-dark transition-colors"
+                    >
+                      +7 (347) 123-45-67
+                    </a>
+                  </div>
+                </div>
               </motion.div>
-              <h3 className="text-title weight-bold text-primary-dark mb-3">WhatsApp</h3>
-              <p className="text-body text-primary-dark mb-4">Быстрая переписка в мессенджере</p>
-              <a
-                href="https://wa.me/73471234567"
-                className="inline-flex items-center space-x-2 text-primary-dark hover:text-primary weight-medium transition-colors"
-              >
-                <span>Написать в WhatsApp</span>
-              </a>
-            </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ y: -5 }}
-              className="text-center p-8 rounded-2xl border hover:shadow-lg transition-all duration-300"
-              style={{ background: 'linear-gradient(to bottom right, var(--color-warning-light), var(--color-warning-light))', borderColor: 'var(--color-warning-light)' }}
-            >
               <motion.div
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                className="w-16 h-16 rounded-2xl bg-warning-light flex items-center justify-center shadow-lg mx-auto mb-4"
+                whileHover={{ y: -5 }}
+                className="bg-gradient-bg p-6 rounded-2xl border border-gray-100 hover:border-primary-dark/30 hover:shadow-lg transition-all duration-300"
               >
-                <Mail className="w-8 h-8 text-white" />
+                <div className="flex items-center space-x-4">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-success to-success-dark flex items-center justify-center shadow-lg flex-shrink-0">
+                    <MessageCircle className="w-7 h-7 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-title weight-bold text-primary-dark mb-1">WhatsApp</h4>
+                    <p className="text-caption text-muted mb-2">Быстрая переписка</p>
+                    <a
+                      href="https://wa.me/73471234567"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-body weight-semibold text-success hover:text-success-dark transition-colors"
+                    >
+                      Написать в WhatsApp →
+                    </a>
+                  </div>
+                </div>
               </motion.div>
-              <h3 className="text-title weight-bold text-primary-dark mb-3">Email</h3>
-              <p className="text-body text-primary-dark mb-4">Отправьте техническое задание</p>
-              <a
-                href="mailto:info@kvartett-ufa.ru"
-                className="inline-flex items-center space-x-2 text-warning-light hover:text-warning weight-medium transition-colors"
+
+              <motion.div
+                whileHover={{ y: -5 }}
+                className="bg-gradient-bg p-6 rounded-2xl border border-gray-100 hover:border-warning-light/30 hover:shadow-lg transition-all duration-300"
               >
-                <span>info@kvartett-ufa.ru</span>
-              </a>
+                <div className="flex items-center space-x-4">
+                  <div className="w-14 h-14 rounded-xl bg-warning-light flex items-center justify-center shadow-lg flex-shrink-0">
+                    <Mail className="w-7 h-7 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-title weight-bold text-primary-dark mb-1">Email</h4>
+                    <p className="text-caption text-muted mb-2">Отправьте ТЗ на почту</p>
+                    <a
+                      href="mailto:info@kvartett-ufa.ru"
+                      className="text-body weight-semibold text-warning-light hover:text-warning transition-colors"
+                    >
+                      info@kvartett-ufa.ru
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Contact Info Cards */}
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                {finalContactInfo.slice(0, 2).map((contact, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{ y: -3 }}
+                    className="bg-white p-5 rounded-xl border border-gray-100 hover:border-primary/20 hover:shadow-md transition-all duration-300"
+                  >
+                    <contact.icon className={`w-8 h-8 ${contact.color} mb-3`} />
+                    <h5 className="text-caption weight-bold text-primary-dark mb-1">{contact.title}</h5>
+                    <p className="text-body-sm text-muted">{contact.content}</p>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="section-padding-y bg-gradient-bg">
-        <div className="container-adaptive">
-          <div className="text-center mb-16">
-            <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
-              Частые вопросы
-            </h2>
-            <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
-              Ответы на самые популярные вопросы наших клиентов
-            </p>
-          </div>
+      {Array.isArray(faqItems) && faqItems.length > 0 && (
+        <section className="section-padding-y bg-gradient-bg">
+          <div className="container-adaptive">
+            <div className="text-center mb-16">
+              <h2 className="text-display-2 weight-bold text-primary-dark mb-6 leading-tight-kw">
+                Частые вопросы
+              </h2>
+              <p className="text-body-xl text-primary-dark max-w-3xl mx-auto">
+                Ответы на самые популярные вопросы наших клиентов
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {Array.isArray(faqItems) && faqItems.length > 0 ? faqItems.map((faq, index) => (
-              <motion.div
-                key={faq.id || index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group bg-white p-8 rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
-              >
-                <div className="flex items-start space-x-4">
-                  <motion.div 
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center flex-shrink-0 shadow-lg"
-                  >
-                    <Star className="w-6 h-6 text-white" />
-                  </motion.div>
-                  <div className="flex-1">
-                    <h4 className="text-title weight-bold text-primary-dark mb-4 leading-tight-kw group-hover:text-primary transition-colors">{faq.question}</h4>
-                    <p className="text-body text-primary-dark leading-relaxed-kw">{faq.answer}</p>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {faqItems.map((faq, index) => (
+                <motion.div
+                  key={faq.id || index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  className="group bg-white p-8 rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 border border-light"
+                >
+                  <div className="flex items-start space-x-4">
+                    <motion.div 
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                      className="w-12 h-12 rounded-xl gradient-kvartett flex items-center justify-center flex-shrink-0 shadow-lg"
+                    >
+                      <Star className="w-6 h-6 text-white" />
+                    </motion.div>
+                    <div className="flex-1">
+                      <h4 className="text-title weight-bold text-primary-dark mb-4 leading-tight-kw group-hover:text-primary transition-colors">{faq.question}</h4>
+                      <p className="text-body text-primary-dark leading-relaxed-kw">{faq.answer}</p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            )) : (
-              <div className="col-span-full text-center py-16">
-                <p className="text-xl text-gray-600">FAQ скоро появится</p>
-              </div>
-            )}
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      <ContactMap />
+        </section>
+      )}
 
       <Footer />
       <FloatingAction />
