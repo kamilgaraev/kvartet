@@ -32,8 +32,7 @@ export async function sendTelegramNotification(lead: {
         reply_markup: {
           inline_keyboard: [
             [
-              { text: '👀 Посмотреть', url: `${process.env.NEXTAUTH_URL}/admin/leads/${lead.id}` },
-              { text: '📞 Позвонить', url: `tel:${lead.phone}` }
+              { text: '👀 Посмотреть в админке', url: `${process.env.NEXTAUTH_URL}/admin/leads` }
             ]
           ]
         }
